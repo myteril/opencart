@@ -11,6 +11,8 @@ class Breadcrumbs extends \Opencart\System\Engine\Controller {
 	 * @return string
 	 */
 	public function index(array $breadcrumbs_items = []): string {
-		return $this->load->view('common/breadcrumbs', ['breadcrumbs' => $breadcrumbs_items]);
+		$data = ['breadcrumbs' => $breadcrumbs_items];
+		$data['structured_data'] = $this->load->controller('structured_data/breadcrumbs', $breadcrumbs_items);
+		return $this->load->view('common/breadcrumbs', $data);
 	}
 }
