@@ -88,6 +88,7 @@ class Login extends \Opencart\System\Engine\Controller {
 		$data['register'] = $this->url->link('account/register', 'language=' . $this->config->get('config_language'));
 		$data['forgotten'] = $this->url->link('account/forgotten', 'language=' . $this->config->get('config_language'));
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
@@ -246,12 +247,12 @@ class Login extends \Opencart\System\Engine\Controller {
 				'telephone'         => $customer_info['telephone'],
 				'custom_field'      => $customer_info['custom_field']
 			];
-			
+
 			// Default Addresses
 			$this->load->model('account/address');
-			
+
 			$address_info = $this->model_account_address->getAddress($this->customer->getId(), $this->customer->getAddressId());
-			
+
 			if ($address_info) {
 				$this->session->data['shipping_address'] = $address_info;
 			}

@@ -43,6 +43,7 @@ class Gdpr extends \Opencart\System\Engine\Controller {
 
 			$data['cancel'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language'));
 
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
@@ -189,6 +190,7 @@ class Gdpr extends \Opencart\System\Engine\Controller {
 				$data['text_message'] = sprintf($this->language->get('text_remove'), $this->config->get('config_gdpr_limit'));
 			}
 
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');

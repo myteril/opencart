@@ -31,6 +31,7 @@ class Exception extends \Opencart\System\Engine\Controller {
 			'href' => $this->url->link('error/exception', 'user_token=' . $this->session->data['user_token'])
 		];
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

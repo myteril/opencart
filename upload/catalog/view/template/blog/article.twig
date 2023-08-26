@@ -1,10 +1,6 @@
 {{ header }}
 <div id="blog-article" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+  {{ breadcrumbs }}
   <div class="row mx-1 py-3 px-4 bg-light">{{ column_left }}
     <h4 class="mt-3 mb-5"><a href="{{ link_blog }}"><i class="fas fa-arrow-left me-2"></i> {{ text_back_to_blog }}</a></h4>
     <h1 class="mb-4 text-center">{{ title }}</h1>

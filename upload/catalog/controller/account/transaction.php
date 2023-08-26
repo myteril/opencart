@@ -38,7 +38,7 @@ class Transaction extends \Opencart\System\Engine\Controller {
 		];
 
 		$this->load->model('account/transaction');
-		
+
 		$data['column_amount'] = sprintf($this->language->get('column_amount'), $this->config->get('config_currency'));
 
 		if (isset($this->request->get['page'])) {
@@ -83,6 +83,7 @@ class Transaction extends \Opencart\System\Engine\Controller {
 
 		$data['continue'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']);
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
