@@ -1,6 +1,6 @@
 # OpenCart change log
 
-## [v4.0.3.0] (Release date: 26.08.2023)
+## [v4.0.3.0] (Release date: 27.08.2023)
 
 https://github.com/myteril/opencart/releases/tag/4.0.3.0
 
