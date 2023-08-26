@@ -73,6 +73,16 @@ class Article extends \Opencart\System\Engine\Model {
 		if(!empty($data['tags'])) {
 			foreach ($data['tags'] as $language_id => $tags) {
 				foreach($tags as $tag){
+					foreach ($article_stores as $article_store_id) {
+						$this->db->query(
+							"INSERT IGNORE INTO `" . DB_PREFIX . "blog_tag` SET " .
+							"`tag` = '" . $this->db->escape((string)$tag) . "', " .
+							"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
+							"`store_id` = '" . intval($article_store_id) . "', " .
+							"`article_count` = 0"
+						);
+					}
+
 					$this->db->query(
 						"INSERT INTO `" . DB_PREFIX . "blog_tag_to_article` SET " .
 						"`tag` = '" . $this->db->escape((string)$tag) . "', " .
@@ -80,6 +90,22 @@ class Article extends \Opencart\System\Engine\Model {
 						"`blog_article_id` = '" . intval($blog_article_id) . "' "
 					);
 				}
+			}
+		}
+
+		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])){
+			$seo_keywords = $data['seo_keywords'];
+			foreach ($seo_keywords as $language_id => $seo_keyword){
+				$language_id = intval($language_id);
+
+				if($language_id === 0){
+					continue;
+				}
+
+				$this->db->query(
+					"INSERT INTO `" . DB_PREFIX . "seo_url`(`store_id`, `language_id`, `key`, `value`, `keyword`, `sort_order`)
+					VALUES ('" . intval($article_store_id) . "','" . intval($language_id) . "','blog_article_id','" . intval($blog_article_id) . "','" . $this->db->escape((string)$seo_keyword) . "', '0')"
+				);
 			}
 		}
 
@@ -160,11 +186,21 @@ class Article extends \Opencart\System\Engine\Model {
 
 		// Add the tags if not exists.
 		if(!empty($data['tags'])) {
-			$available_tags = [];
 
 			foreach ($data['tags'] as $language_id => $tags) {
+				$available_tags = [];
 				foreach($tags as $tag) {
 					$available_tags[] = "'" . $this->db->escape((string)$tag) . "'";
+
+					foreach ($article_stores as $article_store_id) {
+						$this->db->query(
+							"INSERT IGNORE INTO `" . DB_PREFIX . "blog_tag` SET " .
+							"`tag` = '" . $this->db->escape((string)$tag) . "', " .
+							"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
+							"`store_id` = '" . intval($article_store_id) . "', " .
+							"`article_count` = 0"
+						);
+					}
 
 					$this->db->query(
 						"INSERT IGNORE INTO `" . DB_PREFIX . "blog_tag_to_article` SET " .
@@ -173,15 +209,35 @@ class Article extends \Opencart\System\Engine\Model {
 						"`blog_article_id` = '" . intval($blog_article_id) . "' "
 					);
 				}
-			}
 
-			// Delete the tags that are not used anymore.
-			$this->db->query(
-				"DELETE FROM `" . DB_PREFIX . "blog_tag_to_article` WHERE " .
-				"`tag` NOT IN (" . implode(', ', $available_tags) . "), " .
-				"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
-				"`blog_article_id` = '" . intval($blog_article_id) . "' "
-			);
+				// Delete the tags that are not used anymore.
+				$this->db->query(
+					"DELETE FROM `" . DB_PREFIX . "blog_tag_to_article` WHERE " .
+					"`tag` NOT IN (" . implode(', ', $available_tags) . "), " .
+					"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
+					"`blog_article_id` = '" . intval($blog_article_id) . "' "
+				);
+			}
+		}
+
+		// Delete all SEO keywords.
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "seo_url` WHERE `store_id` = '" . intval($article_store_id) . "' AND `key` = 'blog_article_id' AND `value` = '" . intval($blog_article_id) . "'");
+
+		// Add SEO keywords
+		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])){
+			$seo_keywords = $data['seo_keywords'];
+			foreach ($seo_keywords as $language_id => $seo_keyword){
+				$language_id = intval($language_id);
+
+				if($language_id === 0){
+					continue;
+				}
+
+				$this->db->query(
+					"INSERT INTO `" . DB_PREFIX . "seo_url`(`store_id`, `language_id`, `key`, `value`, `keyword`, `sort_order`)
+					VALUES ('" . intval($article_store_id) . "','" . intval($language_id) . "','blog_article_id','" . intval($blog_article_id) . "','" . $this->db->escape((string)$seo_keyword) . "', '0')"
+				);
+			}
 		}
 	}
 

@@ -715,7 +715,7 @@ footer {
   }
 }
 
-.product-thumb {
+.product-thumb, .blog-article-thumb {
   border: 1px solid #ddd;
   margin-bottom: 15px;
 
@@ -893,4 +893,26 @@ footer {
 #cookie div {
   font-size: 16px;
   color: #FFFFFF;
+}
+
+.blog-article-thumb{
+	height: 100%;
+	position: relative;
+
+	.image{
+		min-height: 250px;
+		background-size: cover;
+		background-position: center;
+	}
+
+	.button-group{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+	}
+}
+#article-list{
+	margin-bottom: 0.5rem;
 }

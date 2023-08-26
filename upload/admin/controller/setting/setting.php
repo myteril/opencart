@@ -64,6 +64,9 @@ class Setting extends \Opencart\System\Engine\Controller {
 
 		$data['config_layout_id'] = $this->config->get('config_layout_id');
 
+		// Blog
+		$data['config_blog_enabled'] = $this->config->get('config_blog_enabled');
+
 		// Store Details
 		$data['config_name'] = $this->config->get('config_name');
 		$data['config_owner'] = $this->config->get('config_owner');

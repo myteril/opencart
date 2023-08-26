@@ -153,39 +153,59 @@ $(document).ready(function() {
         }
     });
 
-    // Product List
-    $('#button-list').on('click', function() {
-        var element = this;
+	// Product List
+	$('#button-list').on('click', function() {
+		let $element = $(this);
 
-        $('#product-list').attr('class', 'row row-cols-1 product-list');
+		let selector = $element.attr('data-target');
+		if(typeof selector !== 'string'){
+			selector = '#product-list';
+		}
+		let extraClasses = $element.attr('data-extra-classes');
+		if(typeof extraClasses !== 'string'){
+			extraClasses = '';
+		}
 
-        $('#button-grid').removeClass('active');
-        $('#button-list').addClass('active');
+		$(selector).attr('class', 'row row-cols-1 product-list ' + extraClasses);
 
-        localStorage.setItem('display', 'list');
-    });
+		$('#button-grid').removeClass('active');
+		$('#button-list').addClass('active');
 
-    // Product Grid
-    $('#button-grid').on('click', function() {
-        var element = this;
+		localStorage.setItem('display', 'list');
+	});
 
-        // What a shame bootstrap does not take into account dynamically loaded columns
-        $('#product-list').attr('class', 'row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3');
+	// Product Grid
+	$('#button-grid').on('click', function() {
+		let $element = $(this);
 
-        $('#button-list').removeClass('active');
-        $('#button-grid').addClass('active');
+		let selector = $element.attr('data-target');
+		if(typeof selector !== 'string'){
+			selector = '#product-list';
+		}
+		let extraClasses = $element.attr('data-extra-classes');
+		if(typeof extraClasses !== 'string'){
+			extraClasses = '';
+		}
 
-        localStorage.setItem('display', 'grid');
-    });
+		// What a shame bootstrap does not take into account dynamically loaded columns
+		$(selector).attr('class', 'row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 ' + extraClasses);
 
-    // Local Storage
-    if (localStorage.getItem('display') == 'list') {
-        $('#product-list').attr('class', 'row row-cols-1 product-list');
-        $('#button-list').addClass('active');
-    } else {
-        $('#product-list').attr('class', 'row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3');
-        $('#button-grid').addClass('active');
-    }
+		$('#button-list').removeClass('active');
+		$('#button-grid').addClass('active');
+
+		localStorage.setItem('display', 'grid');
+	});
+
+	// Local Storage
+	if (localStorage.getItem('display') == 'list') {
+		$('#product-list').attr('class', 'row row-cols-1 product-list');
+		$('#article-list').attr('class', 'row row-cols-1 article-list g-4');
+		$('#button-list').addClass('active');
+	} else {
+		$('#product-list').attr('class', 'row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3');
+		$('#article-list').attr('class', 'row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-4');
+		$('#button-grid').addClass('active');
+	}
 
     /* Agree to Terms */
     $('body').on('click', '.modal-link', function(e) {

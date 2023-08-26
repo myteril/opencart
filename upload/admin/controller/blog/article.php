@@ -335,6 +335,19 @@ class Article extends \Opencart\System\Engine\Controller
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
+		// SEO Keywords
+		$data['seo_keywords'] = [];
+		foreach ($data['languages'] as $language){
+			$data['seo_keywords'][$language['language_id']] = '';
+		}
+		if (!empty($blog_article_info)) {
+			$this->load->model('design/seo_url');
+			$seo_keywords = $this->model_design_seo_url->getSeoUrlsByKeyword('blog_article_id', strval($this->request->get['blog_article_id']));
+			foreach($seo_keywords as $seo_keyword){
+				$data['seo_keywords'][$seo_keyword['language_id']] = $seo_keyword['keyword'];
+			}
+		}
+
 		$data['user_token'] = $this->session->data['user_token'];
 
 		$data['header'] = $this->load->controller('common/header');
@@ -359,6 +372,14 @@ class Article extends \Opencart\System\Engine\Controller
 
 		if ((oc_strlen($this->request->post['name']) < 3) || (oc_strlen($this->request->post['name']) > 255)) {
 			$json['error']['name'] = $this->language->get('error_name');
+		}
+
+		if(is_array($this->request->post['seo_keywords'])){
+			foreach ($this->request->post['seo_keywords'] as $language_id => $seo_keyword){
+				if(preg_match('/[a-zA-Z0-9-_]*/', strval($seo_keyword)) !== 1){
+					$json['error']['seo-keyword-' . intval($language_id)] = $this->language->get('error_seo_keyword');
+				}
+			}
 		}
 
 		$this->request->post['status'] = $this->request->post['status'] === '1';

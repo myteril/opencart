@@ -1,0 +1,125 @@
+{{ header }}
+<div id="blog-search" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    <h1 class="mb-3">{{ text_blog }}</h1>
+    <hr class="mb-5">
+    <div class="col-md-3 col-sm-12 order-2 order-md-1">
+      {% if tags|length > 0 %}
+      <h2>{{ text_tags }}</h2>
+      <hr>
+      <div class="mb-4">
+        {% for tag_row in tags %}
+          <a href="{{ tag_row.link }}">
+            <span class="badge {% if tag and tag == tag_row.tag %}bg-primary{% else %}bg-secondary{% endif %} fs-6 me-2 mb-2 d-inline-block">{{ tag_row.tag }} ({{ tag_row.article_count }})</span>
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <h2>{{ text_authors }}</h2>
+      <hr>
+      <div class="mb-4">
+        {% for author_row in authors %}
+          <a href="{{ author_row.link }}">
+            <span class="badge {% if author and author == author_row.blog_author_id %}bg-primary{% else %}bg-secondary{% endif %} fs-6 me-2 mb-2 d-inline-block">{{ author_row.fullname }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    <div id="content" class="col order-1 order-md-2">{{ content_top }}
+      <div class="row mb-5 g-3">
+        <div class="col">
+          <div class="input-group">
+            <input type="text" class="form-control" name="search" value="{{ search }}" placeholder="{{ text_search }}" id="input-search">
+            <button class="btn btn-primary" type="button" id="button-search">{{ button_search }}</button>
+          </div>
+        </div>
+        <div class="col-md-auto{% if not user_searched %} d-none{% endif %}">
+          <button class="btn btn-danger" type="button" id="button-clear-search"><i class="fas fa-xmark"></i> {{ button_clear_search }}</button>
+        </div>
+      </div>
+      {% if article_thumbs %}
+        <div id="display-control" class="row">
+          <div class="col-md-2 d-none d-md-block">
+            <div class="btn-group">
+              <button type="button" id="button-list" data-target="#article-list" data-extra-classes = "g-4" class="btn btn-light" data-bs-toggle="tooltip" title="{{ button_list }}"><i class="fa-solid fa-table-list"></i></button>
+              <button type="button" id="button-grid" data-target="#article-list" data-extra-classes = "g-4" class="btn btn-light" data-bs-toggle="tooltip" title="{{ button_grid }}"><i class="fa-solid fa-table-cells"></i></button>
+            </div>
+          </div>
+          <div class="col-md-3 offset-md-5 col-6">
+            <div class="input-group mb-3">
+              <div class="input-group">
+                <label for="input-sort" class="input-group-text">{{ text_sort }}</label> <select id="input-sort" class="form-select" onchange="location = this.value;">
+                  {% for sorts in sorts %}
+                    <option value="{{ sorts.href }}"{% if sorts.value == '%s-%s'|format(sort, order) %} selected{% endif %}>{{ sorts.text }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="input-group mb-3">
+              <div class="input-group">
+                <label for="input-limit" class="input-group-text">{{ text_limit }}</label> <select id="input-limit" class="form-select" onchange="location = this.value;">
+                  {% for limits in limits %}
+                    <option value="{{ limits.href }}"{% if limits.value == limit %} selected{% endif %}>{{ limits.text }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="article-list" class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
+          {% for article_thumb in article_thumbs %}
+            <div class="col">{{ article_thumb }}</div>
+          {% endfor %}
+        </div>
+        <div class="row">
+          <div class="col-sm-6 text-start">{{ pagination }}</div>
+          <div class="col-sm-6 text-end">{{ results }}</div>
+        </div>
+      {% else %}
+        <p>{{ text_no_results }}</p>
+      {% endif %}
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+<script type="text/javascript"><!--
+  $('#button-search').bind('click', function () {
+    url = 'index.php?route=blog/search&language={{ language }}';
+
+    var search = $('#input-search').prop('value');
+
+    if (search) {
+      url += '&search=' + encodeURIComponent(search);
+    }
+
+    var filter_description = $('#input-description:checked').prop('value');
+
+    if (filter_description) {
+      url += '&description=1';
+    }
+
+    location = url;
+  });
+
+  $('#button-clear-search').bind('click', function () {
+    window.location.href = 'index.php?route=blog/search&language={{ language }}';
+  });
+
+  $('#input-search').bind('keydown', function (e) {
+    if (e.keyCode == 13) {
+      $('#button-search').trigger('click');
+    }
+  });
+
+  $("button.view-article").on('click', function(){
+    window.location.href = $(this).attr('formaction');
+  });
+
+  //--></script>
+{{ footer }}

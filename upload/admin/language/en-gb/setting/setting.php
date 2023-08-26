@@ -47,6 +47,7 @@ $_['entry_meta_title']                    = 'Meta Title';
 $_['entry_meta_description']              = 'Meta Tag Description';
 $_['entry_meta_keyword']                  = 'Meta Tag Keywords';
 $_['entry_layout']                        = 'Default Layout';
+$_['entry_blog_enabled']                  = 'Enable Blog';
 $_['entry_theme']                         = 'Theme';
 $_['entry_name']                          = 'Store Name';
 $_['entry_owner']                         = 'Store Owner';
@@ -240,6 +241,7 @@ $_['help_file_mime_allowed']              = 'Add which file mime types are allow
 $_['help_maintenance']                    = 'Prevents customers from browsing your store. They will instead see a maintenance message. If logged in as admin, you will see the store as normal.';
 $_['help_encryption']                     = 'Please provide a secret key that will be used to encrypt private information when processing orders.';
 $_['help_compression']                    = 'GZIP for more efficient transfer to requesting clients. Compression level must be between 0 - 9.';
+$_['help_blog_enabled']                   = 'Determines whether the blog section is available to use or not.';
 
 // Error
 $_['error_warning']                       = 'Warning: Please check the form carefully for errors!';

@@ -33,10 +33,12 @@ $_['entry_description']     = 'Description';
 $_['entry_content']      	= 'Content';
 $_['entry_tags']      		= 'Article Tags';
 $_['entry_status']      	= 'Status';
+$_['entry_seo_keyword']     = 'SEO Keyword';
 
 // Error
 $_['error_permission'] 		= 'Warning: You do not have permission to modify blog articles!';
 $_['error_name']   			= 'Please enter a valid article name. (between 3 and 255 characters)';
+$_['error_seo_keyword']   	= 'Please enter a SEO keyword which consists of only alphanumerical English characters, hyphen (-) and underscore (_).';
 
 // Helper
 $_['help_author']   		= '(Autocomplete)';

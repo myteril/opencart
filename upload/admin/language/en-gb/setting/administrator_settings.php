@@ -18,7 +18,6 @@ $_['entry_language_admin']                = 'Administration Language';
 $_['help_identifier_fields']              = 'Determines the visibility of the additional identifier fields for products.';
 $_['help_price_incl_tax']                 = 'When enabled, any product price is displayed as price including tax.';
 
-
 $_['error_permission']                    = 'Warning: You do not have permission to modify administrator settings!';
 $_['text_success']                        = 'Success: You have modified administrator settings!';
 
