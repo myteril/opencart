@@ -166,6 +166,7 @@ $_['entry_error_display']                 = 'Fehler anzeigen';
 $_['entry_error_log']                     = 'Fehler mitschreiben';
 $_['entry_error_filename']                = 'Fehlerdatei Name';
 $_['entry_status']                        = 'Status';
+$_['entry_blog_enabled']                  = 'Blog aktivieren';
 
 // Help
 $_['help_geocode']                        = 'Bitte geben Sie den Geo-Code Ihres Standorts manuell ein.';
@@ -240,6 +241,7 @@ $_['help_maintenance']                    = 'Verhindert, dass Kunden in Ihrem Ge
 $_['help_encryption']                     = 'Bitte geben Sie einen geheimen Schlüssel an, der zur Verschlüsselung privater Informationen bei der Bearbeitung von Bestellungen verwendet wird.';
 $_['help_compression']                    = 'GZIP für eine effizientere Übertragung an anfragende Clients. Die Komprimierungsstufe muss zwischen 0 und 9 liegen.';
 $_['help_list_taxes_separately']          = 'Aktivieren Sie diese Einstellung, wenn Sie die Steuerbeträge für zusätzliche Dienstleistungen (Versand, Bearbeitung usw.) getrennt auflisten möchten. <b>Warnung: Diese Einstellung wirkt sich nicht auf die Gesamtsummen der bestehenden Bestellungen aus.</b>';
+$_['help_blog_enabled']                   = 'Bestimmt, ob der Blog für Benutzer verfügbar ist oder nicht.';
 
 // Error
 $_['error_warning']                       = 'Warnung: Bitte prüfen Sie das Formular sorgfältig auf Fehler!';
