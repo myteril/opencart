@@ -88,7 +88,8 @@ class Install extends \Opencart\System\Engine\Model {
 	 * @param string $admin_email
 	 * @return void
 	 */
-	public function setupDatabaseData(\Opencart\System\Library\DB $db, string $data_sql_file, string $db_prefix, string $admin_username, string $admin_password, string $admin_email){
+	public function setupDatabaseData(\Opencart\System\Library\DB $db, string $data_sql_file, string $db_prefix, string $admin_username, string $admin_password, string $admin_email): void
+	{
 		$lines = file($data_sql_file, FILE_IGNORE_NEW_LINES);
 
 		if ($lines) {
