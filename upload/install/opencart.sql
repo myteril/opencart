@@ -6796,7 +6796,7 @@ INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 --
 
 INSERT INTO `oc_blog_article` (`blog_article_id`, `name`, `image`, `date_added`, `date_modified`, `status`, `view_count`, `blog_author_id`) VALUES
-(1, 'The Future of Online Marketing in 2023', 'catalog/demo/blog/article-1.png', '2023-08-20 00:53:43', '2023-08-24 20:50:10', 1, 12, '1'),
+(1, 'The Future of Online Marketing in 2023', 'catalog/demo/blog/article-1.png', '2023-08-20 00:53:43', '2023-08-24 20:50:10', 1, 0, '1'),
 (2, 'TEST 1', '', '2023-08-23 00:19:40', '2023-08-25 21:51:54', 1, 0, '1'),
 (3, 'TEST 2', '', '2023-08-23 15:56:51', '2023-08-25 21:53:16', 1, 0, '');
 
