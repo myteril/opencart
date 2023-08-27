@@ -24,7 +24,7 @@ class Breadcrumbs extends \Opencart\System\Engine\Controller {
 				"@type" => "ListItem",
 				 "position" => $index + 1,
 				 "name" => $breadcrumbs_item['text'],
-				 "item" => $breadcrumbs_item['href']
+				 "item" =>html_entity_decode($breadcrumbs_item['href'], ENT_QUOTES, 'UTF-8')
 			];
 		}
 

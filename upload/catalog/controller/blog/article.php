@@ -135,7 +135,7 @@ class Article extends \Opencart\System\Engine\Controller {
 			$structured_data['author'][] = [
 				'name' => $blog_article['author_name'],
 				'photo' => $author_photo,
-				'link' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $blog_article['blog_author_id'] ),
+				'link' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $blog_article['blog_author_id'], true),
 			];
 		}
 		$data['structured_data'] = $this->load->controller('structured_data/article', $structured_data['title'], $structured_data['author'], $structured_data['image'], $blog_article['date_added'], $blog_article['date_modified']);

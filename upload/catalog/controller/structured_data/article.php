@@ -37,14 +37,14 @@ class Article extends \Opencart\System\Engine\Controller {
 		];
 
 		foreach ($images as $image){
-			$data['structured_data']['image'][] = $image;
+			$data['structured_data']['image'][] = html_entity_decode($image, ENT_QUOTES, 'UTF-8');
 		}
 
 		foreach ($authors as $author){
 			$data['structured_data']['author'][] = [
 				"@type" => "Person",
 			    "name" 	=> $author['name'],
-			    "url" 	=> $author['link']
+			    "url" 	=> html_entity_decode($author['link'], ENT_QUOTES, 'UTF-8')
 			];
 		}
 
