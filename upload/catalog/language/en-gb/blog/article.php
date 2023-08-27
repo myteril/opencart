@@ -4,7 +4,7 @@
 $_['text_blog']                 = 'Blog';
 $_['text_tags']               	= 'Tags';
 $_['text_author']              	= 'Author';
-$_['text_added_at']           	= 'Added at %s';
+$_['text_added_at']           	= 'Published at %s';
 $_['text_modified_at']        	= 'Edited at %s';
 $_['text_about_author']        	= 'About Author';
 $_['text_about_article']        = 'About Article';
