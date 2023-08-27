@@ -247,16 +247,15 @@ footer a {
 #header-cart .dropdown-menu li {
   min-width: 427px;
 }
+#header-cart .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
 @media (max-width: 768px) {
   #header-cart .dropdown-menu li {
     min-width: 100%;
   }
 }
-
-#header-cart .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #f9f9f9;
-}
-
 /* menu */
 #menu {
   background-color: #229ac8;
