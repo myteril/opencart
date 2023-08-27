@@ -28,7 +28,7 @@ class Article extends \Opencart\System\Engine\Controller {
 
 		$data['structured_data'] = [
 			"@context" 		=> "https://schema.org",
-			"@type" 		=> "NewsArticle",
+			"@type" 		=> "BlogPosting",
 			"headline" 		=> $title,
 			"datePublished" => $date_published,
 			"dateModified" 	=> $date_modified,
