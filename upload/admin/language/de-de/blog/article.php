@@ -22,6 +22,7 @@ $_['column_author_name']    = 'Autor/in';
 $_['column_image']     		= 'Artikelbild';
 $_['column_view_count']		= 'Aufrufzähler';
 $_['column_date_added']		= 'Hinzugefügt am';
+$_['column_enabled']		= 'Aktiviert';
 
 // Entry
 $_['entry_stores']      	= 'Geschäfte';
@@ -34,6 +35,7 @@ $_['entry_content']      	= 'Inhalt';
 $_['entry_tags']      		= 'Artikel-Tags';
 $_['entry_status']      	= 'Status';
 $_['entry_seo_keyword']     = 'SEO-Schlüsselwort';
+$_['entry_seo_keywords']    = 'SEO-Schlüsselwörter';
 
 // Error
 $_['error_permission'] 		= 'Warnung: Sie haben keine Berechtigung, Blog-Artikel zu ändern!';

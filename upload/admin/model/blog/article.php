@@ -79,7 +79,7 @@ class Article extends \Opencart\System\Engine\Model {
 							"`tag` = '" . $this->db->escape((string)$tag) . "', " .
 							"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
 							"`store_id` = '" . intval($article_store_id) . "', " .
-							"`article_count` = 0"
+							"`article_count` = '0'"
 						);
 					}
 
@@ -95,17 +95,19 @@ class Article extends \Opencart\System\Engine\Model {
 
 		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])){
 			$seo_keywords = $data['seo_keywords'];
-			foreach ($seo_keywords as $language_id => $seo_keyword){
-				$language_id = intval($language_id);
+			foreach ($seo_keywords as $store_id => $seo_keywords_map){
+				foreach($seo_keywords_map as $language_id => $seo_keyword){
+					$language_id = intval($language_id);
 
-				if($language_id === 0){
-					continue;
+					if($language_id === 0){
+						continue;
+					}
+
+					$this->db->query(
+						"INSERT INTO `" . DB_PREFIX . "seo_url`(`store_id`, `language_id`, `key`, `value`, `keyword`, `sort_order`)
+					VALUES ('" . intval($store_id) . "','" . intval($language_id) . "','blog_article_id','" . intval($blog_article_id) . "','" . $this->db->escape((string)$seo_keyword) . "', '0')"
+					);
 				}
-
-				$this->db->query(
-					"INSERT INTO `" . DB_PREFIX . "seo_url`(`store_id`, `language_id`, `key`, `value`, `keyword`, `sort_order`)
-					VALUES ('" . intval($article_store_id) . "','" . intval($language_id) . "','blog_article_id','" . intval($blog_article_id) . "','" . $this->db->escape((string)$seo_keyword) . "', '0')"
-				);
 			}
 		}
 
@@ -156,8 +158,8 @@ class Article extends \Opencart\System\Engine\Model {
 						"`title` = '" . $this->db->escape((string)$blog_content['title']) . "', " .
 						"`description` = '" . $this->db->escape((string)$blog_content['description']) . "', " .
 						"`content` = '" . $this->db->escape((string)$blog_content['content']) . "', " .
-						"`language_id` = '" . intval($language_id) . "', " .
-						"`blog_article_id` = '" . intval($blog_article_id) . "' "
+						"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
+						"`blog_article_id` = '" . $this->db->escape((int)$blog_article_id) . "' "
 					);
 				}
 			}
@@ -190,7 +192,7 @@ class Article extends \Opencart\System\Engine\Model {
 			foreach ($data['tags'] as $language_id => $tags) {
 				$available_tags = [];
 				foreach($tags as $tag) {
-					$available_tags[] = "'" . $this->db->escape((string)$tag) . "'";
+					$available_tags[] = "'" . str_replace("'", "''", $tag) . "'";
 
 					foreach ($article_stores as $article_store_id) {
 						$this->db->query(
@@ -198,7 +200,7 @@ class Article extends \Opencart\System\Engine\Model {
 							"`tag` = '" . $this->db->escape((string)$tag) . "', " .
 							"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
 							"`store_id` = '" . intval($article_store_id) . "', " .
-							"`article_count` = 0"
+							"`article_count` = '0'"
 						);
 					}
 
@@ -206,16 +208,16 @@ class Article extends \Opencart\System\Engine\Model {
 						"INSERT IGNORE INTO `" . DB_PREFIX . "blog_tag_to_article` SET " .
 						"`tag` = '" . $this->db->escape((string)$tag) . "', " .
 						"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
-						"`blog_article_id` = '" . intval($blog_article_id) . "' "
+						"`blog_article_id` = '" . $this->db->escape((int)$blog_article_id) . "' "
 					);
 				}
 
 				// Delete the tags that are not used anymore.
 				$this->db->query(
 					"DELETE FROM `" . DB_PREFIX . "blog_tag_to_article` WHERE " .
-					"`tag` NOT IN (" . implode(', ', $available_tags) . "), " .
-					"`language_id` = '" . $this->db->escape((int)$language_id) . "', " .
-					"`blog_article_id` = '" . intval($blog_article_id) . "' "
+					"`tag` NOT IN (" . implode(', ', $available_tags) . ") AND " .
+					"`language_id` = '" . $this->db->escape((int)$language_id) . "' AND " .
+					"`blog_article_id` = '" . $this->db->escape((int)$blog_article_id) . "' "
 				);
 			}
 		}
@@ -226,17 +228,19 @@ class Article extends \Opencart\System\Engine\Model {
 		// Add SEO keywords
 		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])){
 			$seo_keywords = $data['seo_keywords'];
-			foreach ($seo_keywords as $language_id => $seo_keyword){
-				$language_id = intval($language_id);
+			foreach ($seo_keywords as $store_id => $seo_keywords_map) {
+				foreach ($seo_keywords_map as $language_id => $seo_keyword) {
+					$language_id = intval($language_id);
 
-				if($language_id === 0){
-					continue;
+					if ($language_id === 0) {
+						continue;
+					}
+
+					$this->db->query(
+						"INSERT INTO `" . DB_PREFIX . "seo_url`(`store_id`, `language_id`, `key`, `value`, `keyword`, `sort_order`)
+					VALUES ('" . intval($store_id) . "','" . intval($language_id) . "','blog_article_id','" . intval($blog_article_id) . "','" . $this->db->escape((string)$seo_keyword) . "', '0')"
+					);
 				}
-
-				$this->db->query(
-					"INSERT INTO `" . DB_PREFIX . "seo_url`(`store_id`, `language_id`, `key`, `value`, `keyword`, `sort_order`)
-					VALUES ('" . intval($article_store_id) . "','" . intval($language_id) . "','blog_article_id','" . intval($blog_article_id) . "','" . $this->db->escape((string)$seo_keyword) . "', '0')"
-				);
 			}
 		}
 	}
