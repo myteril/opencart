@@ -6412,6 +6412,11 @@ function oc_db_schema() {
 				'name' => 'name',
 				'type' => 'varchar(32)',
 				'not_null' => true
+			],
+			[
+				'name' => 'item_availability',
+				'type' => 'enum(\'BackOrder\',\'Discontinued\',\'InStock\',\'InStoreOnly\',\'LimitedAvailability\',\'OnlineOnly\',\'OutOfStock\',\'PreOrder\',\'PreSale\',\'SoldOut\')',
+				'not_null' => true
 			]
 		],
 		'primary' => [

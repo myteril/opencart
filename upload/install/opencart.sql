@@ -2392,12 +2392,21 @@ INSERT INTO `oc_statistics` (`statistics_id`, `code`, `value`) VALUES
 -- Dumping data for table `oc_stock_status`
 --
 
-INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
-(7, 1, 'In Stock'),
-(8, 1, 'Pre-Order'),
-(5, 1, 'Out Of Stock'),
-(6, 1, '2-3 Days');
-
+INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`, `item_availability`) VALUES
+(7, 1, 'In Stock', 'InStock'),
+(8, 1, 'Pre-Order', 'PreOrder'),
+(5, 1, 'Out Of Stock', 'OutOfStock'),
+(6, 1, '2-3 Days', 'InStock');
+BackOrder
+Discontinued
+InStock
+InStoreOnly
+LimitedAvailability
+OnlineOnly
+OutOfStock
+PreOrder
+PreSale
+SoldOut
 -----------------------------------------------------------
 
 --
@@ -7148,11 +7157,11 @@ INSERT INTO `oc_seo_url` (`store_id`, `language_id`, `key`, `value`, `keyword`, 
 (0, 2, 'route', 'product/manufacturer', 'brands', -1),
 (0, 2, 'route', 'blog/article', 'blog', -1);
 
-INSERT INTO `oc_stock_status` (`language_id`, `name`) VALUES
-(2, 'In Stock'),
-(2, 'Pre-Order'),
-(2, 'Out Of Stock'),
-(2, '2-3 Days');
+INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`, `item_availability`) VALUES
+(7, 2, 'In Stock', 'InStock'),
+(8, 2, 'Pre-Order', 'PreOrder'),
+(5, 2, 'Out Of Stock', 'OutOfStock'),
+(6, 2, '2-3 Days', 'InStock');
 
 INSERT INTO `oc_subscription_plan_description` (`subscription_plan_id`, `language_id`, `name`) VALUES
 (1, 2, 'Subscription Plan 1'),

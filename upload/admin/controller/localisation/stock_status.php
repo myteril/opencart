@@ -6,6 +6,20 @@ namespace Opencart\Admin\Controller\Localisation;
  * @package Opencart\Admin\Controller\Localisation
  */
 class StockStatus extends \Opencart\System\Engine\Controller {
+
+	public static array $ItemAvailabilityValues = [
+		'BackOrder',
+		'Discontinued',
+		'InStock',
+		'InStoreOnly',
+		'LimitedAvailability',
+		'OnlineOnly',
+		'OutOfStock',
+		'PreOrder',
+		'PreSale',
+		'SoldOut'
+	];
+
 	/**
 	 * @return void
 	 */
@@ -219,6 +233,17 @@ class StockStatus extends \Opencart\System\Engine\Controller {
 		} else {
 			$data['stock_status'] = [];
 		}
+		if(!empty($data['stock_status'])){
+			$data['item_availability'] = reset($data['stock_status'])['item_availability'];
+		}else{
+			$data['item_availability'] = 'InStock';
+		}
+
+		$data['item_availability_values'] = self::$ItemAvailabilityValues;
+		$data['item_availability_language'] = [];
+		foreach(self::$ItemAvailabilityValues as $value){
+			$data['item_availability_language'][$value] = $this->language->get('value_' . oc_strtolower($value));
+		}
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -243,6 +268,10 @@ class StockStatus extends \Opencart\System\Engine\Controller {
 			if ((oc_strlen($value['name']) < 3) || (oc_strlen($value['name']) > 32)) {
 				$json['error']['name_' . $language_id] = $this->language->get('error_name');
 			}
+		}
+
+		if(!isset($this->request->post['item_availability']) || !in_array($this->request->post['item_availability'], self::$ItemAvailabilityValues)){
+			$json['error']['item-availability'] = $this->language->get('error_item_availability');
 		}
 
 		if (!$json) {

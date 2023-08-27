@@ -30,6 +30,20 @@
 							{% endfor %}
 						</div>
 					</div>
+					<div class="row mb-3 required">
+						<label for="input-item-availability" class="col-sm-2 col-form-label">{{ entry_item_availability }}</label>
+						<div class="col-sm-10">
+              <div class="input-group">
+                <select name="item_availability" id="input-item-availability" class="form-select">
+                  {% for item_availability_value in item_availability_values %}
+                    <option value="{{ item_availability_value }}"{% if item_availability == item_availability_value %} selected{% endif %}>{{ item_availability_language[item_availability_value] }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-text">{{ help_item_availability }}</div>
+              <div id="error-item-availability" class="invalid-feedback"></div>
+						</div>
+					</div>
 					<input type="hidden" name="stock_status_id" value="{{ stock_status_id }}" id="input-stock-status-id"/>
 				</form>
 			</div>
