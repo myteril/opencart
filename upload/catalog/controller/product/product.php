@@ -502,6 +502,64 @@ class Product extends \Opencart\System\Engine\Controller {
 
 			$data['language'] = $this->config->get('config_language');
 
+			// region Structured Data
+
+			$data['structured_data'] = [
+				'name' 			=> $product_info['meta_title'],
+				'description' 	=> $product_info['meta_description'],
+				'product_code' 	=> $product_info['model'],
+				'image' 		=> [],
+				'sku' 			=> $product_info['sku'],
+				'mpn' 			=> $product_info['mpn'],
+				'gtin' 			=> $product_info['ean'],
+				'manifacturer' 	=> $data['manufacturer'],
+				'price'			=> $data['price'] === false ? 0 : $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')),
+				'currency_code' => $this->session->data['currency'],
+				'width' 		=> $product_info['width'],
+				'height' 		=> $product_info['height'],
+				'depth' 		=> $product_info['length'],
+				'weight' 		=> $product_info['weight'],
+				'length_unit' 	=> $this->length->getUnit($product_info['length_class_id']),
+				'weight_unit' 	=> $this->weight->getUnit($product_info['weight_class_id'])
+			];
+
+			if(empty($data['structured_data']['gtin'])){
+				if(!empty($product_info['upc'])){
+					$data['structured_data']['gtin'] = '0' . $product_info['upc'];
+				}else if(!empty($product_info['isbn'])){
+					$data['structured_data']['gtin'] = $product_info['isbn'];
+				}else if(!empty($product_info['jan'])){
+					$data['structured_data']['gtin'] = $product_info['jan'];
+				}
+			}
+
+			if ($product_info['quantity'] <= 0) {
+				$this->load->model('localisation/stock_status');
+				$stock_status_info = $this->model_localisation_stock_status->getStockStatus($product_info['stock_status_id']);
+				if ($stock_status_info) {
+					$data['structured_data']['item_availability'] = $stock_status_info['item_availability'];
+				} else {
+					$data['structured_data']['item_availability'] = 'OutOfStock';
+				}
+			} else {
+				$data['structured_data']['item_availability'] = 'InStock';
+			}
+
+			$data['structured_data']['image'][] = $data['popup'];
+			foreach($data['images'] as $image){
+				$data['structured_data']['image'][] = $image['popup'];
+			}
+
+			if($product_info['reviews'] > 0){
+				$data['structured_data']['rating'] = [
+					'average' 		=> $product_info['rating'],
+					'review_count' 	=> $product_info['reviews']
+				];
+			}
+
+			// endregion Structured Data
+
+			$data['structured_data'] = $this->load->controller('structured_data/product', $data['structured_data']);
 			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
