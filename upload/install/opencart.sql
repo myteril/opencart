@@ -6824,8 +6824,7 @@ INSERT INTO `oc_blog_tag_to_article` (`tag`, `language_id`, `blog_article_id`) V
 ('content-marketing', 1, 1),
 ('online-marketing', 1, 1),
 ('personalization', 1, 1),
-('videomarketing', 1, 1),
-
+('videomarketing', 1, 1);
 
 -----------------------------------------------------------
 
