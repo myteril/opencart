@@ -38,12 +38,13 @@ class Step3 extends \Opencart\System\Engine\Controller {
 
 			// Create database schema.
 			$this->load->model('install/install');
-			$this->model_install_install->createDatabaseSchema($db, $tables, $triggers, $db_prefix);
+			$this->model_install_install->createDatabaseSchema($db, $tables, $db_prefix);
 
 			// Fill database with initial data.
 			$data_sql_file = DIR_APPLICATION . 'opencart.sql';
 			$admin_password = password_hash($this->request->post['password'], PASSWORD_DEFAULT);
 			$this->model_install_install->setupDatabaseData($db, $data_sql_file, $this->request->post['db_prefix'], $this->request->post['username'], $admin_password, $this->request->post['email']);
+			$this->model_install_install->installTriggers($db, $triggers, $db_prefix);
 
 
 			// Catalog config.php

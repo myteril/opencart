@@ -197,10 +197,11 @@ class CliCloud extends \Opencart\System\Engine\Controller {
 		$triggers = oc_db_triggers($db_prefix);
 
 		$this->load->model('install/install');
-		$this->model_install_install->createDatabaseSchema($db, $tables, $triggers, $db_prefix);
+		$this->model_install_install->createDatabaseSchema($db, $tables, $db_prefix);
 		// If cloud we do not need to hash the password as we will be passing the password hash
 		$admin_password = $option['password'];
 		$this->model_install_install->setupDatabaseData($db, $file, $db_prefix, $option['username'], $admin_password, $option['email']);
+		$this->model_install_install->installTriggers($db, $triggers, $db_prefix);
 
 		// Return success message
 		$output = 'SUCCESS! OpenCart successfully installed on your server' . "\n";
