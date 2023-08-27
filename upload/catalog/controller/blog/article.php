@@ -117,6 +117,31 @@ class Article extends \Opencart\System\Engine\Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		// region Structured Data
+
+		$structured_data = [];
+		$structured_data['title'] = $blog_article['title'];
+		$structured_data['image'] = [
+			$image
+		];
+		$structured_data['author'] = [];
+		if(!empty($blog_article['author_name'])){
+			$author_photo = null;
+
+			if (is_file(DIR_IMAGE . html_entity_decode($blog_article['author_photo'], ENT_QUOTES, 'UTF-8'))) {
+				$author_photo = $this->model_tool_image->resize(html_entity_decode($blog_article['author_photo'], ENT_QUOTES, 'UTF-8'), 256, 256);
+			}
+
+			$structured_data['author'][] = [
+				'name' => $blog_article['author_name'],
+				'photo' => $author_photo,
+				'link' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $blog_article['blog_author_id'] ),
+			];
+		}
+		$data['structured_data'] = $this->load->controller('structured_data/article', $structured_data['title'], $structured_data['author'], $structured_data['image'], $blog_article['date_added'], $blog_article['date_modified']);
+
+		// endregion Structured Data
+
 		$this->model_blog_article->increaseViewCountOfArticle($store_id, $blog_article_id);
 
 		$this->response->setOutput($this->load->view('blog/article', $data));

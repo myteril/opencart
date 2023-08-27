@@ -28,6 +28,6 @@ class Breadcrumbs extends \Opencart\System\Engine\Controller {
 			];
 		}
 
-		return $this->load->view('structured_data/breadcrumbs', $data);
+		return $this->load->view('structured_data/default', $data);
 	}
 }
