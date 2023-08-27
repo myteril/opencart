@@ -1,5 +1,7 @@
 <?php
 namespace Opencart\Catalog\Controller\Common;
+use Opencart\System\Library\Image;
+
 /**
  * Class Header
  *
@@ -8,6 +10,7 @@ namespace Opencart\Catalog\Controller\Common;
 class Header extends \Opencart\System\Engine\Controller {
 	/**
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function index(): string {
 		// Analytics
@@ -83,6 +86,21 @@ class Header extends \Opencart\System\Engine\Controller {
 		$data['checkout'] = $this->url->link('checkout/checkout', 'language=' . $this->config->get('config_language'));
 		$data['contact'] = $this->url->link('information/contact', 'language=' . $this->config->get('config_language'));
 		$data['telephone'] = $this->config->get('config_telephone');
+
+		// region Structured Data of Logo (Organization)
+
+		$store_name = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
+		$store_url = HTTP_SERVER;
+		$store_logo = html_entity_decode($this->config->get('config_logo'), ENT_QUOTES, 'UTF-8');
+		$store_logo_image = new Image(DIR_IMAGE . $store_logo);
+		$data['structured_data_logo'] = $this->load->controller(
+			'structured_data/logo',
+			$store_name,
+			$store_url,
+			$store_logo_image->getUrl()
+		);
+
+		// endregion Structured Data of Logo (Organization)
 
 		$data['language'] = $this->load->controller('common/language');
 		$data['currency'] = $this->load->controller('common/currency');
