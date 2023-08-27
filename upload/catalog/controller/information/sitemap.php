@@ -74,6 +74,8 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 		$data['checkout'] = $this->url->link('checkout/checkout', 'language=' . $this->config->get('config_language'));
 		$data['search'] = $this->url->link('product/search', 'language=' . $this->config->get('config_language'));
 		$data['contact'] = $this->url->link('information/contact', 'language=' . $this->config->get('config_language'));
+		$data['blog'] = $this->url->link('blog/search', 'language=' . $this->config->get('config_language'));
+		$data['blog_enabled'] = intval($this->config->get('config_blog_enabled')) === 1;
 
 		$this->load->model('catalog/information');
 
@@ -86,6 +88,7 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 			];
 		}
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');

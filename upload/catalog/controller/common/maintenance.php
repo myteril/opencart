@@ -31,6 +31,7 @@ class Maintenance extends \Opencart\System\Engine\Controller {
 
 		$data['message'] = $this->language->get('text_message');
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['header'] = $this->load->controller('common/header');
 		$data['footer'] = $this->load->controller('common/footer');
 

@@ -59,6 +59,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 
 		$data['voucher_themes'] = $this->model_checkout_voucher_theme->getVoucherThemes();
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
@@ -212,6 +213,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 
 		$data['continue'] = $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language'));
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');

@@ -7273,6 +7273,14 @@ function oc_db_schema() {
 					'key',
 					'value'
 				]
+			],
+			[
+				'name' => 'store_query',
+				'key' => [
+					'store_id',
+					'key',
+					'value'
+				]
 			]
 		],
 		'engine' => 'InnoDB',
@@ -8087,6 +8095,15 @@ function oc_db_schema() {
 				'field' => 'language_id'
 			]
 		],
+		'index' => [
+			[
+				'name' => 'title',
+				'key' => [
+					'title',
+					'description'
+				]
+			]
+		],
 		'engine' => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
@@ -8192,6 +8209,69 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
+		'name' => 'blog_tag',
+		'field' => [
+			[
+				'name' => 'tag',
+				'type' => 'varchar(255)',
+				'not_null' => true
+			],
+			[
+				'name' => 'language_id',
+				'type' => 'int(11)',
+				'not_null' => true
+			],
+			[
+				'name' => 'store_id',
+				'type' => 'bigint(16)',
+				'not_null' => true
+			],
+			[
+				'name' => 'article_count',
+				'type' => 'bigint(16)',
+				'not_null' => true,
+				'default' => '0'
+			],
+		],
+		'index' => [
+			[
+				'name' => 'article_count',
+				'key' => [
+					'tag',
+					'language_id',
+					'store_id',
+					'article_count'
+				]
+			],
+		],
+		'primary' => [
+			'tag',
+			'language_id',
+			'store_id'
+		],
+		'foreign' => [
+			[
+				'key'   => 'blog_article_id',
+				'table' => 'blog_article',
+				'field' => 'blog_article_id'
+			],
+			[
+				'key'   => 'language_id',
+				'table' => 'language',
+				'field' => 'language_id'
+			],
+			[
+				'key'   => 'store_id',
+				'table' => 'store',
+				'field' => 'store_id'
+			]
+		],
+		'engine' => 'InnoDB',
+		'charset' => 'utf8mb4',
+		'collate' => 'utf8mb4_general_ci'
+	];
+
+	$tables[] = [
 		'name' => 'blog_store_to_article',
 		'field' => [
 			[
@@ -8270,6 +8350,20 @@ function oc_db_triggers(string $db_prefix): array
 						 UPDATE `'. $db_prefix . 'blog_article` SET view_count = view_count + @difference WHERE blog_article_id = NEW.blog_article_id LIMIT 1;',
 			'delete' => 'SET @difference = OLD.view_count;
 						 UPDATE `'. $db_prefix . 'blog_article` SET view_count = view_count - @difference WHERE blog_article_id = OLD.blog_article_id LIMIT 1;'
+		],
+	];
+
+	$triggers[] = [
+		'table' => 'blog_tag_to_article',
+		'after' => [
+			'insert' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = NEW.blog_article_id LIMIT 1);
+						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count + 1 WHERE tag = NEW.tag AND language_id = NEW.language_id AND store_id = @store_id LIMIT 1;',
+			'update' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = NEW.blog_article_id LIMIT 1);
+						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count + 1 WHERE tag = NEW.tag AND language_id = NEW.language_id AND store_id = @store_id LIMIT 1;
+						 SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = OLD.blog_article_id LIMIT 1);
+						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count - 1 WHERE tag = OLD.tag AND language_id = OLD.language_id AND store_id = @store_id LIMIT 1;',
+			'delete' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = OLD.blog_article_id LIMIT 1);
+						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count - 1 WHERE tag = OLD.tag AND language_id = OLD.language_id AND store_id = @store_id LIMIT 1;'
 		],
 	];
 

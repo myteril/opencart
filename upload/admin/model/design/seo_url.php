@@ -190,4 +190,16 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 
 		return $query->row;
 	}
+
+	/**
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return array
+	 */
+	public function getSeoUrlsByKeyValue(string $key, string $value): array {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `key` = '" . $this->db->escape($key) . "' AND `value` = '" . $this->db->escape($value) . "'");
+
+		return $query->rows;
+	}
 }
