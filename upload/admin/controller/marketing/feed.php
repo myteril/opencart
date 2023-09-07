@@ -92,7 +92,7 @@ class feed extends \Opencart\System\Engine\Controller {
 			foreach($stores as $store){
 				if(!empty($feed['multilanguage'])) {
 					foreach ($languages as $language_code => $language) {
-						$cache_hash = $this->getCacheHash($store['store_id'], $feed['name'], $language['language_id'], 'last-update');
+						$cache_hash = $this->getCacheHash($store['store_id'], $feed['action'], $language['language_id'], 'last-update');
 						$feed_last_update_cache = $this->cache->get($cache_hash);
 						$feed_last_update_cache = intval($feed_last_update_cache);
 						$feed_list[] = [
@@ -104,7 +104,7 @@ class feed extends \Opencart\System\Engine\Controller {
 						];
 					}
 				}else{
-					$cache_hash = $this->getCacheHash($store['store_id'], $feed['name'], 'last-update');
+					$cache_hash = $this->getCacheHash($store['store_id'], $feed['action'], 'last-update');
 					$feed_last_update_cache = $this->cache->get($cache_hash);
 					$feed_last_update_cache = intval($feed_last_update_cache);
 					$feed_list[] = [
