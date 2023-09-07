@@ -1174,9 +1174,11 @@ class Product extends \Opencart\System\Engine\Controller {
 
                 if(!empty($this->request->post['product_option'])) {
                     foreach ($this->request->post['product_option'] as $i => $product_option) {
-                        foreach ($product_option['product_option_value'] as $j => $product_option_value) {
-                            $this->request->post['product_option'][$i]['product_option_value'][$j]['price'] = $this->tax->calculatePriceExclTax(floatval($product_option_value['price']), $this->request->post['tax_class_id'], 'P');
-                        }
+						if(!empty($product_option['product_option_value'])) {
+							foreach ($product_option['product_option_value'] as $j => $product_option_value) {
+								$this->request->post['product_option'][$i]['product_option_value'][$j]['price'] = $this->tax->calculatePriceExclTax(floatval($product_option_value['price']), $this->request->post['tax_class_id'], 'P');
+							}
+						}
                     }
                 }
 
