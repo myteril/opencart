@@ -8,15 +8,55 @@ namespace Opencart\Catalog\Controller\Feed;
 class Sitemap extends \Opencart\System\Engine\Controller {
 	/**
 	 * @return void
+	 * @throws \Exception
 	 */
 	public function index(): void {
-		$this->load->model('catalog/category');
+		$this->cache->get($this->getCacheHash());
 
-		$xml = $this->generateXML();
+		$sitemap_hash_key = $this->getCacheHash((int)$this->config->get('config_store_id'), 'feed/sitemap', 'sitemap');
+		$last_update_hash_key = $this->getCacheHash((int)$this->config->get('config_store_id'), 'feed/sitemap', 'last-update');
+		$preparing_hash_key = $this->getCacheHash((int)$this->config->get('config_store_id'), 'feed/sitemap', 'preparing');
+
+		// Fetch XML from the cache.
+		$sitemap_xml = $this->cache->get($sitemap_hash_key);
+		$current_time = intval(microtime(true));
+		// If the cache is expired, then generate the XML again.
+		if(empty($sitemap_xml)) {
+			// Check if the sitemap is preparing.
+			$preparation_start_time = $this->cache->get($preparing_hash_key);
+			if (empty($preparation_start_time) || $current_time - intval($preparation_start_time) > 120) {
+				// Mark the cache as the sitemap is preparing.
+				$this->cache->set($preparing_hash_key, $current_time);
+				$sitemap_xml = $this->generateXML();
+				// Save the generated content to the cache.
+				$this->cache->set($sitemap_hash_key, $sitemap_xml);
+				$this->cache->set($last_update_hash_key, $current_time, 10 * 365 * 86400);
+				// Remove the mark.
+				$this->cache->delete($preparing_hash_key);
+			} else {
+				// Refresh the page after five seconds if the sitemap is preparing on other instance of the script.
+				sleep(5);
+				header('Location: ./index.php?route=feed/sitemap&_=' . $current_time);
+				return;
+			}
+		}
+
 		$this->response->addHeader('Content-Type: application/xml');
-		$this->response->setOutput($xml);
+		$this->response->setOutput($sitemap_xml);
 	}
 
+	/**
+	 * @param ...$args
+	 * @return string
+	 */
+	private function getCacheHash(...$args): string
+	{
+		$hash_components = [];
+		foreach ($args as $arg){
+			$hash_components[] = strval($arg);
+		}
+		return hash('sha256', implode('|', $hash_components));
+	}
 
 	/**
 	 * @throws \Exception
@@ -50,6 +90,7 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 
 		$links = [];
 
+		$this->load->model('catalog/category');
 		$categories_1 = $this->model_catalog_category->getCategories(0);
 		foreach ($categories_1 as $category_1) {
 			$categories_2 = $this->model_catalog_category->getCategories($category_1['category_id']);
