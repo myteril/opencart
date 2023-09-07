@@ -54,6 +54,19 @@ class feed extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * @param ...$args
+	 * @return string
+	 */
+	private function getCacheHash(...$args): string
+	{
+		$hash_components = [];
+		foreach ($args as $arg){
+			$hash_components[] = strval($arg);
+		}
+		return hash('sha256', implode('|', $hash_components));
+	}
+
+	/**
 	 * @return void
 	 */
 	public function list(): void {
@@ -69,21 +82,39 @@ class feed extends \Opencart\System\Engine\Controller {
 
 		$feed_list = [];
 
+		// Languages
+		$this->load->model('localisation/language');
+		$languages = $this->model_localisation_language->getLanguages();
+
 		$feeds = $this->getFeedList();
 		$stores = $this->getStoreList();
 		foreach ($feeds as $feed){
 			foreach($stores as $store){
-				$feed_hash = hash('sha256', $store['name'] . " | " . $feed['name']);
-
-				$feed_last_update_cache = $this->cache->get($feed_hash . '-last-update');
-				$feed_last_update_cache = intval($feed_last_update_cache);
-
-				$feed_list[] = [
-					'store_name'    => $store['name'],
-					'feed_name'     => $feed['name'],
-					'feed_url'      => $store['url'] . 'index.php?route=' . $feed['action'],
-					'last_update'   => !empty($feed_last_update_cache) ? date($this->language->get('date_format_long'), strtotime($feed_last_update_cache)) : '-'
-				];
+				if(!empty($feed['multilanguage'])) {
+					foreach ($languages as $language_code => $language) {
+						$cache_hash = $this->getCacheHash($store['store_id'], $feed['name'], $language['language_id'], 'last-update');
+						$feed_last_update_cache = $this->cache->get($cache_hash);
+						$feed_last_update_cache = intval($feed_last_update_cache);
+						$feed_list[] = [
+							'store_name' => $store['name'],
+							'feed_name' => $feed['name'],
+							'language_name' => $language['name'],
+							'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'] . '&language=' . $language['language_id'],
+							'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('date_format_long'), strtotime($feed_last_update_cache)) : '-'
+						];
+					}
+				}else{
+					$cache_hash = $this->getCacheHash($store['store_id'], $feed['name'], 'last-update');
+					$feed_last_update_cache = $this->cache->get($cache_hash);
+					$feed_last_update_cache = intval($feed_last_update_cache);
+					$feed_list[] = [
+						'store_name' => $store['name'],
+						'feed_name' => $feed['name'],
+						'language_name' => false,
+						'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'],
+						'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('date_format_long'), strtotime($feed_last_update_cache)) : '-'
+					];
+				}
 			}
 		}
 
@@ -126,11 +157,13 @@ class feed extends \Opencart\System\Engine\Controller {
 		return [
 			[
 				"name" => "Google Merchant Feed XML",
-				"action" => "feed/google/merchant"
+				"action" => "feed/google/merchant",
+				"multilanguage" => true
 			],
 			[
 				"name" => "Sitemap XML",
-				"action" => "feed/sitemap"
+				"action" => "feed/sitemap",
+				"multilanguage" => false
 			]
 		];
 	}

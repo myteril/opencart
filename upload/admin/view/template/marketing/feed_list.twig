@@ -5,6 +5,7 @@
       <tr>
         <td class="text-start">{{ column_store_name }}</td>
         <td class="text-start">{{ column_feed_name }}</td>
+        <td class="text-start">{{ column_language_name }}</td>
         <td class="text-start">{{ column_feed_url }}</td>
         <td class="text-center">{{ column_last_update }}</td>
         <td class="text-center">{{ column_action }}</td>
@@ -16,6 +17,7 @@
           <tr>
             <td class="text-start">{{ feed.store_name }}</td>
             <td class="text-start">{{ feed.feed_name }}</td>
+            <td class="text-start">{% if feed.language_name %}{{ feed.language_name }}{% else %}{{ text_all_languages }}{% endif %}</td>
             <td class="text-start"><a href="{{ feed.feed_url }}" target="_blank">{{ feed.feed_url }}</a></td>
             <td class="text-center">{{ feed.last_update }}</td>
             <td class="text-center"><a class="btn btn-primary copy-link" data-link="{{ feed.feed_url }}"><i class="fas fa-copy"></i> {{ button_copy_url }}</a></td>
