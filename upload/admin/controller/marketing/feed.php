@@ -100,7 +100,7 @@ class feed extends \Opencart\System\Engine\Controller {
 							'feed_name' => $feed['name'],
 							'language_name' => $language['name'],
 							'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'] . '&language=' . $language['language_id'],
-							'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('date_format_long'), strtotime($feed_last_update_cache)) : '-'
+							'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('date_format_long'), $feed_last_update_cache) : '-'
 						];
 					}
 				}else{
@@ -112,7 +112,7 @@ class feed extends \Opencart\System\Engine\Controller {
 						'feed_name' => $feed['name'],
 						'language_name' => false,
 						'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'],
-						'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('date_format_long'), strtotime($feed_last_update_cache)) : '-'
+						'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('date_format_long'), $feed_last_update_cache) : '-'
 					];
 				}
 			}
