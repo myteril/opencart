@@ -15,7 +15,7 @@ class Cache {
 	 * @var object|mixed
 	 */
 	private object $adaptor;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -32,32 +32,32 @@ class Cache {
 			throw new \Exception('Error: Could not load cache adaptor ' . $adaptor . ' cache!');
 		}
 	}
-	
-    /**
-     * Gets a cache by key name.
-     *
-     * @param	string $key	The cache key name
-     *
-     * @return	string
-     */
+
+	/**
+	 * Gets a cache by key name.
+	 *
+	 * @param string $key The cache key name
+	 *
+	 * @return array|string|null
+	 */
 	public function get(string $key): array|string|null {
 		return $this->adaptor->get($key);
 	}
-	
-    /**
+
+	/**
 	 * Set
 	 *
-     * Sets a cache by key value.
-     *
-     * @param	string	$key	The cache key
-	 * @param	string	$value	The cache value
-	 * 
-	 * @return	string
-     */
+	 * Sets a cache by key value.
+	 *
+	 * @param string $key The cache key
+	 * @param array|string|null $value The cache value
+	 * @param int $expire
+	 * @return void
+	 */
 	public function set(string $key, array|string|null $value, int $expire = 0): void {
 		$this->adaptor->set($key, $value, $expire);
 	}
-   
+
     /**
      * Deletes a cache by key name.
      *
