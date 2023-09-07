@@ -99,7 +99,7 @@ class feed extends \Opencart\System\Engine\Controller {
 							'store_name' => $store['name'],
 							'feed_name' => $feed['name'],
 							'language_name' => $language['name'],
-							'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'] . '&language=' . $language['language_id'],
+							'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'] . '&language=' . $language['code'],
 							'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('datetime_format'), $feed_last_update_cache) : '-'
 						];
 					}
