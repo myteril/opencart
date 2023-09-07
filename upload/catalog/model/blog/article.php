@@ -142,6 +142,28 @@ class Article extends \Opencart\System\Engine\Model {
 
 	/**
 	 * @param array $data
+	 * @return array
+	 */
+	public function getArticlesForSitemap(array $data = []): array{
+		$this->load->model("localisation/language");
+
+		$language =  $this->model_localisation_language->getLanguageByCode($this->config->get('config_language'));
+
+		$sql = "SELECT ba.blog_article_id as blog_article_id, ba.date_modified as date_modified  FROM `" . DB_PREFIX . "blog_article` ba";
+
+		$sql .= " INNER JOIN `" . DB_PREFIX . "blog_store_to_article` bsta ON (ba.blog_article_id =  bsta.blog_article_id AND bsta.store_id = " . intval($data['store_id']) . ") ";
+		$sql .= " INNER JOIN `" . DB_PREFIX . "blog_article_content` bac ON (bac.blog_article_id =  ba.blog_article_id and bac.language_id = '". $this->db->escape($language['language_id']) ."') ";
+		$sql .= " WHERE ba.status = 1 ";
+		$sql .= " ORDER BY ba.`blog_article_id` DESC";
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+
+
+	/**
+	 * @param array $data
 	 * @return int
 	 */
 	public function getTotalArticles(array $data = []): int {
