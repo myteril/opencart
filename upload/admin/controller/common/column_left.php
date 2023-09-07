@@ -413,6 +413,14 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 				];
 			}
 
+			if ($this->user->hasPermission('access', 'marketing/feed')) {
+				$marketing[] = [
+					'name'	   => $this->language->get('text_feeds'),
+					'href'     => $this->url->link('marketing/feed', 'user_token=' . $this->session->data['user_token']),
+					'children' => []
+				];
+			}
+
 			if ($marketing) {
 				$data['menus'][] = [
 					'id'       => 'menu-marketing',

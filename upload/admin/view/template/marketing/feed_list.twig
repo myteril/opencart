@@ -1,0 +1,41 @@
+<form id="form-marketing" method="post" data-oc-toggle="ajax" data-oc-load="{{ action }}" data-oc-target="#feed-list">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <td class="text-start">{{ column_store_name }}</td>
+        <td class="text-start">{{ column_feed_name }}</td>
+        <td class="text-start">{{ column_feed_url }}</td>
+        <td class="text-center">{{ column_last_update }}</td>
+        <td class="text-center">{{ column_action }}</td>
+      </tr>
+      </thead>
+      <tbody>
+      {% if feeds %}
+        {% for feed in feeds %}
+          <tr>
+            <td class="text-start">{{ feed.store_name }}</td>
+            <td class="text-start">{{ feed.feed_name }}</td>
+            <td class="text-start"><a href="{{ feed.feed_url }}" target="_blank">{{ feed.feed_url }}</a></td>
+            <td class="text-center">{{ feed.last_update }}</td>
+            <td class="text-center"><a class="btn btn-primary copy-link" data-link="{{ feed.feed_url }}"><i class="fas fa-copy"></i> {{ button_copy_url }}</a></td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td class="text-center" colspan="8">{{ text_no_results }}</td>
+        </tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+</form>
+<script>
+  $("a.copy-link").on('click', function(){
+    navigator.clipboard.writeText($(this).attr("data-link")).then(function(){
+      console.log('Content copied to clipboard');
+    }).catch(function(err){
+      console.error('Failed to copy: ', err);
+    })
+  });
+</script>
