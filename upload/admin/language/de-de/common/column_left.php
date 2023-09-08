@@ -43,6 +43,7 @@ $_['text_location']            = 'Standorte';
 $_['text_maintenance']         = 'Wartung';
 $_['text_manufacturer']        = 'Hersteller';
 $_['text_marketing']           = 'Marketing';
+$_['text_feeds']           	   = 'Feeds';
 $_['text_marketplace']         = 'Marketplace';
 $_['text_menu']                = 'Menu Manager';
 $_['text_navigation']          = 'Navigation';
