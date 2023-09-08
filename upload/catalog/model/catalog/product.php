@@ -206,6 +206,23 @@ class Product extends \Opencart\System\Engine\Model {
 		return $product_data;
 	}
 
+
+	/**
+	 * @return array
+	 */
+	public function getProductsForFeed(): array {
+		$sql = "SELECT DISTINCT p.*, pd.`meta_title`, pd.`meta_description`, m.`name` as manufacturer_name, `p`.`image`, " . $this->statement['discount'] . ", " . $this->statement['special'];
+		$sql .= " FROM `" . DB_PREFIX . "product_to_store` `p2s` LEFT JOIN `" . DB_PREFIX . "product` `p` ON (`p`.`product_id` = `p2s`.`product_id` AND `p`.`status` = '1' AND `p2s`.`store_id` = '" . (int)$this->config->get('config_store_id'). "' AND `p`.`date_available` <= NOW())";
+		$sql .= " LEFT JOIN `" . DB_PREFIX . "product_description` `pd` ON (`p`.`product_id` = `pd`.`product_id`)";
+		$sql .= " LEFT JOIN `" . DB_PREFIX . "manufacturer` `m` ON (`p`.`manufacturer_id` = `m`.`manufacturer_id`)";
+		$sql .= " WHERE `pd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql .= " ORDER BY p.`sort_order` ASC, LCASE(`pd`.`name`) ASC";
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+
+
 	/**
 	 * @param int $product_id
 	 *
