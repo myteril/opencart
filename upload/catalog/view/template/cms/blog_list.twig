@@ -5,7 +5,8 @@
       <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
     {% endfor %}
   </ul>
-  <div class="row">{{ column_left }}
+  <div class="row">
+    {{ column_left }}
     <div id="content" class="col">
       {{ content_top }}
 
@@ -17,16 +18,14 @@
             {% for topic in topics %}
               <option value="{{ topic.topic_id }}"{% if topic.topic_id == topic_id %} selected{% endif %}>{{ topic.name }}</option>
             {% endfor %}
-          </select> <a href="{{ continue }}" class="btn btn-primary">{{ button_search }}</a>
+          </select>
+          <a href="{{ continue }}" class="btn btn-primary">{{ button_search }}</a>
         </div>
       {% endif %}
 
       {% if articles %}
-
         {% for article in articles %}
-
-          <div class="mb-3">
-
+          <div class="mb-4">
             <h2><a href="{{ article.href }}">{{ article.name }}</a></h2>
 
             {% if article.image %}
@@ -36,7 +35,7 @@
             <ul class="list-inline">
               <li class="list-inline-item">By <a href="{{ article.filter_author }}">{{ article.author }}</a></li>
               <li class="list-inline-item">{{ article.date_added }}</li>
-              <li class="list-inline-item">{{ article.comment_total }} Comments</li>
+              <li class="list-inline-item">{{ article.comment_total }} comments</li>
             </ul>
 
             <div class="mb-3">{{ article.description }}</div>
@@ -44,7 +43,6 @@
             <a href="{{ article.href }}" class="btn btn-primary">{{ button_continue }}</a>
 
           </div>
-
         {% endfor %}
         <div class="row">
           <div class="col-sm-6 text-start">{{ pagination }}</div>
@@ -53,7 +51,6 @@
       {% else %}
         <p>{{ text_no_results }}</p>
       {% endif %}
-
       {{ content_bottom }}
     </div>
     {{ column_right }}
