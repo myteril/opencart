@@ -112,8 +112,6 @@ class CustomerGroup extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('customer/customer_group');
 
-		$customer_group_total = $this->model_customer_customer_group->getTotalCustomerGroups();
-
 		$results = $this->model_customer_customer_group->getCustomerGroups($filter_data);
 
 		foreach ($results as $result) {
@@ -133,10 +131,6 @@ class CustomerGroup extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('customer/customer_group.list', 'user_token=' . $this->session->data['user_token'] . '&sort=cgd.name' . $url);
 		$data['sort_sort_order'] = $this->url->link('customer/customer_group.list', 'user_token=' . $this->session->data['user_token'] . '&sort=cg.sort_order' . $url);
 
@@ -149,6 +143,8 @@ class CustomerGroup extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$customer_group_total = $this->model_customer_customer_group->getTotalCustomerGroups();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $customer_group_total,

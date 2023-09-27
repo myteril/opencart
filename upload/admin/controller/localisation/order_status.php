@@ -112,8 +112,6 @@ class OrderStatus extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/order_status');
 
-		$order_status_total = $this->model_localisation_order_status->getTotalOrderStatuses();
-
 		$results = $this->model_localisation_order_status->getOrderStatuses($filter_data);
 
 		foreach ($results as $result) {
@@ -132,10 +130,6 @@ class OrderStatus extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('localisation/order_status.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
 
 		$url = '';
@@ -147,6 +141,8 @@ class OrderStatus extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$order_status_total = $this->model_localisation_order_status->getTotalOrderStatuses();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $order_status_total,

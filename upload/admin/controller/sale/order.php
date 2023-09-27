@@ -335,8 +335,6 @@ class Order extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('sale/order');
 
-		$order_total = $this->model_sale_order->getTotalOrders($filter_data);
-
 		$results = $this->model_sale_order->getOrders($filter_data);
 
 		foreach ($results as $result) {
@@ -450,6 +448,8 @@ class Order extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$order_total = $this->model_sale_order->getTotalOrders($filter_data);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $order_total,
@@ -1320,7 +1320,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		$data['stylesheet'] = 'view/stylesheet/stylesheet.css';
 
 		// Hard coding scripts so they can be replaced via the events system.
-		$data['jquery'] = 'view/javascript/jquery/jquery-3.7.0.min.js';
+		$data['jquery'] = 'view/javascript/jquery/jquery-3.7.1.min.js';
 		$data['bootstrap_js'] = 'view/javascript/bootstrap/js/bootstrap.bundle.min.js';
 
 		$this->load->model('sale/order');
@@ -1579,7 +1579,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		$data['stylesheet'] = 'view/stylesheet/stylesheet.css';
 
 		// Hard coding scripts so they can be replaced via the events system.
-		$data['jquery'] = 'view/javascript/jquery/jquery-3.7.0.min.js';
+		$data['jquery'] = 'view/javascript/jquery/jquery-3.7.1.min.js';
 		$data['bootstrap_js'] = 'view/javascript/bootstrap/js/bootstrap.bundle.min.js';
 
 		$this->load->model('sale/order');

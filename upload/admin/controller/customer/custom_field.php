@@ -112,8 +112,6 @@ class CustomField extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('customer/custom_field');
 
-		$custom_field_total = $this->model_customer_custom_field->getTotalCustomFields();
-
 		$results = $this->model_customer_custom_field->getCustomFields($filter_data);
 
 		foreach ($results as $result) {
@@ -171,10 +169,6 @@ class CustomField extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('customer/custom_field.list', 'user_token=' . $this->session->data['user_token'] . '&sort=cfd.name' . $url);
 		$data['sort_location'] = $this->url->link('customer/custom_field.list', 'user_token=' . $this->session->data['user_token'] . '&sort=cf.location' . $url);
 		$data['sort_type'] = $this->url->link('customer/custom_field.list', 'user_token=' . $this->session->data['user_token'] . '&sort=cf.type' . $url);
@@ -190,6 +184,8 @@ class CustomField extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$custom_field_total = $this->model_customer_custom_field->getTotalCustomFields();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $custom_field_total,

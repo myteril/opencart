@@ -201,8 +201,6 @@ class Marketing extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('marketing/marketing');
 
-		$marketing_total = $this->model_marketing_marketing->getTotalMarketings($filter_data);
-
 		$results = $this->model_marketing_marketing->getMarketings($filter_data);
 
 		foreach ($results as $result) {
@@ -234,14 +232,11 @@ class Marketing extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['filter_date_to'])) {
 			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
 		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_name'] = $this->url->link('marketing/marketing.list', 'user_token=' . $this->session->data['user_token'] . '&sort=m.name' . $url);
@@ -273,6 +268,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$marketing_total = $this->model_marketing_marketing->getTotalMarketings($filter_data);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $marketing_total,

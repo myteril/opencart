@@ -112,8 +112,6 @@ class Language extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/language');
 
-		$language_total = $this->model_localisation_language->getTotalLanguages();
-
 		$results = $this->model_localisation_language->getLanguages($filter_data);
 
 		foreach ($results as $result) {
@@ -121,6 +119,7 @@ class Language extends \Opencart\System\Engine\Controller {
 				'language_id' => $result['language_id'],
 				'name'        => $result['name'] . (($result['code'] == $this->config->get('config_language')) ? $this->language->get('text_default') : ''),
 				'code'        => $result['code'],
+				'status'      => $result['status'],
 				'sort_order'  => $result['sort_order'],
 				'edit'        => $this->url->link('localisation/language.form', 'user_token=' . $this->session->data['user_token'] . '&language_id=' . $result['language_id'] . $url)
 			];
@@ -132,10 +131,6 @@ class Language extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_name'] = $this->url->link('localisation/language.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
@@ -151,6 +146,8 @@ class Language extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$language_total = $this->model_localisation_language->getTotalLanguages();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $language_total,

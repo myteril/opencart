@@ -112,8 +112,6 @@ class TaxClass extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/tax_class');
 
-		$tax_class_total = $this->model_localisation_tax_class->getTotalTaxClasses();
-
 		$results = $this->model_localisation_tax_class->getTaxClasses($filter_data);
 
 		foreach ($results as $result) {
@@ -132,10 +130,6 @@ class TaxClass extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_title'] = $this->url->link('localisation/tax_class.list', 'user_token=' . $this->session->data['user_token'] . '&sort=title' . $url);
 
 		$url = '';
@@ -147,6 +141,8 @@ class TaxClass extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$tax_class_total = $this->model_localisation_tax_class->getTotalTaxClasses();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $tax_class_total,

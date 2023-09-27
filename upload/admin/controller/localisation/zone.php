@@ -167,8 +167,6 @@ class Zone extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/zone');
 
-		$zone_total = $this->model_localisation_zone->getTotalZones($filter_data);
-
 		$results = $this->model_localisation_zone->getZones($filter_data);
 
 		foreach ($results as $result) {
@@ -177,6 +175,7 @@ class Zone extends \Opencart\System\Engine\Controller {
 				'country' => $result['country'],
 				'name'    => $result['name'] . (($result['zone_id'] == $this->config->get('config_zone_id')) ? $this->language->get('text_default') : ''),
 				'code'    => $result['code'],
+				'status'  => $result['status'],
 				'edit'    => $this->url->link('localisation/zone.form', 'user_token=' . $this->session->data['user_token'] . '&zone_id=' . $result['zone_id'] . $url)
 			];
 		}
@@ -199,10 +198,6 @@ class Zone extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_country'] = $this->url->link('localisation/zone.list', 'user_token=' . $this->session->data['user_token'] . '&sort=c.name' . $url);
@@ -230,6 +225,8 @@ class Zone extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$zone_total = $this->model_localisation_zone->getTotalZones($filter_data);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $zone_total,

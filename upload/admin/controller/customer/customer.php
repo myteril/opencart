@@ -275,8 +275,6 @@ class Customer extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('customer/customer');
 
-		$customer_total = $this->model_customer_customer->getTotalCustomers($filter_data);
-
 		$results = $this->model_customer_customer->getCustomers($filter_data);
 
 		foreach ($results as $result) {
@@ -310,7 +308,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 				'email'          => $result['email'],
 				'store_id'       => $result['store_id'],
 				'customer_group' => $result['customer_group'],
-				'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+				'status'         => $result['status'],
 				'date_added'     => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'unlock'         => $unlock,
 				'store'          => $store_data,
@@ -352,10 +350,6 @@ class Customer extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_name'] = $this->url->link('customer/customer.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
@@ -401,6 +395,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$customer_total = $this->model_customer_customer->getTotalCustomers($filter_data);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $customer_total,

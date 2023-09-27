@@ -110,8 +110,6 @@ class WeightClass extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/weight_class');
 
-		$weight_class_total = $this->model_localisation_weight_class->getTotalWeightClasses();
-
 		$results = $this->model_localisation_weight_class->getWeightClasses($filter_data);
 
 		foreach ($results as $result) {
@@ -132,10 +130,6 @@ class WeightClass extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_title'] = $this->url->link('localisation/weight_class.list', 'user_token=' . $this->session->data['user_token'] . '&sort=title' . $url);
 		$data['sort_unit'] = $this->url->link('localisation/weight_class.list', 'user_token=' . $this->session->data['user_token'] . '&sort=unit' . $url);
 		$data['sort_value'] = $this->url->link('localisation/weight_class.list', 'user_token=' . $this->session->data['user_token'] . '&sort=value' . $url);
@@ -149,6 +143,8 @@ class WeightClass extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$weight_class_total = $this->model_localisation_weight_class->getTotalWeightClasses();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $weight_class_total,

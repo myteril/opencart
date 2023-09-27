@@ -112,8 +112,6 @@ class Layout extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('design/layout');
 
-		$layout_total = $this->model_design_layout->getTotalLayouts();
-
 		$results = $this->model_design_layout->getLayouts($filter_data);
 
 		foreach ($results as $result) {
@@ -132,10 +130,6 @@ class Layout extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('design/layout.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
 
 		$url = '';
@@ -147,6 +141,8 @@ class Layout extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$layout_total = $this->model_design_layout->getTotalLayouts();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $layout_total,

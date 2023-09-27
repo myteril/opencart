@@ -167,14 +167,13 @@ class Country extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/country');
 
-		$country_total = $this->model_localisation_country->getTotalCountries($filter_data);
-
 		$results = $this->model_localisation_country->getCountries($filter_data);
 
 		foreach ($results as $result) {
 			$data['countries'][] = [
 				'country_id' => $result['country_id'],
 				'name'       => $result['name'] . (($result['country_id'] == $this->config->get('config_country_id')) ? $this->language->get('text_default') : ''),
+				'status'      => $result['status'],
 				'iso_code_2' => $result['iso_code_2'],
 				'iso_code_3' => $result['iso_code_3'],
 				'edit'       => $this->url->link('localisation/country.form', 'user_token=' . $this->session->data['user_token'] . '&country_id=' . $result['country_id'] . $url)
@@ -199,10 +198,6 @@ class Country extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_name'] = $this->url->link('localisation/country.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
@@ -230,6 +225,8 @@ class Country extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$country_total = $this->model_localisation_country->getTotalCountries($filter_data);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $country_total,

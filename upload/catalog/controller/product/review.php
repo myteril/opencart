@@ -85,6 +85,14 @@ class Review extends \Opencart\System\Engine\Controller {
 			}
 		}
 
+		$this->load->model('catalog/product');
+
+		$product_info = $this->model_catalog_product->getProduct($product_id);
+
+		if (!$product_info) {
+			$json['error']['warning'] = $this->language->get('error_product');
+		}
+
 		if ((oc_strlen($this->request->post['name']) < 3) || (oc_strlen($this->request->post['name']) > 25)) {
 			$json['error']['name'] = $this->language->get('error_name');
 		}
@@ -163,8 +171,6 @@ class Review extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('catalog/review');
 
-		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($product_id);
-
 		$results = $this->model_catalog_review->getReviewsByProductId($product_id, ($page - 1) * 5, 5);
 
 		foreach ($results as $result) {
@@ -175,6 +181,8 @@ class Review extends \Opencart\System\Engine\Controller {
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
 			];
 		}
+
+		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($product_id);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $review_total,

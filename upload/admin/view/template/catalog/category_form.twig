@@ -87,12 +87,12 @@
                   <input type="text" name="filter" value="" placeholder="{{ entry_filter }}" id="input-filter" data-oc-target="autocomplete-filter" class="form-control" autocomplete="off"/>
                   <ul id="autocomplete-filter" class="dropdown-menu"></ul>
                   <div class="form-control p-0" style="height: 150px; overflow: auto;">
-                    <table id="category-filter" class="table table-sm m-0">
+                    <table id="category-filter" class="table m-0">
                       <tbody>
                         {% for category_filter in category_filters %}
                           <tr id="category-filter-{{ category_filter.filter_id }}">
                             <td>{{ category_filter.name }}<input type="hidden" name="category_filter[]" value="{{ category_filter.filter_id }}"/></td>
-                            <td class="text-end"><button type="button" class="btn btn-danger btn-sm"><i class="fa-solid fa-minus-circle"></i></button></td>
+                            <td class="text-end"><button type="button" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
                           </tr>
                         {% endfor %}
                       </tbody>
@@ -116,11 +116,12 @@
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">{{ entry_image }}</label>
                 <div class="col-sm-10">
-                  <div class="card image">
-                    <img src="{{ thumb }}" alt="" title="" id="thumb-image" data-oc-placeholder="{{ placeholder }}" class="card-img-top"/> <input type="hidden" name="image" value="{{ image }}" id="input-image"/>
-                    <div class="card-body">
-                      <button type="button" data-oc-toggle="image" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-primary btn-sm btn-block"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
-                      <button type="button" data-oc-toggle="clear" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-warning btn-sm btn-block"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
+                  <div class="border rounded d-block" style="max-width: 300px;">
+                    <img src="{{ thumb }}" alt="" title="" id="thumb-image" data-oc-placeholder="{{ placeholder }}" class="img-fluid"/>
+                    <input type="hidden" name="image" value="{{ image }}" id="input-image"/>
+                    <div class="d-grid">
+                      <button type="button" data-oc-toggle="image" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-primary rounded-0"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
+                      <button type="button" data-oc-toggle="clear" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-warning rounded-0"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
                     </div>
                   </div>
                 </div>

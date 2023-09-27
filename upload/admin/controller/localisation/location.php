@@ -112,8 +112,6 @@ class Location extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/location');
 
-		$location_total = $this->model_localisation_location->getTotalLocations();
-
 		$results = $this->model_localisation_location->getLocations($filter_data);
 
 		foreach ($results as $result) {
@@ -133,10 +131,6 @@ class Location extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('localisation/location.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
 		$data['sort_address'] = $this->url->link('localisation/location.list', 'user_token=' . $this->session->data['user_token'] . '&sort=address' . $url);
 
@@ -149,6 +143,8 @@ class Location extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$location_total = $this->model_localisation_location->getTotalLocations();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $location_total,
@@ -250,10 +246,10 @@ class Location extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('tool/image');
 
-		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 
 		if (is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
-			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), 100, 100);
+			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 		} else {
 			$data['thumb'] = $data['placeholder'];
 		}

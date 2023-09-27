@@ -12,6 +12,12 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('account/subscription');
 
+		if (isset($this->request->get['page'])) {
+			$page = (int)$this->request->get['page'];
+		} else {
+			$page = 1;
+		}
+
 		if (!$this->customer->isLogged() || (!isset($this->request->get['customer_token']) || !isset($this->session->data['customer_token']) || ($this->request->get['customer_token'] != $this->session->data['customer_token']))) {
 			$this->session->data['redirect'] = $this->url->link('account/subscription', 'language=' . $this->config->get('config_language'));
 
@@ -43,12 +49,6 @@ class Subscription extends \Opencart\System\Engine\Controller {
 			'href' => $this->url->link('account/subscription', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . $url)
 		];
 
-		if (isset($this->request->get['page'])) {
-			$page = (int)$this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-
 		$limit = 10;
 
 		$data['subscriptions'] = [];
@@ -58,8 +58,6 @@ class Subscription extends \Opencart\System\Engine\Controller {
 		$this->load->model('catalog/product');
 		$this->load->model('localisation/currency');
 		$this->load->model('localisation/subscription_status');
-
-		$subscription_total = $this->model_account_subscription->getTotalSubscriptions();
 
 		$results = $this->model_account_subscription->getSubscriptions(($page - 1) * $limit, $limit);
 
@@ -118,6 +116,8 @@ class Subscription extends \Opencart\System\Engine\Controller {
 			}
 		}
 
+		$subscription_total = $this->model_account_subscription->getTotalSubscriptions();
+
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $subscription_total,
 			'page'  => $page,
@@ -129,7 +129,6 @@ class Subscription extends \Opencart\System\Engine\Controller {
 
 		$data['continue'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']);
 
-		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
@@ -143,19 +142,19 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	/**
 	 * @return void
 	 */
-	public function info(): void {
+	public function info(): object|null {
 		$this->load->language('account/subscription');
-
-		if (!$this->customer->isLogged() || (!isset($this->request->get['customer_token']) || !isset($this->session->data['customer_token']) || ($this->request->get['customer_token'] != $this->session->data['customer_token']))) {
-			$this->session->data['redirect'] = $this->url->link('account/subscription', 'language=' . $this->config->get('config_language'));
-
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
-		}
 
 		if (isset($this->request->get['subscription_id'])) {
 			$subscription_id = (int)$this->request->get['subscription_id'];
 		} else {
 			$subscription_id = 0;
+		}
+
+		if (!$this->customer->isLogged() || (!isset($this->request->get['customer_token']) || !isset($this->session->data['customer_token']) || ($this->request->get['customer_token'] != $this->session->data['customer_token']))) {
+			$this->session->data['redirect'] = $this->url->link('account/subscription', 'language=' . $this->config->get('config_language'));
+
+			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
 		}
 
 		$this->load->model('account/subscription');
@@ -381,7 +380,6 @@ class Subscription extends \Opencart\System\Engine\Controller {
 			//$data['order'] = $this->url->link('account/order.info', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . '&order_id=' . $subscription_info['order_id']);
 			$data['product'] = $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . '&product_id=' . $subscription_info['product_id']);
 
-			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
@@ -391,42 +389,10 @@ class Subscription extends \Opencart\System\Engine\Controller {
 
 			$this->response->setOutput($this->load->view('account/subscription_info', $data));
 		} else {
-			$this->document->setTitle($this->language->get('text_subscription'));
-
-			$data['breadcrumbs'] = [];
-
-			$data['breadcrumbs'][] = [
-				'text' => $this->language->get('text_home'),
-				'href' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
-			];
-
-			$data['breadcrumbs'][] = [
-				'text' => $this->language->get('text_account'),
-				'href' => $this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'])
-			];
-
-			$data['breadcrumbs'][] = [
-				'text' => $this->language->get('heading_title'),
-				'href' => $this->url->link('account/subscription', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'])
-			];
-
-			$data['breadcrumbs'][] = [
-				'text' => $this->language->get('text_subscription'),
-				'href' => $this->url->link('account/subscription.info', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . '&subscription_id=' . $subscription_id)
-			];
-
-			$data['continue'] = $this->url->link('account/subscription', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']);
-
-			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
-			$data['column_left'] = $this->load->controller('common/column_left');
-			$data['column_right'] = $this->load->controller('common/column_right');
-			$data['content_top'] = $this->load->controller('common/content_top');
-			$data['content_bottom'] = $this->load->controller('common/content_bottom');
-			$data['footer'] = $this->load->controller('common/footer');
-			$data['header'] = $this->load->controller('common/header');
-
-			$this->response->setOutput($this->load->view('error/not_found', $data));
+			return new \Opencart\System\Engine\Action('error/not_found');
 		}
+
+		return null;
 	}
 
 	/**

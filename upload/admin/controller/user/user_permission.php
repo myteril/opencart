@@ -112,8 +112,6 @@ class UserPermission extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('user/user_group');
 
-		$user_group_total = $this->model_user_user_group->getTotalUserGroups();
-
 		$results = $this->model_user_user_group->getUserGroups($filter_data);
 
 		foreach ($results as $result) {
@@ -132,10 +130,6 @@ class UserPermission extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('user/user_permission.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
 
 		$url = '';
@@ -147,6 +141,8 @@ class UserPermission extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$user_group_total = $this->model_user_user_group->getTotalUserGroups();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $user_group_total,

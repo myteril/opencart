@@ -113,14 +113,13 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('catalog/subscription_plan');
 
-		$subscription_plan_total = $this->model_catalog_subscription_plan->getTotalSubscriptionPlans();
-
 		$results = $this->model_catalog_subscription_plan->getSubscriptionPlans($filter_data);
 
 		foreach ($results as $result) {
 			$data['subscription_plans'][] = [
 				'subscription_plan_id' => $result['subscription_plan_id'],
 				'name'                 => $result['name'],
+				'status'               => $result['status'],
 				'sort_order'           => $result['sort_order'],
 				'edit'                 => $this->url->link('catalog/subscription_plan.form', 'user_token=' . $this->session->data['user_token'] . '&subscription_plan_id=' . $result['subscription_plan_id'] . $url)
 			];
@@ -132,10 +131,6 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_name'] = $this->url->link('catalog/subscription_plan.list', 'user_token=' . $this->session->data['user_token'] . '&sort=spd.name' . $url);
@@ -150,6 +145,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$subscription_plan_total = $this->model_catalog_subscription_plan->getTotalSubscriptionPlans();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $subscription_plan_total,

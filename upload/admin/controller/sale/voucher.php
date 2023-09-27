@@ -112,8 +112,6 @@ class Voucher extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('sale/voucher');
 
-		$voucher_total = $this->model_sale_voucher->getTotalVouchers();
-
 		$results = $this->model_sale_voucher->getVouchers($filter_data);
 
 		foreach ($results as $result) {
@@ -126,11 +124,11 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			$data['vouchers'][] = [
 				'voucher_id' => $result['voucher_id'],
 				'code'       => $result['code'],
+				'status'     => $result['status'],
 				'from'       => $result['from_name'],
 				'to'         => $result['to_name'],
 				'theme'      => $result['theme'],
 				'amount'     => $this->currency->format($result['amount'], $this->config->get('config_currency')),
-				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'edit'       => $this->url->link('sale/voucher.form', 'user_token=' . $this->session->data['user_token'] . '&voucher_id=' . $result['voucher_id'] . $url),
 				'order'      => $order_href
@@ -143,10 +141,6 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_code'] = $this->url->link('sale/voucher.list', 'user_token=' . $this->session->data['user_token'] . '&sort=v.code' . $url);
@@ -166,6 +160,8 @@ class Voucher extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$voucher_total = $this->model_sale_voucher->getTotalVouchers();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $voucher_total,

@@ -12,10 +12,6 @@ class Search extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('product/search');
 
-		$this->load->model('catalog/category');
-		$this->load->model('catalog/product');
-		$this->load->model('tool/image');
-
 		if (isset($this->request->get['search'])) {
 			$search = $this->request->get['search'];
 		} else {
@@ -24,8 +20,6 @@ class Search extends \Opencart\System\Engine\Controller {
 
 		if (isset($this->request->get['tag'])) {
 			$tag = $this->request->get['tag'];
-		} elseif (isset($this->request->get['search'])) {
-			$tag = $this->request->get['search'];
 		} else {
 			$tag = '';
 		}
@@ -145,6 +139,8 @@ class Search extends \Opencart\System\Engine\Controller {
 		// 3 Level Category Search
 		$data['categories'] = [];
 
+		$this->load->model('catalog/category');
+
 		$categories_1 = $this->model_catalog_category->getCategories(0);
 
 		foreach ($categories_1 as $category_1) {
@@ -180,9 +176,9 @@ class Search extends \Opencart\System\Engine\Controller {
 
 		$data['products'] = [];
 
-		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
+		if ($search || $tag) {
 			$filter_data = [
-				'filter_name'         => $search,
+				'filter_search'       => $search,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,
 				'filter_category_id'  => $category_id,
@@ -193,7 +189,8 @@ class Search extends \Opencart\System\Engine\Controller {
 				'limit'               => $limit
 			];
 
-			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+			$this->load->model('catalog/product');
+			$this->load->model('tool/image');
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
 
@@ -202,6 +199,12 @@ class Search extends \Opencart\System\Engine\Controller {
 					$image = $this->model_tool_image->resize(html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
 				} else {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+				}
+
+				$description = trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')));
+
+				if (oc_strlen($description) > $this->config->get('config_product_description_length')) {
+					$description = oc_substr($description, 0, $this->config->get('config_product_description_length')) . '..';
 				}
 
 				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -226,7 +229,7 @@ class Search extends \Opencart\System\Engine\Controller {
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
-					'description' => oc_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('config_product_description_length')) . '..',
+					'description' => $description,
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,
@@ -399,6 +402,8 @@ class Search extends \Opencart\System\Engine\Controller {
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
+
+			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 			$data['pagination'] = $this->load->controller('common/pagination', [
 				'total' => $product_total,

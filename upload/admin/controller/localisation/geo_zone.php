@@ -112,8 +112,6 @@ class GeoZone extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/geo_zone');
 
-		$geo_zone_total = $this->model_localisation_geo_zone->getTotalGeoZones();
-
 		$results = $this->model_localisation_geo_zone->getGeoZones($filter_data);
 
 		foreach ($results as $result) {
@@ -133,10 +131,6 @@ class GeoZone extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('localisation/geo_zone.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
 		$data['sort_description'] = $this->url->link('localisation/geo_zone.list', 'user_token=' . $this->session->data['user_token'] . '&sort=description' . $url);
 
@@ -149,6 +143,8 @@ class GeoZone extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$geo_zone_total = $this->model_localisation_geo_zone->getTotalGeoZones();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $geo_zone_total,

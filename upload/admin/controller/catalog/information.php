@@ -112,14 +112,13 @@ class Information extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('catalog/information');
 
-		$information_total = $this->model_catalog_information->getTotalInformations();
-
 		$results = $this->model_catalog_information->getInformations($filter_data);
 
 		foreach ($results as $result) {
 			$data['informations'][] = [
 				'information_id' => $result['information_id'],
 				'title'          => $result['title'],
+				'status'         => $result['status'],
 				'sort_order'     => $result['sort_order'],
 				'edit'           => $this->url->link('catalog/information.form', 'user_token=' . $this->session->data['user_token'] . '&information_id=' . $result['information_id'] . $url)
 			];
@@ -131,10 +130,6 @@ class Information extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_title'] = $this->url->link('catalog/information.list', 'user_token=' . $this->session->data['user_token'] . '&sort=id.title' . $url);
@@ -149,6 +144,8 @@ class Information extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$information_total = $this->model_catalog_information->getTotalInformations();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $information_total,

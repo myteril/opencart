@@ -112,8 +112,6 @@ class Download extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('catalog/download');
 
-		$download_total = $this->model_catalog_download->getTotalDownloads();
-
 		$results = $this->model_catalog_download->getDownloads($filter_data);
 
 		foreach ($results as $result) {
@@ -133,10 +131,6 @@ class Download extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('catalog/download.list', 'user_token=' . $this->session->data['user_token'] . '&sort=dd.name' . $url);
 		$data['sort_date_added'] = $this->url->link('catalog/download.list', 'user_token=' . $this->session->data['user_token'] . '&sort=d.date_added' . $url);
 
@@ -149,6 +143,8 @@ class Download extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$download_total = $this->model_catalog_download->getTotalDownloads();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $download_total,

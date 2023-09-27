@@ -126,8 +126,6 @@ class StockStatus extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('localisation/stock_status');
 
-		$stock_status_total = $this->model_localisation_stock_status->getTotalStockStatuses();
-
 		$results = $this->model_localisation_stock_status->getStockStatuses($filter_data);
 
 		foreach ($results as $result) {
@@ -146,10 +144,6 @@ class StockStatus extends \Opencart\System\Engine\Controller {
 			$url .= '&order=ASC';
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		$data['sort_name'] = $this->url->link('localisation/stock_status.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
 
 		$url = '';
@@ -161,6 +155,8 @@ class StockStatus extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$stock_status_total = $this->model_localisation_stock_status->getTotalStockStatuses();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $stock_status_total,

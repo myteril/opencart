@@ -112,8 +112,6 @@ class Coupon extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('marketing/coupon');
 
-		$coupon_total = $this->model_marketing_coupon->getTotalCoupons();
-
 		$results = $this->model_marketing_coupon->getCoupons($filter_data);
 
 		foreach ($results as $result) {
@@ -124,7 +122,7 @@ class Coupon extends \Opencart\System\Engine\Controller {
 				'discount'   => $result['discount'],
 				'date_start' => date($this->language->get('date_format_short'), strtotime($result['date_start'])),
 				'date_end'   => date($this->language->get('date_format_short'), strtotime($result['date_end'])),
-				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+				'status'     => $result['status'],
 				'edit'       => $this->url->link('marketing/coupon.form', 'user_token=' . $this->session->data['user_token'] . '&coupon_id=' . $result['coupon_id'] . $url)
 			];
 		}
@@ -135,10 +133,6 @@ class Coupon extends \Opencart\System\Engine\Controller {
 			$url .= '&order=DESC';
 		} else {
 			$url .= '&order=ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$data['sort_name'] = $this->url->link('marketing/coupon.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
@@ -157,6 +151,8 @@ class Coupon extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+
+		$coupon_total = $this->model_marketing_coupon->getTotalCoupons();
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $coupon_total,

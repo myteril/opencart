@@ -86,21 +86,22 @@ class FileManager extends \Opencart\System\Engine\Controller {
 
 		$this->load->model('tool/image');
 
-		// Get directories
-		$paths = glob($directory . $filter_name . '*{/,.ico,.jpg,.jpeg,.png,.gif,.webp,.JPG,.JPEG,.PNG,.GIF}', GLOB_BRACE);
+		// Get directories and files
+        $paths = array_merge(
+            glob($directory . $filter_name . '*', GLOB_ONLYDIR),
+            glob($directory . $filter_name . '*{' . implode(',', $allowed) . '}', GLOB_BRACE)
+        );
 
 		$total = count($paths);
 		$limit = 16;
-
 		$start = ($page - 1) * $limit;
-		$end = $start > ($total - $limit) ? $total : ($start + $limit);
 
 		$added_files = [];
 
 		if ($paths) {
 			// Split the array based on current page number and max number of items per page of 10
-			foreach (array_slice($paths, $start, $end) as $path) {
-				$path = str_replace('\\', '/', realpath($path));
+            foreach (array_slice($paths, $start, $limit) as $path) {
+                $path = str_replace('\\', '/', realpath($path));
 
 				if (substr($path, 0, strlen($path)) == $path) {
 					$name = basename($path);
@@ -133,7 +134,7 @@ class FileManager extends \Opencart\System\Engine\Controller {
 							'name'  => $name,
 							'path'  => oc_substr($path, oc_strlen($base)),
 							'href'  => HTTP_CATALOG . 'image/catalog/' . oc_substr($path, oc_strlen($base)),
-							'thumb' => $this->model_tool_image->resize(oc_substr($path, oc_strlen(DIR_IMAGE)), 136, 136)
+							'thumb' => $this->model_tool_image->resize(oc_substr($path, oc_strlen(DIR_IMAGE)), $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'))
 						];
 						$added_files[] = $name;
 					}
