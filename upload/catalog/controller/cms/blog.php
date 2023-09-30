@@ -81,8 +81,6 @@ class Blog extends \Opencart\System\Engine\Controller {
 		$topic_info = $this->model_cms_topic->getTopic($filter_topic_id);
 
 		if ($topic_info) {
-			print_r($topic_info);
-
 			$url = '';
 
 			if (isset($this->request->get['search'])) {
@@ -132,9 +130,9 @@ class Blog extends \Opencart\System\Engine\Controller {
 		$this->load->model('tool/image');
 
 		if ($topic_info && is_file(DIR_IMAGE . html_entity_decode($topic_info['image'], ENT_QUOTES, 'UTF-8'))) {
-			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($topic_info['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_article_width'), $this->config->get('config_image_article_height'));
+			$data['image'] = $this->model_tool_image->resize(html_entity_decode($topic_info['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_topic_width'), $this->config->get('config_image_topic_height'));
 		} else {
-			$data['thumb'] = '';
+			$data['image'] = '';
 		}
 
 		$limit = 20;
@@ -155,16 +153,16 @@ class Blog extends \Opencart\System\Engine\Controller {
 		$results = $this->model_cms_article->getArticles($filter_data);
 
 		foreach ($results as $result) {
-			if (is_file(DIR_IMAGE . html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'))) {
-				$image = $this->model_tool_image->resize(html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_article_width'), $this->config->get('config_image_article_height'));
-			} else {
-				$image = '';
-			}
-
 			$description = trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')));
 
 			if (oc_strlen($description) > $this->config->get('config_article_description_length')) {
 				$description = oc_substr($description, 0, $this->config->get('config_article_description_length')) . '..';
+			}
+
+			if (is_file(DIR_IMAGE . html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'))) {
+				$image = $this->model_tool_image->resize(html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_article_width'), $this->config->get('config_image_article_height'));
+			} else {
+				$image = '';
 			}
 
 			$data['articles'][] = [
@@ -237,10 +235,12 @@ class Blog extends \Opencart\System\Engine\Controller {
 
 		foreach ($results as $result) {
 			$data['topics'][] = [
-				'name' => $result['name'],
-				'href' => $this->url->link('cms/blog', 'language=' . $this->config->get('config_language') . '&topic_id='. $result['topic_id'])
+				'topic_id' => $result['topic_id'],
+				'name'     => $result['name']
 			];
 		}
+
+		$data['language'] = $this->config->get('config_language');
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -309,25 +309,47 @@ class Blog extends \Opencart\System\Engine\Controller {
 			if ($topic_info) {
 				$data['breadcrumbs'][] = [
 					'text' => $topic_info['name'],
-					'href' => $this->url->link('cms/article', 'language=' . $this->config->get('config_language') . $url)
+					'href' => $this->url->link('cms/blog', 'language=' . $this->config->get('config_language') . $url)
 				];
 			}
 
 			$data['breadcrumbs'][] = [
 				'text' => $article_info['name'],
-				'href' => $this->url->link('cms/article.info', 'language=' . $this->config->get('config_language') . '&article_id=' .  $article_id . $url)
+				'href' => $this->url->link('cms/blog.info', 'language=' . $this->config->get('config_language') . '&article_id=' .  $article_id . $url)
 			];
 
 			$data['heading_title'] = $article_info['name'];
 
+			$this->load->model('tool/image');
+
+			if (is_file(DIR_IMAGE . html_entity_decode($article_info['image'], ENT_QUOTES, 'UTF-8'))) {
+				$data['image'] = $this->model_tool_image->resize(html_entity_decode($article_info['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_article_width'), $this->config->get('config_image_article_height'));
+			} else {
+				$data['image'] = '';
+			}
+
 			$data['description'] = html_entity_decode($article_info['description'], ENT_QUOTES, 'UTF-8');
+
 			$data['author'] = $article_info['author'];
-			$data['date_added'] = $article_info['date_added'];
-			$data['tag'] = $article_info['tag'];
+			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($article_info['date_added']));
 
-			$data['comment'] = $this->getComments();
+			$data['tags'] = [];
 
-			$data['continue'] = $this->url->link('cms/article', 'language=' . $this->config->get('config_language') . $url);
+			if ($article_info['tag']) {
+				$tags = explode(',', trim($article_info['tag'], ''));
+
+				foreach ($tags as $tag) {
+					$data['tags'][] = [
+						'tag'  => trim($tag),
+						'href' => $this->url->link('cms/blog', 'language=' . $this->config->get('config_language') . '&tag=' . trim($tag))
+					];
+				}
+			}
+
+			$data['comment'] = $this->config->get('config_comment_status') ? $this->load->controller('cms/comment') : '';
+			$data['comment_total'] = $this->model_cms_article->getTotalComments($article_id);
+
+			$data['continue'] = $this->url->link('cms/blog', 'language=' . $this->config->get('config_language') . $url);
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
@@ -342,144 +364,5 @@ class Blog extends \Opencart\System\Engine\Controller {
 		}
 
 		return null;
-	}
-
-	/**
-	 * @return void
-	 */
-	public function comment() {
-		$this->load->language('cms/blog');
-
-		$this->response->setOutput($this->getComments());
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getComments(): string {
-		if (isset($this->request->get['article_id'])) {
-			$article_id = (int)$this->request->get['article_id'];
-		} else {
-			$article_id = 0;
-		}
-
-		if (isset($this->request->get['page'])) {
-			$page = (int)$this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-
-		$data['articles'] = [];
-
-		$this->load->model('cms/article');
-
-		$results = $this->model_cms_article->getComments($article_id, ($page - 1) * (int)$this->config->get('config_pagination_admin'), (int)$this->config->get('config_pagination_admin'));
-
-		foreach ($results as $result) {
-			$data['articles'][] = [
-				'text'       => nl2br($result['text']),
-				'author'     => $result['author'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
-			];
-		}
-
-		$comment_total = $this->model_cms_article->getTotalComments($article_id);
-
-		$data['pagination'] = $this->load->controller('common/pagination', [
-			'total' => $comment_total,
-			'page'  => $page,
-			'limit' => 5,
-			'url'   => $this->url->link('cms/blog.comment', 'language=' . $this->config->get('config_language') . '&article_id=' . $article_id . '&page={page}')
-		]);
-
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($comment_total) ? (($page - 1) * 5) + 1 : 0, ((($page - 1) * 5) > ($comment_total - 5)) ? $comment_total : ((($page - 1) * 5) + 5), $comment_total, ceil($comment_total / 5));
-
-		return $this->load->view('cms/comment', $data);
-	}
-
-	public function addComment(): void {
-		$this->load->language('cms/article');
-
-		$json = array();
-
-		if (isset($this->request->get['article_id'])) {
-			$article_id = $this->request->get['article_id'];
-		} else {
-			$article_id = 0;
-		}
-
-		if (!isset($this->request->get['comment_token']) || !isset($this->session->data['comment_token']) || $this->request->get['comment_token'] != $this->session->data['comment_token']) {
-			$json['error']['warning'] = $this->language->get('error_token');
-		}
-
-		$keys = [
-			'author',
-			'comment'
-		];
-
-		foreach ($keys as $key) {
-			if (!isset($this->request->post[$key])) {
-				$this->request->post[$key] = '';
-			}
-		}
-
-		$this->load->model('cms/article');
-
-		$article_info = $this->model_cms_article->getArticle($article_id);
-
-		if (!$article_info) {
-			$json['error']['warning'] = $this->language->get('error_article');
-		}
-
-		if (!$this->customer->isLogged() && !$this->config->get('config_comment_guest')) {
-			$json['error']['warning'] = $this->language->get('error_guest');
-		}
-
-		if ((oc_strlen($this->request->post['author']) < 3) || (oc_strlen($this->request->post['author']) > 25)) {
-			$json['error']['author'] = $this->language->get('error_author');
-		}
-
-		if ((utf8_strlen($this->request->post['comment']) < 2) || (utf8_strlen($this->request->post['comment']) > 1000)) {
-			$json['error']['comment'] = $this->language->get('error_comment');
-		}
-
-		// Captcha
-		$this->load->model('setting/extension');
-
-		$extension_info = $this->model_setting_extension->getExtensionByCode('captcha', $this->config->get('config_captcha'));
-
-		if ($extension_info && $this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('comment', (array)$this->config->get('config_captcha_page'))) {
-			$captcha = $this->load->controller('extension/'  . $extension_info['extension'] . '/captcha/' . $extension_info['code'] . '.validate');
-
-			if ($captcha) {
-				$json['error']['captcha'] = $captcha;
-			}
-		}
-
-		if (!$json) {
-			// Anti-Spam
-			$comment = str_replace(' ', '', $this->request->post['comment']);
-
-			$this->load->model('cms/antispam');
-
-			$spam = $this->model_cms_antispam->getSpam($comment);
-
-			if (!$this->customer->isCommentor() || $spam) {
-				$status = 0;
-			} else {
-				$status = 1;
-			}
-
-			$this->model_cms_article->addComment($article_id, $this->request->post + ['status' => $status]);
-
-			if (!$status) {
-				$json['success'] = $this->language->get('text_queue');
-			} else {
-				$json['success'] = $this->language->get('text_success');
-			}
-		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
 	}
 }
