@@ -171,6 +171,7 @@ class Blog extends \Opencart\System\Engine\Controller {
 				'description'   => $description,
 				'image'         => $image,
 				'author'        => $result['author'],
+				'filter_author' => $this->url->link('cms/blog', 'language=' . $this->config->get('config_language') . '&author=' . $result['author'] . $url),
 				'comment_total' => $this->model_cms_article->getTotalComments($result['article_id']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'href'          => $this->url->link('cms/blog.info', 'language=' . $this->config->get('config_language') . '&article_id=' . $result['article_id'] . $url)
@@ -225,11 +226,6 @@ class Blog extends \Opencart\System\Engine\Controller {
 		$data['topic_id'] = $filter_topic_id;
 
 		$data['topics'] = [];
-
-		$data['topics'][] = [
-			'name' => $this->language->get('text_all'),
-			'href' => $this->url->link('cms/blog', 'language=' . $this->config->get('config_language'))
-		];
 
 		$results = $this->model_cms_topic->getTopics();
 
@@ -290,6 +286,14 @@ class Blog extends \Opencart\System\Engine\Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['search'])) {
+				$url .= '&search=' . $this->request->get['search'];
+			}
+
+			if (isset($this->request->get['tag'])) {
+				$url .= '&tag=' . $this->request->get['tag'];
+			}
+
 			if (isset($this->request->get['topic_id'])) {
 				$url .= '&topic_id=' . $this->request->get['topic_id'];
 			}
@@ -331,6 +335,8 @@ class Blog extends \Opencart\System\Engine\Controller {
 			$data['description'] = html_entity_decode($article_info['description'], ENT_QUOTES, 'UTF-8');
 
 			$data['author'] = $article_info['author'];
+			$data['filter_author'] = $this->url->link('cms/blog', 'language=' . $this->config->get('config_language') . '&author=' . $article_info['author']);
+
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($article_info['date_added']));
 
 			$data['tags'] = [];

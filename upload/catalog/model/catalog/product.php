@@ -389,7 +389,6 @@ class Product extends \Opencart\System\Engine\Model {
 			$this->cache->set('product.' . md5($sql), $product_data);
 		}
 
-
 		return (array)$product_data;
 	}
 

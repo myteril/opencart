@@ -93,11 +93,7 @@ class Setting extends \Opencart\System\Engine\Controller {
 
 		$data['locations'] = $this->model_localisation_location->getLocations();
 
-		if ($this->config->get('config_location')) {
-			$data['config_location'] = $this->config->get('config_location');
-		} else {
-			$data['config_location'] = [];
-		}
+		$data['config_location'] = (array)$this->config->get('config_location');
 
 		// Localisation
 		$this->load->model('localisation/country');
@@ -105,14 +101,8 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
 		$data['config_country_id'] = $this->config->get('config_country_id');
-
 		$data['config_zone_id'] = $this->config->get('config_zone_id');
-
-		if ($this->config->has('config_timezone')) {
-			$data['config_timezone'] = $this->config->get('config_timezone');
-		} else {
-			$data['config_timezone'] = 'UTC';
-		}
+		$data['config_timezone'] = $this->config->get('config_timezone');
 
 		$data['timezones'] = [];
 
@@ -131,16 +121,18 @@ class Setting extends \Opencart\System\Engine\Controller {
 			];
 		}
 
+		// Language
 		$this->load->model('localisation/language');
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
 		$data['config_language'] = $this->config->get('config_language');
+		$data['config_language_admin'] = $this->config->get('config_language_admin');
 
+		// Currency
 		$this->load->model('localisation/currency');
 
 		$data['currencies'] = $this->model_localisation_currency->getCurrencies();
-
 		$data['config_currency'] = $this->config->get('config_currency');
 
 		$data['currency_engines'] = [];
@@ -166,34 +158,21 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$this->load->model('localisation/length_class');
 
 		$data['length_classes'] = $this->model_localisation_length_class->getLengthClasses();
-
 		$data['config_length_class_id'] = $this->config->get('config_length_class_id');
 
 		$this->load->model('localisation/weight_class');
 
 		$data['weight_classes'] = $this->model_localisation_weight_class->getWeightClasses();
-
 		$data['config_weight_class_id'] = $this->config->get('config_weight_class_id');
 
 		// Options
 		$data['config_product_description_length'] = $this->config->get('config_product_description_length');
-
-		if ($this->config->get('config_pagination')) {
-			$data['config_pagination'] = $this->config->get('config_pagination');
-		} else {
-			$data['config_pagination'] = 15;
-		}
-
+		$data['config_pagination'] = $this->config->get('config_pagination');
 		$data['config_product_count'] = $this->config->get('config_product_count');
-
-		if ($this->config->get('config_pagination_admin')) {
-			$data['config_pagination_admin'] = $this->config->get('config_pagination_admin');
-		} else {
-			$data['config_pagination_admin'] = 10;
-		}
-
+		$data['config_pagination_admin'] = $this->config->get('config_pagination_admin');
 		$data['config_product_report_status'] = $this->config->get('config_product_report_status');
 
+		// Review
 		$data['config_review_status'] = $this->config->get('config_review_status');
 		$data['config_review_purchased'] = $this->config->get('config_review_purchased');
 		$data['config_review_guest'] = $this->config->get('config_review_guest');
@@ -202,7 +181,9 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['config_article_description_length'] = $this->config->get('config_article_description_length');
 		$data['config_comment_status'] = $this->config->get('config_comment_status');
 		$data['config_comment_guest'] = $this->config->get('config_comment_guest');
+		$data['config_comment_approve'] = $this->config->get('config_comment_approve');
 
+		// Voucher
 		$data['config_voucher_min'] = $this->config->get('config_voucher_min');
 		$data['config_voucher_max'] = $this->config->get('config_voucher_max');
 
@@ -211,19 +192,15 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['config_gdpr_id'] = $this->config->get('config_gdpr_id');
 		$data['config_gdpr_limit'] = $this->config->get('config_gdpr_limit');
 
+		// Tax
 		$data['config_tax'] = $this->config->get('config_tax');
 		$data['config_tax_default'] = $this->config->get('config_tax_default');
 		$data['config_tax_customer'] = $this->config->get('config_tax_customer');
         $data['config_list_taxes_separately'] = $this->config->get('config_list_taxes_separately');
 
+		// Customer
 		$data['config_customer_online'] = $this->config->get('config_customer_online');
-
-		if ($this->config->has('config_customer_online_expire')) {
-			$data['config_customer_online_expire'] = $this->config->get('config_customer_online_expire');
-		} else {
-			$data['config_customer_online_expire'] = 1;
-		}
-
+		$data['config_customer_online_expire'] = $this->config->get('config_customer_online_expire');
 		$data['config_customer_activity'] = $this->config->get('config_customer_activity');
 		$data['config_customer_search'] = $this->config->get('config_customer_search');
 
@@ -232,22 +209,13 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['customer_groups'] = $this->model_customer_customer_group->getCustomerGroups();
 
 		$data['config_customer_group_id'] = $this->config->get('config_customer_group_id');
-
-		if ($this->config->get('config_customer_group_display')) {
-			$data['config_customer_group_display'] = $this->config->get('config_customer_group_display');
-		} else {
-			$data['config_customer_group_display'] = [];
-		}
+		$data['config_customer_group_display'] = (array)$this->config->get('config_customer_group_display');
 
 		$data['config_customer_price'] = $this->config->get('config_customer_price');
 		$data['config_telephone_display'] = $this->config->get('config_telephone_display');
 		$data['config_telephone_required'] = $this->config->get('config_telephone_required');
 
-		if ($this->config->has('config_login_attempts')) {
-			$data['config_login_attempts'] = $this->config->get('config_login_attempts');
-		} else {
-			$data['config_login_attempts'] = 5;
-		}
+		$data['config_login_attempts'] = $this->config->get('config_login_attempts');
 
 		$this->load->model('catalog/information');
 
@@ -255,6 +223,7 @@ class Setting extends \Opencart\System\Engine\Controller {
 
 		$data['config_account_id'] = $this->config->get('config_account_id');
 
+		// Checkout
 		$data['config_cart_weight'] = $this->config->get('config_cart_weight');
 		$data['config_checkout_guest'] = $this->config->get('config_checkout_guest');
 		$data['config_checkout_payment_address'] = $this->config->get('config_checkout_payment_address');
@@ -274,19 +243,8 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		$data['config_order_status_id'] = $this->config->get('config_order_status_id');
-
-		if ($this->config->get('config_processing_status')) {
-			$data['config_processing_status'] = $this->config->get('config_processing_status');
-		} else {
-			$data['config_processing_status'] = [];
-		}
-
-		if ($this->config->get('config_complete_status')) {
-			$data['config_complete_status'] = $this->config->get('config_complete_status');
-		} else {
-			$data['config_complete_status'] = [];
-		}
-
+		$data['config_processing_status'] = (array)$this->config->get('config_processing_status');
+		$data['config_complete_status'] = (array)$this->config->get('config_complete_status');
 		$data['config_fraud_status_id'] = $this->config->get('config_fraud_status_id');
 
 		// Subscription
@@ -309,45 +267,23 @@ class Setting extends \Opencart\System\Engine\Controller {
 
 		$data['config_api_id'] = $this->config->get('config_api_id');
 
+		// Stock
 		$data['config_stock_display'] = $this->config->get('config_stock_display');
 		$data['config_stock_warning'] = $this->config->get('config_stock_warning');
 		$data['config_stock_checkout'] = $this->config->get('config_stock_checkout');
 
-		if ($this->config->has('config_affiliate_status')) {
-			$data['config_affiliate_status'] = $this->config->get('config_affiliate_status');
-		} else {
-			$data['config_affiliate_status'] = '';
-		}
-
+		// Affiliate
+		$data['config_affiliate_status'] = $this->config->get('config_affiliate_status');
 		$data['config_affiliate_group_id'] = $this->config->get('config_affiliate_group_id');
-
-		if ($this->config->has('config_affiliate_approval')) {
-			$data['config_affiliate_approval'] = $this->config->get('config_affiliate_approval');
-		} else {
-			$data['config_affiliate_approval'] = '';
-		}
-
-		if ($this->config->has('config_affiliate_auto')) {
-			$data['config_affiliate_auto'] = $this->config->get('config_affiliate_auto');
-		} else {
-			$data['config_affiliate_auto'] = '';
-		}
-
-		if ($this->config->has('config_affiliate_commission')) {
-			$data['config_affiliate_commission'] = $this->config->get('config_affiliate_commission');
-		} else {
-			$data['config_affiliate_commission'] = '5.00';
-		}
-
-		if ($this->config->has('config_affiliate_expire')) {
-			$data['config_affiliate_expire'] = $this->config->get('config_affiliate_expire');
-		} else {
-			$data['config_affiliate_expire'] = 0;
-		}
+		$data['config_affiliate_approval'] = $this->config->get('config_affiliate_approval');
+		$data['config_affiliate_auto'] = (bool)$this->config->get('config_affiliate_auto');
+		$data['config_affiliate_commission'] = (float)$this->config->get('config_affiliate_commission');
+		$data['config_affiliate_expire'] = $this->config->get('config_affiliate_expire');
 
 		// Affiliate terms
 		$data['config_affiliate_id'] = $this->config->get('config_affiliate_id');
 
+		// Returns
 		$this->load->model('localisation/return_status');
 
 		$data['return_statuses'] = $this->model_localisation_return_status->getReturnStatuses();
@@ -378,11 +314,7 @@ class Setting extends \Opencart\System\Engine\Controller {
 			}
 		}
 
-		if ($this->config->has('config_captcha_page')) {
-		   	$data['config_captcha_page'] = $this->config->get('config_captcha_page');
-		} else {
-			$data['config_captcha_page'] = [];
-		}
+		$data['config_captcha_page'] = (array)$this->config->get('config_captcha_page');
 
 		$data['captcha_pages'] = [];
 
@@ -429,161 +361,33 @@ class Setting extends \Opencart\System\Engine\Controller {
 			$data['logo'] = $data['placeholder'];
 		}
 
-		if ($this->config->get('config_image_default_width')) {
-			$data['config_image_default_width'] = $this->config->get('config_image_default_width');
-		} else {
-			$data['config_image_default_width'] = 300;
-		}
-
-		if ($this->config->get('config_image_default_height')) {
-			$data['config_image_default_height'] = $this->config->get('config_image_default_height');
-		} else {
-			$data['config_image_default_height'] = 300;
-		}
-
-		if ($this->config->get('config_image_category_width')) {
-			$data['config_image_category_width'] = $this->config->get('config_image_category_width');
-		} else {
-			$data['config_image_category_width'] = 80;
-		}
-
-		if ($this->config->get('config_image_category_height')) {
-			$data['config_image_category_height'] = $this->config->get('config_image_category_height');
-		} else {
-			$data['config_image_category_height'] = 80;
-		}
-
-		if ($this->config->get('config_image_thumb_width')) {
-			$data['config_image_thumb_width'] = $this->config->get('config_image_thumb_width');
-		} else {
-			$data['config_image_thumb_width'] = 228;
-		}
-
-		if ($this->config->get('config_image_thumb_height')) {
-			$data['config_image_thumb_height'] = $this->config->get('config_image_thumb_height');
-		} else {
-			$data['config_image_thumb_height'] = 228;
-		}
-
-		if ($this->config->get('config_image_popup_width')) {
-			$data['config_image_popup_width'] = $this->config->get('config_image_popup_width');
-		} else {
-			$data['config_image_popup_width'] = 500;
-		}
-
-		if ($this->config->get('config_image_popup_height')) {
-			$data['config_image_popup_height'] = $this->config->get('config_image_popup_height');
-		} else {
-			$data['config_image_popup_height'] = 500;
-		}
-
-		if ($this->config->get('config_image_product_width')) {
-			$data['config_image_product_width'] = $this->config->get('config_image_product_width');
-		} else {
-			$data['config_image_product_width'] = 228;
-		}
-
-		if ($this->config->get('config_image_product_height')) {
-			$data['config_image_product_height'] = $this->config->get('config_image_product_height');
-		} else {
-			$data['config_image_product_height'] = 228;
-		}
-
-		if ($this->config->get('config_image_additional_width')) {
-			$data['config_image_additional_width'] = $this->config->get('config_image_additional_width');
-		} else {
-			$data['config_image_additional_width'] = 74;
-		}
-
-		if ($this->config->get('config_image_additional_height')) {
-			$data['config_image_additional_height'] = $this->config->get('config_image_additional_height');
-		} else {
-			$data['config_image_additional_height'] = 74;
-		}
-
-		if ($this->config->get('config_image_related_width')) {
-			$data['config_image_related_width'] = $this->config->get('config_image_related_width');
-		} else {
-			$data['config_image_related_width'] = 80;
-		}
-
-		if ($this->config->get('config_image_related_height')) {
-			$data['config_image_related_height'] = $this->config->get('config_image_related_height');
-		} else {
-			$data['config_image_related_height'] = 80;
-		}
-
-		if ($this->config->get('config_image_compare_width')) {
-			$data['config_image_compare_width'] = $this->config->get('config_image_compare_width');
-		} else {
-			$data['config_image_compare_width'] = 90;
-		}
-
-		if ($this->config->get('config_image_compare_height')) {
-			$data['config_image_compare_height'] = $this->config->get('config_image_compare_height');
-		} else {
-			$data['config_image_compare_height'] = 90;
-		}
-
-		if ($this->config->get('config_image_article_width')) {
-			$data['config_image_article_width'] = $this->config->get('config_image_article_width');
-		} else {
-			$data['config_image_article_width'] = 1140;
-		}
-
-		if ($this->config->get('config_image_article_height')) {
-			$data['config_image_article_height'] = $this->config->get('config_image_article_height');
-		} else {
-			$data['config_image_article_height'] = 380;
-		}
-
-		if ($this->config->get('config_image_topic_width')) {
-			$data['config_image_topic_width'] = $this->config->get('config_image_topic_width');
-		} else {
-			$data['config_image_topic_width'] = 1140;
-		}
-
-		if ($this->config->get('config_image_topic_height')) {
-			$data['config_image_topic_height'] = $this->config->get('config_image_topic_height');
-		} else {
-			$data['config_image_topic_height'] = 380;
-		}
-
-		if ($this->config->get('config_image_wishlist_width')) {
-			$data['config_image_wishlist_width'] = $this->config->get('config_image_wishlist_width');
-		} else {
-			$data['config_image_wishlist_width'] = 47;
-		}
-
-		if ($this->config->get('config_image_wishlist_height')) {
-			$data['config_image_wishlist_height'] = $this->config->get('config_image_wishlist_height');
-		} else {
-			$data['config_image_wishlist_height'] = 47;
-		}
-
-		if ($this->config->get('config_image_cart_width')) {
-			$data['config_image_cart_width'] = $this->config->get('config_image_cart_width');
-		} else {
-			$data['config_image_cart_width'] = 47;
-		}
-
-		if ($this->config->get('config_image_cart_height')) {
-			$data['config_image_cart_height'] =$this->config->get('config_image_cart_height');
-		} else {
-			$data['config_image_cart_height'] = 47;
-		}
-
-		if ($this->config->get('config_image_location_width')) {
-			$data['config_image_location_width'] = $this->config->get('config_image_location_width');
-		} else {
-			$data['config_image_location_width'] = 268;
-		}
-
-		if ($this->config->get('config_image_location_height')) {
-			$data['config_image_location_height'] = $this->config->get('config_image_location_height');
-		} else {
-			$data['config_image_location_height'] = 50;
-		}
+		// Image
+		$data['config_image_default_width'] = $this->config->get('config_image_default_width');
+		$data['config_image_default_height'] = $this->config->get('config_image_default_height');
+		$data['config_image_category_width'] = $this->config->get('config_image_category_width');
+		$data['config_image_category_height'] = $this->config->get('config_image_category_height');
+		$data['config_image_thumb_width'] = $this->config->get('config_image_thumb_width');
+		$data['config_image_thumb_height'] = $this->config->get('config_image_thumb_height');
+		$data['config_image_popup_width'] = $this->config->get('config_image_popup_width');
+		$data['config_image_popup_height'] = $this->config->get('config_image_popup_height');
+		$data['config_image_product_width'] = $this->config->get('config_image_product_width');
+		$data['config_image_product_height'] = $this->config->get('config_image_product_height');
+		$data['config_image_additional_width'] = $this->config->get('config_image_additional_width');
+		$data['config_image_additional_height'] = $this->config->get('config_image_additional_height');
+		$data['config_image_related_width'] = $this->config->get('config_image_related_width');
+		$data['config_image_related_height'] = $this->config->get('config_image_related_height');
+		$data['config_image_compare_width'] = $this->config->get('config_image_compare_width');
+		$data['config_image_compare_height'] = $this->config->get('config_image_compare_height');
+		$data['config_image_article_width'] = $this->config->get('config_image_article_width');
+		$data['config_image_article_height'] = $this->config->get('config_image_article_height');
+		$data['config_image_topic_width'] = $this->config->get('config_image_topic_width');
+		$data['config_image_topic_height'] = $this->config->get('config_image_topic_height');
+		$data['config_image_wishlist_width'] = $this->config->get('config_image_wishlist_width');
+		$data['config_image_wishlist_height'] = $this->config->get('config_image_wishlist_height');
+		$data['config_image_cart_width'] = $this->config->get('config_image_cart_width');
+		$data['config_image_cart_height'] =$this->config->get('config_image_cart_height');
+		$data['config_image_location_width'] = $this->config->get('config_image_location_width');
+		$data['config_image_location_height'] = $this->config->get('config_image_location_height');
 
 		// Mail
 		$data['config_mail_engine'] = $this->config->get('config_mail_engine');
@@ -591,24 +395,9 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['config_mail_smtp_hostname'] = $this->config->get('config_mail_smtp_hostname');
 		$data['config_mail_smtp_username'] = $this->config->get('config_mail_smtp_username');
 		$data['config_mail_smtp_password'] = $this->config->get('config_mail_smtp_password');
-
-		if ($this->config->has('config_mail_smtp_port')) {
-			$data['config_mail_smtp_port'] = $this->config->get('config_mail_smtp_port');
-		} else {
-			$data['config_mail_smtp_port'] = 25;
-		}
-
-		if ($this->config->has('config_mail_smtp_timeout')) {
-			$data['config_mail_smtp_timeout'] = $this->config->get('config_mail_smtp_timeout');
-		} else {
-			$data['config_mail_smtp_timeout'] = 5;
-		}
-
-		if ($this->config->has('config_mail_alert')) {
-		   	$data['config_mail_alert'] = $this->config->get('config_mail_alert');
-		} else {
-			$data['config_mail_alert'] = [];
-		}
+		$data['config_mail_smtp_port'] = $this->config->get('config_mail_smtp_port');
+		$data['config_mail_smtp_timeout'] = $this->config->get('config_mail_smtp_timeout');
+		$data['config_mail_alert'] = (array)$this->config->get('config_mail_alert');
 
 		$data['mail_alerts'] = [];
 
@@ -636,13 +425,7 @@ class Setting extends \Opencart\System\Engine\Controller {
 
 		// Server
 		$data['config_maintenance'] = $this->config->get('config_maintenance');
-
-		if ($this->config->has('config_session_expire')) {
-			$data['config_session_expire'] = $this->config->get('config_session_expire');
-		} else {
-			$data['config_session_expire'] = 3600;
-		}
-
+		$data['config_session_expire'] = $this->config->get('config_session_expire');
 		$data['config_session_samesite'] = $this->config->get('config_session_samesite');
 		$data['config_seo_url'] = $this->config->get('config_seo_url');
 		$data['config_robots'] = $this->config->get('config_robots');
@@ -653,12 +436,7 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['config_shared'] = $this->config->get('config_shared');
 
 		// Uploads
-		if ($this->config->get('config_file_max_size')) {
-			$data['config_file_max_size'] = $this->config->get('config_file_max_size');
-		} else {
-			$data['config_file_max_size'] = 20;
-		}
-
+		$data['config_file_max_size'] = $this->config->get('config_file_max_size');
 		$data['config_file_ext_allowed'] = $this->config->get('config_file_ext_allowed');
 		$data['config_file_mime_allowed'] = $this->config->get('config_file_mime_allowed');
 
@@ -706,10 +484,6 @@ class Setting extends \Opencart\System\Engine\Controller {
 
 		if ((oc_strlen($this->request->post['config_email']) > 96) || !filter_var($this->request->post['config_email'], FILTER_VALIDATE_EMAIL)) {
 			$json['error']['email'] = $this->language->get('error_email');
-		}
-
-		if ((oc_strlen($this->request->post['config_telephone']) < 3) || (oc_strlen($this->request->post['config_telephone']) > 32)) {
-			$json['error']['telephone'] = $this->language->get('error_telephone');
 		}
 
 		if (!$this->request->post['config_product_description_length']) {

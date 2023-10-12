@@ -7,7 +7,8 @@ use Opencart\System\Library\DB;
  *
  * @package Opencart\Install\Model\Install
  */
-class Install extends \Opencart\System\Engine\Model {
+class Install extends \Opencart\System\Engine\Model
+{
 	/**
 	 * @param DB $db
 	 * @param array $tables
@@ -47,8 +48,9 @@ class Install extends \Opencart\System\Engine\Model {
 			}
 
 			$sql = rtrim($sql, ",\n") . "\n";
-			$sql .= ") ENGINE=" . $table['engine'] . " CHARSET=" . $table['charset'] . " COLLATE=" . $table['collate'] . ";\n";
+			$sql .= ") ENGINE=" . $table['engine'] . " CHARSET=" . $table['charset'] . " ROW_FORMAT=DYNAMIC COLLATE=" . $table['collate'] . ";\n";
 
+			// Add table into another array so that it can be sorted to avoid foreign keys from being incorrectly formed.
 			$db->query($sql);
 		}
 	}
@@ -59,25 +61,27 @@ class Install extends \Opencart\System\Engine\Model {
 	 * @param string $db_prefix
 	 * @return void
 	 */
-	public function installTriggers(\Opencart\System\Library\DB $db, array $triggers, string $db_prefix): void{
-		foreach ($triggers as $trigger){
+	public
+	function installTriggers(\Opencart\System\Library\DB $db, array $triggers, string $db_prefix): void
+	{
+		foreach ($triggers as $trigger) {
 			$table = $trigger['table'];
-			foreach(['after', 'before'] as $trigger_time){
-				foreach(['update', 'delete', 'insert'] as $trigger_event){
-					if(isset($trigger[$trigger_time][$trigger_event]) && is_string($trigger[$trigger_time][$trigger_event])){
+			foreach (['after', 'before'] as $trigger_time) {
+				foreach (['update', 'delete', 'insert'] as $trigger_event) {
+					if (isset($trigger[$trigger_time][$trigger_event]) && is_string($trigger[$trigger_time][$trigger_event])) {
 						$trigger_content = $trigger[$trigger_time][$trigger_event];
 
-						$trigger_name = $db_prefix . $table . '_' .  $trigger_time . '_' .  $trigger_event;
+						$trigger_name = $db_prefix . $table . '_' . $trigger_time . '_' . $trigger_event;
 
 						$db->query('DROP TRIGGER IF EXISTS ' . $trigger_name);
 
 						$trigger_sql = '
-							CREATE TRIGGER ' . $trigger_name . ' ' . oc_strtoupper($trigger_time) . ' ' . oc_strtoupper($trigger_event) . ' ON ' . $db_prefix . $table . '
-							   FOR EACH ROW
-							   BEGIN
-								   ' . $trigger_content . '
-							   END;
-						';
+						CREATE TRIGGER ' . $trigger_name . ' ' . oc_strtoupper($trigger_time) . ' ' . oc_strtoupper($trigger_event) . ' ON ' . $db_prefix . $table . '
+						   FOR EACH ROW
+						   BEGIN
+							   ' . $trigger_content . '
+						   END;
+					';
 
 						$db->query($trigger_sql);
 					}
@@ -122,26 +126,21 @@ class Install extends \Opencart\System\Engine\Model {
 				}
 			}
 
-			$db->query("SET CHARACTER SET utf8");
+			$db->query("SET CHARACTER SET utf8mb4");
 
 			$db->query("SET @@session.sql_mode = ''");
 
-			$db->query("DELETE FROM `" . $db_prefix . "user` WHERE `user_id` = '1'");
+			$db->query("DELETE FROM `" . $data['db_prefix'] . "user` WHERE `user_id` = '1'");
+			$db->query("INSERT INTO `" . $data['db_prefix'] . "user` SET `user_id` = '1', `user_group_id` = '1', `username` = '" . $db->escape($data['username']) . "', `password` = '" . $db->escape(password_hash(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "', `firstname` = 'John', `lastname` = 'Doe', `email` = '" . $db->escape($data['email']) . "', `status` = '1', `date_added` = NOW()");
 
-			$db->query("INSERT INTO `" . $db_prefix . "user` SET `user_id` = '1', `user_group_id` = '1', `username` = '" . $db->escape($admin_username) . "', `password` = '" . $db->escape($admin_password) . "', `firstname` = 'John', `lastname` = 'Doe', `email` = '" . $db->escape($admin_email) . "', `status` = '1', `date_added` = NOW()");
+			$db->query("UPDATE `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_email', `value` = '" . $db->escape($data['email']) . "' WHERE `key` = 'config_email'");
 
-			$db->query("DELETE FROM `" . $db_prefix . "setting` WHERE `key` = 'config_email'");
-			$db->query("INSERT INTO `" . $db_prefix . "setting` SET `code` = 'config', `key` = 'config_email', `value` = '" . $db->escape($admin_email) . "'");
+			$db->query("INSERT INTO `" . $data['db_prefix'] . "api` SET `username` = 'Default', `key` = '" . $db->escape(oc_token(256)) . "', `status` = '1', `date_added` = NOW(), `date_modified` = NOW()");
 
-			$db->query("DELETE FROM `" . $db_prefix . "setting` WHERE `key` = 'config_encryption'");
-			$db->query("INSERT INTO `" . $db_prefix . "setting` SET `code` = 'config', `key` = 'config_encryption', `value` = '" . $db->escape(oc_token(1024)) . "'");
+			$api_id = $db->getLastId();
 
-			$db->query("INSERT INTO `" . $db_prefix . "api` SET `username` = 'Default', `key` = '" . $db->escape(oc_token(256)) . "', `status` = 1, `date_added` = NOW(), `date_modified` = NOW()");
-
-			$last_id = $db->getLastId();
-
-			$db->query("DELETE FROM `" . $db_prefix . "setting` WHERE `key` = 'config_api_id'");
-			$db->query("INSERT INTO `" . $db_prefix . "setting` SET `code` = 'config', `key` = 'config_api_id', `value` = '" . (int)$last_id . "'");
+			$db->query("DELETE FROM `" . $data['db_prefix'] . "setting` WHERE `key` = 'config_api_id'");
+			$db->query("INSERT INTO `" . $data['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_api_id', `value` = '" . (int)$api_id . "'");
 
 			// set the current years prefix
 			$db->query("UPDATE `" . $db_prefix . "setting` SET `value` = 'INV-" . date('Y') . "-00' WHERE `key` = 'config_invoice_prefix'");
@@ -156,14 +155,15 @@ class Install extends \Opencart\System\Engine\Model {
 	 * @param string $db_prefix
 	 * @return void
 	 */
-	public function upgradeDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, array $triggers, string $database_name, string $db_prefix): void{
+	public function upgradeDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, array $triggers, string $database_name, string $db_prefix): void
+	{
 		$tables_to_insert = [];
 		$tables_to_update = [];
 		foreach ($tables as $table) {
 			$table_query = $db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . $database_name . "' AND TABLE_NAME = '" . $db_prefix . $table['name'] . "'");
-			if($table_query->num_rows > 0){
+			if ($table_query->num_rows > 0) {
 				$tables_to_update[] = $table;
-			}else{
+			} else {
 				$tables_to_insert[] = $table;
 			}
 		}
@@ -279,3 +279,4 @@ class Install extends \Opencart\System\Engine\Model {
 		}
 	}
 }
+

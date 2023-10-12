@@ -101,13 +101,6 @@ class Upgrade4 extends \Opencart\System\Engine\Controller {
 			}
 
 			$missing[] = [
-				'key'        => 'config_encryption',
-				'value'      => hash('sha512', oc_token(32)),
-				'code'       => 'config',
-				'serialized' => 0
-			];
-
-			$missing[] = [
 				'key'        => 'config_voucher_min',
 				'value'      => 1,
 				'code'       => 'config',
@@ -180,18 +173,24 @@ class Upgrade4 extends \Opencart\System\Engine\Controller {
 				];
 			}
 
-			if (isset($settings['config_smtp_timeout'])) {
-				$missing[] = [
-					'key'        => 'config_mail_smtp_timeout',
-					'value'      => $settings['config_smtp_timeout'],
-					'code'       => 'config',
-					'serialized' => 0
-				];
-			}
-
 			$missing[] = [
 				'key'        => 'config_article_description_length',
 				'value'      => 100,
+				'code'       => 'config',
+				'serialized' => 0
+			];
+
+
+			$missing[] = [
+				'key'        => 'config_image_default_width',
+				'value'      => 300,
+				'code'       => 'config',
+				'serialized' => 0
+			];
+
+			$missing[] = [
+				'key'        => 'config_image_default_height',
+				'value'      => 300,
 				'code'       => 'config',
 				'serialized' => 0
 			];
@@ -301,7 +300,6 @@ class Upgrade4 extends \Opencart\System\Engine\Controller {
 				'code'       => 'config',
 				'serialized' => 0
 			];
-
 
 			$missing[] = [
 				'key'        => 'config_subscription_denied_status_id',

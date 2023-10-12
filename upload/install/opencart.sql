@@ -893,10 +893,11 @@ INSERT INTO `oc_extension` (`extension_id`, `extension`, `type`, `code`) VALUES
 (12, 'opencart', 'total', 'coupon'),
 (13, 'opencart', 'module', 'category'),
 (14, 'opencart', 'module', 'account'),
-(15, 'opencart', 'total', 'reward'),
-(16, 'opencart', 'total', 'voucher'),
-(17, 'opencart', 'payment', 'free_checkout'),
-(18, 'opencart', 'module', 'featured'),
+(15, 'opencart', 'module', 'topic'),
+(16, 'opencart', 'total', 'reward'),
+(17, 'opencart', 'total', 'voucher'),
+(18, 'opencart', 'payment', 'free_checkout'),
+(19, 'opencart', 'module', 'featured'),
 (20, 'opencart', 'theme', 'basic'),
 (21, 'opencart', 'dashboard', 'activity'),
 (22, 'opencart', 'dashboard', 'sale'),
@@ -1445,9 +1446,9 @@ INSERT INTO `oc_extension_path` (`extension_install_id`, `path`) VALUES
 -- Dumping data for table `oc_geo_zone`
 --
 
-INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
-(3, 'UK VAT Zone', 'UK VAT', '2010-02-26 22:33:24', '2009-01-06 23:26:25'),
-(4, 'UK Shipping', 'UK Shipping Zones', '2010-12-15 15:18:13', '2009-06-23 01:14:53');
+INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`) VALUES
+(3, 'UK VAT Zone', 'UK VAT'),
+(4, 'UK Shipping', 'UK Shipping Zones');
 
 -----------------------------------------------------------
 
@@ -1514,7 +1515,8 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 (10, 'Affiliate'),
 (11, 'Information'),
 (12, 'Compare'),
-(13, 'Search');
+(13, 'Search'),
+(14, 'Blog');
 
 -----------------------------------------------------------
 
@@ -1525,11 +1527,12 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 INSERT INTO `oc_layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
 (1, 10, 'opencart.account', 'column_right', 1),
 (2, 6, 'opencart.account', 'column_right', 1),
-(3, 1, 'opencart.banner.3', 'content_top', 1),
-(4, 1, 'opencart.featured.2', 'content_top', 2),
-(5, 1, 'opencart.banner.4', 'content_bottom', 1),
-(6, 3, 'opencart.category', 'column_left', 1),
-(7, 3, 'opencart.banner.1', 'column_left', 2);
+(3, 1, 'opencart.featured.2', 'content_top', 2),
+(4, 3, 'opencart.banner.1', 'column_left', 2),
+(5, 1, 'opencart.banner.3', 'content_top', 1),
+(6, 1, 'opencart.banner.4', 'content_bottom', 1),
+(7, 3, 'opencart.category', 'column_left', 1),
+(8, 14, 'opencart.topic', 'column_left', 1)
 
 -----------------------------------------------------------
 
@@ -1551,7 +1554,9 @@ INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 (11, 4, 0, ''),
 (12, 5, 0, 'product/manufacturer'),
 (13, 12, 0, 'product/compare'),
-(14, 13, 0, 'product/search');
+(14, 13, 0, 'product/search'),
+(15, 14, 0, 'cms/blog'),
+(16, 14, 0, 'cms/blog.info');
 
 -----------------------------------------------------------
 
@@ -2146,10 +2151,10 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'config', 'config_image_popup_height', '800', 0),
 (0, 'config', 'config_image_category_width', '80', 0),
 (0, 'config', 'config_image_category_height', '80', 0),
-(0, 'config', 'config_image_article_width', '90', 0),
-(0, 'config', 'config_image_article_height', '90', 0),
-(0, 'config', 'config_image_topic_width', '90', 0),
-(0, 'config', 'config_image_topic_height', '90', 0),
+(0, 'config', 'config_image_article_width', '1140', 0),
+(0, 'config', 'config_image_article_height', '380', 0),
+(0, 'config', 'config_image_topic_width', '1140', 0),
+(0, 'config', 'config_image_topic_height', '380', 0),
 (0, 'config', 'config_image_product_width', '250', 0),
 (0, 'config', 'config_image_product_height', '250', 0),
 (0, 'config', 'config_image_additional_width', '74', 0),
@@ -2238,6 +2243,7 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'total_voucher', 'total_voucher_status', '1', 0),
 (0, 'module_category', 'module_category_status', '1', 0),
 (0, 'module_account', 'module_account_status', '1', 0),
+(0, 'module_topic', 'module_topic_status', '1', 0),
 (0, 'theme_basic', 'theme_basic_status', '1', 0),
 (0, 'dashboard_activity', 'dashboard_activity_status', '1', 0),
 (0, 'dashboard_activity', 'dashboard_activity_sort_order', '7', 0),
@@ -2448,9 +2454,9 @@ INSERT INTO `oc_subscription_status` (`subscription_status_id`, `language_id`, `
 -- Dumping data for table `oc_tax_class`
 --
 
-INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`, `date_modified`) VALUES
-(9, 'Taxable Goods', 'Taxed goods', '2009-01-06 23:21:53', '2011-09-23 14:07:50'),
-(10, 'Downloadable Products', 'Downloadable', '2011-09-21 22:19:39', '2011-09-22 10:27:36');
+INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`) VALUES
+(9, 'Taxable Goods', 'Taxed goods'),
+(10, 'Downloadable Products', 'Downloadable');
 
 -----------------------------------------------------------
 
@@ -2458,9 +2464,9 @@ INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`
 -- Dumping data for table `oc_tax_rate`
 --
 
-INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`, `date_added`, `date_modified`) VALUES
-(86, 3, 'VAT (20%)', '20.0000', 'P', '2011-03-09 21:17:10', '2011-09-22 22:24:29'),
-(87, 3, 'Eco Tax (-2.00)', '2.0000', 'F', '2011-09-21 21:49:23', '2011-09-23 00:40:19');
+INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`) VALUES
+(86, 3, 'VAT (20%)', '20.0000', 'P'),
+(87, 3, 'Eco Tax (-2.00)', '2.0000', 'F');
 
 -----------------------------------------------------------
 
@@ -6685,7 +6691,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 -- Dumping data for table `oc_zone_to_geo_zone`
 --
 
-INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES
+INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`) VALUES
 (1, 222, 0, 4, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 222, 3513, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 222, 3514, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
