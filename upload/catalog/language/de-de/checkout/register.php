@@ -10,9 +10,9 @@ $_['text_payment_address']    = 'Rechnungsadresse';
 $_['text_shipping_address']   = 'Lieferadresse';
 $_['text_your_password']      = 'Ihr Passwort';
 $_['text_agree']              = '<a href="%s" class="modal-link"><b>%s</b></a> habe ich gelesen und akzeptiert.';
-$_['text_success_add']        = 'Erfolgreich: Ihr Kunden-Konto wurde eingerichtet!';
-$_['text_success_guest']      = 'Erfolgreich: Ihre Gästekontoinformationen wurden gespeichert!';
-$_['text_success_edit']       = 'Erfolgreich: Ihr Kunden-Konto wurde erfolgreich aktualisiert.';
+$_['text_add_success']        = 'Erfolgreich: Ihr Konto wurde erstellt!';
+$_['text_guest_success']      = 'Erfolgreich: Die Daten Ihres Gastkontos wurden gespeichert!';
+$_['text_edit_success']       = 'Erfolgreich: Ihr Konto wurde aktualisiert.';
 
 // Entry
 $_['entry_customer_group']    = 'Kunden Gruppe';

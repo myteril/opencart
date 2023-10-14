@@ -41,6 +41,13 @@ $_['text_hour']                           = 'Stunde(n)';
 $_['text_none']                           = 'Keine';
 $_['text_lax']                            = 'Lax';
 $_['text_strict']                         = 'Strikt';
+$_['text_cms'] 							  = 'CMS';
+$_['text_comment'] 						  = 'Kommentar';
+$_['text_region'] 						  = 'Region';
+$_['text_language'] 				      = 'Sprache';
+$_['text_currency'] 					  = 'Währung';
+$_['text_measurement'] 					  = 'Messung';
+
 
 // Entry
 $_['entry_meta_title']                    = 'Meta Titel';
@@ -129,16 +136,16 @@ $_['entry_return_status']                 = 'Rückgabe-Status';
 $_['entry_captcha']                       = 'Captcha';
 $_['entry_captcha_page']                  = 'Captcha Seite';
 $_['entry_logo']                          = 'Online-Shop Logo';
-$_['entry_image_category']                = 'Kategorie Bild Größe (W x H)';
-$_['entry_image_thumb']                   = 'Produkt Bild Thumb Größe (W x H)';
-$_['entry_image_popup']                   = 'Produkt Bild Popup Größe (W x H)';
-$_['entry_image_product']                 = 'Produkt Bild Liste Größe (W x H)';
-$_['entry_image_additional']              = 'Zusätzliche Produkt Bild Größe (W x H)';
-$_['entry_image_related']                 = 'Verwandte Produkte Bild Größe (W x H)';
-$_['entry_image_compare']                 = 'Vergleich Bild Größe (W x H)';
-$_['entry_image_wishlist']                = 'Wunsch-Liste Bild Größe (W x H)';
-$_['entry_image_cart']                    = 'Warenkorb Bild Größe (W x H)';
-$_['entry_image_location']                = 'Online-Shop Größe (W x H)';
+$_['entry_image_category']                = 'Kategorie Bild Größe (B x H)';
+$_['entry_image_thumb']                   = 'Produkt Bild Thumb Größe (B x H)';
+$_['entry_image_popup']                   = 'Produkt Bild Popup Größe (B x H)';
+$_['entry_image_product']                 = 'Produkt Bild Liste Größe (B x H)';
+$_['entry_image_additional']              = 'Zusätzliche Produkt Bild Größe (B x H)';
+$_['entry_image_related']                 = 'Verwandte Produkte Bild Größe (B x H)';
+$_['entry_image_compare']                 = 'Vergleich Bild Größe (B x H)';
+$_['entry_image_wishlist']                = 'Wunsch-Liste Bild Größe (B x H)';
+$_['entry_image_cart']                    = 'Warenkorb Bild Größe (B x H)';
+$_['entry_image_location']                = 'Online-Shop Größe (B x H)';
 $_['entry_width']                         = 'Breite';
 $_['entry_height']                        = 'Höhe';
 $_['entry_mail_engine']                   = 'Mail Engine';
@@ -161,12 +168,21 @@ $_['entry_session_expire']                = 'Session Gültigkeit';
 $_['entry_session_samesite']              = 'Session Samesite Cookie';
 $_['entry_compression']                   = 'Kompressionsgrad der Ausgabe';
 $_['entry_security']                      = 'Two-factor Security';
-$_['entry_encryption']                    = 'Verschlüsselungs-Schlüssel';
 $_['entry_error_display']                 = 'Fehler anzeigen';
 $_['entry_error_log']                     = 'Fehler mitschreiben';
 $_['entry_error_filename']                = 'Fehlerdatei Name';
 $_['entry_status']                        = 'Status';
 $_['entry_blog_enabled']                  = 'Blog aktivieren';
+$_['entry_article_description_length'] 	  = 'Liste Beschreibung Grenze';
+$_['entry_comment_status'] 				  = 'Kommentare zulassen';
+$_['entry_comment_guest'] 				  = 'Gastkommentare zulassen';
+$_['entry_comment_approve'] 		      = 'Kommentare automatisch genehmigen';
+$_['entry_image_default'] 				  = 'Standard-Bildgröße (B x H)';
+$_['entry_image_article'] 				  = 'Artikel Bildgröße (B x H)';
+$_['entry_image_topic'] 				  = 'Thema Bildgröße (B x H)';
+
+
+
 
 // Help
 $_['help_geocode']                        = 'Bitte geben Sie den Geo-Code Ihres Standorts manuell ein.';
@@ -242,6 +258,10 @@ $_['help_encryption']                     = 'Bitte geben Sie einen geheimen Schl
 $_['help_compression']                    = 'GZIP für eine effizientere Übertragung an anfragende Clients. Die Komprimierungsstufe muss zwischen 0 und 9 liegen.';
 $_['help_list_taxes_separately']          = 'Aktivieren Sie diese Einstellung, wenn Sie die Steuerbeträge für zusätzliche Dienstleistungen (Versand, Bearbeitung usw.) getrennt auflisten möchten. <b>Warnung: Diese Einstellung wirkt sich nicht auf die Gesamtsummen der bestehenden Bestellungen aus.</b>';
 $_['help_blog_enabled']                   = 'Bestimmt, ob der Blog für Benutzer verfügbar ist oder nicht.';
+$_['help_article_description_length'] 	  = 'In der Listenansicht ist dies die Zeichengrenze für die Kurzbeschreibung des Artikels.';
+$_['help_comment_guest'] 				  = 'Erlauben Sie Gästen, Kommentare zu veröffentlichen.';
+$_['help_comment_approve'] 			      = 'Automatische Genehmigung von Kommentaren, da sonst der erste Kommentar genehmigt werden muss, bevor er in eine sichere Liste aufgenommen wird.';
+
 
 // Error
 $_['error_warning']                       = 'Warnung: Bitte prüfen Sie das Formular sorgfältig auf Fehler!';
@@ -251,7 +271,6 @@ $_['error_name']                          = 'Der Online-Shop Name muss zwischen 
 $_['error_owner']                         = 'Online-Shop Betreiber muss zwischen 3 und 64 Zeichen lang sein!';
 $_['error_address']                       = 'Online-Shop Adresse muss zwischen 10 und 256 Zeichen lang sein!';
 $_['error_email']                         = 'Die E-Mail Adresse scheint nicht gültig zu sein!';
-$_['error_telephone']                     = 'Telefon muss zwischen 3 und 32 Zeichen lang sein!';
 $_['error_product_description_length']    = 'Produkt Beschreibungs-Länge wird benötigt!';
 $_['error_pagination']                    = 'Produkte pro Seite wird benötigt!';
 $_['error_login_attempts']                = 'Anmeldeversuche müssen größer als 0 sein!';
@@ -279,3 +298,6 @@ $_['error_log_required']                  = 'Fehlerprotokoll Dateiname benötigt
 $_['error_log_invalid']                   = 'Fehlerprotokoll Dateiname ungültig!';
 $_['error_log_extension']                 = 'Fehlerprotokoll Dateinamen-Extension muß .log sein!';
 $_['error_encryption']                    = 'Der Sicherheitsschlüssel muss zwischen 32 und 1024 Zeichen lang sein!';
+$_['error_image_default'] 				  = 'Produktbild Standardgrößen-Abmessungen benötigt!';
+$_['error_image_article'] 				  = 'Artikel Bild Größen-Abmessungen benötigt!';
+$_['error_image_topic'] 				  = 'Thema Bildgrößen-Abmessungen benötigt!';

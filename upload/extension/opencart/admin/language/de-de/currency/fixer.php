@@ -7,7 +7,6 @@ $_['text_extension']   = 'Erweiterungen';
 $_['text_success']     = 'Erfolgreich: Sie haben die Währungsumrechnung Fixer modifiziert!';
 $_['text_edit']        = 'Bearbeite Währungsumrechnung Fixer';
 $_['text_signup']      = 'Fixer.io Währungsumrechnungs-Service <a href="https://fixer.io/" target="_blank" class="alert-link">hier anmelden</a>.';
-$_['text_support']     = 'Diese Erweiterung setzt die Euro-Währung (EUR) als verfügbare Währungsauswahl vorraus.';
 
 // Entry
 $_['entry_api']        = 'API Access Key';

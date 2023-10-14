@@ -26,6 +26,7 @@ $_['entry_status']      = 'Status';
 $_['entry_text']        = 'Erfahrungen, Anmerkungen und weitere Details';
 $_['entry_date_from']   = 'Datum von';
 $_['entry_date_to']     = 'Datum bis';
+$_['entry_date_added']  = 'Datum zugef.';
 
 // Help
 $_['help_product']      = '(Automatische Vervollständigung)';

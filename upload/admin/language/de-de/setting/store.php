@@ -18,6 +18,9 @@ $_['text_account']                     = 'Kunden-Konto';
 $_['text_checkout']                    = 'Kasse';
 $_['text_stock']                       = 'Lager';
 $_['text_image']                       = 'Bild-Größen';
+$_['text_region']                      = 'Region';
+$_['text_language']                    = 'Sprache';
+$_['text_currency']                    = 'Währung';
 
 // Column
 $_['column_name']                      = 'Online-Shop (Store)';
@@ -63,18 +66,20 @@ $_['entry_checkout']                   = 'Kassa-Bedingungen';
 $_['entry_stock_display']              = 'Lagerstand zeigen';
 $_['entry_stock_checkout']             = 'Kassenzahlung bei Lagerfehlbestand';
 $_['entry_logo']                       = 'Online-Shop Logo';
-$_['entry_image_category']             = 'Kategorie Bild Größe (W x H)';
-$_['entry_image_thumb']                = 'Produkt Bild Thumb Größe (W x H)';
-$_['entry_image_popup']                = 'Produkt Bild Popup Größe (W x H)';
-$_['entry_image_product']              = 'Produkt Bild Liste Größe (W x H)';
-$_['entry_image_additional']           = 'Zusätzliche Produkt Bild Größe (W x H)';
-$_['entry_image_related']              = 'Verwandte Produkte Bild Größe (W x H)';
-$_['entry_image_compare']              = 'Vergleich Bild Größe (W x H)';
-$_['entry_image_wishlist']             = 'Wunsch-Liste Bild Größe (W x H)';
-$_['entry_image_cart']                 = 'Warenkorb Bild Größe (W x H)';
-$_['entry_image_location']             = 'Online-Shop (Store) Größe (W x H)';
+$_['entry_image_category']             = 'Kategorie Bild Größe (B x H)';
+$_['entry_image_thumb']                = 'Produkt Bild Thumb Größe (B x H)';
+$_['entry_image_popup']                = 'Produkt Bild Popup Größe (B x H)';
+$_['entry_image_product']              = 'Produkt Bild Liste Größe (B x H)';
+$_['entry_image_additional']           = 'Zusätzliche Produkt Bild Größe (B x H)';
+$_['entry_image_related']              = 'Verwandte Produkte Bild Größe (B x H)';
+$_['entry_image_compare']              = 'Vergleich Bild Größe (B x H)';
+$_['entry_image_wishlist']             = 'Wunsch-Liste Bild Größe (B x H)';
+$_['entry_image_cart']                 = 'Warenkorb Bild Größe (B x H)';
+$_['entry_image_location']             = 'Online-Shop (Store) Größe (B x H)';
 $_['entry_width']                      = 'Breite';
 $_['entry_height']                     = 'Höhe';
+$_['entry_image_article']              = 'Artikel-Bildgröße (B x H)';
+$_['entry_image_topic']                = 'Thema Bildgröße (B x H)';
 
 // Help
 $_['help_url']                         = 'Geben Sie die vollständige URL zu Ihrem Online-Shop an. Achten Sie darauf, dass Sie \'/\' am Ende hinzufügen. Beispiel: http://www.ihredomain.com/path/<br/><br/>Verwenden Sie keine Verzeichnisse, um einen neuen Online-Shop zu erstellen. Sie sollten immer mit einer anderen Domain oder Subdomain auf Ihr Hosting verweisen.';
@@ -108,7 +113,6 @@ $_['error_name']                       = 'Der Online-Shop Titel muss zwischen 3 
 $_['error_owner']                      = 'Online-Shop (Store) Betreiber muss zwischen 3 und 64 Zeichen lang sein!';
 $_['error_address']                    = 'Online-Shop (Store) Adresse muss zwischen 10 und 256 Zeichen lang sein!';
 $_['error_email']                      = 'Die E-Mail Adresse scheint nicht gültig zu sein!';
-$_['error_telephone']                  = 'Telefon muss zwischen 3 und 32 Zeichen lang sein!';
 $_['error_product_description_length'] = 'Produkt Beschreibungs-Länge wird benötigt!';
 $_['error_pagination']                 = 'Produkte pro Seite wird benötigt!';
 $_['error_customer_group_display']     = 'Sie müssen die Standard-Kunden-Gruppe einbeziehen, wenn Sie diese Funktion nutzen wollen!';
@@ -125,4 +129,6 @@ $_['error_image_compare']              = 'Produkt-Vergleich-Bild Größen-Abmess
 $_['error_image_wishlist']             = 'Wunschlisten-Bild Größen-Abmessungen benötigt!';
 $_['error_image_cart']                 = 'Warenkorb-Bild Größen-Abmessungen benötigt!';
 $_['error_image_location']             = 'Online-Shop (Store) Bild Größen-Abmessungen benötigt!';
+$_['error_image_article']              = 'Artikel Bild Größe Abmessungen benötigt!';
+$_['error_image_topic']                = 'Thema-Bildgrößen-Abmessungen benötigt!';
 

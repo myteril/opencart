@@ -1,6 +1,7 @@
 <?php
 // Text
 $_['text_address_format']      = 'Adressen Formate';
+$_['text_address_format']      = 'Adressen Formate';
 $_['text_affiliate']           = 'Partner';
 $_['text_api']                 = 'API';
 $_['text_attribute']           = 'Eigenschaften';
@@ -86,3 +87,8 @@ $_['text_zone']                = 'Zonen';
 $_['text_complete_status']     = 'Bestellungen abgeschlossen';
 $_['text_processing_status']   = 'Bestellungen in Arbeit';
 $_['text_other_status']        = 'Bestellungen anderer Stati';
+$_['text_antispam']			   = 'Anti-Spam';
+$_['text_article']			   = 'Artikel';
+$_['text_topic']			   = 'Themen';
+$_['text_comment']			   = 'Kommentare';
+$_['text_cms']			   	   = 'CMS';

@@ -15,8 +15,6 @@ $_['column_name']          = 'Steuer';
 $_['column_rate']          = 'Steuersatz';
 $_['column_type']          = 'Typ';
 $_['column_geo_zone']      = 'Geo-Zone';
-$_['column_date_added']    = 'Datum hinzugefügt';
-$_['column_date_modified'] = 'Änderungs-Datum';
 $_['column_action']        = 'Aktion';
 
 // Entry

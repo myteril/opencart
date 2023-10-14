@@ -8,7 +8,7 @@ $_['text_note']       = '<span class="text-danger">Hinweis:</span> HTML wird nic
 $_['text_success']    = 'Vielen Dank für Ihre Bewertung. Sie wurde zur weiteren Prüfung im Genehmigungs-Prozess vorgemerkt.';
 
 // Entry
-$_['entry_name']       = 'Ihr Name';
+$_['entry_author']     = 'Your Name';
 $_['entry_review']     = 'Ihre Bewertung - Erfahrungen, Anmerkungen und weitere Details';
 $_['entry_rating']     = 'Ihre Bewertungsstufe - Bitte eine Stufe auswählen';
 $_['entry_good']       = 'Gut';
@@ -20,8 +20,9 @@ $_['tab_review']       = 'Bewertungen (%s)';
 // Error
 $_['error_token']      = 'Warnung: Bewertungs-Token ungültig!';
 $_['error_product']    = 'Warnung: Das Produkt konnte nicht gefunden werden';
-$_['error_name']       = 'Der Name der Bewertung muss zwischen 3 und 25 Zeichen lang sein!';
+$_['error_author']     = 'Review Name must be between 3 and 25 characters!';
 $_['error_text']       = 'Der Bewertungstext muss zwischen 25 und 1000 Zeichen lang sein!';
 $_['error_rating']     = 'Bitte wählen Sie eine Bewertungsstufe aus!';
 $_['error_guest']      = 'Sie müssen sich anmelden, um das Produkt zu bewerten!';
 $_['error_purchased']  = 'Sie müssen dieses Produkt gekauft haben, bevor Sie eine Bewertung schreiben können!';
+$_['error_status']     = 'Bewertungen sind deaktiviert!';
