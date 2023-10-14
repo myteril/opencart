@@ -1,28 +1,28 @@
 <?php
 /**
- * @package		OpenCart
- * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2022, OpenCart, Ltd. (https://www.opencart.com/)
- * @license		https://opensource.org/licenses/GPL-3.0
- * @link		https://www.opencart.com
-*/
+ * @package        OpenCart
+ * @author         Daniel Kerr
+ * @copyright      Copyright (c) 2005 - 2022, OpenCart, Ltd. (https://www.opencart.com/)
+ * @license        https://opensource.org/licenses/GPL-3.0
+ * @link           https://www.opencart.com
+ */
 namespace Opencart\System\Library;
 /**
  * Class Cache
  */
 class Cache {
 	/**
-	 * @var object|mixed
+	 * @var object
 	 */
 	private object $adaptor;
 
 	/**
 	 * Constructor
 	 *
-	 * @param	string	$adaptor	The type of storage for the cache.
-	 * @param	int		$expire		Optional parameters
+	 * @param string $adaptor The type of storage for the cache.
+	 * @param int    $expire  Optional parameters
 	 *
- 	*/
+	 */
 	public function __construct(string $adaptor, int $expire = 3600) {
 		$class = 'Opencart\System\Library\Cache\\' . $adaptor;
 
@@ -38,9 +38,9 @@ class Cache {
 	 *
 	 * @param string $key The cache key name
 	 *
-	 * @return array|string|null
+	 * @return    mixed
 	 */
-	public function get(string $key): array|string|null {
+	public function get(string $key) {
 		return $this->adaptor->get($key);
 	}
 
@@ -49,20 +49,20 @@ class Cache {
 	 *
 	 * Sets a cache by key value.
 	 *
-	 * @param string $key The cache key
-	 * @param array|string|null $value The cache value
-	 * @param int $expire
-	 * @return void
+	 * @param string $key   The cache key
+	 * @param mixed  $value The cache value
+	 *
+	 * @return    string
 	 */
-	public function set(string $key, array|string|null $value, int $expire = 0): void {
+	public function set(string $key, $value, int $expire = 0): void {
 		$this->adaptor->set($key, $value, $expire);
 	}
 
-    /**
-     * Deletes a cache by key name.
-     *
-     * @param	string	$key	The cache key
-     */
+	/**
+	 * Deletes a cache by key name.
+	 *
+	 * @param string $key The cache key
+	 */
 	public function delete(string $key): void {
 		$this->adaptor->delete($key);
 	}

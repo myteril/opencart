@@ -1532,7 +1532,7 @@ INSERT INTO `oc_layout_module` (`layout_module_id`, `layout_id`, `code`, `positi
 (5, 1, 'opencart.banner.3', 'content_top', 1),
 (6, 1, 'opencart.banner.4', 'content_bottom', 1),
 (7, 3, 'opencart.category', 'column_left', 1),
-(8, 14, 'opencart.topic', 'column_left', 1)
+(8, 14, 'opencart.topic', 'column_left', 1);
 
 -----------------------------------------------------------
 
@@ -2149,8 +2149,8 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'config', 'config_image_thumb_height', '500', 0),
 (0, 'config', 'config_image_popup_width', '800', 0),
 (0, 'config', 'config_image_popup_height', '800', 0),
-(0, 'config', 'config_image_category_width', '80', 0),
-(0, 'config', 'config_image_category_height', '80', 0),
+(0, 'config', 'config_image_category_width', '200', 0),
+(0, 'config', 'config_image_category_height', '200', 0),
 (0, 'config', 'config_image_article_width', '1140', 0),
 (0, 'config', 'config_image_article_height', '380', 0),
 (0, 'config', 'config_image_topic_width', '1140', 0),
