@@ -48,6 +48,7 @@ class Subscription extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/subscription', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$limit = 10;
 
@@ -195,6 +196,7 @@ class Subscription extends \Opencart\System\Engine\Controller {
 				'text' => $heading_title,
 				'href' => $this->url->link('account/subscription.info', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . '&subscription_id=' . $this->request->get['subscription_id'] . $url)
 			];
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 			$data['subscription_id'] = $subscription_info['subscription_id'];
 			$data['order_id'] = $subscription_info['order_id'];

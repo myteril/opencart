@@ -39,6 +39,7 @@ class CustomerGroup extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('customer/customer_group', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('customer/customer_group.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('customer/customer_group.delete', 'user_token=' . $this->session->data['user_token']);
@@ -196,6 +197,7 @@ class CustomerGroup extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('customer/customer_group', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('customer/customer_group.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('customer/customer_group', 'user_token=' . $this->session->data['user_token'] . $url);

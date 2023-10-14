@@ -57,6 +57,7 @@ class Country extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/country', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('localisation/country.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('localisation/country.delete', 'user_token=' . $this->session->data['user_token']);
@@ -290,6 +291,7 @@ class Country extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/country', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/country.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/country', 'user_token=' . $this->session->data['user_token'] . $url);

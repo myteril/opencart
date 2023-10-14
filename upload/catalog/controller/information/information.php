@@ -38,6 +38,7 @@ class Information extends \Opencart\System\Engine\Controller {
 				'text' => $information_info['title'],
 				'href' => $this->url->link('information/information', 'language=' . $this->config->get('config_language') . '&information_id=' .  $information_id)
 			];
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 			$data['heading_title'] = $information_info['title'];
 

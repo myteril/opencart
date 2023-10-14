@@ -30,6 +30,7 @@ class Marketing extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/opencart/report/marketing', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('extension/opencart/report/marketing.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=report');

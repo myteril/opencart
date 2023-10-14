@@ -28,6 +28,7 @@ class Contact extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketing/contact', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$this->load->model('setting/store');
 

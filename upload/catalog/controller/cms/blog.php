@@ -108,6 +108,7 @@ class Blog extends \Opencart\System\Engine\Controller {
 				'href' => $this->url->link('cms/blog', 'language=' . $this->config->get('config_language') . $url)
 			];
 		}
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		if ($topic_info) {
 			$this->document->setTitle($topic_info['meta_title']);
@@ -321,6 +322,7 @@ class Blog extends \Opencart\System\Engine\Controller {
 				'text' => $article_info['name'],
 				'href' => $this->url->link('cms/blog.info', 'language=' . $this->config->get('config_language') . '&article_id=' .  $article_id . $url)
 			];
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 			$data['heading_title'] = $article_info['name'];
 

@@ -37,6 +37,7 @@ class Banner extends \Opencart\System\Engine\Controller {
 				'href' => $this->url->link('extension/opencart/module/banner', 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $this->request->get['module_id'])
 			];
 		}
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		if (!isset($this->request->get['module_id'])) {
 			$data['save'] = $this->url->link('extension/opencart/module/banner.save', 'user_token=' . $this->session->data['user_token']);
@@ -115,7 +116,7 @@ class Banner extends \Opencart\System\Engine\Controller {
 		} else {
 			$data['status'] = '';
 		}
-		
+
 		if (isset($this->request->get['module_id'])) {
 			$data['module_id'] = (int)$this->request->get['module_id'];
 		} else {

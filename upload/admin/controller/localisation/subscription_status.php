@@ -39,6 +39,7 @@ class SubscriptionStatus extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/subscription_status', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('localisation/subscription_status.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('localisation/subscription_status.delete', 'user_token=' . $this->session->data['user_token']);
@@ -194,6 +195,7 @@ class SubscriptionStatus extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/subscription_status', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/subscription_status.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/subscription_status', 'user_token=' . $this->session->data['user_token'] . $url);

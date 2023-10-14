@@ -30,6 +30,7 @@ class Backup extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('tool/backup', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['upload'] = $this->url->link('tool/backup.upload', 'user_token=' . $this->session->data['user_token']);
 

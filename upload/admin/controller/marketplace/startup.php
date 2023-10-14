@@ -39,6 +39,7 @@ class Startup extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketplace/startup', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['delete'] = $this->url->link('marketplace/startup.delete', 'user_token=' . $this->session->data['user_token']);
 

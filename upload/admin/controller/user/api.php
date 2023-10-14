@@ -39,6 +39,7 @@ class Api extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/api', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('user/api.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('user/api.delete', 'user_token=' . $this->session->data['user_token']);
@@ -207,6 +208,7 @@ class Api extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/api', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('user/api.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('user/api', 'user_token=' . $this->session->data['user_token'] . $url);

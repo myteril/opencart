@@ -39,6 +39,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('sale/voucher', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('sale/voucher.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('sale/voucher.delete', 'user_token=' . $this->session->data['user_token']);
@@ -115,12 +116,12 @@ class Voucher extends \Opencart\System\Engine\Controller {
 		$results = $this->model_sale_voucher->getVouchers($filter_data);
 
 		foreach ($results as $result) {
-			if ($result['order_id']) {	
+			if ($result['order_id']) {
 				$order_href = $this->url->link('sale/order.info', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . $result['order_id'] . $url);
 			} else {
 				$order_href = '';
 			}
-			
+
 			$data['vouchers'][] = [
 				'voucher_id' => $result['voucher_id'],
 				'code'       => $result['code'],
@@ -213,6 +214,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('sale/voucher', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('sale/voucher.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('sale/voucher', 'user_token=' . $this->session->data['user_token'] . $url);

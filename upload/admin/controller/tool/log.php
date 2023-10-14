@@ -11,7 +11,7 @@ class Log extends \Opencart\System\Engine\Controller {
 	 */
 	public function index(): void {
 		$this->load->language('tool/log');
-		
+
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['breadcrumbs'] = [];
@@ -25,6 +25,7 @@ class Log extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('tool/log', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];

@@ -89,6 +89,7 @@ class Review extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/review', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('catalog/review.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('catalog/review.delete', 'user_token=' . $this->session->data['user_token']);
@@ -216,7 +217,7 @@ class Review extends \Opencart\System\Engine\Controller {
 		];
 
 		$this->load->model('catalog/review');
-		
+
 		$results = $this->model_catalog_review->getReviews($filter_data);
 
 		foreach ($results as $result) {
@@ -295,7 +296,7 @@ class Review extends \Opencart\System\Engine\Controller {
 		}
 
 		$review_total = $this->model_catalog_review->getTotalReviews($filter_data);
-		
+
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $review_total,
 			'page'  => $page,
@@ -372,6 +373,7 @@ class Review extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/review', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('catalog/review.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('catalog/review', 'user_token=' . $this->session->data['user_token'] . $url);

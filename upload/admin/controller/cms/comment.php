@@ -26,6 +26,7 @@ class Comment extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('cms/comment', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['approve'] = $this->url->link('cms/comment.approve', 'user_token=' . $this->session->data['user_token']);
 		$data['spam'] = $this->url->link('cms/comment.spam', 'user_token=' . $this->session->data['user_token']);

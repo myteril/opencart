@@ -39,6 +39,7 @@ class VoucherTheme extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('sale/voucher_theme', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('sale/voucher_theme.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('sale/voucher_theme.delete', 'user_token=' . $this->session->data['user_token']);
@@ -194,6 +195,7 @@ class VoucherTheme extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('sale/voucher_theme', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('sale/voucher_theme.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('sale/voucher_theme', 'user_token=' . $this->session->data['user_token'] . $url);

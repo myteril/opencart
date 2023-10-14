@@ -25,6 +25,7 @@ class Notification extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('tool/notification', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['list'] = $this->getList();
 
@@ -75,7 +76,7 @@ class Notification extends \Opencart\System\Engine\Controller {
 
 		foreach ($results as $result) {
 			$second = time() - strtotime($result['date_added']);
-			
+
 			$ranges = [
 				'second' => $second,
 				'minute' => floor($second / 60),

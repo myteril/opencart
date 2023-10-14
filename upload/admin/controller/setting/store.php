@@ -31,6 +31,7 @@ class Store extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('setting/store', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('setting/store.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('setting/store.delete', 'user_token=' . $this->session->data['user_token']);
@@ -147,6 +148,7 @@ class Store extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('text_settings'),
 			'href' => $this->url->link('setting/store.form', 'user_token=' . $this->session->data['user_token'] . (isset($this->request->post['store_id']) ? '&store_id=' . $this->request->get['store_id'] : '') . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('setting/store.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('setting/store', 'user_token=' . $this->session->data['user_token']);

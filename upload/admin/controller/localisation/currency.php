@@ -39,6 +39,7 @@ class Currency extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/currency', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['refresh'] = $this->url->link('localisation/currency.refresh', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['add'] = $this->url->link('localisation/currency.form', 'user_token=' . $this->session->data['user_token'] . $url);
@@ -111,6 +112,7 @@ class Currency extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/currency', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['action'] = $this->url->link('localisation/currency.list', 'user_token=' . $this->session->data['user_token'] . $url);
 
@@ -215,6 +217,7 @@ class Currency extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/currency', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/currency.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/currency', 'user_token=' . $this->session->data['user_token'] . $url);

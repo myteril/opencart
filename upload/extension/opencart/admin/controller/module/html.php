@@ -40,6 +40,7 @@ class HTML extends \Opencart\System\Engine\Controller {
 				'href' => $this->url->link('extension/opencart/module/html', 'user_token=' . $this->session->data['user_token'] . '&module_id=' . $this->request->get['module_id'])
 			];
 		}
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		if (!isset($this->request->get['module_id'])) {
 			$data['save'] = $this->url->link('extension/opencart/module/html.save', 'user_token=' . $this->session->data['user_token']);
@@ -76,7 +77,7 @@ class HTML extends \Opencart\System\Engine\Controller {
 		} else {
 			$data['status'] = '';
 		}
-		
+
 		if (isset($this->request->get['module_id'])) {
 			$data['module_id'] = (int)$this->request->get['module_id'];
 		} else {

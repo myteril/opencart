@@ -39,6 +39,7 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/subscription_plan', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('catalog/subscription_plan.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['copy'] = $this->url->link('catalog/subscription_plan.copy', 'user_token=' . $this->session->data['user_token'] . $url);
@@ -198,6 +199,7 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/subscription_plan', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('catalog/subscription_plan.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('catalog/subscription_plan', 'user_token=' . $this->session->data['user_token'] . $url);

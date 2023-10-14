@@ -39,6 +39,7 @@ class Banner extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/banner', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('design/banner.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('design/banner.delete', 'user_token=' . $this->session->data['user_token']);
@@ -195,6 +196,7 @@ class Banner extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/banner', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('design/banner.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('design/banner', 'user_token=' . $this->session->data['user_token'] . $url);
@@ -246,7 +248,7 @@ class Banner extends \Opencart\System\Engine\Controller {
 					$image = '';
 					$thumb = 'no_image.png';
 				}
-				
+
 				$data['banner_images'][$language_id][] = [
 					'title'      => $value['title'],
 					'link'       => $value['link'],

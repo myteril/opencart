@@ -30,6 +30,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/opencart/dashboard/customer', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('extension/opencart/dashboard/customer.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=dashboard');
@@ -37,7 +38,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 		$data['dashboard_customer_width'] = $this->config->get('dashboard_customer_width');
 
 		$data['columns'] = [];
-		
+
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
 		}

@@ -40,6 +40,7 @@ class ReturnAction extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/return_action', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('localisation/return_action.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('localisation/return_action.delete', 'user_token=' . $this->session->data['user_token']);
@@ -195,6 +196,7 @@ class ReturnAction extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/return_action', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/return_action.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/return_action', 'user_token=' . $this->session->data['user_token'] . $url);

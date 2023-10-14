@@ -39,6 +39,7 @@ class Category extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/category', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['repair'] = $this->url->link('catalog/category.repair', 'user_token=' . $this->session->data['user_token']);
 		$data['add'] = $this->url->link('catalog/category.form', 'user_token=' . $this->session->data['user_token'] . $url);
@@ -201,6 +202,7 @@ class Category extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/category', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('catalog/category.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('catalog/category', 'user_token=' . $this->session->data['user_token'] . $url);
@@ -261,7 +263,7 @@ class Category extends \Opencart\System\Engine\Controller {
 		}
 
 		$data['stores'] = [];
-		
+
 		$data['stores'][] = [
 			'store_id' => 0,
 			'name'     => $this->language->get('text_default')
@@ -389,11 +391,11 @@ class Category extends \Opencart\System\Engine\Controller {
 
 		if (isset($this->request->post['category_id']) && $this->request->post['parent_id']) {
 			$results = $this->model_catalog_category->getPaths($this->request->post['parent_id']);
-			
+
 			foreach ($results as $result) {
 				if ($result['path_id'] == $this->request->post['category_id']) {
 					$json['error']['parent'] = $this->language->get('error_parent');
-					
+
 					break;
 				}
 			}

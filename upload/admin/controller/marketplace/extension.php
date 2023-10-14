@@ -25,6 +25,7 @@ class Extension extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		if (isset($this->request->get['type'])) {
 			$data['type'] = $this->request->get['type'];

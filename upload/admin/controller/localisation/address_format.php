@@ -31,6 +31,7 @@ class AddressFormat extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/address_format', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('localisation/address_format.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('localisation/address_format.delete', 'user_token=' . $this->session->data['user_token']);
@@ -134,6 +135,7 @@ class AddressFormat extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/address_format', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/address_format.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/address_format', 'user_token=' . $this->session->data['user_token'] . $url);

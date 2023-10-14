@@ -27,6 +27,7 @@ class Manufacturer extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('text_brand'),
 			'href' => $this->url->link('product/manufacturer', 'language=' . $this->config->get('config_language'))
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['categories'] = [];
 
@@ -139,6 +140,7 @@ class Manufacturer extends \Opencart\System\Engine\Controller {
 				'text' => $manufacturer_info['name'],
 				'href' => $this->url->link('product/manufacturer.info', 'language=' . $this->config->get('config_language') . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url)
 			];
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 			$data['heading_title'] = $manufacturer_info['name'];
 

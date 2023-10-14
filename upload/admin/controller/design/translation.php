@@ -39,6 +39,7 @@ class Translation extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/translation', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('design/translation.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('design/translation.delete', 'user_token=' . $this->session->data['user_token']);
@@ -205,6 +206,7 @@ class Translation extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/translation', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('design/translation.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('design/translation', 'user_token=' . $this->session->data['user_token'] . $url);

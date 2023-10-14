@@ -30,6 +30,7 @@ class Recent extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/opencart/dashboard/recent', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('extension/opencart/dashboard/recent.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=dashboard');
@@ -37,7 +38,7 @@ class Recent extends \Opencart\System\Engine\Controller {
 		$data['dashboard_recent_width'] = $this->config->get('dashboard_recent_width');
 
 		$data['columns'] = [];
-		
+
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
 		}
@@ -93,7 +94,7 @@ class Recent extends \Opencart\System\Engine\Controller {
 		];
 
 		$this->load->model('sale/order');
-		
+
 		$results = $this->model_sale_order->getOrders($filter_data);
 
 		foreach ($results as $result) {

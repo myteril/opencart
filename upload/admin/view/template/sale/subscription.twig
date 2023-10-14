@@ -6,11 +6,7 @@
         <button type="button" data-bs-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-subscription').toggleClass('d-none');" class="btn btn-light d-md-none"><i class="fa-solid fa-filter"></i></button>
       </div>
       <h1>{{ heading_title }}</h1>
-      <ol class="breadcrumb">
-        {% for breadcrumb in breadcrumbs %}
-          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-        {% endfor %}
-      </ol>
+      {{ breadcrumbs }}
     </div>
   </div>
   <div class="container-fluid">

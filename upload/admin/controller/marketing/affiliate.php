@@ -119,6 +119,7 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketing/affiliate', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['csv'] = $this->url->link('marketing/affiliate.csv', 'user_token=' . $this->session->data['user_token']);
 		$data['complete'] = $this->url->link('marketing/affiliate.complete', 'user_token=' . $this->session->data['user_token']);
@@ -529,6 +530,7 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketing/affiliate', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('marketing/affiliate.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('marketing/affiliate', 'user_token=' . $this->session->data['user_token'] . $url);

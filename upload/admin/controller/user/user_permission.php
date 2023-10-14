@@ -39,6 +39,7 @@ class UserPermission extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/user_permission', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('user/user_permission.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('user/user_permission.delete', 'user_token=' . $this->session->data['user_token']);
@@ -194,6 +195,7 @@ class UserPermission extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/user_permission', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('user/user_permission.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('user/user_permission', 'user_token=' . $this->session->data['user_token'] . $url);

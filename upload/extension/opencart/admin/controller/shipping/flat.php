@@ -24,6 +24,7 @@ class Flat extends \Opencart\System\Engine\Controller {
 
 		$data['breadcrumbs'][] = ['text' => $this->language->get('heading_title'), 'href' => $this->url->link('extension/opencart/shipping/flat', 'user_token=' . $this->session->data['user_token'])];
 
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 		$data['save'] = $this->url->link('extension/opencart/shipping/flat.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=shipping');
 

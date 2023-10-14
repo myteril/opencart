@@ -36,6 +36,7 @@ class Basic extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/opencart/theme/basic', 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store_id)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('extension/opencart/theme/basic.save', 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store_id);
 		$data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=theme');

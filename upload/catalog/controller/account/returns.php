@@ -50,6 +50,7 @@ class Returns extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/returns', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['returns'] = [];
 
@@ -143,6 +144,7 @@ class Returns extends \Opencart\System\Engine\Controller {
 				'text' => $this->language->get('text_return'),
 				'href' => $this->url->link('account/returns.info', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . '&return_id=' . $this->request->get['return_id'] . $url)
 			];
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 			$data['return_id'] = $return_info['return_id'];
 			$data['order_id'] = $return_info['order_id'];
@@ -213,6 +215,7 @@ class Returns extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/returns.add', 'language=' . $this->config->get('config_language'))
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$this->session->data['return_token'] = substr(bin2hex(openssl_random_pseudo_bytes(26)), 0, 26);
 
@@ -439,6 +442,7 @@ class Returns extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/returns.add', 'language=' . $this->config->get('config_language'))
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['continue'] = $this->url->link('common/home', 'language=' . $this->config->get('config_language'));
 

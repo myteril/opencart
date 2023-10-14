@@ -30,6 +30,7 @@ class Order extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/opencart/dashboard/order', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('extension/opencart/dashboard/order.save', 'user_token=' . $this->session->data['user_token']);
 
@@ -38,7 +39,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		$data['dashboard_order_width'] = $this->config->get('dashboard_order_width');
 
 		$data['columns'] = [];
-		
+
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
 		}

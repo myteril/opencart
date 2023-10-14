@@ -8,11 +8,7 @@
         <button type="submit" form="form-customer-approval" formaction="{{ deny }}" data-bs-toggle="tooltip" title="{{ text_deny }}" class="btn btn-warning"><i class="fa-solid fa-circle-xmark"></i></button>
       </div>
       <h1>{{ heading_title }}</h1>
-      <ol class="breadcrumb">
-        {% for breadcrumb in breadcrumbs %}
-          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-        {% endfor %}
-      </ol>
+      {{ breadcrumbs }}
     </div>
   </div>
   <div class="container-fluid">

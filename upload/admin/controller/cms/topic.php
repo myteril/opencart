@@ -39,6 +39,7 @@ class Topic extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('cms/topic', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('cms/topic.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('cms/topic.delete', 'user_token=' . $this->session->data['user_token']);
@@ -200,6 +201,7 @@ class Topic extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('cms/topic', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('cms/topic.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('cms/topic', 'user_token=' . $this->session->data['user_token'] . $url);

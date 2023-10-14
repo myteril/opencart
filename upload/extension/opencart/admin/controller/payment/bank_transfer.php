@@ -30,6 +30,7 @@ class BankTransfer extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/opencart/payment/bank_transfer', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('extension/opencart/payment/bank_transfer.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=payment');
@@ -39,7 +40,7 @@ class BankTransfer extends \Opencart\System\Engine\Controller {
 		$data['payment_bank_transfer_bank'] = [];
 
 		$languages = $this->model_localisation_language->getLanguages();
-		
+
 		foreach ($languages as $language) {
 			$data['payment_bank_transfer_bank'][$language['language_id']] = $this->config->get('payment_bank_transfer_bank_' . $language['language_id']);
 		}

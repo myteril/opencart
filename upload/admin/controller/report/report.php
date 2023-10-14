@@ -25,6 +25,7 @@ class Report extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/report', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		if (isset($this->request->get['code'])) {
 			$data['code'] = $this->request->get['code'];

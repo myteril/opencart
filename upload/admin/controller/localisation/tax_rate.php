@@ -39,6 +39,7 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/tax_rate', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('localisation/tax_rate.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('localisation/tax_rate.delete', 'user_token=' . $this->session->data['user_token']);
@@ -200,6 +201,7 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/tax_rate', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/tax_rate.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/tax_rate', 'user_token=' . $this->session->data['user_token'] . $url);

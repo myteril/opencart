@@ -132,6 +132,7 @@ class Category extends \Opencart\System\Engine\Controller {
 				'text' => $category_info['name'],
 				'href' => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . $url)
 			];
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 			$data['heading_title'] = $category_info['name'];
 

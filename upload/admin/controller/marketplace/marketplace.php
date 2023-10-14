@@ -107,6 +107,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketplace/marketplace', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$time = time();
 
@@ -627,6 +628,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link('marketplace/marketplace', 'user_token=' . $this->session->data['user_token'] . $url)
 			];
+			$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 			$data['banner'] = $response_info['banner'];
 

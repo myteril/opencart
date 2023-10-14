@@ -39,6 +39,7 @@ class Language extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/language', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('localisation/language.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('localisation/language.delete', 'user_token=' . $this->session->data['user_token']);
@@ -199,6 +200,7 @@ class Language extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/language', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/language.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/language', 'user_token=' . $this->session->data['user_token'] . $url);
@@ -277,11 +279,11 @@ class Language extends \Opencart\System\Engine\Controller {
 		if ((oc_strlen($this->request->post['code']) < 2) || (oc_strlen($this->request->post['code']) > 5)) {
 			$json['error']['code'] = $this->language->get('error_code');
 		}
-		
+
 		if ((oc_strlen($this->request->post['locale']) < 2) || (oc_strlen($this->request->post['locale']) > 255)) {
 			$json['error']['locale'] = $this->language->get('error_locale');
 		}
-		
+
 		$language_info = $this->model_localisation_language->getLanguageByCode($this->request->post['code']);
 
 		if (!$this->request->post['language_id']) {

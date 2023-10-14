@@ -45,6 +45,7 @@ class Antispam extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('cms/antispam', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('cms/antispam.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('cms/antispam.delete', 'user_token=' . $this->session->data['user_token']);
@@ -225,6 +226,7 @@ class Antispam extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('cms/antispam', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('cms/antispam.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('cms/antispam', 'user_token=' . $this->session->data['user_token'] . $url);

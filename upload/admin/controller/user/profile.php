@@ -25,6 +25,7 @@ class Profile extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/profile', 'user_token=' . $this->session->data['user_token'])
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('user/profile.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token']);

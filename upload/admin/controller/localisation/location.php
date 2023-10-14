@@ -39,6 +39,7 @@ class Location extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/location', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('localisation/location.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('localisation/location.delete', 'user_token=' . $this->session->data['user_token']);
@@ -196,6 +197,7 @@ class Location extends \Opencart\System\Engine\Controller {
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('localisation/location', 'user_token=' . $this->session->data['user_token'] . $url)
 		];
+		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['save'] = $this->url->link('localisation/location.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('localisation/location', 'user_token=' . $this->session->data['user_token'] . $url);
@@ -237,7 +239,7 @@ class Location extends \Opencart\System\Engine\Controller {
 		} else {
 			$data['telephone'] = '';
 		}
-		
+
 		if (!empty($location_info)) {
 			$data['image'] = $location_info['image'];
 		} else {
