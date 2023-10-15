@@ -1185,8 +1185,16 @@ class Product extends \Opencart\System\Engine\Controller {
 
                 if(!empty($this->request->post['product_subscription'])){
                     foreach ($this->request->post['product_subscription'] as $i => $product_subscription){
-                        $this->request->post['product_subscription'][$i]['price'] = $this->tax->calculatePriceExclTax(floatval($product_subscription['price']), $this->request->post['tax_class_id']);
-                        $this->request->post['product_subscription'][$i]['trial_price'] = $this->tax->calculatePriceExclTax(floatval($product_subscription['trial_price']), $this->request->post['tax_class_id']);
+
+						if(!empty($this->request->post['product_subscription'][$i]['price'])){
+							$this->request->post['product_subscription'][$i]['price'] = $this->tax->calculatePriceExclTax(floatval($product_subscription['price']), $this->request->post['tax_class_id']);
+						}else{
+							$this->request->post['product_subscription'][$i]['price'] = 0;
+						}
+
+						if(!empty($this->request->post['product_subscription'][$i]['trial_price'])){
+							$this->request->post['product_subscription'][$i]['trial_price'] = $this->tax->calculatePriceExclTax(floatval($product_subscription['trial_price']), $this->request->post['tax_class_id']);
+						}
                     }
                 }
 
