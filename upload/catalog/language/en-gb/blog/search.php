@@ -23,4 +23,4 @@ $_['text_authors']              = 'Authors';
 
 // Button
 $_['button_clear_search']       = 'Clear Search Criteria';
-$_['button_view_article']       = 'View';
+$_['button_view_article']       = 'Continue Reading';
