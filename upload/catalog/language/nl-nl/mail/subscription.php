@@ -1,0 +1,34 @@
+<?php
+// Text
+$_['text_subject']               = '%s - Abonnement %s';
+$_['text_greeting']              = 'Bedankt voor uw interesse in %s product. Uw abonnementsaanvraag is ontvangen en zal worden verwerkt zodra de betaling is bevestigd.';
+$_['text_link']                  = 'Klik op de onderstaande link om je abonnement te bekijken:';
+$_['text_promotion']             = 'Succes: Er is met succes een promotie toegevoegd aan dit abonnement!';
+$_['text_subscription_trial']    = "%s elke %d %s(en) voor %d betaling(en) daarna ";
+$_['text_subscription_duration'] = "%s elke %d %s(en) voor %d betaling(en)";
+$_['text_subscription_cancel']   = "%s elke %d %s(en) tot annulering";
+$_['text_subscription_detail']   = 'Abonnement Details';
+$_['text_instruction']           = 'Instructies';
+$_['text_orders_id']             = 'Bestelling ID:';
+$_['text_date_added']            = 'Datum toegevoegd:';
+$_['text_order_status']          = 'Orderstatus:';
+$_['text_payment_method']        = 'Betaalmethode:';
+$_['text_payment_address']       = 'Factuuradres:';
+$_['text_email']                 = 'E-mail:';
+$_['text_telephone']             = 'Telefoon:';
+$_['text_ip']                    = 'IP-adres:';
+$_['text_products']              = 'Producten';
+$_['text_product']               = 'Product';
+$_['text_model']                 = 'Productcode';
+$_['text_quantity']              = 'Aantal';
+$_['text_price']                 = 'Prijs';
+$_['text_order_total']           = 'Order Totals';
+$_['text_total']                 = 'Totaal';
+$_['text_comment']               = 'De opmerkingen voor uw abonnement zijn:';
+$_['text_description']           = 'Beschrijving';
+$_['text_day']                   = 'dag';
+$_['text_week']                  = 'week';
+$_['text_semi_month']            = 'halve maand';
+$_['text_month']                 = 'maand';
+$_['text_year']                  = 'jaar';
+$_['text_footer']                = 'Beantwoord deze e-mail als je vragen hebt.';
