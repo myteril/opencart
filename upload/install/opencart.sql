@@ -2455,9 +2455,9 @@ INSERT INTO `oc_subscription_status` (`subscription_status_id`, `language_id`, `
 -- Dumping data for table `oc_tax_class`
 --
 
-INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_modified`) VALUES
-(9, 'Taxable Goods', 'Taxed goods', NOW()),
-(10, 'Downloadable Products', 'Downloadable', NOW());
+INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`) VALUES
+(9, 'Taxable Goods', 'Taxed goods'),
+(10, 'Downloadable Products', 'Downloadable');
 
 -----------------------------------------------------------
 
