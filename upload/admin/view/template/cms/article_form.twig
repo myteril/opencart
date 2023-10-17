@@ -24,12 +24,12 @@
             <div id="tab-general" class="tab-pane active">
               <ul class="nav nav-tabs">
                 {% for language in languages %}
-                  <li class="nav-item"><a href="#language-{{ language.language_id }}" data-bs-toggle="tab" class="nav-link{% if loop.first %} active{% endif %}"><img src="{{ language.image }}" title="{{ language.name }}"/> {{ language.name }}</a></li>
+                  <li class="nav-item{% if not language.status %} d-none{% endif %}"><a href="#language-{{ language.language_id }}" data-bs-toggle="tab" class="nav-link{% if loop.first %} active{% endif %}"><img src="{{ language.image }}" title="{{ language.name }}"/> {{ language.name }}</a></li>
                 {% endfor %}
               </ul>
               <div class="tab-content">
                 {% for language in languages %}
-                  <div id="language-{{ language.language_id }}" class="tab-pane{% if loop.first %} active{% endif %}">
+                  <div id="language-{{ language.language_id }}" class="tab-pane{% if loop.first %} active{% endif %}{% if not language.status %} d-none{% endif %}">
                     <div class="row mb-3 required">
                       <label for="input-name-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_name }}</label>
                       <div class="col-sm-10">
@@ -142,7 +142,7 @@
                         <td class="text-start">{{ store.name }}</td>
                         <td class="text-start">
                           {% for language in languages %}
-                            <div class="input-group">
+                            <div class="input-group{% if not language.status %} d-none{% endif %}">
                               <div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}"/></div>
                               <input type="text" name="article_seo_url[{{ store.store_id }}][{{ language.language_id }}]" value="{% if article_seo_url[store.store_id][language.language_id] %}{{ article_seo_url[store.store_id][language.language_id] }}{% endif %}" placeholder="{{ entry_keyword }}" id="input-keyword-{{ store.store_id }}-{{ language.language_id }}" class="form-control"/>
                             </div>

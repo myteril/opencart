@@ -13,7 +13,7 @@
       <tbody>
         {% if languages %}
           {% for language in languages %}
-            <tr>
+            <tr class="{% if not language.status %} d-none{% endif %}">
               <td class="text-center"><input type="checkbox" name="selected[]" value="{{ language.language_id }}" class="form-check-input"/></td>
               <td class="text-start">{{ language.name }}
                 <br/>

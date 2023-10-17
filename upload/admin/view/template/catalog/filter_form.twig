@@ -20,7 +20,7 @@
               <label class="col-sm-2 col-form-label">{{ entry_group }}</label>
               <div class="col-sm-10">
                 {% for language in languages %}
-                  <div class="input-group">
+                  <div class="input-group{% if not language.status %} d-none{% endif %}">
                     <div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}"/></div>
                     <input type="text" name="filter_group_description[{{ language.language_id }}][name]" value="{{ filter_group_description[language.language_id] ? filter_group_description[language.language_id].name }}" placeholder="{{ entry_group }}" id="input-group-{{ language.language_id }}" class="form-control"/>
                   </div>
@@ -51,7 +51,7 @@
                   <tr id="filter-row-{{ filter_row }}">
                     <td class="text-start" style="width: 70%;"><input type="hidden" name="filter[{{ filter_row }}][filter_id]" value="{{ filter.filter_id }}"/>
                       {% for language in languages %}
-                        <div class="input-group">
+                        <div class="input-group{% if not language.status %} d-none{% endif %}">
                           <div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}"/></div>
                           <input type="text" name="filter[{{ filter_row }}][filter_description][{{ language.language_id }}][name]" value="{{ filter.filter_description[language.language_id] ? filter.filter_description[language.language_id].name }}" placeholder="{{ entry_name }}" id="input-filter-{{ filter_row }}-{{ language.language_id }}" class="form-control"/>
                         </div>
@@ -84,7 +84,7 @@ $('#button-filter').on('click', function () {
     html = '<tr id="filter-row-' + filter_row + '">';
     html += '  <td class="text-start" style="width: 70%;"><input type="hidden" name="filter[' + filter_row + '][filter_id]" value=""/>';
   {% for language in languages %}
-    html += '  <div class="input-group">';
+    html += '  <div class="input-group{% if not language.status %} d-none{% endif %}">';
     html += '    <div class="input-group-text"><img src="{{ language.image|escape('js') }}" title="{{ language.name|escape('js') }}" /></div>';
     html += '    <input type="text" name="filter[' + filter_row + '][filter_description][{{ language.language_id }}][name]" value="" placeholder="{{ entry_name|escape('js') }}" id="input-filter-' + filter_row + '-{{ language.language_id }}" class="form-control"/>';
     html += '  </div>';

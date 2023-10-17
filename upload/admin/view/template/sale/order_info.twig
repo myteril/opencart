@@ -154,7 +154,7 @@
                 <div class="form-floating">
                   <select name="language" id="input-language" class="form-select">
                     {% for language in languages %}
-                      <option value="{{ language.code }}"{% if language.code == language_code %} selected{% endif %}>{{ language.name }}</option>
+                      <option class="{% if not language.status %} d-none{% endif %}" value="{{ language.code }}"{% if language.code == language_code %} selected{% endif %}>{{ language.name }}</option>
                     {% endfor %}
                   </select> <label for="input-language">{{ entry_language }}</label>
                 </div>
