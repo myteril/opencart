@@ -132,7 +132,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
 		$data['add'] = $this->url->link('sale/order.info', 'user_token=' . $this->session->data['user_token'] . $url);
-		$data['delete'] = $this->url->link('sale/order.delete', 'user_token=' . $this->session->data['user_token']);
+		$data['delete'] = $this->url->link('sale/order.delete', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['invoice'] = $this->url->link('sale/order.invoice', 'user_token=' . $this->session->data['user_token']);
 		$data['shipping'] = $this->url->link('sale/order.shipping', 'user_token=' . $this->session->data['user_token']);
 
@@ -1398,7 +1398,19 @@ class Order extends \Opencart\System\Engine\Controller {
 					'country'   => $order_info['payment_country']
 				];
 
-				$payment_address = str_replace(["\r\n", "\r", "\n"], '<br/>', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br/>', trim(str_replace($find, $replace, $format))));
+				$pattern_1 = [
+					"\r\n",
+					"\r",
+					"\n"
+				];
+
+				$pattern_2 = [
+					"/\s\s+/",
+					"/\r\r+/",
+					"/\n\n+/"
+				];
+
+				$payment_address = str_replace($pattern_1, '<br/>', preg_replace($pattern_2, '<br/>', trim(str_replace($find, $replace, $format))));
 
 				// Shipping Address
 				if ($order_info['shipping_address_format']) {
@@ -1433,7 +1445,7 @@ class Order extends \Opencart\System\Engine\Controller {
 					'country'   => $order_info['shipping_country']
 				];
 
-				$shipping_address = str_replace(["\r\n", "\r", "\n"], '<br/>', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br/>', trim(str_replace($find, $replace, $format))));
+				$shipping_address = str_replace($pattern_1, '<br/>', preg_replace($pattern_2, '<br/>', trim(str_replace($find, $replace, $format))));
 
 				$product_data = [];
 
@@ -1658,7 +1670,19 @@ class Order extends \Opencart\System\Engine\Controller {
 					'country'   => $order_info['shipping_country']
 				];
 
-				$shipping_address = str_replace(["\r\n", "\r", "\n"], '<br/>', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br/>', trim(str_replace($find, $replace, $format))));
+				$pattern_1 = [
+					"\r\n",
+					"\r",
+					"\n"
+				];
+
+				$pattern_2 = [
+					"/\s\s+/",
+					"/\r\r+/",
+					"/\n\n+/"
+				];
+
+				$shipping_address = str_replace($pattern_1, '<br/>', preg_replace($pattern_2, '<br/>', trim(str_replace($find, $replace, $format))));
 
 				$product_data = [];
 

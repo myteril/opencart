@@ -3,7 +3,7 @@ namespace Opencart\Catalog\Controller\Extension\Opencart\Total;
 /**
  * Class Shipping
  *
- * @package
+ * @package Opencart\Catalog\Controller\Extension\Opencart\Total
  */
 class Shipping extends \Opencart\System\Engine\Controller {
 	/**
@@ -77,7 +77,7 @@ class Shipping extends \Opencart\System\Engine\Controller {
 			$json['error']['postcode'] = $this->language->get('error_postcode');
 		}
 
-		if ($this->request->post['country_id'] == '') {
+		if (!$country_info || $this->request->post['country_id'] == '') {
 			$json['error']['country'] = $this->language->get('error_country');
 		}
 

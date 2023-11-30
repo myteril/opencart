@@ -3,7 +3,7 @@ namespace Opencart\Catalog\Controller\Extension\Opencart\Module;
 /**
  * Class Store
  *
- * @package
+ * @package Opencart\Catalog\Controller\Extension\Opencart\Module
  */
 class Store extends \Opencart\System\Engine\Controller {
 	/**
@@ -44,6 +44,8 @@ class Store extends \Opencart\System\Engine\Controller {
 			}
 
 			return $this->load->view('extension/opencart/module/store', $data);
+		} else {
+			return '';
 		}
 		return '';
 	}

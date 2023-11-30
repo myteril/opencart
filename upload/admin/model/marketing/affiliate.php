@@ -51,9 +51,13 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	 * @return array
 	 */
 	public function getAffiliate(int $customer_id): array {
-		$query = $this->db->query("SELECT DISTINCT *, CONCAT(c.`firstname`, ' ', c.`lastname`) AS `customer`, ca.`custom_field` FROM `" . DB_PREFIX . "customer_affiliate` ca LEFT JOIN `" . DB_PREFIX . "customer` c ON (ca.`customer_id` = c.`customer_id`) WHERE ca.`customer_id` = '" . (int)$customer_id . "'");
+		$query = $this->db->query("SELECT DISTINCT *, CONCAT(`c`.`firstname`, ' ', `c`.`lastname`) AS `customer`, `ca`.`custom_field` FROM `" . DB_PREFIX . "customer_affiliate` `ca` LEFT JOIN `" . DB_PREFIX . "customer` `c` ON (`ca`.`customer_id` = `c`.`customer_id`) WHERE `ca`.`customer_id` = '" . (int)$customer_id . "'");
 
-		return $query->row;
+		if ($query->num_rows) {
+			return $query->row + ['custom_field' => json_decode($query->row['custom_field'], true)];
+		} else {
+			return [];
+		}
 	}
 
 	/**
@@ -64,7 +68,11 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	public function getAffiliateByTracking(string $tracking): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_affiliate` WHERE `tracking` = '" . $this->db->escape($tracking) . "'");
 
-		return $query->row;
+		if ($query->num_rows) {
+			return $query->row + ['custom_field' => json_decode($query->row['custom_field'], true)];
+		} else {
+			return [];
+		}
 	}
 
 	/**
@@ -98,7 +106,7 @@ class Affiliate extends \Opencart\System\Engine\Model {
 		}
 
 		if (!empty($data['filter_date_to'])) {
-			$implode[] = "DATE(`ca.``date_added`) <= DATE('" . $this->db->escape((string)$data['filter_date_to']) . "')";
+			$implode[] = "DATE(`ca`.`date_added`) <= DATE('" . $this->db->escape((string)$data['filter_date_to']) . "')";
 		}
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
@@ -141,9 +149,15 @@ class Affiliate extends \Opencart\System\Engine\Model {
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
 
+		$order_data = [];
+
 		$query = $this->db->query($sql);
 
-		return $query->rows;
+		foreach ($query->rows as $key => $result) {
+			$order_data[$key] = $result + ['custom_field' => json_decode($result['custom_field'], true)];
+		}
+
+		return $order_data;
 	}
 
 	/**
@@ -152,7 +166,7 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	 * @return int
 	 */
 	public function getTotalAffiliates(array $data = []): int {
-		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "customer_affiliate` ca LEFT JOIN `" . DB_PREFIX . "customer` c ON (ca.`customer_id` = c.`customer_id`)";
+		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "customer_affiliate` `ca` LEFT JOIN `" . DB_PREFIX . "customer` `c` ON (`ca`.`customer_id` = `c`.`customer_id`)";
 
 		$implode = [];
 

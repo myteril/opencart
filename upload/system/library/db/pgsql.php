@@ -3,24 +3,24 @@ namespace Opencart\System\Library\DB;
 /**
  * Class PgSQL
  *
- * @package
+ * @package Opencart\System\Library\DB
  */
 class PgSQL {
 	/**
 	 * @var object|resource|null
 	 */
-	private object|null $connection;
+	private $connection;
 
 	/**
-	 * Constructor
-	 *
-	 * @param    string  $hostname
-	 * @param    string  $username
-	 * @param    string  $password
-	 * @param    string  $database
-	 * @param    string  $port
-	 */
-	public function __construct(string $hostname, string $username, string $password, string $database, string $port = '', string $sslKey='', string $sslCert='', string $sslCa='') {
+     * Constructor
+     *
+     * @param string $hostname
+     * @param string $username
+     * @param string $password
+     * @param string $database
+     * @param string $port
+     */
+	public function __construct(string $hostname, string $username, string $password, string $database, string $port = '', string $ssl_key = '', string $ssl_cert = '', string $ssl_ca = '') {
 		if (!$port) {
 			$port = '5432';
 		}
@@ -41,13 +41,13 @@ class PgSQL {
 	}
 
 	/**
-	 * Query
-	 *
-	 * @param    string  $sql
-	 *
-	 * @return   bool|object
-	 */
-	public function query(string $sql): bool|object {
+     * Query
+     *
+     * @param string $sql
+     *
+     * @return mixed
+     */
+	public function query(string $sql) {
 		$resource = pg_query($this->connection, $sql);
 
 		if ($resource) {
@@ -81,30 +81,30 @@ class PgSQL {
 	}
 	
 	/**
-	 * Escape
-	 *
-	 * @param    string  value
-	 *
-	 * @return   string
-	 */
+     * Escape
+     *
+     * @param string $value
+     *
+     * @return string
+     */
 	public function escape(string $value): string  {
 		return pg_escape_string($this->connection, $value);
 	}
 
 	/**
-	 * countAffected
-	 *
-	 * @return   int
-	 */
+     * countAffected
+     *
+     * @return int
+     */
 	public function countAffected(): int {
 		return pg_affected_rows($this->connection);
 	}
 	
 	/**
-	 * getLastId
-	 *
-	 * @return   int
-	 */
+     * getLastId
+     *
+     * @return int
+     */
 	public function getLastId(): int {
 		$query = $this->query("SELECT LASTVAL() AS `id`");
 
@@ -112,10 +112,10 @@ class PgSQL {
 	}
 
 	/**
-	 * isConnected
-	 *
-	 * @return   bool
-	 */
+     * isConnected
+     *
+     * @return bool
+     */
 	public function isConnected(): bool {
 		return pg_connection_status($this->connection) == PGSQL_CONNECTION_OK;
 	}

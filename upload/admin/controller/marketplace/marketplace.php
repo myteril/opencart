@@ -216,7 +216,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 
 		$data['promotions'] = [];
 
-		if (isset($response_info['promotions']) && $page == 1) {
+		if ($page == 1 && isset($response_info['promotions'])) {
 			foreach ($response_info['promotions'] as $result) {
 				$data['promotions'][] = [
 					'name'         => $result['name'],
@@ -922,6 +922,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 						'extension_id'          => $extension_id,
 						'extension_download_id' => $extension_download_id,
 						'name'                  => $response_info['name'],
+						'description'           => isset($response_info['description']) ? $response_info['description'] : '',
 						'code' 				    => basename($response_info['filename'], '.ocmod.zip'),
 						'author'                => $response_info['author'],
 						'version'               => $response_info['version'],

@@ -12,7 +12,7 @@ namespace Opencart\System\Engine;
  */
 class Action {
 	/**
-	 * @var string|array|string[]|null
+	 * @var string
 	 */
 	private string $route;
 	/**
@@ -29,13 +29,15 @@ class Action {
 	 *
 	 * @param string $route
 	 */
-	public function __construct(string $route) {
+	public function __construct(string $route, $application = 'catalog/') {
 		$this->route = preg_replace('/[^a-zA-Z0-9_|\/\.]/', '', $route);
+
+		//'Opencart\\' . $application . '\\' . $this->class;
 
 		$pos = strrpos($this->route, '.');
 
 		if ($pos === false) {
-			$this->class = 'Controller\\' . str_replace(['_', '/'], ['', '\\'], ucwords($this->route, '_/'));
+			$this->class =  'Controller\\' . str_replace(['_', '/'], ['', '\\'], ucwords($this->route, '_/'));
 			$this->method = 'index';
 		} else {
 			$this->class = 'Controller\\' . str_replace(['_', '/'], ['', '\\'], ucwords(substr($this->route, 0, $pos), '_/'));
@@ -46,7 +48,7 @@ class Action {
 	/**
 	 * getId
 	 *
-	 * @return    string
+	 * @return string
 	 *
 	 */
 	public function getId(): string {
@@ -54,13 +56,12 @@ class Action {
 	}
 
 	/**
-	 *
 	 * Execute
 	 *
 	 * @param object $registry
 	 * @param array  $args
 	 *
-	 * @return    mixed
+	 * @return mixed
 	 */
 	public function execute(\Opencart\System\Engine\Registry $registry, array &$args = []) {
 		// Stop any magical methods being called

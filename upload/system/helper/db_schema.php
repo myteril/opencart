@@ -1792,11 +1792,6 @@ function oc_db_schema() {
 				'not_null' => true
 			],
 			[
-				'name'     => 'commenter',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
-			],
-			[
 				'name'     => 'ip',
 				'type'     => 'varchar(40)',
 				'not_null' => true
@@ -1808,6 +1803,11 @@ function oc_db_schema() {
 			],
 			[
 				'name'     => 'safe',
+				'type'     => 'tinyint(1)',
+				'not_null' => true
+			],
+			[
+				'name'     => 'commenter',
 				'type'     => 'tinyint(1)',
 				'not_null' => true
 			],
@@ -3120,6 +3120,11 @@ function oc_db_schema() {
 				'not_null' => true
 			],
 			[
+				'name'     => 'description',
+				'type'     => 'text',
+				'not_null' => true
+			],
+			[
 				'name'     => 'code',
 				'type'     => 'varchar(255)',
 				'not_null' => true
@@ -4127,17 +4132,27 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'module',
+		'name'    => 'modification',
 		'field'   => [
 			[
-				'name'           => 'module_id',
+				'name'           => 'modification_id',
 				'type'           => 'int(11)',
 				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
+				'name'      => 'extension_install_id',
+				'type'      => 'int(11)',
+				'not_null'  => true
+			],
+			[
 				'name'     => 'name',
 				'type'     => 'varchar(64)',
+				'not_null' => true
+			],
+			[
+				'name'     => 'description',
+				'type'     => 'text',
 				'not_null' => true
 			],
 			[
@@ -4146,15 +4161,73 @@ function oc_db_schema() {
 				'not_null' => true
 			],
 			[
-				'name'     => 'setting',
+				'name'     => 'author',
+				'type'     => 'varchar(64)',
+				'not_null' => true
+			],
+			[
+				'name'     => 'version',
+				'type'     => 'varchar(32)',
+				'not_null' => true
+			],
+			[
+				'name'     => 'link',
+				'type'     => 'varchar(255)',
+				'not_null' => true
+			],
+			[
+				'name'     => 'xml',
 				'type'     => 'text',
+				'not_null' => true
+			],
+			[
+				'name'     => 'status',
+				'type'     => 'tinyint(1)',
+				'not_null' => true
+			],
+			[
+				'name'     => 'date_added',
+				'type'     => 'datetime',
+				'not_null' => true
+			]
+		],
+		'primary' => [
+			'modification_id'
+		],
+		'engine'  => 'InnoDB',
+		'charset' => 'utf8mb4',
+		'collate' => 'utf8mb4_general_ci'
+	];
+
+	$tables[] = [
+		'name' => 'module',
+		'field' => [
+			[
+				'name' => 'module_id',
+				'type' => 'int(11)',
+				'not_null' => true,
+				'auto_increment' => true
+			],
+			[
+				'name' => 'name',
+				'type' => 'varchar(64)',
+				'not_null' => true
+			],
+			[
+				'name' => 'code',
+				'type' => 'varchar(64)',
+				'not_null' => true
+			],
+			[
+				'name' => 'setting',
+				'type' => 'text',
 				'not_null' => true
 			]
 		],
 		'primary' => [
 			'module_id'
 		],
-		'engine'  => 'InnoDB',
+		'engine' => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
@@ -6805,6 +6878,11 @@ function oc_db_schema() {
 				'auto_increment' => true
 			],
 			[
+				'name'     => 'description',
+				'type'     => 'text',
+				'not_null' => true
+			],
+			[
 				'name'     => 'code',
 				'type'     => 'varchar(64)',
 				'not_null' => true
@@ -7069,6 +7147,11 @@ function oc_db_schema() {
 			[
 				'name'     => 'product_id',
 				'type'     => 'int(11)',
+				'not_null' => true
+			],
+			[
+				'name'     => 'option',
+				'type'     => 'text',
 				'not_null' => true
 			],
 			[

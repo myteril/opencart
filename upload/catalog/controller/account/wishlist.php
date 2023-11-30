@@ -96,7 +96,15 @@ class WishList extends \Opencart\System\Engine\Controller {
 				}
 
 				if ($product_info['quantity'] <= 0) {
-					$stock = $product_info['stock_status'];
+					$this->load->model('localisation/stock_status');
+
+					$stock_status_info = $this->model_localisation_stock_status->getStockStatus($product_info['stock_status_id']);
+
+					if ($stock_status_info) {
+						$stock = $stock_status_info['name'];
+					} else {
+						$stock = '';
+					}
 				} elseif ($this->config->get('config_stock_display')) {
 					$stock = $product_info['quantity'];
 				} else {
@@ -165,9 +173,9 @@ class WishList extends \Opencart\System\Engine\Controller {
 
 			$this->session->data['wishlist'] = array_unique($this->session->data['wishlist']);
 
-			// Store the
+			// Logged in. We store the product ID into the wishlist
 			if ($this->customer->isLogged()) {
-				// Edit customers cart
+				// Edit the customer's cart
 				$this->load->model('account/wishlist');
 
 				$this->model_account_wishlist->addWishlist($product_id);

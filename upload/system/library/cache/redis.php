@@ -3,7 +3,7 @@ namespace Opencart\System\Library\Cache;
 /**
  * Class Redis
  *
- * @package
+ * @package Opencart\System\Library\Cache
  */
 class Redis {
 	/**
@@ -28,12 +28,12 @@ class Redis {
 	}
 
 	/**
-	 * Get
-	 *
-	 * @param string $key
-	 *
-	 * @return     mixed
-	 */
+     * Get
+     *
+     * @param string $key
+     *
+     * @return mixed
+     */
 	public function get(string $key) {
 		$data = $this->redis->get(CACHE_PREFIX . $key);
 
@@ -47,7 +47,7 @@ class Redis {
 	 * @param mixed  $value
 	 * @param int    $expire
 	 */
-	public function set(string $key, $value, int $expire = 0) {
+	public function set(string $key, $value, int $expire = 0): void {
 		if (!$expire) {
 			$expire = $this->expire;
 		}
