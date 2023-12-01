@@ -713,7 +713,6 @@ class Store extends \Opencart\System\Engine\Controller {
 
 		if (!$json) {
 			$this->load->model('setting/setting');
-
 			$this->load->model('setting/store');
 
 			if (!$this->request->post['store_id']) {
@@ -774,7 +773,6 @@ class Store extends \Opencart\System\Engine\Controller {
 
 		if (!$json) {
 			$this->load->model('setting/store');
-
 			$this->load->model('setting/setting');
 
 			foreach ($selected as $store_id) {
