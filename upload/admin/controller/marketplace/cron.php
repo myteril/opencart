@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Marketplace;
  */
 class Cron extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -58,6 +60,8 @@ class Cron extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -67,6 +71,8 @@ class Cron extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {
@@ -175,6 +181,8 @@ class Cron extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Run
+	 *
 	 * @return void
 	 */
 	public function run(): void {
@@ -218,6 +226,8 @@ class Cron extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Enable
+	 *
 	 * @return void
 	 */
 	public function enable(): void {
@@ -248,6 +258,8 @@ class Cron extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Disable
+	 *
 	 * @return void
 	 */
 	public function disable(): void {
@@ -278,6 +290,8 @@ class Cron extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

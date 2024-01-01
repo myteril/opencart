@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Marketplace;
  */
 class Installer extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -27,7 +29,7 @@ class Installer extends \Opencart\System\Engine\Controller {
 		];
 		$data['breadcrumbs'] = $this->load->controller('common/breadcrumbs', $data['breadcrumbs']);
 
-		// Use the  for the max file size
+		// Use the configuration option to get the max file size
 		$data['error_upload_size'] = sprintf($this->language->get('error_file_size'), ini_get('upload_max_filesize'));
 
 		$data['config_file_max_size'] = ((int)preg_filter('/[^0-9]/', '', ini_get('upload_max_filesize')) * 1024 * 1024);
@@ -52,6 +54,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -61,6 +65,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {
@@ -215,6 +221,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Upload
+	 *
 	 * @return void
 	 */
 	public function upload(): void {
@@ -318,6 +326,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Install
+	 *
 	 * @return void
 	 */
 	public function install(): void {
@@ -385,7 +395,7 @@ class Installer extends \Opencart\System\Engine\Controller {
 					$base = DIR_EXTENSION;
 					$prefix = '';
 
-					// OCMOD files shoudl not be copies across
+					// OCMOD files should not be copied across
 					if (substr($destination, 0, 6) == 'ocmod/') {
 						continue;
 					}
@@ -458,6 +468,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Xml
+	 *
 	 * @return void
 	 */
 	public function xml(): void {
@@ -557,8 +569,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 
 									$modification_data = [
 										'extension_install_id' => $extension_install_id,
-										'name'                 => $name,
-										'description'          => $description,
+										'name'                 => strip_tags($name),
+										'description'          => nl2br(strip_tags($description)),
 										'code'                 => $code,
 										'author'               => $author,
 										'version'              => $version,
@@ -591,6 +603,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Vendor
+	 *
 	 * Generate new autoloader file
 	 *
 	 * @return void
@@ -840,6 +854,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

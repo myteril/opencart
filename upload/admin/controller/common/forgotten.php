@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Common;
  */
 class Forgotten extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -41,6 +43,8 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Confirm
+	 *
 	 * @return void
 	 */
 	public function confirm(): void {
@@ -82,6 +86,8 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Reset
+	 *
 	 * @return void
 	 */
 	public function reset(): void {
@@ -142,6 +148,8 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Password
+	 *
 	 * @return void
 	 */
 	public function password(): void {
@@ -191,7 +199,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			if ((oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
+			if ((oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 6) || (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
 				$json['error']['password'] = $this->language->get('error_password');
 			}
 

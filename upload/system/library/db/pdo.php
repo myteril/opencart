@@ -20,21 +20,24 @@ class PDO {
 	private int $affected;
 
 	/**
-     * Constructor
-     *
-     * @param string $hostname
-     * @param string $username
-     * @param string $password
-     * @param string $database
-     * @param string $port
-     */
-	public function __construct(string $hostname, string $username, string $password, string $database, string $port = '', string $sslKey='', string $sslCert='', string $sslCa='') {
+	 * Constructor
+	 *
+	 * @param string $hostname
+	 * @param string $username
+	 * @param string $password
+	 * @param string $database
+	 * @param string $port
+	 * @param string $sslKey
+	 * @param string $sslCert
+	 * @param string $sslCa
+	 */
+	public function __construct(string $hostname, string $username, string $password, string $database, string $port = '', string $sslKey = '', string $sslCert = '', string $sslCa = '') {
 		if (!$port) {
 			$port = '3306';
 		}
 
 		try {
-			$pdo = @new \PDO('mysql:host=' . $hostname . ';port=' . $port . ';dbname=' . $database . ';charset=utf8mb4', $username, $password, array(\PDO::ATTR_PERSISTENT => false, \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_general_ci'));
+			$pdo = @new \PDO('mysql:host=' . $hostname . ';port=' . $port . ';dbname=' . $database . ';charset=utf8mb4', $username, $password, [\PDO::ATTR_PERSISTENT => false, \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_general_ci']);
 		} catch (\PDOException $e) {
 			throw new \Exception('Error: Could not make a database link using ' . $username . '@' . $hostname . '!');
 		}
@@ -51,12 +54,12 @@ class PDO {
 	}
 
 	/**
-     * Query
-     *
-     * @param string $sql
-     *
-     * @return mixed
-     */
+	 * Query
+	 *
+	 * @param string $sql
+	 *
+	 * @return mixed
+	 */
 	public function query(string $sql) {
 		$sql = preg_replace('/(?:\'\:)([a-z0-9]*.)(?:\')/', ':$1', $sql);
 
@@ -70,7 +73,7 @@ class PDO {
 					$data = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
 					$result = new \stdClass();
-					$result->row = isset($data[0]) ? $data[0] : [];
+					$result->row = $data[0] ?? [];
 					$result->rows = $data;
 					$result->num_rows = count($data);
 					$this->affected = 0;
@@ -92,12 +95,12 @@ class PDO {
 	}
 
 	/**
-     * Escape
-     *
-     * @param string $value
-     *
-     * @return string
-     */
+	 * Escape
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
 	public function escape(string $value): string {
 		$key = ':' . count($this->data);
 
@@ -107,28 +110,28 @@ class PDO {
 	}
 
 	/**
-     * countAffected
-     *
-     * @return int
-     */
+	 * countAffected
+	 *
+	 * @return int
+	 */
 	public function countAffected(): int {
 		return $this->affected;
 	}
 
 	/**
-     * getLastId
-     *
-     * @return int
-     */
+	 * getLastId
+	 *
+	 * @return int
+	 */
 	public function getLastId(): int {
 		return $this->connection->lastInsertId();
 	}
 
 	/**
-     * isConnected
-     *
-     * @return bool
-     */
+	 * isConnected
+	 *
+	 * @return bool
+	 */
 	public function isConnected(): bool {
 		return $this->connection;
 	}
@@ -137,7 +140,6 @@ class PDO {
 	 * Destructor
 	 *
 	 * Closes the DB connection when this object is destroyed.
-	 *
 	 */
 	public function __destruct() {
 		$this->connection = null;

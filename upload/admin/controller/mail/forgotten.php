@@ -7,6 +7,7 @@ namespace Opencart\Admin\Controller\Mail;
  */
 class Forgotten extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
 	 *
 	 * admin/model/user/user/editCode/after
 	 *
@@ -14,8 +15,9 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 	 * @param array  $args
 	 * @param mixed  $output
 	 *
-	 * @return void
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function index(string &$route, array &$args, &$output): void {
 		if (isset($this->request->get['route'])) {

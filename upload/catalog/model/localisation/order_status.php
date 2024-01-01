@@ -7,6 +7,8 @@ namespace Opencart\Catalog\Model\Localisation;
  */
 class OrderStatus extends \Opencart\System\Engine\Model {
 	/**
+	 * Get Order Status
+	 *
 	 * @param int $order_status_id
 	 *
 	 * @return array
@@ -18,6 +20,8 @@ class OrderStatus extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Order Statuses
+	 *
 	 * @return array
 	 */
 	public function getOrderStatuses(): array {
@@ -34,7 +38,7 @@ class OrderStatus extends \Opencart\System\Engine\Model {
 
 			$this->cache->set('order_status.' . $key, $order_status_data);
 		}
-		
+
 		return $order_status_data;
 	}
 }

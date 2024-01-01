@@ -7,15 +7,19 @@ namespace Opencart\Admin\Model\Setting;
  */
 class Modification extends \Opencart\System\Engine\Model {
 	/**
+	 * Add Modification
+	 *
 	 * @param array $data
 	 *
 	 * @return void
 	 */
 	public function addModification(array $data): void {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "modification` SET `extension_install_id` = '" . (int)$data['extension_install_id'] . "', `name` = '" . $this->db->escape($data['name']) . "', `code` = '" . $this->db->escape($data['code']) . "', `author` = '" . $this->db->escape($data['author']) . "', `version` = '" . $this->db->escape($data['version']) . "', `link` = '" . $this->db->escape($data['link']) . "', `xml` = '" . $this->db->escape($data['xml']) . "', `status` = '" . (int)$data['status'] . "', `date_added` = NOW()");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "modification` SET `extension_install_id` = '" . (int)$data['extension_install_id'] . "', `name` = '" . $this->db->escape($data['name']) . "', `description` = '" . $this->db->escape($data['description']) . "', `code` = '" . $this->db->escape($data['code']) . "', `author` = '" . $this->db->escape($data['author']) . "', `version` = '" . $this->db->escape($data['version']) . "', `link` = '" . $this->db->escape($data['link']) . "', `xml` = '" . $this->db->escape($data['xml']) . "', `status` = '" . (int)$data['status'] . "', `date_added` = NOW()");
 	}
 
 	/**
+	 * Delete Modification
+	 *
 	 * @param int $modification_id
 	 *
 	 * @return void
@@ -25,6 +29,8 @@ class Modification extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Delete Modification By Extension Install ID
+	 *
 	 * @param int $extension_install_id
 	 *
 	 * @return void
@@ -34,6 +40,8 @@ class Modification extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Edit Status
+	 *
 	 * @param int  $modification_id
 	 * @param bool $status
 	 *
@@ -44,6 +52,8 @@ class Modification extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Modification
+	 *
 	 * @param int $modification_id
 	 *
 	 * @return mixed
@@ -55,6 +65,8 @@ class Modification extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Modifications
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -64,6 +76,7 @@ class Modification extends \Opencart\System\Engine\Model {
 
 		$sort_data = [
 			'name',
+			'description',
 			'author',
 			'version',
 			'status',
@@ -100,6 +113,8 @@ class Modification extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Modifications
+	 *
 	 * @return int
 	 */
 	public function getTotalModifications(): int {
@@ -109,6 +124,8 @@ class Modification extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Modification By Code
+	 *
 	 * @param string $code
 	 *
 	 * @return array

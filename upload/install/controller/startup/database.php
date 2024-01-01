@@ -7,8 +7,9 @@ namespace Opencart\Install\Controller\Startup;
  */
 class Database extends \Opencart\System\Engine\Controller {
 	/**
-	 * @return void
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function index(): void {
 		if (is_file(DIR_OPENCART . 'config.php') && filesize(DIR_OPENCART . 'config.php') > 0) {
@@ -45,7 +46,7 @@ class Database extends \Opencart\System\Engine\Controller {
 			} else {
 				$port = ini_get('mysqli.default_port');
 			}
-			
+
 			$this->registry->set('db', new \Opencart\System\Library\DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, $port, $db_ssl_key, $db_ssl_cert, $db_ssl_ca));
 		}
 	}

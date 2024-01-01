@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Marketing;
  */
 class Contact extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -48,8 +50,11 @@ class Contact extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
-	 * @return void
+	 * Send
+	 *
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function send(): void {
 		$this->load->language('marketing/contact');
@@ -85,7 +90,7 @@ class Contact extends \Opencart\System\Engine\Controller {
 
 			$setting = $this->model_setting_setting->getSetting('config', $this->request->post['store_id']);
 
-			$store_email = isset($setting['config_email']) ? $setting['config_email'] : $this->config->get('config_email');
+			$store_email = $setting['config_email'] ?? $this->config->get('config_email');
 
 			if (isset($this->request->get['page'])) {
 				$page = (int)$this->request->get['page'];
@@ -206,7 +211,7 @@ class Contact extends \Opencart\System\Engine\Controller {
 				$end = $start + $limit;
 
 				if ($end < $email_total) {
-					$json['text'] = sprintf($this->language->get('text_sent'), $start ? $start : 1, $email_total);
+					$json['text'] = sprintf($this->language->get('text_sent'), $start ?: 1, $email_total);
 
 					$json['next'] = $this->url->link('marketing/contact.send', 'user_token=' . $this->session->data['user_token'] . '&page=' . ($page + 1), true);
 				} else {
@@ -225,12 +230,12 @@ class Contact extends \Opencart\System\Engine\Controller {
 
 				if ($this->config->get('config_mail_engine')) {
 					$mail_option = [
-						'parameter' => $this->config->get('config_mail_parameter'),
+						'parameter'     => $this->config->get('config_mail_parameter'),
 						'smtp_hostname' => $this->config->get('config_mail_smtp_hostname'),
 						'smtp_username' => $this->config->get('config_mail_smtp_username'),
 						'smtp_password' => html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8'),
-						'smtp_port' => $this->config->get('config_mail_smtp_port'),
-						'smtp_timeout' => $this->config->get('config_mail_smtp_timeout')
+						'smtp_port'     => $this->config->get('config_mail_smtp_port'),
+						'smtp_timeout'  => $this->config->get('config_mail_smtp_timeout')
 					];
 
 					$mail = new \Opencart\System\Library\Mail($this->config->get('config_mail_engine'), $mail_option);

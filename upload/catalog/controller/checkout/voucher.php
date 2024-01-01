@@ -42,7 +42,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 		$data['save'] = $this->url->link('checkout/voucher.add', 'language=' . $this->config->get('config_language') . '&voucher_token=' . $this->session->data['voucher_token']);
 
 		if ($this->customer->isLogged()) {
-			$data['from_name'] = $this->customer->getFirstName() . ' '  . $this->customer->getLastName();
+			$data['from_name'] = $this->customer->getFirstName() . ' ' . $this->customer->getLastName();
 		} else {
 			$data['from_name'] = '';
 		}
@@ -71,6 +71,8 @@ class Voucher extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add
+	 *
 	 * @return void
 	 */
 	public function add(): void {
@@ -155,6 +157,8 @@ class Voucher extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Remove
+	 *
 	 * @return void
 	 */
 	public function remove(): void {
@@ -192,6 +196,8 @@ class Voucher extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Success
+	 *
 	 * @return void
 	 */
 	public function success(): void {

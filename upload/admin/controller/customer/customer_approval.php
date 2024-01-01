@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Customer;
  */
 class CustomerApproval extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -46,6 +48,8 @@ class CustomerApproval extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -55,6 +59,8 @@ class CustomerApproval extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {
@@ -205,6 +211,8 @@ class CustomerApproval extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Approve
+	 *
 	 * @return void
 	 */
 	public function approve(): void {
@@ -251,6 +259,8 @@ class CustomerApproval extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Deny
+	 *
 	 * @return void
 	 */
 	public function deny(): void {

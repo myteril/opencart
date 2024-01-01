@@ -141,6 +141,8 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Info
+	 *
 	 * @return object|\Opencart\System\Engine\Action|null
 	 */
 	public function info(): ?object {
@@ -264,7 +266,7 @@ class Subscription extends \Opencart\System\Engine\Controller {
 				];
 
 				$pattern_2 = [
-					"/\s\s+/",
+					"/\\s\\s+/",
 					"/\r\r+/",
 					"/\n\n+/"
 				];
@@ -325,7 +327,7 @@ class Subscription extends \Opencart\System\Engine\Controller {
 				];
 
 				$pattern_2 = [
-					"/\s\s+/",
+					"/\\s\\s+/",
 					"/\r\r+/",
 					"/\n\n+/"
 				];
@@ -422,6 +424,8 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * History
+	 *
 	 * @return void
 	 */
 	public function history(): void {
@@ -431,6 +435,8 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get History
+	 *
 	 * @return string
 	 */
 	public function getHistory(): string {
@@ -477,6 +483,8 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Order
+	 *
 	 * @return void
 	 */
 	public function order(): void {
@@ -486,6 +494,8 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Order
+	 *
 	 * @return string
 	 */
 	public function getOrder(): string {

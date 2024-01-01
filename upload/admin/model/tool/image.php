@@ -7,12 +7,15 @@ namespace Opencart\Admin\Model\Tool;
  */
 class Image extends \Opencart\System\Engine\Model {
 	/**
+	 * Resize
+	 *
 	 * @param string $filename
 	 * @param int    $width
 	 * @param int    $height
 	 *
-	 * @return string
 	 * @throws \Exception
+	 *
+	 * @return string
 	 */
 	public function resize(string $filename, int $width, int $height): string {
 		if (!is_file(DIR_IMAGE . $filename) || substr(str_replace('\\', '/', realpath(DIR_IMAGE . $filename)), 0, strlen(DIR_IMAGE)) != DIR_IMAGE) {
@@ -25,8 +28,8 @@ class Image extends \Opencart\System\Engine\Model {
 		$image_new = 'cache/' . oc_substr($filename, 0, oc_strrpos($filename, '.')) . '-' . $width . 'x' . $height . '.' . $extension;
 
 		if (!is_file(DIR_IMAGE . $image_new) || (filemtime(DIR_IMAGE . $image_old) > filemtime(DIR_IMAGE . $image_new))) {
-			list($width_orig, $height_orig, $image_type) = getimagesize(DIR_IMAGE . $image_old);
-				 
+			[$width_orig, $height_orig, $image_type] = getimagesize(DIR_IMAGE . $image_old);
+
 			if (!in_array($image_type, [IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_WEBP])) {
 				return HTTP_CATALOG . 'image/' . $image_old;
 			}

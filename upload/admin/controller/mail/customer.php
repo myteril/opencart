@@ -7,12 +7,15 @@ namespace Opencart\Admin\Controller\Mail;
  */
 class Customer extends \Opencart\System\Engine\Controller {
 	/**
+	 * Approve
+	 *
 	 * @param string $route
 	 * @param array  $args
 	 * @param mixed  $output
 	 *
-	 * @return void
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function approve(string &$route, array &$args, &$output): void {
 		if (isset($args[0])) {
@@ -102,12 +105,15 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Deny
+	 *
 	 * @param string $route
 	 * @param array  $args
 	 * @param mixed  $output
 	 *
-	 * @return void
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function deny(string &$route, array &$args, &$output): void {
 		if (isset($args[0])) {

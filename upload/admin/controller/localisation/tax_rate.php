@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Localisation;
  */
 class TaxRate extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -56,6 +58,8 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -65,6 +69,8 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -167,6 +173,8 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -218,7 +226,7 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 			$data['tax_rate_id'] = 0;
 		}
 
-	    if (!empty($tax_rate_info)) {
+		if (!empty($tax_rate_info)) {
 			$data['name'] = $tax_rate_info['name'];
 		} else {
 			$data['name'] = '';
@@ -264,6 +272,8 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -300,6 +310,8 @@ class TaxRate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

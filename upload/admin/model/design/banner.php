@@ -7,19 +7,21 @@ namespace Opencart\Admin\Model\Design;
  */
 class Banner extends \Opencart\System\Engine\Model {
 	/**
+	 * Add Banner
+	 *
 	 * @param array $data
 	 *
 	 * @return int
 	 */
 	public function addBanner(array $data): int {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "banner` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `status` = '" . (bool)(isset($data['status']) ? $data['status'] : 0) . "'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "banner` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "'");
 
 		$banner_id = $this->db->getLastId();
 
 		if (isset($data['banner_image'])) {
 			foreach ($data['banner_image'] as $language_id => $value) {
 				foreach ($value as $banner_image) {
-					$this->db->query("INSERT INTO `" . DB_PREFIX . "banner_image` SET `banner_id` = '" . (int)$banner_id . "', `language_id` = '" . (int)$language_id . "', `title` = '" .  $this->db->escape($banner_image['title']) . "', `link` = '" .  $this->db->escape($banner_image['link']) . "', `image` = '" .  $this->db->escape($banner_image['image']) . "', `sort_order` = '" .  (int)$banner_image['sort_order'] . "'");
+					$this->db->query("INSERT INTO `" . DB_PREFIX . "banner_image` SET `banner_id` = '" . (int)$banner_id . "', `language_id` = '" . (int)$language_id . "', `title` = '" . $this->db->escape($banner_image['title']) . "', `link` = '" . $this->db->escape($banner_image['link']) . "', `image` = '" . $this->db->escape($banner_image['image']) . "', `sort_order` = '" . (int)$banner_image['sort_order'] . "'");
 				}
 			}
 		}
@@ -28,26 +30,30 @@ class Banner extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Edit Banner
+	 *
 	 * @param int   $banner_id
 	 * @param array $data
 	 *
 	 * @return void
 	 */
 	public function editBanner(int $banner_id, array $data): void {
-		$this->db->query("UPDATE `" . DB_PREFIX . "banner` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `status` = '" . (bool)(isset($data['status']) ? $data['status'] : 0) . "' WHERE `banner_id` = '" . (int)$banner_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "banner` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "' WHERE `banner_id` = '" . (int)$banner_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "banner_image` WHERE `banner_id` = '" . (int)$banner_id . "'");
 
 		if (isset($data['banner_image'])) {
 			foreach ($data['banner_image'] as $language_id => $value) {
 				foreach ($value as $banner_image) {
-					$this->db->query("INSERT INTO `" . DB_PREFIX . "banner_image` SET `banner_id` = '" . (int)$banner_id . "', `language_id` = '" . (int)$language_id . "', `title` = '" .  $this->db->escape($banner_image['title']) . "', `link` = '" .  $this->db->escape($banner_image['link']) . "', `image` = '" .  $this->db->escape($banner_image['image']) . "', `sort_order` = '" . (int)$banner_image['sort_order'] . "'");
+					$this->db->query("INSERT INTO `" . DB_PREFIX . "banner_image` SET `banner_id` = '" . (int)$banner_id . "', `language_id` = '" . (int)$language_id . "', `title` = '" . $this->db->escape($banner_image['title']) . "', `link` = '" . $this->db->escape($banner_image['link']) . "', `image` = '" . $this->db->escape($banner_image['image']) . "', `sort_order` = '" . (int)$banner_image['sort_order'] . "'");
 				}
 			}
 		}
 	}
 
 	/**
+	 * Delete Banner
+	 *
 	 * @param int $banner_id
 	 *
 	 * @return void
@@ -58,6 +64,8 @@ class Banner extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Banner
+	 *
 	 * @param int $banner_id
 	 *
 	 * @return array
@@ -69,6 +77,8 @@ class Banner extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Banners
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -111,6 +121,8 @@ class Banner extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Images
+	 *
 	 * @param int $banner_id
 	 *
 	 * @return array
@@ -133,6 +145,8 @@ class Banner extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Banners
+	 *
 	 * @return int
 	 */
 	public function getTotalBanners(): int {

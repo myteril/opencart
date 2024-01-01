@@ -1,10 +1,12 @@
 <?php
 /**
  * @package        OpenCart
+ *
  * @author         Daniel Kerr
  * @copyright      Copyright (c) 2005 - 2022, OpenCart, Ltd. (https://www.opencart.com/)
  * @license        https://opensource.org/licenses/GPL-3.0
- * @link           https://www.opencart.com
+ *
+ * @see           https://www.opencart.com
  */
 namespace Opencart\System\Engine;
 /**
@@ -16,7 +18,7 @@ class Factory {
 	/**
 	 * @var object|\Opencart\System\Engine\Registry
 	 */
-	protected $registry;
+	protected \Opencart\System\Engine\Registry $registry;
 
 	/**
 	 * Constructor
@@ -71,13 +73,13 @@ class Factory {
 	}
 
 	/**
-     * Library
-     *
-     * @param string $route
-     * @param array  $args
-     *
-     * @return object
-     */
+	 * Library
+	 *
+	 * @param string $route
+	 * @param array  $args
+	 *
+	 * @return object
+	 */
 	public function library(string $route, array $args): object {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', $route);

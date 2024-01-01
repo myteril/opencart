@@ -1,10 +1,12 @@
 <?php
 /**
  * @package     OpenCart
+ *
  * @author      Daniel Kerr
  * @copyright   Copyright (c) 2005 - 2017, OpenCart, Ltd. (https://www.opencart.com/)
  * @license     https://opensource.org/licenses/GPL-3.0
- * @link        https://www.opencart.com
+ *
+ * @see        https://www.opencart.com
  */
 namespace Opencart\System\Engine;
 /**
@@ -46,7 +48,6 @@ class Action {
 	 * getId
 	 *
 	 * @return string
-	 *
 	 */
 	public function getId(): string {
 		return $this->route;
@@ -87,7 +88,7 @@ class Action {
 		$callable = [$controller, $this->method];
 
 		if (is_callable($callable)) {
-			return call_user_func_array($callable, $args);
+			return $callable(...$args);
 		} else {
 			return new \Exception('Error: Could not call route ' . $this->route . '!');
 		}

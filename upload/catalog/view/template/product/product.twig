@@ -44,7 +44,7 @@
                     <span class="fa-stack"><i class="fa-solid fa-star fa-stack-1x"></i><i class="fa-regular fa-star fa-stack-1x"></i></span>
                   {% endif %}
                 {% endfor %}
-                <a href="" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ text_reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ text_write }}</a></p>
+                <a href="#" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ text_reviews }}</a> / <a href="#" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ text_write }}</a></p>
             </div>
           {% endif %}
           {% if price %}
@@ -75,8 +75,8 @@
           {% endif %}
           <form method="post" data-oc-toggle="ajax">
             <div class="btn-group">
-              <button type="submit" formaction="{{ add_to_wishlist }}" data-bs-toggle="tooltip" class="btn btn-light" title="{{ button_wishlist }}"><i class="fa-solid fa-heart"></i></button>
-              <button type="submit" formaction="{{ add_to_compare }}" data-bs-toggle="tooltip" class="btn btn-light" title="{{ button_compare }}"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+              <button type="submit" formaction="{{ wishlist_add }}" data-bs-toggle="tooltip" class="btn btn-light" title="{{ button_wishlist }}"><i class="fa-solid fa-heart"></i></button>
+              <button type="submit" formaction="{{ compare_add }}" data-bs-toggle="tooltip" class="btn btn-light" title="{{ button_compare }}"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
             </div>
             <input type="hidden" name="product_id" value="{{ product_id }}"/>
           </form>
@@ -114,8 +114,7 @@
                                 {{ option_value.name }}
                                 {% if option_value.price %}
                                   ({{ option_value.price_prefix }}{{ option_value.price }})
-                                {% endif %}
-                              </label>
+                                {% endif %}</label>
                             </div>
                           {% endfor %}
                         </div>
@@ -337,7 +336,7 @@ $('#form-product').on('submit', function(e) {
             if (json['success']) {
                 $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                $('#header-cart').load('index.php?route=common/cart.info');
+                $('#header-cart').load('index.php?route=common/cart.info&language={{ language }}');
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {

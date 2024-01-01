@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Extension\Opencart\Report;
  */
 class CustomerReward extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -46,6 +48,8 @@ class CustomerReward extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -70,6 +74,8 @@ class CustomerReward extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Report
+	 *
 	 * @return void
 	 */
 	public function report(): void {
@@ -83,6 +89,8 @@ class CustomerReward extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -92,6 +100,8 @@ class CustomerReward extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Report
+	 *
 	 * @return string
 	 */
 	public function getReport(): string {
@@ -122,11 +132,11 @@ class CustomerReward extends \Opencart\System\Engine\Controller {
 		$data['customers'] = [];
 
 		$filter_data = [
-			'filter_date_start'	=> $filter_date_start,
-			'filter_date_end'	=> $filter_date_end,
-			'filter_customer'	=> $filter_customer,
-			'start'				=> ($page - 1) * $this->config->get('config_pagination'),
-			'limit'				=> $this->config->get('config_pagination')
+			'filter_date_start' => $filter_date_start,
+			'filter_date_end'   => $filter_date_end,
+			'filter_customer'   => $filter_customer,
+			'start'             => ($page - 1) * $this->config->get('config_pagination'),
+			'limit'             => $this->config->get('config_pagination')
 		];
 
 		$this->load->model('extension/opencart/report/customer');

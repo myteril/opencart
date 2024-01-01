@@ -12,6 +12,8 @@ class Product extends \Opencart\System\Engine\Model {
 	protected array $statement = [];
 
 	/**
+	 * Constructor
+	 *
 	 * @param \Opencart\System\Engine\Registry $registry
 	 */
 	public function __construct(\Opencart\System\Engine\Registry $registry) {
@@ -25,19 +27,21 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Product
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
 	 */
 	public function getProduct(int $product_id): array {
-		$query = $this->db->query("SELECT DISTINCT *, `pd`.`name`, `p`.`image`, " . $this->statement['discount'] . ", " . $this->statement['special'] . ", " . $this->statement['reward'] . ", " . $this->statement['review']  . " FROM `" . DB_PREFIX . "product_to_store` `p2s` LEFT JOIN `" . DB_PREFIX . "product` `p` ON (`p`.`product_id` = `p2s`.`product_id` AND `p`.`status` = '1' AND `p`.`date_available` <= NOW()) LEFT JOIN `" . DB_PREFIX . "product_description` `pd` ON (`p`.`product_id` = `pd`.`product_id`) WHERE `p2s`.`store_id` = '" . (int)$this->config->get('config_store_id') . "' AND `p2s`.`product_id` = '" . (int)$product_id . "' AND `pd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
+		$query = $this->db->query("SELECT DISTINCT *, `pd`.`name`, `p`.`image`, " . $this->statement['discount'] . ", " . $this->statement['special'] . ", " . $this->statement['reward'] . ", " . $this->statement['review'] . " FROM `" . DB_PREFIX . "product_to_store` `p2s` LEFT JOIN `" . DB_PREFIX . "product` `p` ON (`p`.`product_id` = `p2s`.`product_id` AND `p`.`status` = '1' AND `p`.`date_available` <= NOW()) LEFT JOIN `" . DB_PREFIX . "product_description` `pd` ON (`p`.`product_id` = `pd`.`product_id`) WHERE `p2s`.`store_id` = '" . (int)$this->config->get('config_store_id') . "' AND `p2s`.`product_id` = '" . (int)$product_id . "' AND `pd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		if ($query->num_rows) {
 			$product_data = $query->row;
 
 			$product_data['variant'] = (array)json_decode($query->row['variant'], true);
 			$product_data['override'] = (array)json_decode($query->row['override'], true);
-			$product_data['price'] = (float)($query->row['discount'] ? $query->row['discount'] : $query->row['price']);
+			$product_data['price'] = (float)($query->row['discount'] ?: $query->row['price']);
 			$product_data['rating'] = (int)$query->row['rating'];
 			$product_data['reviews'] = (int)$query->row['reviews'] ? $query->row['reviews'] : 0;
 
@@ -48,6 +52,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Products
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -226,6 +232,8 @@ class Product extends \Opencart\System\Engine\Model {
 
 
 	/**
+	 * Get Categories
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
@@ -237,6 +245,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Attributes
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
@@ -270,6 +280,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Options
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
@@ -314,6 +326,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Discounts
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
@@ -325,6 +339,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Images
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
@@ -336,6 +352,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Subscription
+	 *
 	 * @param int $product_id
 	 * @param int $subscription_plan_id
 	 *
@@ -348,6 +366,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Subscriptions
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
@@ -359,6 +379,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Layout ID
+	 *
 	 * @param int $product_id
 	 *
 	 * @return int
@@ -374,6 +396,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Related
+	 *
 	 * @param int $product_id
 	 *
 	 * @return array
@@ -397,6 +421,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Products
+	 *
 	 * @param array $data
 	 *
 	 * @return int
@@ -508,6 +534,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Specials
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -569,6 +597,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Specials
+	 *
 	 * @return int
 	 */
 	public function getTotalSpecials(): int {
@@ -582,6 +612,8 @@ class Product extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Add Report
+	 *
 	 * @param int    $product_id
 	 * @param string $ip
 	 * @param string $country

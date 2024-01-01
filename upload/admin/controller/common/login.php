@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Common;
  */
 class Login extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -75,6 +77,8 @@ class Login extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Login
+	 *
 	 * @return void
 	 */
 	public function login(): void {

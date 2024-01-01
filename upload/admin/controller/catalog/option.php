@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Catalog;
  */
 class Option extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -44,7 +46,7 @@ class Option extends \Opencart\System\Engine\Controller {
 		$data['add'] = $this->url->link('catalog/option.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('catalog/option.delete', 'user_token=' . $this->session->data['user_token']);
 
-		$data['list'] = $this->getList();
+		$data['list'] = $this->controller_catalog_option->getList();
 
 		$data['user_token'] = $this->session->data['user_token'];
 
@@ -56,15 +58,19 @@ class Option extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
 		$this->load->language('catalog/option');
 
-		$this->response->setOutput($this->getList());
+		$this->response->setOutput($this->controller_catalog_option->getList());
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -163,6 +169,8 @@ class Option extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -276,6 +284,8 @@ class Option extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -350,6 +360,8 @@ class Option extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -392,6 +404,8 @@ class Option extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Autocomplete
+	 *
 	 * @return void
 	 */
 	public function autocomplete(): void {

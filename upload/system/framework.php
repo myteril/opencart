@@ -65,7 +65,7 @@ set_error_handler(function(string $code, string $message, string $file, string $
 });
 
 // Exception Handler
-set_exception_handler(function(\Throwable $e) use ($log, $config): void  {
+set_exception_handler(function(\Throwable $e) use ($log, $config): void {
 	if ($config->get('error_log')) {
 		$log->write($e->getMessage() . ': in ' . $e->getFile() . ' on line ' . $e->getLine());
 	}
@@ -90,6 +90,9 @@ if ($config->has('action_event')) {
 		}
 	}
 }
+
+// Factory
+$registry->set('factory', new \Opencart\System\Engine\Factory($registry));
 
 // Loader
 $loader = new \Opencart\System\Engine\Loader($registry);
@@ -120,7 +123,7 @@ $response->addHeader('Access-Control-Allow-Headers: X-Requested-With, Content-Ty
 $response->addHeader('Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE');
 $response->addHeader('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 $response->addHeader('Pragma: no-cache');
-$response->setCompression($config->get('response_compression'));
+$response->setCompression((int)$config->get('response_compression'));
 
 // Database
 if ($config->get('db_autostart')) {
@@ -174,9 +177,6 @@ $registry->set('url', new \Opencart\System\Library\Url($config->get('site_url'))
 // Document
 $registry->set('document', new \Opencart\System\Library\Document());
 
-// Factory
-$registry->set('factory', new \Opencart\System\Engine\Factory($registry));
-
 $action = '';
 $args = [];
 $output = '';
@@ -186,7 +186,7 @@ $error = new \Opencart\System\Engine\Action($config->get('action_error'));
 
 // Pre Actions
 foreach ($config->get('action_pre_action') as $pre_action) {
-	$pre_action  = new \Opencart\System\Engine\Action($pre_action);
+	$pre_action = new \Opencart\System\Engine\Action($pre_action);
 
 	$result = $pre_action->execute($registry);
 

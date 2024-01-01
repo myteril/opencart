@@ -43,7 +43,7 @@ class Review extends \Opencart\System\Engine\Controller {
 		$extension_info = $this->model_setting_extension->getExtensionByCode('captcha', $this->config->get('config_captcha'));
 
 		if ($extension_info && $this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('review', (array)$this->config->get('config_captcha_page'))) {
-			$data['captcha'] = $this->load->controller('extension/'  . $extension_info['extension'] . '/captcha/' . $extension_info['code']);
+			$data['captcha'] = $this->load->controller('extension/' . $extension_info['extension'] . '/captcha/' . $extension_info['code']);
 		} else {
 			$data['captcha'] = '';
 		}
@@ -54,6 +54,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Write
+	 *
 	 * @return void
 	 */
 	public function write(): void {
@@ -72,7 +74,7 @@ class Review extends \Opencart\System\Engine\Controller {
 		}
 
 		$keys = [
-			'name',
+			'author',
 			'text',
 			'rating'
 		];
@@ -108,7 +110,7 @@ class Review extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$this->customer->isLogged() && !$this->config->get('config_review_guest')) {
-			$json['error']['warning']  = $this->language->get('error_guest');
+			$json['error']['warning']  = $this->language->get('error_login');
 		}
 
 		if ($this->customer->isLogged() && $this->config->get('config_review_purchased')) {
@@ -125,7 +127,7 @@ class Review extends \Opencart\System\Engine\Controller {
 		$extension_info = $this->model_setting_extension->getExtensionByCode('captcha', $this->config->get('config_captcha'));
 
 		if ($extension_info && $this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('review', (array)$this->config->get('config_captcha_page'))) {
-			$captcha = $this->load->controller('extension/'  . $extension_info['extension'] . '/captcha/' . $extension_info['code'] . '.validate');
+			$captcha = $this->load->controller('extension/' . $extension_info['extension'] . '/captcha/' . $extension_info['code'] . '.validate');
 
 			if ($captcha) {
 				$json['error']['captcha'] = $captcha;
@@ -145,6 +147,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -154,6 +158,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {

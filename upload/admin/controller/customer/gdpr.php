@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Customer;
  */
 class Gdpr extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -45,6 +47,8 @@ class Gdpr extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -54,6 +58,8 @@ class Gdpr extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {
@@ -218,6 +224,8 @@ class Gdpr extends \Opencart\System\Engine\Controller {
 	 *	denied     = -1
 	*/
 	/**
+	 * Approve
+	 *
 	 * @return void
 	 */
 	public function approve(): void {
@@ -264,6 +272,8 @@ class Gdpr extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Deny
+	 *
 	 * @return void
 	 */
 	public function deny(): void {
@@ -300,6 +310,8 @@ class Gdpr extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

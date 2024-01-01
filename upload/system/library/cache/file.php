@@ -42,6 +42,7 @@ class File {
 	 *
 	 * @param string $key
 	 * @param mixed  $value
+	 * @param int    $expire
 	 *
 	 * @return void
 	 */
@@ -80,7 +81,7 @@ class File {
 	public function __destruct() {
 		$files = glob(DIR_CACHE . 'cache.*');
 
-		if ($files && rand(1, 100) == 1) {
+		if ($files && mt_rand(1, 100) == 1) {
 			foreach ($files as $file) {
 				$time = substr(strrchr($file, '.'), 1);
 

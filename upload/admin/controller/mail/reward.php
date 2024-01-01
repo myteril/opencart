@@ -7,12 +7,15 @@ namespace Opencart\Admin\Controller\Mail;
  */
 class Reward extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @param string $route
 	 * @param array  $args
 	 * @param mixed  $output
 	 *
-	 * @return void
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function index(string $route, array $args, $output): void {
 		if (isset($args[0])) {

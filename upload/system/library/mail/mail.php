@@ -9,19 +9,19 @@ class Mail {
 	protected array $option = [];
 
 	/**
-     * Constructor
-     *
-     * @param array $option
-     */
+	 * Constructor
+	 *
+	 * @param array $option
+	 */
 	public function __construct(array &$option = []) {
 		$this->option = &$option;
 	}
 
 	/**
-     * Send
-     *
-     * @return bool
-     */
+	 * Send
+	 *
+	 * @return bool
+	 */
 	public function send(): bool {
 		if (is_array($this->option['to'])) {
 			$to = implode(',', $this->option['to']);
@@ -29,7 +29,7 @@ class Mail {
 			$to = $this->option['to'];
 		}
 
-		if (version_compare(phpversion(), '7.4', '>=') || substr(PHP_OS, 0, 3) == 'WIN') {
+		if (version_compare(PHP_VERSION, '7.4', '>=') || substr(PHP_OS, 0, 3) == 'WIN') {
 			$eol = "\r\n";
 		} else {
 			$eol = PHP_EOL;
@@ -48,7 +48,7 @@ class Mail {
 		}
 
 		$header .= 'Return-Path: ' . $this->option['from'] . $eol;
-		$header .= 'X-Mailer: PHP/' . phpversion() . $eol;
+		$header .= 'X-Mailer: PHP/' . PHP_VERSION . $eol;
 		$header .= 'Content-Type: multipart/mixed; boundary="' . $boundary . '"' . $eol . $eol;
 
 		$message = '--' . $boundary . $eol;

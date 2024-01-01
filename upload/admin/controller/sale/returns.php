@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Sale;
  */
 class Returns extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -149,6 +151,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -158,6 +162,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -419,6 +425,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -628,6 +636,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -692,6 +702,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -724,6 +736,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * History
+	 *
 	 * @return void
 	 */
 	public function history(): void {
@@ -733,6 +747,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get History
+	 *
 	 * @return string
 	 */
 	public function getHistory(): string {
@@ -780,6 +796,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add History
+	 *
 	 * @return void
 	 */
 	public function addHistory(): void {

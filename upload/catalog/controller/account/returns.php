@@ -93,6 +93,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Info
+	 *
 	 * @return object|\Opencart\System\Engine\Action|null
 	 */
 	public function info(): ?object {
@@ -174,8 +176,7 @@ class Returns extends \Opencart\System\Engine\Controller {
 				];
 			}
 
-			$data['continue'] = $this->url->link('account/returns', 'language=' . $this->config->get('config_language') . $url);
-
+			$data['continue'] = $this->url->link('account/returns', 'language=' . $this->config->get('config_language') . $url . '&customer_token=' . $this->session->data['customer_token']);
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
@@ -192,6 +193,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add
+	 *
 	 * @return void
 	 */
 	public function add(): void {
@@ -297,7 +300,7 @@ class Returns extends \Opencart\System\Engine\Controller {
 		$extension_info = $this->model_setting_extension->getExtensionByCode('captcha', $this->config->get('config_captcha'));
 
 		if ($extension_info && $this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('returns', (array)$this->config->get('config_captcha_page'))) {
-			$data['captcha'] = $this->load->controller('extension/'  . $extension_info['extension'] . '/captcha/' . $extension_info['code']);
+			$data['captcha'] = $this->load->controller('extension/' . $extension_info['extension'] . '/captcha/' . $extension_info['code']);
 		} else {
 			$data['captcha'] = '';
 		}
@@ -325,6 +328,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -424,6 +429,8 @@ class Returns extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Success
+	 *
 	 * @return void
 	 */
 	public function success(): void {

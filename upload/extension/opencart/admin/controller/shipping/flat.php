@@ -7,7 +7,7 @@ namespace Opencart\Admin\Controller\Extension\Opencart\Shipping;
  */
 class Flat extends \Opencart\System\Engine\Controller {
 	/**
-	 * index
+	 * Index
 	 *
 	 * @return void
 	 */
@@ -61,6 +61,8 @@ class Flat extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {

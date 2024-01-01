@@ -7,12 +7,14 @@ namespace Opencart\Admin\Model\Cms;
  */
 class Article extends \Opencart\System\Engine\Model {
 	/**
+	 * Add Article
+	 *
 	 * @param array $data
 	 *
 	 * @return int
 	 */
 	public function addArticle(array $data): int {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "article` SET `topic_id` = '" . (int)$data['topic_id'] . "', `author` = '" . $this->db->escape($data['author']) . "', `status` = '" . (bool)(isset($data['status']) ? $data['status'] : 0) . "', `date_added` = NOW(), `date_modified` = NOW()");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "article` SET `topic_id` = '" . (int)$data['topic_id'] . "', `author` = '" . $this->db->escape($data['author']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_added` = NOW(), `date_modified` = NOW()");
 
 		$article_id = $this->db->getLastId();
 
@@ -45,13 +47,15 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Edit Article
+	 *
 	 * @param int   $article_id
 	 * @param array $data
 	 *
 	 * @return void
 	 */
 	public function editArticle(int $article_id, array $data): void {
-		$this->db->query("UPDATE `" . DB_PREFIX . "article` SET `topic_id` = '" . (int)$data['topic_id'] . "', `author` = '" . $this->db->escape($data['author']) . "', `status` = '" . (bool)(isset($data['status']) ? $data['status'] : 0) . "', `date_modified` = NOW() WHERE `article_id` = '" . (int)$article_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "article` SET `topic_id` = '" . (int)$data['topic_id'] . "', `author` = '" . $this->db->escape($data['author']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_modified` = NOW() WHERE `article_id` = '" . (int)$article_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "article_description` WHERE `article_id` = '" . (int)$article_id . "'");
 
@@ -88,6 +92,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Delete Article
+	 *
 	 * @param int $article_id
 	 *
 	 * @return void
@@ -104,6 +110,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Article
+	 *
 	 * @param int $article_id
 	 *
 	 * @return array
@@ -111,20 +119,22 @@ class Article extends \Opencart\System\Engine\Model {
 	public function getArticle(int $article_id): array {
 		$sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "article` `a` LEFT JOIN `" . DB_PREFIX . "article_description` `ad` ON (`a`.`article_id` = `ad`.`article_id`) WHERE `a`.`article_id` = '" . (int)$article_id . "' AND `ad`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
-		$article_data = $this->cache->get('article.'. md5($sql));
+		$article_data = $this->cache->get('article.' . md5($sql));
 
 		if (!$article_data) {
 			$query = $this->db->query($sql);
 
 			$article_data = $query->row;
 
-			$this->cache->set('article.'. md5($sql), $article_data);
+			$this->cache->set('article.' . md5($sql), $article_data);
 		}
 
 		return $article_data;
 	}
 
 	/**
+	 * Get Articles
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -167,20 +177,22 @@ class Article extends \Opencart\System\Engine\Model {
 
 		$key = md5($sql);
 
-		$article_data = $this->cache->get('article.'. $key);
+		$article_data = $this->cache->get('article.' . $key);
 
 		if (!$article_data) {
 			$query = $this->db->query($sql);
 
 			$article_data = $query->rows;
 
-			$this->cache->set('article.'. $key, $article_data);
+			$this->cache->set('article.' . $key, $article_data);
 		}
 
 		return $article_data;
 	}
 
 	/**
+	 * Get Descriptions
+	 *
 	 * @param int $article_id
 	 *
 	 * @return array
@@ -206,6 +218,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Seo Urls
+	 *
 	 * @param int $article_id
 	 *
 	 * @return array
@@ -223,6 +237,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Stores
+	 *
 	 * @param int $article_id
 	 *
 	 * @return array
@@ -240,6 +256,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Layouts
+	 *
 	 * @param int $article_id
 	 *
 	 * @return array
@@ -257,6 +275,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Articles
+	 *
 	 * @return int
 	 */
 	public function getTotalArticles(): int {
@@ -266,6 +286,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Articles By Layout ID
+	 *
 	 * @param int $layout_id
 	 *
 	 * @return int
@@ -277,6 +299,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Edit Comment Status
+	 *
 	 * @param int  $article_comment_id
 	 * @param bool $status
 	 *
@@ -284,18 +308,26 @@ class Article extends \Opencart\System\Engine\Model {
 	 */
 	public function editCommentStatus(int $article_comment_id, bool $status): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "article_comment` SET `status` = '" . (bool)$status . "' WHERE `article_comment_id` = '" . (int)$article_comment_id . "'");
+
+		$this->cache->delete('topic');
 	}
 
 	/**
+	 * Delete Comment
+	 *
 	 * @param int $article_comment_id
 	 *
 	 * @return void
 	 */
 	public function deleteComment(int $article_comment_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "article_comment` WHERE `article_comment_id` = '" . (int)$article_comment_id . "'");
+
+		$this->cache->delete('topic');
 	}
 
 	/**
+	 * Get Comment
+	 *
 	 * @param int $article_comment_id
 	 *
 	 * @return array
@@ -307,6 +339,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Comments
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -364,6 +398,8 @@ class Article extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Comments
+	 *
 	 * @param array $data
 	 *
 	 * @return int
@@ -374,7 +410,7 @@ class Article extends \Opencart\System\Engine\Model {
 		$implode = [];
 
 		if (!empty($data['filter_keyword'])) {
-			$implode[] = "LCASE(`ac`.`comment`) LIKE '" . $this->db->escape('%' .oc_strtolower($data['filter_keyword']) . '%') . "'";
+			$implode[] = "LCASE(`ac`.`comment`) LIKE '" . $this->db->escape('%' . oc_strtolower($data['filter_keyword']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_article'])) {

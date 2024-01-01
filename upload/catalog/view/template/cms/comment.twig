@@ -1,14 +1,28 @@
 <div class="text-center">
-  <button type="button" data-oc-toggle="comment" data-oc-url="{{ comment_add }}" class="btn btn-outline-secondary"><i class="fa fa-thumbs-up"></i></button>
-  <button type="button" class="btn btn-outline-secondary"><i class="fa fa-thumbs-down"></i></button>
+  <button type="button" value="{{ like }}" id="input-rating-like" data-oc-toggle="rate" class="btn btn-secondary"><i class="fa fa-thumbs-up"></i></button>
+  <button type="button" value="{{ dislike }}" id="input-rating-dislike" data-oc-toggle="rate" class="btn btn-secondary"><i class="fa fa-thumbs-down"></i></button>
   {% if comment_guest %}
-    <button type="button" data-bs-toggle="modal" data-bs-target="#modal-comment" class="btn btn-outline-secondary">{{ button_comment }}</button>
+    <button type="button" value="{{ comment_add }}" data-oc-toggle="comment" data-oc-target="#comment-0" data-oc-trigger="#button-refresh" class="btn btn-secondary">{{ button_comment }}</button>
   {% else %}
-    <button type="button" class="btn btn-outline-secondary" disabled>{{ button_comment }}</button>
+    <button type="button" class="btn btn-secondary" disabled>{{ button_comment }}</button>
   {% endif %}
 </div>
 <hr/>
-<h2>{{ heading_title }}</h2>
+<div class="row mb-3">
+  <div class="col">
+    <h2>{{ heading_title }}</h2>
+  </div>
+  <div class="col-4">
+    <div class="input-group">
+      <label for="input-sort" class="input-group-text">{{ text_sort }}</label>
+      <select id="input-sort" class="form-select">
+        {% for sorts in sorts %}
+          <option value="{{ sorts.href }}"{% if sorts.value == '%s-%s'|format(sort, order) %} selected{% endif %}>{{ sorts.text }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
 <div id="comment">{{ list }}</div>
 <div id="modal-comment" class="modal">
   <div class="modal-dialog">
@@ -18,21 +32,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <form id="form-comment" action="">
+        <form id="form-comment" action="" data-oc-target="" data-oc-trigger="">
           <div class="mb-3 required">
-            <label for="input-author" class="form-label">{{ entry_author }}</label> <input type="text" name="author" value="{{ author }}" placeholder="{{ entry_author }}" id="input-author" class="form-control"/>
+            <label for="input-author" class="form-label">{{ entry_author }}</label>
+            <input type="text" name="author" value="{{ author }}" placeholder="{{ entry_author }}" id="input-author" class="form-control"/>
             <div id="error-author" class="invalid-feedback"></div>
           </div>
           <div class="mb-3 required">
-            <label for="input-comment" class="form-label">{{ entry_comment }}</label> <textarea name="comment" rows="5" placeholder="{{ entry_comment }}" id="input-comment" class="form-control">{{ comment }}</textarea>
+            <label for="input-comment" class="form-label">{{ entry_comment }}</label>
+            <textarea name="comment" rows="5" placeholder="{{ entry_comment }}" id="input-comment" class="form-control">{{ comment }}</textarea>
             <div id="error-comment" class="invalid-feedback"></div>
           </div>
-          <input type="hidden" name="parent" value="{{ parent_id }}" id="input-parent"/>
           {{ captcha }}
         </form>
       </div>
       <div class="modal-footer">
-        <button type="submit" id="button-comment" formaction="form-comment" class="btn btn-primary">{{ button_comment }}</button>
+        <button type="submit" id="button-comment" form="form-comment" class="btn btn-primary">{{ button_comment }}</button>
       </div>
     </div>
   </div>
@@ -44,55 +59,22 @@ $('#comment').on('click', '.pagination a', function(e) {
     $('#comment').load(this.href);
 });
 
-// View Replies
-$('#comment').on('click', '[data-oc-toggle=\'reply\']', function(e) {
+$('#input-sort').on('change', function(e) {
+    $('#comment').load($(this).val());
+});
+
+// Add Comment
+$('#cms-blog').on('click', '[data-oc-toggle=\'comment\']', function(e) {
     e.preventDefault();
 
     var element = this;
 
-    $.ajax({
-        url: $(element).attr('data-oc-target'),
-        dataType: 'html',
-        beforeSend: function() {
-            $(element).button('loading');
-        },
-        complete: function() {
-            $(element).button('reset');
-        },
-        success: function(html) {
-            $(element).parent().replaceWith(html);
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    });
+    $('#form-comment').attr('action', $(element).val());
+    $('#form-comment').attr('data-oc-target', $(element).attr('data-oc-target'));
+    $('#form-comment').attr('data-oc-trigger', $(element).attr('data-oc-trigger'));
+
+    $('#modal-comment').modal('show');
 });
-
-
-// Refresh
-$('#rely').on('click', '.reply-refresh', function(e) {
-    e.preventDefault();
-
-    var element = this;
-
-    $.ajax({
-        url: $(element).attr('href'),
-        dataType: 'html',
-        beforeSend: function() {
-            $(element).button('loading');
-        },
-        complete: function() {
-            $(element).button('reset');
-        },
-        success: function(html) {
-            $(element).parent().replaceWith(html);
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    });
-});
-
 
 $('#form-comment').on('submit', function(e) {
     e.preventDefault();
@@ -100,9 +82,9 @@ $('#form-comment').on('submit', function(e) {
     var element = this;
 
     $.ajax({
-        url: $(element).attr(''),
+        url: $(element).attr('action'),
         type: 'post',
-        data: $('#form-comment').serialize(),
+        data: $(element).serialize(),
         dataType: 'json',
         cache: false,
         contentType: 'application/x-www-form-urlencoded',
@@ -115,6 +97,7 @@ $('#form-comment').on('submit', function(e) {
         },
         success: function(json) {
             $('.alert-dismissible').remove();
+
             $('#form-comment').find('.is-invalid').removeClass('is-invalid');
             $('#form-comment').find('.invalid-feedback').removeClass('d-block');
 
@@ -133,6 +116,8 @@ $('#form-comment').on('submit', function(e) {
                 $('#modal-comment .modal-body').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
                 $('#input-comment').val('');
+
+                $($('#form-comment').attr('data-oc-trigger')).trigger('click');
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {
@@ -140,4 +125,92 @@ $('#form-comment').on('submit', function(e) {
         }
     });
 });
+
+// More
+$('#comment').on('click', '[data-oc-toggle=\'next\']', function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: $(element).val(),
+        dataType: 'html',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(html) {
+            $(element).parent().before(html);
+            $(element).parent().remove();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Refresh
+$('#comment').on('click', '[data-oc-toggle=\'refresh\']', function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: $(element).val(),
+        dataType: 'html',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(html) {
+            $($(element).attr('data-oc-target')).remove();
+
+            $(element).parent().before(html);
+            $(element).parent().remove();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Rating
+let rating = function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: $(element).val(),
+        dataType: 'json',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(json) {
+            $('.alert-dismissible').remove();
+
+            if (json['error']) {
+                $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+            }
+
+            if (json['success']) {
+                $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
+$('#input-rating-like, #input-rating-dislike').on('click', rating);
+
+$('#comment').on('click', '[data-oc-toggle=\'rate\']', rating);
 //--></script>

@@ -7,7 +7,6 @@ namespace Opencart\Admin\Controller\Event;
  */
 class Statistics extends \Opencart\System\Engine\Controller {
 	/**
-	 *
 	 * addReview
 	 *
 	 * @param string $route
@@ -15,7 +14,7 @@ class Statistics extends \Opencart\System\Engine\Controller {
 	 * @param mixed  $output
 	 *
 	 * @return void
-	 * 
+	 *
 	 * admin/model/catalog/review/addReview/after
 	 */
 	public function addReview(string &$route, array &$args, &$output): void {

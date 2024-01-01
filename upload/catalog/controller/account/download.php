@@ -70,7 +70,7 @@ class Download extends \Opencart\System\Engine\Controller {
 				];
 
 				while (($size / 1024) > 1) {
-					$size = $size / 1024;
+					$size /= 1024;
 					$i++;
 				}
 
@@ -109,6 +109,8 @@ class Download extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Download
+	 *
 	 * @return void
 	 */
 	public function download(): void {
@@ -135,7 +137,7 @@ class Download extends \Opencart\System\Engine\Controller {
 			if (!headers_sent()) {
 				if (is_file($file)) {
 					header('Content-Type: application/octet-stream');
-					header('Content-Disposition: attachment; filename="' . ($mask ? $mask : basename($file)) . '"');
+					header('Content-Disposition: attachment; filename="' . ($mask ?: basename($file)) . '"');
 					header('Expires: 0');
 					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 					header('Pragma: public');

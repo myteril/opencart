@@ -7,6 +7,8 @@ namespace Opencart\Catalog\Model\Catalog;
  */
 class Category extends \Opencart\System\Engine\Model {
 	/**
+	 * Get Category
+	 *
 	 * @param int $category_id
 	 *
 	 * @return array
@@ -29,6 +31,8 @@ class Category extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Categories
+	 *
 	 * @param int $parent_id
 	 *
 	 * @return array
@@ -40,6 +44,8 @@ class Category extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Filters
+	 *
 	 * @param int $category_id
 	 *
 	 * @return array
@@ -84,6 +90,8 @@ class Category extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Layout ID
+	 *
 	 * @param int $category_id
 	 *
 	 * @return int

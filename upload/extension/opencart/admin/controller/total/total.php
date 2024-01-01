@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Extension\Opencart\Total;
  */
 class Total extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -46,6 +48,8 @@ class Total extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {

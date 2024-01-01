@@ -7,6 +7,8 @@ namespace Opencart\Catalog\Model\Account;
  */
 class Subscription extends \Opencart\System\Engine\Model {
 	/**
+	 * Get Subscription
+	 *
 	 * @param int $subscription_id
 	 *
 	 * @return array
@@ -28,6 +30,8 @@ class Subscription extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Subscription By Order Product ID
+	 *
 	 * @param int $order_id
 	 * @param int $order_product_id
 	 *
@@ -50,6 +54,8 @@ class Subscription extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Subscriptions
+	 *
 	 * @param int $start
 	 * @param int $limit
 	 *
@@ -67,9 +73,11 @@ class Subscription extends \Opencart\System\Engine\Model {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "subscription` WHERE `customer_id` = '" . (int)$this->customer->getId() . "' AND `subscription_status_id` > '0' AND `store_id` = '" . (int)$this->config->get('config_store_id') . "' ORDER BY `subscription_id` DESC LIMIT " . (int)$start . "," . (int)$limit);
 
 		return $query->rows;
-    }
+	}
 
 	/**
+	 * Get Total Subscriptions
+	 *
 	 * @return int
 	 */
 	public function getTotalSubscriptions(): int {
@@ -80,9 +88,11 @@ class Subscription extends \Opencart\System\Engine\Model {
 		} else {
 			return 0;
 		}
-    }
+	}
 
 	/**
+	 * Get Total Subscription By Shipping Address ID
+	 *
 	 * @param int $address_id
 	 *
 	 * @return int
@@ -94,6 +104,8 @@ class Subscription extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Subscription By Payment Address ID
+	 *
 	 * @param int $address_id
 	 *
 	 * @return int
@@ -105,6 +117,8 @@ class Subscription extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Histories
+	 *
 	 * @param int $subscription_id
 	 * @param int $start
 	 * @param int $limit
@@ -126,6 +140,8 @@ class Subscription extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Histories
+	 *
 	 * @param int $subscription_id
 	 *
 	 * @return int

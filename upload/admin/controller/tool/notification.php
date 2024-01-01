@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Tool;
  */
 class Notification extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -39,6 +41,8 @@ class Notification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -48,6 +52,8 @@ class Notification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {
@@ -80,17 +86,17 @@ class Notification extends \Opencart\System\Engine\Controller {
 			$ranges = [
 				'second' => $second,
 				'minute' => floor($second / 60),
-				'hour'	 => floor($second / 3600),
-				'day'	 => floor($second / 86400),
-				'week'	 => floor($second / 604800),
-				'month'	 => floor($second / 2629743),
-				'year'	 => floor($second / 31556926)
+				'hour'   => floor($second / 3600),
+				'day'    => floor($second / 86400),
+				'week'   => floor($second / 604800),
+				'month'  => floor($second / 2629743),
+				'year'   => floor($second / 31556926)
 			];
 
 			foreach ($ranges as $range => $value) {
 				if ($value) {
 					$date_added = $value;
-					$code = $range . ($value > 1) ? 's' : '';
+					$code = $range . ($value > 1) ? $range . 's' : '';
 				}
 			}
 
@@ -119,6 +125,8 @@ class Notification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Info
+	 *
 	 * @return void
 	 */
 	public function info(): void {
@@ -137,7 +145,7 @@ class Notification extends \Opencart\System\Engine\Controller {
 
 			$data['title'] = $notification_info['title'];
 
-			$data['text'] = oc_bbcode_decode($notification_info['text']);
+			$data['text'] = html_entity_decode($notification_info['text'], ENT_QUOTES, 'UTF-8');
 
 			$this->model_tool_notification->editStatus($notification_id, 1);
 
@@ -146,6 +154,8 @@ class Notification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

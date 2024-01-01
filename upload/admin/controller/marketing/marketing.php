@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Marketing;
  */
 class Marketing extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -101,6 +103,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -110,6 +114,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -190,14 +196,14 @@ class Marketing extends \Opencart\System\Engine\Controller {
 		$data['marketings'] = [];
 
 		$filter_data = [
-			'filter_name'       => $filter_name,
-			'filter_code'       => $filter_code,
-			'filter_date_from'  => $filter_date_from,
-			'filter_date_to'    => $filter_date_to,
-			'sort'              => $sort,
-			'order'             => $order,
-			'start'             => ($page - 1) * $this->config->get('config_pagination_admin'),
-			'limit'             => $this->config->get('config_pagination_admin')
+			'filter_name'      => $filter_name,
+			'filter_code'      => $filter_code,
+			'filter_date_from' => $filter_date_from,
+			'filter_date_to'   => $filter_date_to,
+			'sort'             => $sort,
+			'order'            => $order,
+			'start'            => ($page - 1) * $this->config->get('config_pagination_admin'),
+			'limit'            => $this->config->get('config_pagination_admin')
 		];
 
 		$this->load->model('marketing/marketing');
@@ -288,6 +294,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -387,6 +395,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -429,6 +439,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -461,6 +473,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Report
+	 *
 	 * @return void
 	 */
 	public function report(): void {
@@ -470,6 +484,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Report
+	 *
 	 * @return string
 	 */
 	public function getReport(): string {

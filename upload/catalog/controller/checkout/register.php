@@ -26,7 +26,7 @@ class Register extends \Opencart\System\Engine\Controller {
 
 		$data['shipping_required'] = $this->cart->hasShipping();
 
-		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language'));
+		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token'] = oc_token(32));
 
 		$data['customer_groups'] = [];
 
@@ -35,7 +35,7 @@ class Register extends \Opencart\System\Engine\Controller {
 
 			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
 
-			foreach ($customer_groups  as $customer_group) {
+			foreach ($customer_groups as $customer_group) {
 				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 					$data['customer_groups'][] = $customer_group;
 				}
@@ -144,7 +144,7 @@ class Register extends \Opencart\System\Engine\Controller {
 		$extension_info = $this->model_setting_extension->getExtensionByCode('captcha', $this->config->get('config_captcha'));
 
 		if ($extension_info && $this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('register', (array)$this->config->get('config_captcha_page'))) {
-			$data['captcha'] = $this->load->controller('extension/'  . $extension_info['extension'] . '/captcha/' . $extension_info['code']);
+			$data['captcha'] = $this->load->controller('extension/' . $extension_info['extension'] . '/captcha/' . $extension_info['code']);
 		} else {
 			$data['captcha'] = '';
 		}
@@ -165,6 +165,8 @@ class Register extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -382,7 +384,7 @@ class Register extends \Opencart\System\Engine\Controller {
 			}
 
 			// If account register password required
-			if ($this->request->post['account'] && (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
+			if ($this->request->post['account'] && (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 6) || (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
 				$json['error']['password'] = $this->language->get('error_password');
 			}
 
@@ -421,7 +423,7 @@ class Register extends \Opencart\System\Engine\Controller {
 				'lastname'          => $this->request->post['lastname'],
 				'email'             => $this->request->post['email'],
 				'telephone'         => $this->request->post['telephone'],
-				'custom_field'      => isset($this->request->post['custom_field']) ? $this->request->post['custom_field'] : []
+				'custom_field'      => $this->request->post['custom_field'] ?? []
 			];
 
 			// Register
@@ -490,7 +492,7 @@ class Register extends \Opencart\System\Engine\Controller {
 					'iso_code_2'     => $iso_code_2,
 					'iso_code_3'     => $iso_code_3,
 					'address_format' => $address_format,
-					'custom_field'   => isset($this->request->post['payment_custom_field']) ? $this->request->post['payment_custom_field'] : []
+					'custom_field'   => $this->request->post['payment_custom_field'] ?? []
 				];
 
 				// Add
@@ -569,7 +571,7 @@ class Register extends \Opencart\System\Engine\Controller {
 						'iso_code_2'     => $iso_code_2,
 						'iso_code_3'     => $iso_code_3,
 						'address_format' => $address_format,
-						'custom_field'   => isset($this->request->post['shipping_custom_field']) ? $this->request->post['shipping_custom_field'] : []
+						'custom_field'   => $this->request->post['shipping_custom_field'] ?? []
 					];
 
 					// Add

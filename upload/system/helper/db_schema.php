@@ -58,75 +58,62 @@ function oc_db_schema() {
 	$tables = [];
 
 	$tables[] = [
-		'name'    => 'address',
-		'field'   => [
+		'name'  => 'address',
+		'field' => [
 			[
 				'name'           => 'address_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'firstname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'firstname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'lastname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'lastname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'company',
-				'type'     => 'varchar(60)',
-				'not_null' => true
+				'name' => 'company',
+				'type' => 'varchar(60)'
 			],
 			[
-				'name'     => 'address_1',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'address_1',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'address_2',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'address_2',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'city',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'city',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'postcode',
-				'type'     => 'varchar(10)',
-				'not_null' => true
+				'name' => 'postcode',
+				'type' => 'varchar(10)'
 			],
 			[
-				'name'     => 'country_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'country_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'zone_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'zone_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'custom_field',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'custom_field',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'default',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'default',
+				'type' => 'tinyint(1)'
 			]
 		],
 		'primary' => [
@@ -139,7 +126,7 @@ function oc_db_schema() {
 				'field' => 'customer_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'customer_id',
 				'key'  => [
@@ -153,23 +140,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'address_format',
-		'field'   => [
+		'name'  => 'address_format',
+		'field' => [
 			[
 				'name'           => 'address_format_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'address_format',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'address_format',
+				'type' => 'text'
 			]
 		],
 		'primary' => [
@@ -181,38 +165,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'api',
-		'field'   => [
+		'name'  => 'api',
+		'field' => [
 			[
 				'name'           => 'api_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'username',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'username',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'key',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'key',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -224,23 +202,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'api_ip',
-		'field'   => [
+		'name'  => 'api_ip',
+		'field' => [
 			[
 				'name'           => 'api_ip_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'api_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'api_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			]
 		],
 		'primary' => [
@@ -259,38 +234,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'api_session',
-		'field'   => [
+		'name'  => 'api_session',
+		'field' => [
 			[
 				'name'           => 'api_session_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'api_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'api_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'session_id',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'session_id',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -309,23 +278,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'attribute',
-		'field'   => [
+		'name'  => 'attribute',
+		'field' => [
 			[
 				'name'           => 'attribute_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'attribute_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'attribute_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -344,22 +310,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'attribute_description',
-		'field'   => [
+		'name'  => 'attribute_description',
+		'field' => [
 			[
-				'name'     => 'attribute_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'attribute_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -384,18 +347,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'attribute_group',
-		'field'   => [
+		'name'  => 'attribute_group',
+		'field' => [
 			[
 				'name'           => 'attribute_group_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -407,22 +368,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'attribute_group_description',
-		'field'   => [
+		'name'  => 'attribute_group_description',
+		'field' => [
 			[
-				'name'     => 'attribute_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'attribute_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -447,23 +405,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'banner',
-		'field'   => [
+		'name'  => 'banner',
+		'field' => [
 			[
 				'name'           => 'banner_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			]
 		],
 		'primary' => [
@@ -475,44 +430,37 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'banner_image',
-		'field'   => [
+		'name'  => 'banner_image',
+		'field' => [
 			[
 				'name'           => 'banner_image_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'banner_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'banner_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'link',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'link',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'sort_order',
+				'type'    => 'int(3)',
+				'default' => '0'
 			]
 		],
 		'primary' => [
@@ -536,24 +484,22 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'antispam',
-		'field'   => [
+		'name'  => 'antispam',
+		'field' => [
 			[
 				'name'           => 'antispam_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'keyword',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'keyword',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
 			'antispam_id'
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'keyword',
 				'key'  => [
@@ -567,38 +513,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'article',
-		'field'   => [
+		'name'  => 'article',
+		'field' => [
 			[
 				'name'           => 'article_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'topic_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'topic_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'author',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'author',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -610,49 +550,48 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'article_comment',
-		'field'   => [
+		'name'  => 'article_comment',
+		'field' => [
 			[
 				'name'           => 'article_comment_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'article_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'article_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'parent_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'parent_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'author',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'author',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
-			],
-
-			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'rating',
+				'type' => 'int(11)'
+			],
+			[
+				'name' => 'ip',
+				'type' => 'varchar(40)'
+			],
+			[
+				'name' => 'status',
+				'type' => 'tinyint(1)'
+			],
+			[
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -670,7 +609,7 @@ function oc_db_schema() {
 				'field' => 'customer_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'article_id',
 				'key'  => [
@@ -690,52 +629,43 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'article_description',
-		'field'   => [
+		'name'  => 'article_description',
+		'field' => [
 			[
-				'name'     => 'article_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'article_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'tag',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'tag',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'meta_title',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_title',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_description',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_keyword',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_keyword',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -749,7 +679,7 @@ function oc_db_schema() {
 				'field' => 'language_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'name',
 				'key'  => [
@@ -763,22 +693,114 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'article_to_layout',
-		'field'   => [
+		'name'  => 'article_rating',
+		'field' => [
 			[
-				'name'     => 'article_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name'           => 'article_rating_id',
+				'type'           => 'int(11)',
+				'auto_increment' => true
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'article_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'layout_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'article_comment_id',
+				'type' => 'int(11)'
+			],
+			[
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => 0
+			],
+			[
+				'name'    => 'customer_id',
+				'type'    => 'int(11)',
+				'default' => 0
+			],
+			[
+				'name' => 'rating',
+				'type' => 'tinyint(11)'
+			],
+			[
+				'name' => 'ip',
+				'type' => 'varchar(40)'
+			],
+			[
+				'name' => 'date_added',
+				'type' => 'datetime'
+			]
+		],
+		'primary' => [
+			'article_rating_id'
+		],
+		'foreign' => [
+			[
+				'key'   => 'article_id',
+				'table' => 'article',
+				'field' => 'article_id'
+			],
+			[
+				'key'   => 'article_comment_id',
+				'table' => 'article_comment',
+				'field' => 'article_comment_id'
+			],
+			[
+				'key'   => 'customer_id',
+				'table' => 'customer',
+				'field' => 'customer_id'
+			],
+			[
+				'key'   => 'store_id',
+				'table' => 'store',
+				'field' => 'store_id'
+			]
+		],
+		'index' => [
+			[
+				'name' => 'article_id',
+				'key'  => [
+					'article_id'
+				]
+			],
+			[
+				'name' => 'article_comment_id',
+				'key'  => [
+					'article_comment_id'
+				]
+			],
+			[
+				'name' => 'customer_id',
+				'key'  => [
+					'customer_id'
+				]
+			],
+			[
+				'name' => 'store_id',
+				'key'  => [
+					'store_id'
+				]
+			]
+		],
+		'engine'  => 'InnoDB',
+		'charset' => 'utf8mb4',
+		'collate' => 'utf8mb4_general_ci'
+	];
+
+	$tables[] = [
+		'name'  => 'article_to_layout',
+		'field' => [
+			[
+				'name' => 'article_id',
+				'type' => 'int(11)'
+			],
+			[
+				'name' => 'store_id',
+				'type' => 'int(11)'
+			],
+			[
+				'name' => 'layout_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -808,18 +830,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'article_to_store',
-		'field'   => [
+		'name'  => 'article_to_store',
+		'field' => [
 			[
-				'name'     => 'article_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'article_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			]
 		],
 		'primary' => [
@@ -844,24 +864,21 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'topic',
-		'field'   => [
+		'name'  => 'topic',
+		'field' => [
 			[
 				'name'           => 'topic_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'sort_order',
+				'type'    => 'int(3)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			]
 		],
 		'primary' => [
@@ -873,47 +890,39 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'topic_description',
-		'field'   => [
+		'name'  => 'topic_description',
+		'field' => [
 			[
-				'name'     => 'topic_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'topic_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_title',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_title',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_description',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_keyword',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_keyword',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -927,7 +936,7 @@ function oc_db_schema() {
 				'field' => 'language_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'name',
 				'key'  => [
@@ -941,18 +950,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'topic_to_store',
-		'field'   => [
+		'name'  => 'topic_to_store',
+		'field' => [
 			[
-				'name'     => 'topic_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'topic_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			]
 		],
 		'primary' => [
@@ -977,63 +984,52 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'cart',
-		'field'   => [
+		'name'  => 'cart',
+		'field' => [
 			[
 				'name'           => 'cart_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'api_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'api_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'session_id',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'session_id',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'subscription_plan_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_plan_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'option',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'option',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'quantity',
-				'type'     => 'int(5)',
-				'not_null' => true
+				'name' => 'quantity',
+				'type' => 'int(5)'
 			],
 			[
-				'name'     => 'override',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'override',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'price',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -1066,7 +1062,7 @@ function oc_db_schema() {
 				'field' => 'subscription_plan_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'cart_id',
 				'key'  => [
@@ -1084,61 +1080,52 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'category',
-		'field'   => [
+		'name'  => 'category',
+		'field' => [
 			[
 				'name'           => 'category_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'parent_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'parent_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'top',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'top',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'column',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'column',
+				'type' => 'int(3)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'sort_order',
+				'type'    => 'int(3)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
 			'category_id'
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'parent_id',
 				'key'  => [
@@ -1152,42 +1139,35 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'category_description',
-		'field'   => [
+		'name'  => 'category_description',
+		'field' => [
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'meta_title',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_title',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_description',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_keyword',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_keyword',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -1201,7 +1181,7 @@ function oc_db_schema() {
 				'field' => 'language_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'name',
 				'key'  => [
@@ -1215,17 +1195,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'category_filter',
-		'field'   => [
+		'name'  => 'category_filter',
+		'field' => [
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'filter_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'filter_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -1250,22 +1228,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'category_path',
-		'field'   => [
+		'name'  => 'category_path',
+		'field' => [
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'path_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'path_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'level',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'level',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -1285,22 +1260,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'category_to_layout',
-		'field'   => [
+		'name'  => 'category_to_layout',
+		'field' => [
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'layout_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'layout_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -1330,18 +1302,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'category_to_store',
-		'field'   => [
+		'name'  => 'category_to_store',
+		'field' => [
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			]
 		],
 		'primary' => [
@@ -1366,44 +1336,37 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'country',
-		'field'   => [
+		'name'  => 'country',
+		'field' => [
 			[
 				'name'           => 'country_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'iso_code_2',
-				'type'     => 'varchar(2)',
-				'not_null' => true
+				'name' => 'iso_code_2',
+				'type' => 'varchar(2)'
 			],
 			[
-				'name'     => 'iso_code_3',
-				'type'     => 'varchar(3)',
-				'not_null' => true
+				'name' => 'iso_code_3',
+				'type' => 'varchar(3)'
 			],
 			[
-				'name'     => 'address_format_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'address_format_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'postcode_required',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'postcode_required',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'status',
+				'type'    => 'tinyint(1)',
+				'default' => '1'
 			]
 		],
 		'primary' => [
@@ -1415,78 +1378,64 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'coupon',
-		'field'   => [
+		'name'  => 'coupon',
+		'field' => [
 			[
 				'name'           => 'coupon_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(20)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(20)'
 			],
 			[
-				'name'     => 'type',
-				'type'     => 'char(1)',
-				'not_null' => true
+				'name' => 'type',
+				'type' => 'char(1)'
 			],
 			[
-				'name'     => 'discount',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'discount',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'logged',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'logged',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'shipping',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'shipping',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'total',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'total',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'date_start',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_start',
+				'type' => 'date'
 			],
 			[
-				'name'     => 'date_end',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_end',
+				'type' => 'date'
 			],
 			[
-				'name'     => 'uses_total',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'uses_total',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'uses_customer',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'uses_customer',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -1498,17 +1447,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'coupon_category',
-		'field'   => [
+		'name'  => 'coupon_category',
+		'field' => [
 			[
-				'name'     => 'coupon_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'coupon_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -1533,38 +1480,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'coupon_history',
-		'field'   => [
+		'name'  => 'coupon_history',
+		'field' => [
 			[
 				'name'           => 'coupon_history_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'coupon_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'coupon_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'amount',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'amount',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -1593,23 +1534,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'coupon_product',
-		'field'   => [
+		'name'  => 'coupon_product',
+		'field' => [
 			[
 				'name'           => 'coupon_product_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'coupon_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'coupon_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -1633,48 +1571,40 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'cron',
-		'field'   => [
+		'name'  => 'cron',
+		'field' => [
 			[
 				'name'           => 'cron_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'cycle',
-				'type'     => 'varchar(12)',
-				'not_null' => true
+				'name' => 'cycle',
+				'type' => 'varchar(12)'
 			],
 			[
-				'name'     => 'action',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'action',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -1686,53 +1616,44 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'currency',
-		'field'   => [
+		'name'  => 'currency',
+		'field' => [
 			[
 				'name'           => 'currency_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(3)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(3)'
 			],
 			[
-				'name'     => 'symbol_left',
-				'type'     => 'varchar(12)',
-				'not_null' => true
+				'name' => 'symbol_left',
+				'type' => 'varchar(12)'
 			],
 			[
-				'name'     => 'symbol_right',
-				'type'     => 'varchar(12)',
-				'not_null' => true
+				'name' => 'symbol_right',
+				'type' => 'varchar(12)'
 			],
 			[
-				'name'     => 'decimal_place',
-				'type'     => 'int(1)',
-				'not_null' => true
+				'name' => 'decimal_place',
+				'type' => 'int(1)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'double(15,8)',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'double(15,8)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -1744,99 +1665,81 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer',
-		'field'   => [
+		'name'  => 'customer',
+		'field' => [
 			[
 				'name'           => 'customer_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'firstname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'firstname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'lastname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'lastname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'telephone',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'telephone',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'password',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'password',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'custom_field',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'custom_field',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'newsletter',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'newsletter',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'safe',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'safe',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'commenter',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'commenter',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'token',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'token',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -1859,7 +1762,7 @@ function oc_db_schema() {
 				'field' => 'language_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'email',
 				'key'  => [
@@ -1873,38 +1776,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_activity',
-		'field'   => [
+		'name'  => 'customer_activity',
+		'field' => [
 			[
 				'name'           => 'customer_activity_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'key',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'key',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'data',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'data',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -1923,98 +1820,80 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_affiliate',
-		'field'   => [
+		'name'  => 'customer_affiliate',
+		'field' => [
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'company',
-				'type'     => 'varchar(60)',
-				'not_null' => true
+				'name' => 'company',
+				'type' => 'varchar(60)'
 			],
 			[
-				'name'     => 'website',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'website',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'tracking',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'tracking',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'balance',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'balance',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'commission',
-				'type'     => 'decimal(4,2)',
-				'not_null' => true,
-				'default'  => '0.00'
+				'name'    => 'commission',
+				'type'    => 'decimal(4,2)',
+				'default' => '0.00'
 			],
 			[
-				'name'     => 'tax',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'tax',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'payment_method',
-				'type'     => 'varchar(6)',
-				'not_null' => true
+				'name' => 'payment_method',
+				'type' => 'varchar(6)'
 			],
 			[
-				'name'     => 'cheque',
-				'type'     => 'varchar(100)',
-				'not_null' => true
+				'name' => 'cheque',
+				'type' => 'varchar(100)'
 			],
 			[
-				'name'     => 'paypal',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'paypal',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'bank_name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'bank_name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'bank_branch_number',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'bank_branch_number',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'bank_swift_code',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'bank_swift_code',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'bank_account_name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'bank_account_name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'bank_account_number',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'bank_account_number',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'custom_field',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'custom_field',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2033,38 +1912,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_affiliate_report',
-		'field'   => [
+		'name'  => 'customer_affiliate_report',
+		'field' => [
 			[
 				'name'           => 'customer_affiliate_report_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'country',
-				'type'     => 'varchar(2)',
-				'not_null' => true
+				'name' => 'country',
+				'type' => 'varchar(2)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2088,28 +1961,24 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_approval',
-		'field'   => [
+		'name'  => 'customer_approval',
+		'field' => [
 			[
 				'name'           => 'customer_approval_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'type',
-				'type'     => 'varchar(9)',
-				'not_null' => true
+				'name' => 'type',
+				'type' => 'varchar(9)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2128,48 +1997,40 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_authorize',
-		'field'   => [
+		'name'  => 'customer_authorize',
+		'field' => [
 			[
 				'name'           => 'customer_authorize_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'token',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'token',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'total',
-				'type'     => 'int(1)',
-				'not_null' => true
+				'name' => 'total',
+				'type' => 'int(1)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'user_agent',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'user_agent',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2188,23 +2049,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_group',
-		'field'   => [
+		'name'  => 'customer_group',
+		'field' => [
 			[
 				'name'           => 'customer_group_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'approval',
-				'type'     => 'int(1)',
-				'not_null' => true
+				'name' => 'approval',
+				'type' => 'int(1)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -2216,27 +2074,23 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_group_description',
-		'field'   => [
+		'name'  => 'customer_group_description',
+		'field' => [
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			]
 		],
 		'primary' => [
@@ -2261,28 +2115,24 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_history',
-		'field'   => [
+		'name'  => 'customer_history',
+		'field' => [
 			[
 				'name'           => 'customer_history_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2294,44 +2144,38 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_login',
-		'field'   => [
+		'name'  => 'customer_login',
+		'field' => [
 			[
 				'name'           => 'customer_login_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'total',
-				'type'     => 'int(4)',
-				'not_null' => true
+				'name' => 'total',
+				'type' => 'int(4)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
 			'customer_login_id'
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'email',
 				'key'  => [
@@ -2351,38 +2195,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_ip',
-		'field'   => [
+		'name'  => 'customer_ip',
+		'field' => [
 			[
 				'name'           => 'customer_ip_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'country',
-				'type'     => 'varchar(2)',
-				'not_null' => true
+				'name' => 'country',
+				'type' => 'varchar(2)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2400,7 +2238,7 @@ function oc_db_schema() {
 				'field' => 'store_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'ip',
 				'key'  => [
@@ -2414,32 +2252,27 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_online',
-		'field'   => [
+		'name'  => 'customer_online',
+		'field' => [
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'url',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'url',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'referer',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'referer',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2451,41 +2284,35 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_reward',
-		'field'   => [
+		'name'  => 'customer_reward',
+		'field' => [
 			[
 				'name'           => 'customer_reward_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'customer_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'order_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'points',
-				'type'     => 'int(8)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'points',
+				'type'    => 'int(8)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2509,38 +2336,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_transaction',
-		'field'   => [
+		'name'  => 'customer_transaction',
+		'field' => [
 			[
 				'name'           => 'customer_transaction_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'amount',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'amount',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2564,63 +2385,52 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_search',
-		'field'   => [
+		'name'  => 'customer_search',
+		'field' => [
 			[
 				'name'           => 'customer_search_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'keyword',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'keyword',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'sub_category',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'sub_category',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'products',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'products',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2654,22 +2464,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'customer_wishlist',
-		'field'   => [
+		'name'  => 'customer_wishlist',
+		'field' => [
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2694,43 +2501,36 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'custom_field',
-		'field'   => [
+		'name'  => 'custom_field',
+		'field' => [
 			[
 				'name'           => 'custom_field_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'type',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'type',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'validation',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'validation',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'location',
-				'type'     => 'varchar(10)',
-				'not_null' => true
+				'name' => 'location',
+				'type' => 'varchar(10)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -2742,22 +2542,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'custom_field_customer_group',
-		'field'   => [
+		'name'  => 'custom_field_customer_group',
+		'field' => [
 			[
-				'name'     => 'custom_field_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'custom_field_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'required',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'required',
+				'type' => 'tinyint(1)'
 			]
 		],
 		'primary' => [
@@ -2782,22 +2579,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'custom_field_description',
-		'field'   => [
+		'name'  => 'custom_field_description',
+		'field' => [
 			[
-				'name'     => 'custom_field_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'custom_field_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			]
 		],
 		'primary' => [
@@ -2822,23 +2616,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'custom_field_value',
-		'field'   => [
+		'name'  => 'custom_field_value',
+		'field' => [
 			[
 				'name'           => 'custom_field_value_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'custom_field_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'custom_field_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -2857,27 +2648,23 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'custom_field_value_description',
-		'field'   => [
+		'name'  => 'custom_field_value_description',
+		'field' => [
 			[
-				'name'     => 'custom_field_value_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'custom_field_value_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'custom_field_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'custom_field_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			]
 		],
 		'primary' => [
@@ -2902,28 +2689,24 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'download',
-		'field'   => [
+		'name'  => 'download',
+		'field' => [
 			[
 				'name'           => 'download_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'filename',
-				'type'     => 'varchar(160)',
-				'not_null' => true
+				'name' => 'filename',
+				'type' => 'varchar(160)'
 			],
 			[
-				'name'     => 'mask',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'mask',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -2935,22 +2718,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'download_description',
-		'field'   => [
+		'name'  => 'download_description',
+		'field' => [
 			[
-				'name'     => 'download_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'download_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -2970,38 +2750,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'download_report',
-		'field'   => [
+		'name'  => 'download_report',
+		'field' => [
 			[
 				'name'           => 'download_report_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'download_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'download_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'country',
-				'type'     => 'varchar(2)',
-				'not_null' => true
+				'name' => 'country',
+				'type' => 'varchar(2)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -3025,45 +2799,38 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'event',
-		'field'   => [
+		'name'  => 'event',
+		'field' => [
 			[
 				'name'           => 'event_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'trigger',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'trigger',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'action',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'action',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'status',
+				'type'    => 'tinyint(1)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'sort_order',
+				'type'    => 'int(3)',
+				'default' => '1'
 			]
 		],
 		'primary' => [
@@ -3075,28 +2842,24 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'extension',
-		'field'   => [
+		'name'  => 'extension',
+		'field' => [
 			[
 				'name'           => 'extension_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'extension',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'extension',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'type',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'type',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(128)'
 			]
 		],
 		'primary' => [
@@ -3108,63 +2871,52 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'extension_install',
-		'field'   => [
+		'name'  => 'extension_install',
+		'field' => [
 			[
 				'name'           => 'extension_install_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'extension_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'extension_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'extension_download_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'extension_download_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'version',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'version',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'author',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'author',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'link',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'link',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -3183,23 +2935,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'extension_path',
-		'field'   => [
+		'name'  => 'extension_path',
+		'field' => [
 			[
 				'name'           => 'extension_path_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'extension_install_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'extension_install_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'path',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'path',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -3212,7 +2961,7 @@ function oc_db_schema() {
 				'field' => 'extension_install_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'path',
 				'key'  => [
@@ -3226,23 +2975,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'filter',
-		'field'   => [
+		'name'  => 'filter',
+		'field' => [
 			[
 				'name'           => 'filter_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'filter_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'filter_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -3261,27 +3007,23 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'filter_description',
-		'field'   => [
+		'name'  => 'filter_description',
+		'field' => [
 			[
-				'name'     => 'filter_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'filter_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'filter_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'filter_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -3306,18 +3048,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'filter_group',
-		'field'   => [
+		'name'  => 'filter_group',
+		'field' => [
 			[
 				'name'           => 'filter_group_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -3329,22 +3069,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'filter_group_description',
-		'field'   => [
+		'name'  => 'filter_group_description',
+		'field' => [
 			[
-				'name'     => 'filter_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'filter_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -3369,48 +3106,40 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'gdpr',
-		'field'   => [
+		'name'  => 'gdpr',
+		'field' => [
 			[
 				'name'           => 'gdpr_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'action',
-				'type'     => 'varchar(6)',
-				'not_null' => true
+				'name' => 'action',
+				'type' => 'varchar(6)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -3434,23 +3163,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'geo_zone',
-		'field'   => [
+		'name'  => 'geo_zone',
+		'field' => [
 			[
 				'name'           => 'geo_zone_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -3462,31 +3188,27 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'information',
-		'field'   => [
+		'name'  => 'information',
+		'field' => [
 			[
 				'name'           => 'information_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'bottom',
-				'type'     => 'int(1)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'bottom',
+				'type'    => 'int(1)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'sort_order',
+				'type'    => 'int(3)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'status',
+				'type'    => 'tinyint(1)',
+				'default' => '1'
 			]
 		],
 		'primary' => [
@@ -3498,42 +3220,35 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'information_description',
-		'field'   => [
+		'name'  => 'information_description',
+		'field' => [
 			[
-				'name'     => 'information_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'information_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'mediumtext',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'mediumtext'
 			],
 			[
-				'name'     => 'meta_title',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_title',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_description',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_keyword',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_keyword',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -3553,22 +3268,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'information_to_layout',
-		'field'   => [
+		'name'  => 'information_to_layout',
+		'field' => [
 			[
-				'name'     => 'information_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'information_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'layout_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'layout_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -3598,17 +3310,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'information_to_store',
-		'field'   => [
+		'name'  => 'information_to_store',
+		'field' => [
 			[
-				'name'     => 'information_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'information_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -3633,50 +3343,43 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'language',
-		'field'   => [
+		'name'  => 'language',
+		'field' => [
 			[
 				'name'           => 'language_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(5)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(5)'
 			],
 			[
-				'name'     => 'locale',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'locale',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'extension',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'extension',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'sort_order',
+				'type'    => 'int(3)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			]
 		],
 		'primary' => [
 			'language_id'
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'name',
 				'key'  => [
@@ -3690,18 +3393,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'layout',
-		'field'   => [
+		'name'  => 'layout',
+		'field' => [
 			[
 				'name'           => 'layout_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -3713,33 +3414,28 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'layout_module',
-		'field'   => [
+		'name'  => 'layout_module',
+		'field' => [
 			[
 				'name'           => 'layout_module_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'layout_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'layout_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'position',
-				'type'     => 'varchar(14)',
-				'not_null' => true
+				'name' => 'position',
+				'type' => 'varchar(14)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -3758,28 +3454,24 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'layout_route',
-		'field'   => [
+		'name'  => 'layout_route',
+		'field' => [
 			[
 				'name'           => 'layout_route_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'layout_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'layout_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'route',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'route',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -3803,18 +3495,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'length_class',
-		'field'   => [
+		'name'  => 'length_class',
+		'field' => [
 			[
 				'name'           => 'length_class_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'decimal(15,8)'
 			]
 		],
 		'primary' => [
@@ -3826,27 +3516,23 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'length_class_description',
-		'field'   => [
+		'name'  => 'length_class_description',
+		'field' => [
 			[
-				'name'     => 'length_class_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'length_class_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'unit',
-				'type'     => 'varchar(4)',
-				'not_null' => true
+				'name' => 'unit',
+				'type' => 'varchar(4)'
 			]
 		],
 		'primary' => [
@@ -3871,54 +3557,46 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'location',
-		'field'   => [
+		'name'  => 'location',
+		'field' => [
 			[
 				'name'           => 'location_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'address',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'address',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'telephone',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'telephone',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'geocode',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'geocode',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'open',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'open',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			]
 		],
 		'primary' => [
 			'location_id'
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'name',
 				'key'  => [
@@ -3932,28 +3610,24 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'manufacturer',
-		'field'   => [
+		'name'  => 'manufacturer',
+		'field' => [
 			[
 				'name'           => 'manufacturer_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -3965,22 +3639,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'manufacturer_to_layout',
-		'field'   => [
+		'name'  => 'manufacturer_to_layout',
+		'field' => [
 			[
-				'name'     => 'manufacturer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'manufacturer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'layout_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'layout_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -4010,17 +3681,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'manufacturer_to_store',
-		'field'   => [
+		'name'  => 'manufacturer_to_store',
+		'field' => [
 			[
-				'name'     => 'manufacturer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'manufacturer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -4045,39 +3714,33 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'marketing',
-		'field'   => [
+		'name'  => 'marketing',
+		'field' => [
 			[
 				'name'           => 'marketing_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'clicks',
-				'type'     => 'int(5)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'clicks',
+				'type'    => 'int(5)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -4089,38 +3752,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'marketing_report',
-		'field'   => [
+		'name'  => 'marketing_report',
+		'field' => [
 			[
 				'name'           => 'marketing_report_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'marketing_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'marketing_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'country',
-				'type'     => 'varchar(2)',
-				'not_null' => true
+				'name' => 'country',
+				'type' => 'varchar(2)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -4144,63 +3801,53 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'modification',
-		'field'   => [
+		'name'  => 'modification',
+		'field' => [
 			[
 				'name'           => 'modification_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'      => 'extension_install_id',
-				'type'      => 'int(11)',
-				'not_null'  => true
-			],
-			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
+				'name'     => 'extension_install_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'author',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'version',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'author',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'link',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'version',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'xml',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'link',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'xml',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
+			],
+			[
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -4212,66 +3859,57 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name' => 'module',
+		'name'  => 'module',
 		'field' => [
 			[
-				'name' => 'module_id',
-				'type' => 'int(11)',
-				'not_null' => true,
+				'name'           => 'module_id',
+				'type'           => 'int(11)',
 				'auto_increment' => true
 			],
 			[
 				'name' => 'name',
-				'type' => 'varchar(64)',
-				'not_null' => true
+				'type' => 'varchar(64)'
 			],
 			[
 				'name' => 'code',
-				'type' => 'varchar(64)',
-				'not_null' => true
+				'type' => 'varchar(64)'
 			],
 			[
 				'name' => 'setting',
-				'type' => 'text',
-				'not_null' => true
+				'type' => 'text'
 			]
 		],
 		'primary' => [
 			'module_id'
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name'    => 'notification',
-		'field'   => [
+		'name'  => 'notification',
+		'field' => [
 			[
 				'name'           => 'notification_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'text',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'text',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(11)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(11)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -4283,23 +3921,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'option',
-		'field'   => [
+		'name'  => 'option',
+		'field' => [
 			[
 				'name'           => 'option_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'type',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'type',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -4311,22 +3946,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'option_description',
-		'field'   => [
+		'name'  => 'option_description',
+		'field' => [
 			[
-				'name'     => 'option_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'option_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			]
 		],
 		'primary' => [
@@ -4346,28 +3978,24 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'option_value',
-		'field'   => [
+		'name'  => 'option_value',
+		'field' => [
 			[
 				'name'           => 'option_value_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'option_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'option_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -4386,27 +4014,23 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'option_value_description',
-		'field'   => [
+		'name'  => 'option_value_description',
+		'field' => [
 			[
-				'name'     => 'option_value_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'option_value_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'option_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'option_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			]
 		],
 		'primary' => [
@@ -4431,330 +4055,267 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order',
-		'field'   => [
+		'name'  => 'order',
+		'field' => [
 			[
 				'name'           => 'order_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'subscription_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'invoice_no',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'invoice_no',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'invoice_prefix',
-				'type'     => 'varchar(26)',
-				'not_null' => true
+				'name' => 'invoice_prefix',
+				'type' => 'varchar(26)'
 			],
 			[
-				'name'     => 'transaction_id',
-				'type'     => 'varchar(100)',
-				'not_null' => true
+				'name' => 'transaction_id',
+				'type' => 'varchar(100)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'store_name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'store_name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'store_url',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'store_url',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'customer_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'customer_group_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'firstname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'firstname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'lastname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'lastname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'telephone',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'telephone',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'custom_field',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'custom_field',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'payment_address_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'payment_address_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'payment_firstname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'payment_firstname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'payment_lastname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'payment_lastname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'payment_company',
-				'type'     => 'varchar(60)',
-				'not_null' => true
+				'name' => 'payment_company',
+				'type' => 'varchar(60)'
 			],
 			[
-				'name'     => 'payment_address_1',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'payment_address_1',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'payment_address_2',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'payment_address_2',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'payment_city',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'payment_city',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'payment_postcode',
-				'type'     => 'varchar(10)',
-				'not_null' => true
+				'name' => 'payment_postcode',
+				'type' => 'varchar(10)'
 			],
 			[
-				'name'     => 'payment_country',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'payment_country',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'payment_country_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'payment_country_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'payment_zone',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'payment_zone',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'payment_zone_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'payment_zone_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'payment_address_format',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'payment_address_format',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'payment_custom_field',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'payment_custom_field',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'payment_method',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'payment_method',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'shipping_address_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'shipping_address_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'shipping_firstname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'shipping_firstname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'shipping_lastname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'shipping_lastname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'shipping_company',
-				'type'     => 'varchar(60)',
-				'not_null' => true
+				'name' => 'shipping_company',
+				'type' => 'varchar(60)'
 			],
 			[
-				'name'     => 'shipping_address_1',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'shipping_address_1',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'shipping_address_2',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'shipping_address_2',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'shipping_city',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'shipping_city',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'shipping_postcode',
-				'type'     => 'varchar(10)',
-				'not_null' => true
+				'name' => 'shipping_postcode',
+				'type' => 'varchar(10)'
 			],
 			[
-				'name'     => 'shipping_country',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'shipping_country',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'shipping_country_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'shipping_country_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'shipping_zone',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'shipping_zone',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'shipping_zone_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'shipping_zone_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'shipping_address_format',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'shipping_address_format',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'shipping_custom_field',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'shipping_custom_field',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'shipping_method',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'shipping_method',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'total',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'total',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'order_status_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'order_status_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'affiliate_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'affiliate_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'commission',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'commission',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'marketing_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'marketing_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'tracking',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'tracking',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_code',
-				'type'     => 'varchar(5)',
-				'not_null' => true
+				'name' => 'language_code',
+				'type' => 'varchar(5)'
 			],
 			[
-				'name'     => 'currency_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'currency_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'currency_code',
-				'type'     => 'varchar(3)',
-				'not_null' => true
+				'name' => 'currency_code',
+				'type' => 'varchar(3)'
 			],
 			[
-				'name'     => 'currency_value',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true,
-				'default'  => '1.00000000'
+				'name'    => 'currency_value',
+				'type'    => 'decimal(15,8)',
+				'default' => '1.00000000'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'forwarded_ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'forwarded_ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'user_agent',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'user_agent',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'accept_language',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'accept_language',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -4822,7 +4383,7 @@ function oc_db_schema() {
 				'field' => 'currency_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'email',
 				'key'  => [
@@ -4836,39 +4397,33 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order_history',
-		'field'   => [
+		'name'  => 'order_history',
+		'field' => [
 			[
 				'name'           => 'order_history_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'order_status_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_status_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'notify',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'notify',
+				'type'    => 'tinyint(1)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -4892,49 +4447,41 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order_option',
-		'field'   => [
+		'name'  => 'order_option',
+		'field' => [
 			[
 				'name'           => 'order_option_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'order_product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_option_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_option_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_option_value_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'product_option_value_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'type',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'type',
+				'type' => 'varchar(32)'
 			]
 		],
 		'primary' => [
@@ -4968,66 +4515,55 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order_product',
-		'field'   => [
+		'name'  => 'order_product',
+		'field' => [
 			[
 				'name'           => 'order_product_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'master_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'master_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'model',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'model',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'quantity',
-				'type'     => 'int(4)',
-				'not_null' => true
+				'name' => 'quantity',
+				'type' => 'int(4)'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'price',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'total',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'total',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'tax',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'tax',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'reward',
-				'type'     => 'int(8)',
-				'not_null' => true
+				'name' => 'reward',
+				'type' => 'int(8)'
 			]
 		],
 		'primary' => [
@@ -5050,7 +4586,7 @@ function oc_db_schema() {
 				'field' => 'product_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'order_id',
 				'key'  => [
@@ -5064,93 +4600,76 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order_subscription',
-		'field'   => [
+		'name'  => 'order_subscription',
+		'field' => [
 			[
 				'name'           => 'order_subscription_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'subscription_plan_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_plan_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'trial_price',
-				'type'     => 'decimal(10,4)',
-				'not_null' => true
+				'name' => 'trial_price',
+				'type' => 'decimal(10,4)'
 			],
 			[
-				'name'     => 'trial_tax',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'trial_tax',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'trial_frequency',
-				'type'     => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')',
-				'not_null' => true
+				'name' => 'trial_frequency',
+				'type' => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')'
 			],
 			[
-				'name'     => 'trial_cycle',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'trial_cycle',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'trial_duration',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'trial_duration',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'trial_remaining',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'trial_remaining',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'trial_status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'trial_status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(10,4)',
-				'not_null' => true
+				'name' => 'price',
+				'type' => 'decimal(10,4)'
 			],
 			[
-				'name'     => 'tax',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'tax',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'frequency',
-				'type'     => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')',
-				'not_null' => true
+				'name' => 'frequency',
+				'type' => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')'
 			],
 			[
-				'name'     => 'cycle',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'cycle',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'duration',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'duration',
+				'type' => 'smallint(6)'
 			]
 		],
 		'primary' => [
@@ -5178,7 +4697,7 @@ function oc_db_schema() {
 				'field' => 'subscription_status_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'order_id',
 				'key'  => [
@@ -5192,23 +4711,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order_status',
-		'field'   => [
+		'name'  => 'order_status',
+		'field' => [
 			[
 				'name'           => 'order_status_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			]
 		],
 		'primary' => [
@@ -5228,44 +4744,37 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order_total',
-		'field'   => [
+		'name'  => 'order_total',
+		'field' => [
 			[
 				'name'           => 'order_total_id',
 				'type'           => 'int(10)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'extension',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'extension',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'value',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -5278,7 +4787,7 @@ function oc_db_schema() {
 				'field' => 'order_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'order_id',
 				'key'  => [
@@ -5292,68 +4801,56 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'order_voucher',
-		'field'   => [
+		'name'  => 'order_voucher',
+		'field' => [
 			[
 				'name'           => 'order_voucher_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'voucher_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'voucher_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(10)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(10)'
 			],
 			[
-				'name'     => 'from_name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'from_name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'from_email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'from_email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'to_name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'to_name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'to_email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'to_email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'voucher_theme_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'voucher_theme_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'message',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'message',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'amount',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'amount',
+				'type' => 'decimal(15,4)'
 			]
 		],
 		'primary' => [
@@ -5377,195 +4874,161 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product',
-		'field'   => [
+		'name'  => 'product',
+		'field' => [
 			[
 				'name'           => 'product_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'master_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'master_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'model',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'model',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'sku',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'sku',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'upc',
-				'type'     => 'varchar(12)',
-				'not_null' => true
+				'name' => 'upc',
+				'type' => 'varchar(12)'
 			],
 			[
-				'name'     => 'ean',
-				'type'     => 'varchar(14)',
-				'not_null' => true
+				'name' => 'ean',
+				'type' => 'varchar(14)'
 			],
 			[
-				'name'     => 'jan',
-				'type'     => 'varchar(13)',
-				'not_null' => true
+				'name' => 'jan',
+				'type' => 'varchar(13)'
 			],
 			[
-				'name'     => 'isbn',
-				'type'     => 'varchar(17)',
-				'not_null' => true
+				'name' => 'isbn',
+				'type' => 'varchar(17)'
 			],
 			[
-				'name'     => 'mpn',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'mpn',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'location',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'location',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'variant',
-				'type'     => 'text',
-				'not_null' => true,
-				'default'  => ''
+				'name'    => 'variant',
+				'type'    => 'text',
+				'default' => ''
 			],
 			[
-				'name'     => 'override',
-				'type'     => 'text',
-				'not_null' => true,
-				'default'  => ''
+				'name'    => 'override',
+				'type'    => 'text',
+				'default' => ''
 			],
 			[
-				'name'     => 'quantity',
-				'type'     => 'int(4)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'quantity',
+				'type'    => 'int(4)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'stock_status_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'stock_status_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'manufacturer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'manufacturer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'shipping',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'shipping',
+				'type'    => 'tinyint(1)',
+				'default' => '1'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'price',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'points',
-				'type'     => 'int(8)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'points',
+				'type'    => 'int(8)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'tax_class_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'tax_class_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'date_available',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_available',
+				'type' => 'date'
 			],
 			[
-				'name'     => 'weight',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true,
-				'default'  => '0.00000000'
+				'name'    => 'weight',
+				'type'    => 'decimal(15,8)',
+				'default' => '0.00000000'
 			],
 			[
-				'name'     => 'weight_class_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'weight_class_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'length',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true,
-				'default'  => '0.00000000'
+				'name'    => 'length',
+				'type'    => 'decimal(15,8)',
+				'default' => '0.00000000'
 			],
 			[
-				'name'     => 'width',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true,
-				'default'  => '0.00000000'
+				'name'    => 'width',
+				'type'    => 'decimal(15,8)',
+				'default' => '0.00000000'
 			],
 			[
-				'name'     => 'height',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true,
-				'default'  => '0.00000000'
+				'name'    => 'height',
+				'type'    => 'decimal(15,8)',
+				'default' => '0.00000000'
 			],
 			[
-				'name'     => 'length_class_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'length_class_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'subtract',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'subtract',
+				'type'    => 'tinyint(1)',
+				'default' => '1'
 			],
 			[
-				'name'     => 'minimum',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'minimum',
+				'type'    => 'int(11)',
+				'default' => '1'
 			],
 			[
-				'name'     => 'rating',
-				'type'     => 'int(1)',
-				'not_null' => true
+				'name' => 'rating',
+				'type' => 'int(1)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'sort_order',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'status',
+				'type'    => 'tinyint(1)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -5609,27 +5072,23 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_attribute',
-		'field'   => [
+		'name'  => 'product_attribute',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'attribute_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'attribute_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'text',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'text',
+				'type' => 'text'
 			]
 		],
 		'primary' => [
@@ -5660,47 +5119,39 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_description',
-		'field'   => [
+		'name'  => 'product_description',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'tag',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'tag',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'meta_title',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_title',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_description',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'meta_keyword',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'meta_keyword',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -5719,7 +5170,7 @@ function oc_db_schema() {
 				'field' => 'language_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'name',
 				'key'  => [
@@ -5733,51 +5184,43 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_discount',
-		'field'   => [
+		'name'  => 'product_discount',
+		'field' => [
 			[
 				'name'           => 'product_discount_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'quantity',
-				'type'     => 'int(4)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'quantity',
+				'type'    => 'int(4)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'priority',
-				'type'     => 'int(5)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'priority',
+				'type'    => 'int(5)',
+				'default' => '1'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'price',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'date_start',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_start',
+				'type' => 'date'
 			],
 			[
-				'name'     => 'date_end',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_end',
+				'type' => 'date'
 			]
 		],
 		'primary' => [
@@ -5795,7 +5238,7 @@ function oc_db_schema() {
 				'field' => 'customer_group_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'product_id',
 				'key'  => [
@@ -5809,17 +5252,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_filter',
-		'field'   => [
+		'name'  => 'product_filter',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'filter_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'filter_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -5844,29 +5285,25 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_image',
-		'field'   => [
+		'name'  => 'product_image',
+		'field' => [
 			[
 				'name'           => 'product_image_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'sort_order',
+				'type'    => 'int(3)',
+				'default' => '0'
 			]
 		],
 		'primary' => [
@@ -5879,7 +5316,7 @@ function oc_db_schema() {
 				'field' => 'product_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'product_id',
 				'key'  => [
@@ -5893,33 +5330,28 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_option',
-		'field'   => [
+		'name'  => 'product_option',
+		'field' => [
 			[
 				'name'           => 'product_option_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'option_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'option_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'required',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'required',
+				'type' => 'tinyint(1)'
 			]
 		],
 		'primary' => [
@@ -5943,73 +5375,60 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_option_value',
-		'field'   => [
+		'name'  => 'product_option_value',
+		'field' => [
 			[
 				'name'           => 'product_option_value_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_option_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_option_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'option_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'option_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'option_value_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'option_value_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'quantity',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'quantity',
+				'type' => 'int(3)'
 			],
 			[
-				'name'     => 'subtract',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'subtract',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'price',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'price_prefix',
-				'type'     => 'varchar(1)',
-				'not_null' => true
+				'name' => 'price_prefix',
+				'type' => 'varchar(1)'
 			],
 			[
-				'name'     => 'points',
-				'type'     => 'int(8)',
-				'not_null' => true
+				'name' => 'points',
+				'type' => 'int(8)'
 			],
 			[
-				'name'     => 'points_prefix',
-				'type'     => 'varchar(1)',
-				'not_null' => true
+				'name' => 'points_prefix',
+				'type' => 'varchar(1)'
 			],
 			[
-				'name'     => 'weight',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true
+				'name' => 'weight',
+				'type' => 'decimal(15,8)'
 			],
 			[
-				'name'     => 'weight_prefix',
-				'type'     => 'varchar(1)',
-				'not_null' => true
+				'name' => 'weight_prefix',
+				'type' => 'varchar(1)'
 			]
 		],
 		'primary' => [
@@ -6043,32 +5462,27 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_subscription',
-		'field'   => [
+		'name'  => 'product_subscription',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'subscription_plan_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_plan_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'trial_price',
-				'type'     => 'decimal(10,4)',
-				'not_null' => true
+				'name' => 'trial_price',
+				'type' => 'decimal(10,4)'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(10,4)',
-				'not_null' => true
+				'name' => 'price',
+				'type' => 'decimal(10,4)'
 			]
 		],
 		'primary' => [
@@ -6099,17 +5513,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_related',
-		'field'   => [
+		'name'  => 'product_related',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'related_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'related_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -6134,39 +5546,33 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_report',
-		'field'   => [
+		'name'  => 'product_report',
+		'field' => [
 			[
 				'name'           => 'product_report_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => 0
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => 0
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'country',
-				'type'     => 'varchar(2)',
-				'not_null' => true
+				'name' => 'country',
+				'type' => 'varchar(2)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -6190,31 +5596,27 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_reward',
-		'field'   => [
+		'name'  => 'product_reward',
+		'field' => [
 			[
 				'name'           => 'product_reward_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => 0
+				'name'    => 'product_id',
+				'type'    => 'int(11)',
+				'default' => 0
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'customer_group_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'points',
-				'type'     => 'int(8)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'points',
+				'type'    => 'int(8)',
+				'default' => '0'
 			]
 		],
 		'primary' => [
@@ -6238,45 +5640,38 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_special',
-		'field'   => [
+		'name'  => 'product_special',
+		'field' => [
 			[
 				'name'           => 'product_special_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'priority',
-				'type'     => 'int(5)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'priority',
+				'type'    => 'int(5)',
+				'default' => '1'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'price',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'date_start',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_start',
+				'type' => 'date'
 			],
 			[
-				'name'     => 'date_end',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_end',
+				'type' => 'date'
 			]
 		],
 		'primary' => [
@@ -6294,7 +5689,7 @@ function oc_db_schema() {
 				'field' => 'customer_group_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'product_id',
 				'key'  => [
@@ -6308,17 +5703,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_to_category',
-		'field'   => [
+		'name'  => 'product_to_category',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'category_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'category_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -6337,7 +5730,7 @@ function oc_db_schema() {
 				'field' => 'category_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'category_id',
 				'key'  => [
@@ -6351,17 +5744,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_to_download',
-		'field'   => [
+		'name'  => 'product_to_download',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'download_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'download_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -6386,22 +5777,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_to_layout',
-		'field'   => [
+		'name'  => 'product_to_layout',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'layout_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'layout_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -6431,18 +5819,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_to_store',
-		'field'   => [
+		'name'  => 'product_to_store',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			]
 		],
 		'primary' => [
@@ -6467,17 +5853,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'product_viewed',
-		'field'   => [
+		'name'  => 'product_viewed',
+		'field' => [
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'viewed',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'viewed',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -6496,103 +5880,84 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'return',
-		'field'   => [
+		'name'  => 'return',
+		'field' => [
 			[
 				'name'           => 'return_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'firstname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'firstname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'lastname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'lastname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'telephone',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'telephone',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'product',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'product',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'model',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'model',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'quantity',
-				'type'     => 'int(4)',
-				'not_null' => true
+				'name' => 'quantity',
+				'type' => 'int(4)'
 			],
 			[
-				'name'     => 'opened',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'opened',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'return_reason_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'return_reason_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'return_action_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'return_action_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'return_status_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'return_status_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_ordered',
-				'type'     => 'date',
-				'not_null' => true
+				'name' => 'date_ordered',
+				'type' => 'date'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -6636,24 +6001,21 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'return_action',
-		'field'   => [
+		'name'  => 'return_action',
+		'field' => [
 			[
 				'name'           => 'return_action_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'language_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			]
 		],
 		'primary' => [
@@ -6673,38 +6035,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'return_history',
-		'field'   => [
+		'name'  => 'return_history',
+		'field' => [
 			[
 				'name'           => 'return_history_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'return_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'return_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'return_status_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'return_status_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'notify',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'notify',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -6728,24 +6084,21 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'return_reason',
-		'field'   => [
+		'name'  => 'return_reason',
+		'field' => [
 			[
 				'name'           => 'return_reason_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'language_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			]
 		],
 		'primary' => [
@@ -6765,24 +6118,21 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'return_status',
-		'field'   => [
+		'name'  => 'return_status',
+		'field' => [
 			[
 				'name'           => 'return_status_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'language_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			]
 		],
 		'primary' => [
@@ -6802,54 +6152,45 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'review',
-		'field'   => [
+		'name'  => 'review',
+		'field' => [
 			[
 				'name'           => 'review_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'author',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'author',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'text',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'text',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'rating',
-				'type'     => 'int(1)',
-				'not_null' => true
+				'name' => 'rating',
+				'type' => 'int(1)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'status',
+				'type'    => 'tinyint(1)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -6867,7 +6208,7 @@ function oc_db_schema() {
 				'field' => 'customer_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'product_id',
 				'key'  => [
@@ -6881,38 +6222,32 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'startup',
-		'field'   => [
+		'name'  => 'startup',
+		'field' => [
 			[
 				'name'           => 'startup_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'action',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'action',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -6924,23 +6259,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'statistics',
-		'field'   => [
+		'name'  => 'statistics',
+		'field' => [
 			[
 				'name'           => 'statistics_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'decimal(15,4)'
 			]
 		],
 		'primary' => [
@@ -6952,28 +6284,25 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'session',
-		'field'   => [
+		'name'  => 'session',
+		'field' => [
 			[
-				'name'     => 'session_id',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'session_id',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'data',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'data',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'expire',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'expire',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
 			'session_id'
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'expire',
 				'key'  => [
@@ -6987,40 +6316,34 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'setting',
-		'field'   => [
+		'name'  => 'setting',
+		'field' => [
 			[
 				'name'           => 'setting_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'store_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'key',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'key',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'serialized',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => 0
+				'name'    => 'serialized',
+				'type'    => 'tinyint(1)',
+				'default' => 0
 			]
 		],
 		'primary' => [
@@ -7039,18 +6362,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'stock_status',
-		'field'   => [
+		'name'  => 'stock_status',
+		'field' => [
 			[
 				'name'           => 'stock_status_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
 				'name'     => 'name',
@@ -7080,23 +6401,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'store',
-		'field'   => [
+		'name'  => 'store',
+		'field' => [
 			[
 				'name'           => 'store_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'url',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'url',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -7108,198 +6426,160 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'subscription',
-		'field'   => [
+		'name'  => 'subscription',
+		'field' => [
 			[
 				'name'           => 'subscription_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'order_product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'payment_address_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'payment_address_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'payment_method',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'payment_method',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'shipping_address_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'shipping_address_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'shipping_method',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'shipping_method',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'product_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'product_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'option',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'option',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'quantity',
-				'type'     => 'int(4)',
-				'not_null' => true
+				'name' => 'quantity',
+				'type' => 'int(4)'
 			],
 			[
-				'name'     => 'subscription_plan_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_plan_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'trial_price',
-				'type'     => 'decimal(10,4)',
-				'not_null' => true
+				'name' => 'trial_price',
+				'type' => 'decimal(10,4)'
 			],
 			[
-				'name'     => 'trial_frequency',
-				'type'     => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')',
-				'not_null' => true
+				'name' => 'trial_frequency',
+				'type' => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')'
 			],
 			[
-				'name'     => 'trial_cycle',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'trial_cycle',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'trial_duration',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'trial_duration',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'trial_remaining',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'trial_remaining',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'trial_status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'trial_status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'price',
-				'type'     => 'decimal(10,4)',
-				'not_null' => true
+				'name' => 'price',
+				'type' => 'decimal(10,4)'
 			],
 			[
-				'name'     => 'frequency',
-				'type'     => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')',
-				'not_null' => true
+				'name' => 'frequency',
+				'type' => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')'
 			],
 			[
-				'name'     => 'cycle',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'cycle',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'duration',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'duration',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'remaining',
-				'type'     => 'smallint(6)',
-				'not_null' => true
+				'name' => 'remaining',
+				'type' => 'smallint(6)'
 			],
 			[
-				'name'     => 'date_next',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_next',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'subscription_status_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_status_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'affiliate_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'affiliate_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'marketing_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'marketing_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'tracking',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'tracking',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'currency_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'currency_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'forwarded_ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'forwarded_ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'user_agent',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'user_agent',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'accept_language',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'accept_language',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			],
 			[
-				'name'     => 'date_modified',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_modified',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -7332,7 +6612,7 @@ function oc_db_schema() {
 				'field' => 'subscription_status_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'order_id',
 				'key'  => [
@@ -7346,39 +6626,33 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'subscription_history',
-		'field'   => [
+		'name'  => 'subscription_history',
+		'field' => [
 			[
 				'name'           => 'subscription_history_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'subscription_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'subscription_status_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_status_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'notify',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'notify',
+				'type'    => 'tinyint(1)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'comment',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'comment',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -7402,58 +6676,48 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'subscription_plan',
-		'field'   => [
+		'name'  => 'subscription_plan',
+		'field' => [
 			[
 				'name'           => 'subscription_plan_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'trial_frequency',
-				'type'     => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')',
-				'not_null' => true
+				'name' => 'trial_frequency',
+				'type' => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')'
 			],
 			[
-				'name'     => 'trial_duration',
-				'type'     => 'int(10)',
-				'not_null' => true
+				'name' => 'trial_duration',
+				'type' => 'int(10)'
 			],
 			[
-				'name'     => 'trial_cycle',
-				'type'     => 'int(10)',
-				'not_null' => true
+				'name' => 'trial_cycle',
+				'type' => 'int(10)'
 			],
 			[
-				'name'     => 'trial_status',
-				'type'     => 'tinyint(4)',
-				'not_null' => true
+				'name' => 'trial_status',
+				'type' => 'tinyint(4)'
 			],
 			[
-				'name'     => 'frequency',
-				'type'     => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')',
-				'not_null' => true
+				'name' => 'frequency',
+				'type' => 'enum(\'day\',\'week\',\'semi_month\',\'month\',\'year\')'
 			],
 			[
-				'name'     => 'duration',
-				'type'     => 'int(10)',
-				'not_null' => true
+				'name' => 'duration',
+				'type' => 'int(10)'
 			],
 			[
-				'name'     => 'cycle',
-				'type'     => 'int(10)',
-				'not_null' => true
+				'name' => 'cycle',
+				'type' => 'int(10)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -7465,22 +6729,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'subscription_plan_description',
-		'field'   => [
+		'name'  => 'subscription_plan_description',
+		'field' => [
 			[
-				'name'     => 'subscription_plan_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'subscription_plan_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -7500,23 +6761,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'subscription_status',
-		'field'   => [
+		'name'  => 'subscription_status',
+		'field' => [
 			[
 				'name'           => 'subscription_status_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			]
 		],
 		'primary' => [
@@ -7536,23 +6794,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'tax_class',
-		'field'   => [
+		'name'  => 'tax_class',
+		'field' => [
 			[
 				'name'           => 'tax_class_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'description',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'description',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -7564,35 +6819,30 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'tax_rate',
-		'field'   => [
+		'name'  => 'tax_rate',
+		'field' => [
 			[
 				'name'           => 'tax_rate_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'geo_zone_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'geo_zone_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'rate',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true,
-				'default'  => '0.0000'
+				'name'    => 'rate',
+				'type'    => 'decimal(15,4)',
+				'default' => '0.0000'
 			],
 			[
-				'name'     => 'type',
-				'type'     => 'char(1)',
-				'not_null' => true
+				'name' => 'type',
+				'type' => 'char(1)'
 			]
 		],
 		'primary' => [
@@ -7611,17 +6861,15 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'tax_rate_to_customer_group',
-		'field'   => [
+		'name'  => 'tax_rate_to_customer_group',
+		'field' => [
 			[
-				'name'     => 'tax_rate_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'tax_rate_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'customer_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'customer_group_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
@@ -7646,34 +6894,29 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'tax_rule',
-		'field'   => [
+		'name'  => 'tax_rule',
+		'field' => [
 			[
 				'name'           => 'tax_rule_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'tax_class_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'tax_class_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'tax_rate_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'tax_rate_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'based',
-				'type'     => 'varchar(10)',
-				'not_null' => true
+				'name' => 'based',
+				'type' => 'varchar(10)'
 			],
 			[
-				'name'     => 'priority',
-				'type'     => 'int(5)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'priority',
+				'type'    => 'int(5)',
+				'default' => '1'
 			]
 		],
 		'primary' => [
@@ -7697,33 +6940,28 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'theme',
-		'field'   => [
+		'name'  => 'theme',
+		'field' => [
 			[
 				'name'           => 'theme_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'route',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'route',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'mediumtext',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'mediumtext'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -7742,43 +6980,36 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'translation',
-		'field'   => [
+		'name'  => 'translation',
+		'field' => [
 			[
 				'name'           => 'translation_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'route',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'route',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'key',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'key',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -7802,33 +7033,28 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'upload',
-		'field'   => [
+		'name'  => 'upload',
+		'field' => [
 			[
 				'name'           => 'upload_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'filename',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'filename',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -7840,43 +7066,36 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'seo_url',
-		'field'   => [
+		'name'  => 'seo_url',
+		'field' => [
 			[
 				'name'           => 'seo_url_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'store_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'store_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'key',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'key',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'value',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'keyword',
-				'type'     => 'varchar(768)',
-				'not_null' => true
+				'name' => 'keyword',
+				'type' => 'varchar(768)'
 			],
 			[
-				'name'     => 'sort_order',
-				'type'     => 'int(3)',
-				'not_null' => true
+				'name' => 'sort_order',
+				'type' => 'int(3)'
 			]
 		],
 		'primary' => [
@@ -7894,7 +7113,7 @@ function oc_db_schema() {
 				'field' => 'language_id'
 			]
 		],
-		'index'   => [
+		'index' => [
 			[
 				'name' => 'keyword',
 				'key'  => [
@@ -7923,71 +7142,59 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'user',
-		'field'   => [
+		'name'  => 'user',
+		'field' => [
 			[
 				'name'           => 'user_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'user_group_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'user_group_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'username',
-				'type'     => 'varchar(20)',
-				'not_null' => true
+				'name' => 'username',
+				'type' => 'varchar(20)'
 			],
 			[
-				'name'     => 'password',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'password',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'firstname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'firstname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'lastname',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'lastname',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true,
-				'default'  => ''
+				'name'    => 'image',
+				'type'    => 'varchar(255)',
+				'default' => ''
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(40)',
-				'not_null' => true,
-				'default'  => ''
+				'name'    => 'code',
+				'type'    => 'varchar(40)',
+				'default' => ''
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true,
-				'default'  => ''
+				'name'    => 'ip',
+				'type'    => 'varchar(40)',
+				'default' => ''
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -8006,48 +7213,40 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'user_authorize',
-		'field'   => [
+		'name'  => 'user_authorize',
+		'field' => [
 			[
 				'name'           => 'user_authorize_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'user_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'user_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'token',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'token',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'total',
-				'type'     => 'int(1)',
-				'not_null' => true
+				'name' => 'total',
+				'type' => 'int(1)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'user_agent',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'user_agent',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -8066,23 +7265,20 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'user_group',
-		'field'   => [
+		'name'  => 'user_group',
+		'field' => [
 			[
 				'name'           => 'user_group_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'permission',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'permission',
+				'type' => 'text'
 			]
 		],
 		'primary' => [
@@ -8094,33 +7290,28 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'user_login',
-		'field'   => [
+		'name'  => 'user_login',
+		'field' => [
 			[
 				'name'           => 'user_login_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'user_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'user_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'ip',
-				'type'     => 'varchar(40)',
-				'not_null' => true
+				'name' => 'ip',
+				'type' => 'varchar(40)'
 			],
 			[
-				'name'     => 'user_agent',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'user_agent',
+				'type' => 'varchar(255)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -8139,68 +7330,56 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'voucher',
-		'field'   => [
+		'name'  => 'voucher',
+		'field' => [
 			[
 				'name'           => 'voucher_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(10)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(10)'
 			],
 			[
-				'name'     => 'from_name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'from_name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'from_email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'from_email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'to_name',
-				'type'     => 'varchar(64)',
-				'not_null' => true
+				'name' => 'to_name',
+				'type' => 'varchar(64)'
 			],
 			[
-				'name'     => 'to_email',
-				'type'     => 'varchar(96)',
-				'not_null' => true
+				'name' => 'to_email',
+				'type' => 'varchar(96)'
 			],
 			[
-				'name'     => 'voucher_theme_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'voucher_theme_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'message',
-				'type'     => 'text',
-				'not_null' => true
+				'name' => 'message',
+				'type' => 'text'
 			],
 			[
-				'name'     => 'amount',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'amount',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true
+				'name' => 'status',
+				'type' => 'tinyint(1)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -8219,33 +7398,28 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'voucher_history',
-		'field'   => [
+		'name'  => 'voucher_history',
+		'field' => [
 			[
 				'name'           => 'voucher_history_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'voucher_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'voucher_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'order_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'order_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'amount',
-				'type'     => 'decimal(15,4)',
-				'not_null' => true
+				'name' => 'amount',
+				'type' => 'decimal(15,4)'
 			],
 			[
-				'name'     => 'date_added',
-				'type'     => 'datetime',
-				'not_null' => true
+				'name' => 'date_added',
+				'type' => 'datetime'
 			]
 		],
 		'primary' => [
@@ -8269,18 +7443,16 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'voucher_theme',
-		'field'   => [
+		'name'  => 'voucher_theme',
+		'field' => [
 			[
 				'name'           => 'voucher_theme_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'image',
-				'type'     => 'varchar(255)',
-				'not_null' => true
+				'name' => 'image',
+				'type' => 'varchar(255)'
 			]
 		],
 		'primary' => [
@@ -8292,22 +7464,19 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'voucher_theme_description',
-		'field'   => [
+		'name'  => 'voucher_theme_description',
+		'field' => [
 			[
-				'name'     => 'voucher_theme_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'voucher_theme_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(32)'
 			]
 		],
 		'primary' => [
@@ -8327,19 +7496,17 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'weight_class',
-		'field'   => [
+		'name'  => 'weight_class',
+		'field' => [
 			[
 				'name'           => 'weight_class_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'value',
-				'type'     => 'decimal(15,8)',
-				'not_null' => true,
-				'default'  => '0.00000000'
+				'name'    => 'value',
+				'type'    => 'decimal(15,8)',
+				'default' => '0.00000000'
 			]
 		],
 		'primary' => [
@@ -8351,27 +7518,23 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'weight_class_description',
-		'field'   => [
+		'name'  => 'weight_class_description',
+		'field' => [
 			[
-				'name'     => 'weight_class_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'weight_class_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'language_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'language_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'title',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'title',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'unit',
-				'type'     => 'varchar(4)',
-				'not_null' => true
+				'name' => 'unit',
+				'type' => 'varchar(4)'
 			]
 		],
 		'primary' => [
@@ -8391,34 +7554,29 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'zone',
-		'field'   => [
+		'name'  => 'zone',
+		'field' => [
 			[
 				'name'           => 'zone_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'country_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'country_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'name',
-				'type'     => 'varchar(128)',
-				'not_null' => true
+				'name' => 'name',
+				'type' => 'varchar(128)'
 			],
 			[
-				'name'     => 'code',
-				'type'     => 'varchar(32)',
-				'not_null' => true
+				'name' => 'code',
+				'type' => 'varchar(32)'
 			],
 			[
-				'name'     => 'status',
-				'type'     => 'tinyint(1)',
-				'not_null' => true,
-				'default'  => '1'
+				'name'    => 'status',
+				'type'    => 'tinyint(1)',
+				'default' => '1'
 			]
 		],
 		'primary' => [
@@ -8437,29 +7595,25 @@ function oc_db_schema() {
 	];
 
 	$tables[] = [
-		'name'    => 'zone_to_geo_zone',
-		'field'   => [
+		'name'  => 'zone_to_geo_zone',
+		'field' => [
 			[
 				'name'           => 'zone_to_geo_zone_id',
 				'type'           => 'int(11)',
-				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name'     => 'country_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'country_id',
+				'type' => 'int(11)'
 			],
 			[
-				'name'     => 'zone_id',
-				'type'     => 'int(11)',
-				'not_null' => true,
-				'default'  => '0'
+				'name'    => 'zone_id',
+				'type'    => 'int(11)',
+				'default' => '0'
 			],
 			[
-				'name'     => 'geo_zone_id',
-				'type'     => 'int(11)',
-				'not_null' => true
+				'name' => 'geo_zone_id',
+				'type' => 'int(11)'
 			]
 		],
 		'primary' => [

@@ -7,17 +7,21 @@ namespace Opencart\Admin\Model\User;
  */
 class UserGroup extends \Opencart\System\Engine\Model {
 	/**
+	 * Add User Group
+	 *
 	 * @param array $data
 	 *
 	 * @return int
 	 */
 	public function addUserGroup(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "user_group` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `permission` = '" . (isset($data['permission']) ? $this->db->escape(json_encode($data['permission'])) : '') . "'");
-	
+
 		return $this->db->getLastId();
 	}
 
 	/**
+	 * Edit User Group
+	 *
 	 * @param int   $user_group_id
 	 * @param array $data
 	 *
@@ -28,6 +32,8 @@ class UserGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Delete User Group
+	 *
 	 * @param int $user_group_id
 	 *
 	 * @return void
@@ -37,6 +43,8 @@ class UserGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get User Group
+	 *
 	 * @param int $user_group_id
 	 *
 	 * @return array
@@ -44,15 +52,15 @@ class UserGroup extends \Opencart\System\Engine\Model {
 	public function getUserGroup(int $user_group_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "user_group` WHERE `user_group_id` = '" . (int)$user_group_id . "'");
 
-		$user_group = [
+		return [
 			'name'       => $query->row['name'],
 			'permission' => json_decode($query->row['permission'], true)
 		];
-
-		return $user_group;
 	}
 
 	/**
+	 * Get User Groups
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -84,6 +92,8 @@ class UserGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total User Groups
+	 *
 	 * @return int
 	 */
 	public function getTotalUserGroups(): int {
@@ -93,6 +103,8 @@ class UserGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Add Permission
+	 *
 	 * @param int    $user_group_id
 	 * @param string $type
 	 * @param string $route
@@ -112,6 +124,8 @@ class UserGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Remove Permission
+	 *
 	 * @param int    $user_group_id
 	 * @param string $type
 	 * @param string $route

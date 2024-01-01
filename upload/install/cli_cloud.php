@@ -21,7 +21,7 @@ error_reporting(E_ALL);
 define('APPLICATION', 'Install');
 
 // DIR
-define('DIR_OPENCART', str_replace('\\', '/', realpath(dirname(__FILE__) . '/../')) . '/');
+define('DIR_OPENCART', str_replace('\\', '/', realpath(__DIR__ . '/../')) . '/');
 define('DIR_SYSTEM', DIR_OPENCART . 'system/');
 
 // Startup
@@ -58,9 +58,10 @@ set_error_handler(/**
  * @param       $line
  * @param array $errcontext
  *
- * @return false
  * @throws \ErrorException
- */ function($code, $message, $file, $line, array $errcontext) {
+ *
+ * @return false
+ */ function($code, $message, $file, $line, array $errcontext): bool {
 	// error was suppressed with the @-operator
 	if (error_reporting() === 0) {
 		return false;
@@ -95,7 +96,7 @@ class CliCloud extends \Opencart\System\Engine\Controller {
 				break;
 			case 'usage':
 			default:
-				$output = $this->usage($argv);
+				$output = $this->usage();
 				break;
 		}
 
@@ -145,7 +146,7 @@ class CliCloud extends \Opencart\System\Engine\Controller {
 		}
 
 		if (count($missing)) {
-			return 'ERROR: Following inputs were missing or invalid: ' . implode(', ', $missing)  . "\n";
+			return 'ERROR: Following inputs were missing or invalid: ' . implode(', ', $missing) . "\n";
 		}
 
 		// Pre-installation check
@@ -208,9 +209,7 @@ class CliCloud extends \Opencart\System\Engine\Controller {
 		$this->model_install_install->installTriggers($db, $triggers, $db_prefix);
 
 		// Return success message
-		$output = 'SUCCESS! OpenCart successfully installed on your server' . "\n";
-
-		return $output;
+		return 'SUCCESS! OpenCart successfully installed on your server' . "\n";
 	}
 
 	/**

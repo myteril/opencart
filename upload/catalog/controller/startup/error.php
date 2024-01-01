@@ -17,6 +17,8 @@ class Error extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Error
+	 *
 	 * @param string $code
 	 * @param string $message
 	 * @param string $file
@@ -53,11 +55,13 @@ class Error extends \Opencart\System\Engine\Controller {
 			header('Location: ' . $this->config->get('error_page'));
 			exit();
 		}
-	
+
 		return true;
 	}
 
 	/**
+	 * Exception
+	 *
 	 * @param \Throwable $e
 	 *
 	 * @return void
@@ -74,4 +78,4 @@ class Error extends \Opencart\System\Engine\Controller {
 			exit();
 		}
 	}
-} 
+}

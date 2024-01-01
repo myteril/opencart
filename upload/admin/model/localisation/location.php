@@ -7,6 +7,8 @@ namespace Opencart\Admin\Model\Localisation;
  */
 class Location extends \Opencart\System\Engine\Model {
 	/**
+	 * Add Location
+	 *
 	 * @param array $data
 	 *
 	 * @return int
@@ -18,16 +20,20 @@ class Location extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Edit Location
+	 *
 	 * @param int   $location_id
 	 * @param array $data
 	 *
 	 * @return void
 	 */
 	public function editLocation(int $location_id, array $data): void {
-			$this->db->query("UPDATE `" . DB_PREFIX . "location` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `address` = '" . $this->db->escape((string)$data['address']) . "', `geocode` = '" . $this->db->escape((string)$data['geocode']) . "', `telephone` = '" . $this->db->escape((string)$data['telephone']) . "', `image` = '" . $this->db->escape((string)$data['image']) . "', `open` = '" . $this->db->escape((string)$data['open']) . "', `comment` = '" . $this->db->escape((string)$data['comment']) . "' WHERE `location_id` = '" . (int)$location_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "location` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `address` = '" . $this->db->escape((string)$data['address']) . "', `geocode` = '" . $this->db->escape((string)$data['geocode']) . "', `telephone` = '" . $this->db->escape((string)$data['telephone']) . "', `image` = '" . $this->db->escape((string)$data['image']) . "', `open` = '" . $this->db->escape((string)$data['open']) . "', `comment` = '" . $this->db->escape((string)$data['comment']) . "' WHERE `location_id` = '" . (int)$location_id . "'");
 	}
 
 	/**
+	 * Delete Location
+	 *
 	 * @param int $location_id
 	 *
 	 * @return void
@@ -37,6 +43,8 @@ class Location extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Location
+	 *
 	 * @param int $location_id
 	 *
 	 * @return array
@@ -48,6 +56,8 @@ class Location extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Locations
+	 *
 	 * @param array $data
 	 *
 	 * @return array
@@ -90,6 +100,8 @@ class Location extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Locations
+	 *
 	 * @return int
 	 */
 	public function getTotalLocations(): int {

@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Sale;
  */
 class Order extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -180,6 +182,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -189,6 +193,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -468,8 +474,11 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
-	 * @return void
+	 * Info
+	 *
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function info(): void {
 		$this->load->language('sale/order');
@@ -1161,7 +1170,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		// Additional tabs that are payment gateway specific
 		$data['tabs'] = [];
 
-		// Extension Order Tabs can are called here.
+		// Extension Order Tabs can be called here.
 		$this->load->model('setting/extension');
 
 		if (!empty($order_info['payment_method']['code'])) {
@@ -1188,7 +1197,7 @@ class Order extends \Opencart\System\Engine\Controller {
 			}
 		}
 
-		// Extension Order Tabs can are called here.
+		// Extension Order Tabs can be called here.
 		$this->load->model('setting/extension');
 
 		$extensions = $this->model_setting_extension->getExtensionsByType('fraud');
@@ -1241,6 +1250,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	// Method to call the store front API and return a response.
 
 	/**
+	 * Call
+	 *
 	 * @return void
 	 */
 	public function call(): void {
@@ -1305,6 +1316,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Invoice
+	 *
 	 * @return void
 	 */
 	public function invoice(): void {
@@ -1405,7 +1418,7 @@ class Order extends \Opencart\System\Engine\Controller {
 				];
 
 				$pattern_2 = [
-					"/\s\s+/",
+					"/\\s\\s+/",
 					"/\r\r+/",
 					"/\n\n+/"
 				];
@@ -1503,13 +1516,13 @@ class Order extends \Opencart\System\Engine\Controller {
 					}
 
 					$product_data[] = [
-						'name'     		=> $product['name'],
-						'model'    		=> $product['model'],
-						'option'   		=> $option_data,
-						'subscription'	=> $description,
-						'quantity' 		=> $product['quantity'],
-						'price'    		=> $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
-						'total'    		=> $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
+						'name'         => $product['name'],
+						'model'        => $product['model'],
+						'option'       => $option_data,
+						'subscription' => $description,
+						'quantity'     => $product['quantity'],
+						'price'        => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+						'total'        => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
 					];
 				}
 
@@ -1576,6 +1589,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Shipping
+	 *
 	 * @return void
 	 */
 	public function shipping(): void {
@@ -1677,7 +1692,7 @@ class Order extends \Opencart\System\Engine\Controller {
 				];
 
 				$pattern_2 = [
-					"/\s\s+/",
+					"/\\s\\s+/",
 					"/\r\r+/",
 					"/\n\n+/"
 				];
@@ -1728,18 +1743,18 @@ class Order extends \Opencart\System\Engine\Controller {
 						}
 
 						$product_data[] = [
-							'name'     	   => $product_info['name'],
-							'model'    	   => $product_info['model'],
-							'option'   	   => $option_data,
-							'quantity'     => $product['quantity'],
-							'location'     => $product_info['location'],
-							'sku'          => $product_info['sku'],
-							'upc'          => $product_info['upc'],
-							'ean'          => $product_info['ean'],
-							'jan'          => $product_info['jan'],
-							'isbn'         => $product_info['isbn'],
-							'mpn'          => $product_info['mpn'],
-							'weight'       => $this->weight->format(($product_info['weight'] + (float)$option_weight) * $product['quantity'], $product_info['weight_class_id'], $this->language->get('decimal_point'), $this->language->get('thousand_point'))
+							'name'     => $product_info['name'],
+							'model'    => $product_info['model'],
+							'option'   => $option_data,
+							'quantity' => $product['quantity'],
+							'location' => $product_info['location'],
+							'sku'      => $product_info['sku'],
+							'upc'      => $product_info['upc'],
+							'ean'      => $product_info['ean'],
+							'jan'      => $product_info['jan'],
+							'isbn'     => $product_info['isbn'],
+							'mpn'      => $product_info['mpn'],
+							'weight'   => $this->weight->format(($product_info['weight'] + (float)$option_weight) * $product['quantity'], $product_info['weight_class_id'], $this->language->get('decimal_point'), $this->language->get('thousand_point'))
 						];
 					}
 				}
@@ -1767,6 +1782,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * History
+	 *
 	 * @return void
 	 */
 	public function history(): void {
@@ -1776,6 +1793,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get History
+	 *
 	 * @return string
 	 */
 	public function getHistory(): string {
@@ -1823,6 +1842,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Create Invoice No
+	 *
 	 * @return void
 	 */
 	public function createInvoiceNo(): void {
@@ -1865,6 +1886,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add Reward
+	 *
 	 * @return void
 	 */
 	public function addReward(): void {
@@ -1913,6 +1936,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Remove Reward
+	 *
 	 * @return void
 	 */
 	public function removeReward(): void {
@@ -1951,6 +1976,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add Commission
+	 *
 	 * @return void
 	 */
 	public function addCommission(): void {
@@ -2001,6 +2028,8 @@ class Order extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Remove Commission
+	 *
 	 * @return void
 	 */
 	public function removeCommission(): void {

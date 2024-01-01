@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Common;
  */
 class Authorize extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -91,6 +93,8 @@ class Authorize extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Send
+	 *
 	 * @return void
 	 */
 	public function send(): void {
@@ -105,6 +109,8 @@ class Authorize extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Validate
+	 *
 	 * @return void
 	 */
 	public function validate(): void {
@@ -153,6 +159,8 @@ class Authorize extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Unlock
+	 *
 	 * @return void
 	 */
 	public function unlock(): void {
@@ -182,6 +190,8 @@ class Authorize extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Confirm
+	 *
 	 * @return void
 	 */
 	public function confirm(): void {
@@ -201,6 +211,8 @@ class Authorize extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Reset
+	 *
 	 * @return void
 	 */
 	public function reset(): void {

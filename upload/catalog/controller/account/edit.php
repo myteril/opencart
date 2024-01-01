@@ -44,7 +44,7 @@ class Edit extends \Opencart\System\Engine\Controller {
 		$data['config_telephone_required'] = $this->config->get('config_telephone_required');
 
 		$data['save'] = $this->url->link('account/edit.save', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']);
-		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language'));
+		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token'] = oc_token(32));
 
 		$this->load->model('account/customer');
 
@@ -90,6 +90,8 @@ class Edit extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -169,7 +171,7 @@ class Edit extends \Opencart\System\Engine\Controller {
 				'lastname'          => $this->request->post['lastname'],
 				'email'             => $this->request->post['email'],
 				'telephone'         => $this->request->post['telephone'],
-				'custom_field'      => isset($this->request->post['custom_field']) ? $this->request->post['custom_field'] : []
+				'custom_field'      => $this->request->post['custom_field'] ?? []
 			];
 
 			unset($this->session->data['shipping_method']);

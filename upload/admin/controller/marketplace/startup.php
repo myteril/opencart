@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Marketplace;
  */
 class Startup extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -55,6 +57,8 @@ class Startup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -64,6 +68,8 @@ class Startup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {
@@ -167,6 +173,8 @@ class Startup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Enable
+	 *
 	 * @return void
 	 */
 	public function enable(): void {
@@ -197,6 +205,8 @@ class Startup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Disable
+	 *
 	 * @return void
 	 */
 	public function disable(): void {
@@ -227,6 +237,8 @@ class Startup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

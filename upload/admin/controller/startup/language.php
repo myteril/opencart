@@ -12,6 +12,8 @@ class Language extends \Opencart\System\Engine\Controller {
 	private static array $languages = [];
 
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -37,9 +39,11 @@ class Language extends \Opencart\System\Engine\Controller {
 		}
 	}
 
-	// Fill the language up with default values
-
 	/**
+	 * After
+	 *
+	 * Fill the language up with default values
+	 *
 	 * @param $route
 	 * @param $prefix
 	 * @param $code

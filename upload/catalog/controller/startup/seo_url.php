@@ -7,9 +7,9 @@ namespace Opencart\Catalog\Controller\Startup;
  */
 class SeoUrl extends \Opencart\System\Engine\Controller {
 	/**
-	 * @return void
+	 * @return null
 	 */
-	public function index(): void {
+	public function index() {
 		// Add rewrite to URL class
 		if ($this->config->get('config_seo_url')) {
 			$this->url->addRewrite($this);
@@ -25,28 +25,32 @@ class SeoUrl extends \Opencart\System\Engine\Controller {
 					array_pop($parts);
 				}
 
-				foreach ($parts as $part) {
-					$seo_url_info = $this->model_design_seo_url->getSeoUrlByKeyword($part);
+				foreach ($parts as $key => $value) {
+					$seo_url_info = $this->model_design_seo_url->getSeoUrlByKeyword($value);
 
 					if ($seo_url_info) {
 						$this->request->get[$seo_url_info['key']] = html_entity_decode($seo_url_info['value'], ENT_QUOTES, 'UTF-8');
+
+						unset($parts[$key]);
 					}
 				}
 
-				if (!isset($this->request->get['route']) && count($parts) == 1 && isset($this->request->get['language'])) {
+				if (!isset($this->request->get['route'])) {
 					$this->request->get['route'] = $this->config->get('action_default');
 				}
-			} elseif (!isset($this->request->get['route'])) {
-				$this->request->get['route'] = $this->config->get('action_default');
-			}
 
-			if (!isset($this->request->get['route'])) {
-				$this->request->get['route'] = $this->config->get('action_error');
+				if ($parts) {
+					$this->request->get['route'] = $this->config->get('action_error');
+				}
 			}
 		}
+
+		return null;
 	}
 
 	/**
+	 * Rewrite
+	 *
 	 * @param string $link
 	 *
 	 * @return string
@@ -80,7 +84,17 @@ class SeoUrl extends \Opencart\System\Engine\Controller {
 		$parts = explode('&', $url_info['query']);
 
 		foreach ($parts as $part) {
-			[$key, $value] = explode('=', $part);
+			$pair = explode('=', $part);
+
+			if (isset($pair[0])) {
+				$key = (string)$pair[0];
+			}
+
+			if (isset($pair[1])) {
+				$value = (string)$pair[1];
+			} else {
+				$value = '';
+			}
 
 			$result = $this->model_design_seo_url->getSeoUrlByKeyValue((string)$key, (string)$value);
 

@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\User;
  */
 class Api extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -56,6 +58,8 @@ class Api extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -65,6 +69,8 @@ class Api extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -167,6 +173,8 @@ class Api extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -277,6 +285,8 @@ class Api extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -317,6 +327,8 @@ class Api extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -349,6 +361,8 @@ class Api extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete Session
+	 *
 	 * @return void
 	 */
 	public function deleteSession(): void {

@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Catalog;
  */
 class AttributeGroup extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -44,7 +46,7 @@ class AttributeGroup extends \Opencart\System\Engine\Controller {
 		$data['add'] = $this->url->link('catalog/attribute_group.form', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['delete'] = $this->url->link('catalog/attribute_group.delete', 'user_token=' . $this->session->data['user_token']);
 
-		$data['list'] = $this->getList();
+		$data['list'] = $this->controller_catalog_attribute_group->getList();
 
 		$data['user_token'] = $this->session->data['user_token'];
 
@@ -56,15 +58,19 @@ class AttributeGroup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
 		$this->load->language('catalog/attribute_group');
 
-		$this->response->setOutput($this->getList());
+		$this->response->setOutput($this->controller_catalog_attribute_group->getList());
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -163,6 +169,8 @@ class AttributeGroup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -240,6 +248,8 @@ class AttributeGroup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -278,6 +288,8 @@ class AttributeGroup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

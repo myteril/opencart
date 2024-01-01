@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Marketplace;
  */
 class Modification extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -59,6 +61,8 @@ class Modification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -68,6 +72,8 @@ class Modification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	public function getList(): string {
@@ -175,6 +181,13 @@ class Modification extends \Opencart\System\Engine\Controller {
 		return $this->load->view('marketplace/modification_list', $data);
 	}
 
+	/**
+	 * Refresh
+	 *
+	 * @throws Exception
+	 *
+	 * @return void
+	 */
 	public function refresh(): void {
 		$this->load->language('marketplace/modification');
 
@@ -223,7 +236,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 					if (is_file($file)) {
 						unlink($file);
 
-						// If directory use the remove directory function
+					// If directory use the remove directory function
 					} elseif (is_dir($file)) {
 						rmdir($file);
 					}
@@ -547,7 +560,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 						}
 					}
 
-					$handle = fopen(DIR_EXTENSION . 'ocmod/'  . $key, 'w');
+					$handle = fopen(DIR_EXTENSION . 'ocmod/' . $key, 'w');
 
 					fwrite($handle, $value);
 
@@ -566,10 +579,20 @@ class Modification extends \Opencart\System\Engine\Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
+	/**
+	 * Log
+	 *
+	 * @return void
+	 */
 	public function log(): void {
 		$this->response->setOutput($this->getLog());
 	}
 
+	/**
+	 * getLog
+	 *
+	 * @return string
+	 */
 	public function getLog(): string {
 		$file = DIR_LOGS . 'ocmod.log';
 
@@ -580,6 +603,11 @@ class Modification extends \Opencart\System\Engine\Controller {
 		}
 	}
 
+	/**
+	 * Clear
+	 *
+	 * @return void
+	 */
 	public function clear(): void {
 		$this->load->language('marketplace/modification');
 
@@ -620,7 +648,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 					if (is_file($file)) {
 						unlink($file);
 
-						// If directory use the remove directory function
+					// If directory use the remove directory function
 					} elseif (is_dir($file)) {
 						rmdir($file);
 					}
@@ -635,6 +663,8 @@ class Modification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Enable
+	 *
 	 * @return void
 	 */
 	public function enable(): void {
@@ -665,6 +695,8 @@ class Modification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Disable
+	 *
 	 * @return void
 	 */
 	public function disable(): void {
@@ -695,6 +727,8 @@ class Modification extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

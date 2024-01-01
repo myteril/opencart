@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Common;
  */
 class Security extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return string
 	 */
 	public function index(): string {
@@ -60,6 +62,8 @@ class Security extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Install
+	 *
 	 * @return void
 	 */
 	public function install(): void {
@@ -120,6 +124,8 @@ class Security extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Storage
+	 *
 	 * @return void
 	 */
 	public function storage(): void {
@@ -278,6 +284,8 @@ class Security extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Admin
+	 *
 	 * @return void
 	 */
 	public function admin(): void {
@@ -305,7 +313,7 @@ class Security extends \Opencart\System\Engine\Controller {
 				$json['error'] = $this->language->get('error_admin');
 			}
 
-			if ($page == 1  && is_dir($base_new)) {
+			if ($page == 1 && is_dir($base_new)) {
 				$json['error'] = $this->language->get('error_admin_exists');
 			}
 

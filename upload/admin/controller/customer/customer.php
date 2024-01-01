@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Customer;
  */
 class Customer extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -138,6 +140,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -147,6 +151,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -415,6 +421,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -645,6 +653,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -706,7 +716,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 		}
 
 		if ($this->request->post['password'] || (!isset($this->request->post['customer_id']))) {
-			if ((oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
+			if ((oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 6) || (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
 				$json['error']['password'] = $this->language->get('error_password');
 			}
 
@@ -734,6 +744,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Unlock
+	 *
 	 * @return void
 	 */
 	public function unlock(): void {
@@ -762,6 +774,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -794,6 +808,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Login
+	 *
 	 * @return object|\Opencart\System\Engine\Action|null
 	 */
 	public function login(): ?object {
@@ -824,7 +840,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 			$store_info = $this->model_setting_store->getStore($store_id);
 
 			if ($store_info) {
-				$this->response->redirect($store_info['url'] . 'index.php?route=account/login.token&email=' . urlencode($customer_info['email']). '&login_token=' . $token);
+				$this->response->redirect($store_info['url'] . 'index.php?route=account/login.token&email=' . urlencode($customer_info['email']) . '&login_token=' . $token);
 			} else {
 				$this->response->redirect(HTTP_CATALOG . 'index.php?route=account/login.token&email=' . urlencode($customer_info['email']) . '&login_token=' . $token);
 			}
@@ -836,6 +852,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Payment
+	 *
 	 * @return void
 	 */
 	public function payment(): void {
@@ -845,6 +863,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Payment
+	 *
 	 * @return string
 	 */
 	private function getPayment(): string {
@@ -901,6 +921,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete Payment
+	 *
 	 * @return void
 	 */
 	public function deletePayment(): void {
@@ -931,6 +953,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * History
+	 *
 	 * @return void
 	 */
 	public function history(): void {
@@ -940,6 +964,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get History
+	 *
 	 * @return string
 	 */
 	public function getHistory(): string {
@@ -985,6 +1011,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add History
+	 *
 	 * @return void
 	 */
 	public function addHistory(): void {
@@ -1021,6 +1049,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Transaction
+	 *
 	 * @return void
 	 */
 	public function transaction(): void {
@@ -1030,6 +1060,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Transaction
+	 *
 	 * @return string
 	 */
 	public function getTransaction(): string {
@@ -1078,6 +1110,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add Transaction
+	 *
 	 * @return void
 	 */
 	public function addTransaction(): void {
@@ -1116,6 +1150,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Reward
+	 *
 	 * @return void
 	 */
 	public function reward(): void {
@@ -1125,6 +1161,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Reward
+	 *
 	 * @return string
 	 */
 	public function getReward(): string {
@@ -1173,6 +1211,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Add Reward
+	 *
 	 * @return void
 	 */
 	public function addReward(): void {
@@ -1211,6 +1251,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Ip
+	 *
 	 * @return void
 	 */
 	public function ip(): void {
@@ -1220,6 +1262,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Ip
+	 *
 	 * @return string
 	 */
 	public function getIp(): string {
@@ -1280,6 +1324,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Authorize
+	 *
 	 * @return void
 	 */
 	public function authorize(): void {
@@ -1289,6 +1335,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Authorize
+	 *
 	 * @return string
 	 */
 	public function getAuthorize(): string {
@@ -1339,6 +1387,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete Authorize
+	 *
 	 * @return void
 	 */
 	public function deleteAuthorize(): void {
@@ -1388,6 +1438,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Autocomplete
+	 *
 	 * @return void
 	 */
 	public function autocomplete(): void {
@@ -1407,10 +1459,10 @@ class Customer extends \Opencart\System\Engine\Controller {
 			}
 
 			$filter_data = [
-				'filter_name'      => $filter_name,
-				'filter_email'     => $filter_email,
-				'start'            => 0,
-				'limit'            => 5
+				'filter_name'  => $filter_name,
+				'filter_email' => $filter_email,
+				'start'        => 0,
+				'limit'        => 5
 			];
 
 			$this->load->model('customer/customer');
@@ -1446,6 +1498,8 @@ class Customer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Customfield
+	 *
 	 * @return void
 	 */
 	public function customfield(): void {

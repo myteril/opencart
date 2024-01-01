@@ -7,6 +7,8 @@ namespace Opencart\Catalog\Model\Localisation;
  */
 class Country extends \Opencart\System\Engine\Model {
 	/**
+	 * Get Country
+	 *
 	 * @param int $country_id
 	 *
 	 * @return array
@@ -18,6 +20,8 @@ class Country extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Country By Iso Code 2
+	 *
 	 * @param string $iso_code_2
 	 *
 	 * @return array
@@ -27,20 +31,22 @@ class Country extends \Opencart\System\Engine\Model {
 
 		$key = md5($sql);
 
-		$country_data = $this->cache->get('country.'. $key);
+		$country_data = $this->cache->get('country.' . $key);
 
 		if (!$country_data) {
 			$query = $this->db->query($sql);
 
 			$country_data = $query->rows;
 
-			$this->cache->set('country.'. $key, $country_data);
+			$this->cache->set('country.' . $key, $country_data);
 		}
 
 		return $country_data;
 	}
 
 	/**
+	 * Get Country By Iso Code 3
+	 *
 	 * @param string $iso_code_3
 	 *
 	 * @return array
@@ -50,20 +56,22 @@ class Country extends \Opencart\System\Engine\Model {
 
 		$key = md5($sql);
 
-		$country_data = $this->cache->get('country.'. $key);
+		$country_data = $this->cache->get('country.' . $key);
 
 		if (!$country_data) {
 			$query = $this->db->query($sql);
 
 			$country_data = $query->rows;
 
-			$this->cache->set('country.'. md5($sql), $country_data);
+			$this->cache->set('country.' . md5($sql), $country_data);
 		}
 
 		return $country_data;
 	}
 
 	/**
+	 * Get Countries
+	 *
 	 * @return array
 	 */
 	public function getCountries(): array {
@@ -71,14 +79,14 @@ class Country extends \Opencart\System\Engine\Model {
 
 		$key = md5($sql);
 
-		$country_data = $this->cache->get('country.'. $key);
+		$country_data = $this->cache->get('country.' . $key);
 
 		if (!$country_data) {
 			$query = $this->db->query($sql);
 
 			$country_data = $query->rows;
 
-			$this->cache->set('country.'. $key, $country_data);
+			$this->cache->set('country.' . $key, $country_data);
 		}
 
 		return $country_data;

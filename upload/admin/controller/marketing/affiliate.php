@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Marketing;
  */
 class Affiliate extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -172,8 +174,6 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 			'value' => 800
 		];
 
-		$data['user_token'] = $this->session->data['user_token'];
-
 		$data['filter_customer'] = $filter_customer;
 		$data['filter_tracking'] = $filter_tracking;
 		$data['filter_payment_method'] = $filter_payment_method;
@@ -194,6 +194,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -203,6 +205,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -397,6 +401,7 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 		$data['sort_name'] = $this->url->link('marketing/affiliate.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
 		$data['sort_tracking'] = $this->url->link('marketing/affiliate.list', 'user_token=' . $this->session->data['user_token'] . '&sort=ca.tracking' . $url);
 		$data['sort_commission'] = $this->url->link('marketing/affiliate.list', 'user_token=' . $this->session->data['user_token'] . '&sort=ca.commission' . $url);
+		$data['sort_balance'] = $this->url->link('marketing/affiliate.list', 'user_token=' . $this->session->data['user_token'] . '&sort=ca.balance' . $url);
 		$data['sort_date_added'] = $this->url->link('marketing/affiliate.list', 'user_token=' . $this->session->data['user_token'] . '&sort=ca.date_added' . $url);
 
 		$url = '';
@@ -460,6 +465,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -659,15 +666,17 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 		$custom_fields = $this->model_customer_custom_field->getCustomFields($filter_data);
 
 		foreach ($custom_fields as $custom_field) {
-			$data['custom_fields'][] = [
-				'custom_field_id'    => $custom_field['custom_field_id'],
-				'custom_field_value' => $this->model_customer_custom_field->getValues($custom_field['custom_field_id']),
-				'name'               => $custom_field['name'],
-				'value'              => $custom_field['value'],
-				'type'               => $custom_field['type'],
-				'location'           => $custom_field['location'],
-				'sort_order'         => $custom_field['sort_order']
-			];
+			if ($custom_field['status']) {
+				$data['custom_fields'][] = [
+					'custom_field_id'    => $custom_field['custom_field_id'],
+					'custom_field_value' => $this->model_customer_custom_field->getValues($custom_field['custom_field_id']),
+					'name'               => $custom_field['name'],
+					'value'              => $custom_field['value'],
+					'type'               => $custom_field['type'],
+					'location'           => $custom_field['location'],
+					'sort_order'         => $custom_field['sort_order']
+				];
+			}
 		}
 
 		if (!empty($affiliate_info)) {
@@ -690,6 +699,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -790,6 +801,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -822,6 +835,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Calculate
+	 *
 	 * @return void
 	 */
 	public function calculate(): void {
@@ -851,6 +866,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Csv
+	 *
 	 * @return \Opencart\System\Engine\Action|void
 	 */
 	public function csv() {
@@ -896,7 +913,7 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 				header('Content-Disposition: attachment; filename=payout-' . date('d-m-Y') . '.csv"');
 				header('Content-Length: ' . strlen($csv));
 
-				print($csv);
+				echo $csv;
 			} else {
 				exit('Error: Headers already sent out!');
 			}
@@ -906,6 +923,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Complete
+	 *
 	 * @return void
 	 */
 	public function complete(): void {
@@ -945,6 +964,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Report
+	 *
 	 * @return void
 	 */
 	public function report(): void {
@@ -954,6 +975,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Report
+	 *
 	 * @return string
 	 */
 	private function getReport(): string {
@@ -1015,6 +1038,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Autocomplete
+	 *
 	 * @return void
 	 */
 	public function autocomplete(): void {

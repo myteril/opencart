@@ -1,11 +1,13 @@
 <?php
 /**
  * @package		OpenCart
+ *
  * @author		Daniel Kerr
  * @copyright	Copyright (c) 2005 - 2022, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- * @link		https://www.opencart.com
-*/
+ *
+ * @see		https://www.opencart.com
+ */
 namespace Opencart\System\Library;
 /**
  * Class Language
@@ -33,23 +35,22 @@ class Language {
 	protected array $cache = [];
 
 	/**
-     * Constructor
-     *
-     * @param string $code
-     *
-     */
+	 * Constructor
+	 *
+	 * @param string $code
+	 */
 	public function __construct(string $code) {
 		$this->code = $code;
 	}
 
 	/**
-     * addPath
-     *
-     * @param string $namespace
-     * @param string $directory
-     *
-     * @return void
-     */
+	 * addPath
+	 *
+	 * @param string $namespace
+	 * @param string $directory
+	 *
+	 * @return void
+	 */
 	public function addPath(string $namespace, string $directory = ''): void {
 		if (!$directory) {
 			$this->directory = $namespace;
@@ -59,37 +60,37 @@ class Language {
 	}
 
 	/**
-     * Get
-     *
-     * Get language text string
-     *
-     * @param string $key
-     */
+	 * Get
+	 *
+	 * Get language text string
+	 *
+	 * @param string $key
+	 */
 	public function get(string $key) {
-		return isset($this->data[$key]) ? $this->data[$key] : $key;
+		return $this->data[$key] ?? $key;
 	}
 
 	/**
-     * Set
-     *
-     * Set language text string
-     *
-     * @param string $key
-     * @param string $value
-     *
-     * @return void
-     */
+	 * Set
+	 *
+	 * Set language text string
+	 *
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return void
+	 */
 	public function set(string $key, string $value): void {
 		$this->data[$key] = $value;
 	}
-	
+
 	/**
-     * All
-     *
-     * @param string $prefix
-     *
-     * @return array
-     */
+	 * All
+	 *
+	 * @param string $prefix
+	 *
+	 * @return array
+	 */
 	public function all(string $prefix = ''): array {
 		if (!$prefix) {
 			return $this->data;
@@ -109,23 +110,23 @@ class Language {
 	}
 
 	/**
-     * Clear
-     *
-     * @return void
-     */
+	 * Clear
+	 *
+	 * @return void
+	 */
 	public function clear(): void {
 		$this->data = [];
 	}
 
 	/**
-     * Load
-     *
-     * @param string $filename
-     * @param string $prefix
-     * @param string $code Language code
-     *
-     * @return array
-     */
+	 * Load
+	 *
+	 * @param string $filename
+	 * @param string $prefix
+	 * @param string $code     Language code
+	 *
+	 * @return array
+	 */
 	public function load(string $filename, string $prefix = '', string $code = ''): array {
 		if (!$code) {
 			$code = $this->code;

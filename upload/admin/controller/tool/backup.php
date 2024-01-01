@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Tool;
  */
 class Backup extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -63,6 +65,8 @@ class Backup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * History
+	 *
 	 * @return void
 	 */
 	public function history(): void {
@@ -72,6 +76,8 @@ class Backup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get History
+	 *
 	 * @return string
 	 */
 	public function getHistory(): string {
@@ -99,7 +105,7 @@ class Backup extends \Opencart\System\Engine\Controller {
 			];
 
 			while (($size / 1024) > 1) {
-				$size = $size / 1024;
+				$size /= 1024;
 
 				$i++;
 			}
@@ -116,6 +122,8 @@ class Backup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Backup
+	 *
 	 * @return void
 	 */
 	public function backup(): void {
@@ -240,6 +248,8 @@ class Backup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Restore
+	 *
 	 * @return void
 	 */
 	public function restore(): void {
@@ -300,7 +310,7 @@ class Backup extends \Opencart\System\Engine\Controller {
 				}
 
 				if ($start && substr($line, -2) == ";\n") {
-					$this->db->query(substr($sql, 0, strlen($sql) -2));
+					$this->db->query(substr($sql, 0, strlen($sql) - 2));
 
 					$start = false;
 				}
@@ -336,6 +346,8 @@ class Backup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Upload
+	 *
 	 * @return void
 	 */
 	public function upload(): void {
@@ -377,6 +389,8 @@ class Backup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Download
+	 *
 	 * @return void
 	 */
 	public function download(): void {
@@ -422,6 +436,8 @@ class Backup extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

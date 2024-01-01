@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Catalog;
  */
 class Review extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -96,6 +98,12 @@ class Review extends \Opencart\System\Engine\Controller {
 
 		$data['list'] = $this->getList();
 
+		$data['filter_product'] = $filter_product;
+		$data['filter_author'] = $filter_author;
+		$data['filter_status'] = $filter_status;
+		$data['filter_date_from'] = $filter_date_from;
+		$data['filter_date_to'] = $filter_date_to;
+
 		$data['user_token'] = $this->session->data['user_token'];
 
 		$data['header'] = $this->load->controller('common/header');
@@ -106,6 +114,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -115,6 +125,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -319,6 +331,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -442,6 +456,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -490,6 +506,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -522,6 +540,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Sync
+	 *
 	 * @return void
 	 */
 	public function sync(): void {

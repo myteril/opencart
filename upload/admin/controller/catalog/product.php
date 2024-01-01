@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Catalog;
  */
 class Product extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -95,7 +97,7 @@ class Product extends \Opencart\System\Engine\Controller {
 		$data['copy'] = $this->url->link('catalog/product.copy', 'user_token=' . $this->session->data['user_token']);
 		$data['delete'] = $this->url->link('catalog/product.delete', 'user_token=' . $this->session->data['user_token']);
 
-		$data['list'] = $this->getList();
+		$data['list'] = $this->controller_catalog_product->getList();
 
 		$data['filter_name'] = $filter_name;
 		$data['filter_model'] = $filter_model;
@@ -113,12 +115,14 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
 		$this->load->language('catalog/product');
 
-		$this->response->setOutput($this->getList());
+		$this->response->setOutput($this->controller_catalog_product->getList());
 	}
 
 	/**
@@ -360,6 +364,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -889,7 +895,7 @@ class Product extends \Opencart\System\Engine\Controller {
 				'option_id'            => $product_option['option_id'],
 				'name'                 => $product_option['name'],
 				'type'                 => $product_option['type'],
-				'value'                => isset($product_option['value']) ? $product_option['value'] : '',
+				'value'                => $product_option['value'] ?? '',
 				'required'             => $product_option['required']
 			];
 		}
@@ -948,7 +954,7 @@ class Product extends \Opencart\System\Engine\Controller {
 					'option_id'            => $product_option['option_id'],
 					'name'                 => $option_info['name'],
 					'type'                 => $option_info['type'],
-					'value'                => isset($data['variant'][$product_option['product_option_id']]) ? $data['variant'][$product_option['product_option_id']] : $product_option['value'],
+					'value'                => $data['variant'][$product_option['product_option_id']] ?? $product_option['value'],
 					'required'             => $product_option['required']
 				];
 			}
@@ -1097,6 +1103,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -1239,6 +1247,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {
@@ -1271,6 +1281,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Copy
+	 *
 	 * @return void
 	 */
 	public function copy(): void {
@@ -1303,6 +1315,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Report
+	 *
 	 * @return void
 	 */
 	public function report(): void {
@@ -1312,6 +1326,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get Report
+	 *
 	 * @return string
 	 */
 	public function getReport(): string {
@@ -1370,6 +1386,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Autocomplete
+	 *
 	 * @return void
 	 */
 	public function autocomplete(): void {

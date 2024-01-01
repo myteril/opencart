@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Extension\Opencart\Currency;
  */
 class ECB extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -45,6 +47,8 @@ class ECB extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -69,6 +73,8 @@ class ECB extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Currency
+	 *
 	 * @param string $default
 	 *
 	 * @return void

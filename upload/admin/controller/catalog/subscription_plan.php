@@ -7,6 +7,8 @@ namespace Opencart\Admin\Controller\Catalog;
  */
 class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 	/**
+	 * Index
+	 *
 	 * @return void
 	 */
 	public function index(): void {
@@ -57,6 +59,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * List
+	 *
 	 * @return void
 	 */
 	public function list(): void {
@@ -66,6 +70,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Get List
+	 *
 	 * @return string
 	 */
 	protected function getList(): string {
@@ -165,6 +171,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Form
+	 *
 	 * @return void
 	 */
 	public function form(): void {
@@ -317,6 +325,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Save
+	 *
 	 * @return void
 	 */
 	public function save(): void {
@@ -359,6 +369,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Copy
+	 *
 	 * @return void
 	 */
 	public function copy(): void {
@@ -391,6 +403,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
+	 * Delete
+	 *
 	 * @return void
 	 */
 	public function delete(): void {

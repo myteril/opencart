@@ -1,10 +1,12 @@
 <?php
 /**
  * @package   OpenCart
+ *
  * @author    Daniel Kerr
  * @copyright Copyright (c) 2005 - 2022, OpenCart, Ltd. (https://www.opencart.com/)
  * @license   https://opensource.org/licenses/GPL-3.0
  * @author    Daniel Kerr
+ *
  * @see       https://www.opencart.com
  */
 namespace Opencart\System\Library;
@@ -31,29 +33,29 @@ class Url {
 	}
 
 	/**
-     * addRewrite
-     *
-     * Add a rewrite method to the URL system
-     *
-     * @param object $rewrite
-     *
-     * @return void
-     */
+	 * addRewrite
+	 *
+	 * Add a rewrite method to the URL system
+	 *
+	 * @param object $rewrite
+	 *
+	 * @return void
+	 */
 	public function addRewrite(\Opencart\System\Engine\Controller $rewrite): void {
 		$this->rewrite[] = $rewrite;
 	}
 
 	/**
-     * Link
-     * 
-     * Generates a URL
-     *
-     * @param string $route
-     * @param mixed  $args
-     * @param bool   $js
-     *
-     * @return string
-     */
+	 * Link
+	 *
+	 * Generates a URL
+	 *
+	 * @param string $route
+	 * @param mixed  $args
+	 * @param bool   $js
+	 *
+	 * @return string
+	 */
 	public function link(string $route, $args = '', bool $js = false): string {
 		$url = $this->url . 'index.php?route=' . $route;
 
