@@ -13,12 +13,14 @@
  * Model class
  */
 namespace Opencart\System\Engine;
+
 /**
  * Class Model
  *
  * @mixin \Opencart\System\Engine\Registry
  */
-class Model {
+class Model
+{
 	/**
 	 * @var \Opencart\System\Engine\Registry
 	 */
@@ -29,7 +31,8 @@ class Model {
 	 *
 	 * @param \Opencart\System\Engine\Registry $registry
 	 */
-	public function __construct(\Opencart\System\Engine\Registry $registry) {
+	public function __construct(\Opencart\System\Engine\Registry $registry)
+	{
 		$this->registry = $registry;
 	}
 
@@ -40,7 +43,8 @@ class Model {
 	 *
 	 * @return object
 	 */
-	public function __get(string $key): object {
+	public function __get(string $key): object
+	{
 		if ($this->registry->has($key)) {
 			return $this->registry->get($key);
 		} else {
@@ -56,7 +60,8 @@ class Model {
 	 *
 	 * @return void
 	 */
-	public function __set(string $key, object $value): void {
+	public function __set(string $key, object $value): void
+	{
 		$this->registry->set($key, $value);
 	}
 
@@ -69,7 +74,8 @@ class Model {
 	 *
 	 * @return bool
 	 */
-	public function __isset(string $key): bool {
+	public function __isset(string $key): bool
+	{
 		return $this->registry->has($key);
 	}
 }
