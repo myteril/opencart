@@ -764,7 +764,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 		if (!$json) {
 			$this->load->model('customer/customer');
 
-			$this->model_customer_customer->deleteAuthorizeAttempts($this->request->get['email']);
+			$this->model_customer_customer->deleteLoginAttempts($this->request->get['email']);
 
 			$json['success'] = $this->language->get('text_success');
 		}
@@ -884,9 +884,9 @@ class Customer extends \Opencart\System\Engine\Controller {
 
 		$data['payment_methods'] = [];
 
-		$this->load->model('customer/customer');
+		$this->load->model('sale/subscription');
 
-		$results = $this->model_customer_customer->getPaymentMethods($customer_id, ($page - 1) * $limit, $limit);
+		$results = $this->model_sale_subscription->getSubscriptions(['filter_customer_id' => $customer_id]);
 
 		foreach ($results as $result) {
 			if (isset($result['image'])) {
@@ -906,7 +906,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 			];
 		}
 
-		$payment_total = $this->model_customer_customer->getTotalPaymentMethods($customer_id);
+		$payment_total = $this->model_sale_subscription->getTotalSubscriptions(['filter_customer_id' => $customer_id]);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
 			'total' => $payment_total,
@@ -941,9 +941,9 @@ class Customer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$this->load->model('customer/customer');
+			$this->load->model('sale/subscription');
 
-			$this->model_customer_customer->deletePaymentMethod($customer_payment_id);
+			$this->model_sale_subscription->deleteSubscriptionByCustomerPaymentId($customer_payment_id);
 
 			$json['success'] = $this->language->get('text_success');
 		}
@@ -1412,25 +1412,20 @@ class Customer extends \Opencart\System\Engine\Controller {
 			$json['error'] = $this->language->get('error_permission');
 		}
 
-		$this->load->model('customer/customer');
+		$this->load->model('user/user');
 
-		$login_info = $this->model_customer_customer->getAuthorize($customer_authorize_id);
+		$authorize_info = $this->model_user_user->getAuthorize($customer_authorize_id);
 
-		if (!$login_info) {
+		if (!$authorize_info) {
 			$json['error'] = $this->language->get('error_authorize');
 		}
 
 		if (!$json) {
+			$this->load->model('customer/customer');
+
 			$this->model_customer_customer->deleteAuthorize($customer_authorize_id);
 
-			// If the token is still present, then we enforce the customer to log out automatically.
-			if ($login_info['token'] == $token) {
-				$this->session->data['success'] = $this->language->get('text_success');
-
-				$json['redirect'] = $this->url->link('common/login', '', true);
-			} else {
-				$json['success'] = $this->language->get('text_success');
-			}
+			$json['success'] = $this->language->get('text_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

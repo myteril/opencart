@@ -9,7 +9,7 @@ class Country extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Country
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -24,8 +24,8 @@ class Country extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Country
 	 *
-	 * @param int   $country_id
-	 * @param array $data
+	 * @param int                  $country_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -53,7 +53,7 @@ class Country extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $country_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getCountry(int $country_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "country` WHERE `country_id` = '" . (int)$country_id . "'");
@@ -66,7 +66,7 @@ class Country extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $iso_code_2
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getCountryByIsoCode2(string $iso_code_2): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE `iso_code_2` = '" . $this->db->escape($iso_code_2) . "' AND `status` = '1'");
@@ -79,7 +79,7 @@ class Country extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $iso_code_3
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getCountryByIsoCode3(string $iso_code_3): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE `iso_code_3` = '" . $this->db->escape($iso_code_3) . "' AND `status` = '1'");
@@ -90,9 +90,9 @@ class Country extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Countries
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getCountries(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "country`";
@@ -163,7 +163,7 @@ class Country extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Countries
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */

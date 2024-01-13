@@ -13,7 +13,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 		$this->load->language('account/forgotten');
 
 		if ($this->customer->isLogged()) {
-			$this->response->redirect($this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']));
+			$this->response->redirect($this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'], true));
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -115,7 +115,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 		}
 
 		if ($this->customer->isLogged()) {
-			$this->response->redirect($this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']));
+			$this->response->redirect($this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'], true));
 		}
 
 		$this->load->model('account/customer');
@@ -127,7 +127,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 
 			$this->session->data['error'] = $this->language->get('error_code');
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language'), true));
 		}
 
 		$this->document->setTitle($this->language->get('heading_reset'));
@@ -149,7 +149,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 			'href' => $this->url->link('account/forgotten.reset', 'language=' . $this->config->get('config_language'))
 		];
 
-		$this->session->data['reset_token'] = substr(bin2hex(openssl_random_pseudo_bytes(26)), 0, 26);
+		$this->session->data['reset_token'] = oc_token(26);
 
 		$data['save'] = $this->url->link('account/forgotten.password', 'language=' . $this->config->get('config_language') . '&email=' . urlencode($email) . '&code=' . $code . '&reset_token=' . $this->session->data['reset_token']);
 		$data['back'] = $this->url->link('account/login', 'language=' . $this->config->get('config_language'));

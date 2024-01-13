@@ -8,9 +8,9 @@ namespace Opencart\Catalog\Controller\Mail;
 class Review extends \Opencart\System\Engine\Controller {
 	// catalog/model/catalog/review/addReview/after
 	/**
-	 * @param string $route
-	 * @param array  $args
-	 * @param mixed  $output
+	 * @param string            $route
+	 * @param array<int, mixed> $args
+	 * @param mixed             $output
 	 *
 	 * @throws \Exception
 	 *
@@ -30,7 +30,7 @@ class Review extends \Opencart\System\Engine\Controller {
 				$subject = sprintf($this->language->get('text_subject'), $store_name);
 
 				$data['product'] = html_entity_decode($product_info['name'], ENT_QUOTES, 'UTF-8');
-				$data['reviewer'] = html_entity_decode($args[1]['name'], ENT_QUOTES, 'UTF-8');
+				$data['reviewer'] = html_entity_decode($args[1]['author'], ENT_QUOTES, 'UTF-8');
 				$data['rating'] = (int)$args[1]['rating'];
 				$data['text'] = nl2br($args[1]['text']);
 

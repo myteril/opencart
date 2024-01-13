@@ -7,9 +7,9 @@ namespace Opencart\Admin\Model\Extension\Opencart\Report;
  */
 class ProductPurchased extends \Opencart\System\Engine\Model {
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getPurchased(array $data = []): array {
 		$sql = "SELECT op.`name`, op.`model`, SUM(op.`quantity`) AS quantity, SUM((op.`price` + op.`tax`) * op.`quantity`) AS `total` FROM `" . DB_PREFIX . "order_product` op LEFT JOIN `" . DB_PREFIX . "order` `o` ON (op.`order_id` = `o`.`order_id`)";
@@ -48,7 +48,7 @@ class ProductPurchased extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */

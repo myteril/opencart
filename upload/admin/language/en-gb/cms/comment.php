@@ -8,6 +8,8 @@ $_['text_list']        = 'Article Comments List';
 $_['text_filter']      = 'Filter';
 $_['text_by']          = 'by';
 $_['text_info']        = 'Comment Information';
+$_['text_rating']      = 'Success: You have modified article ratings!';
+$_['text_next']        = 'Success: You have modified %s to %s of %s comment ratings!';
 
 // Column
 $_['column_comment']   = 'Comment';
@@ -23,7 +25,7 @@ $_['entry_date_to']    = 'Date To';
 
 // Button
 $_['button_spam']      = 'Spam';
-$_['button_refresh']   = 'Calculating ratings';
+$_['button_rating']    = 'Calculate Ratings';
 
 // Error
 $_['error_permission'] = 'Warning: You do not have permission to modify article comments!';

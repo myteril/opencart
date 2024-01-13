@@ -7,11 +7,6 @@ namespace Opencart\Admin\Controller\Extension\Opencart\Total;
  */
 class Tax extends \Opencart\System\Engine\Controller {
 	/**
-	 * @var array
-	 */
-	private array $error = [];
-
-	/**
 	 * Index
 	 *
 	 * @return void

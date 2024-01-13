@@ -9,11 +9,13 @@ class OrderStatus extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Order Status
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return int
+	 * @return ?int
 	 */
-	public function addOrderStatus(array $data): int {
+	public function addOrderStatus(array $data): ?int {
+		$order_status_id = null;
+
 		foreach ($data['order_status'] as $language_id => $value) {
 			if (isset($order_status_id)) {
 				$this->db->query("INSERT INTO `" . DB_PREFIX . "order_status` SET `order_status_id` = '" . (int)$order_status_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($value['name']) . "'");
@@ -32,8 +34,8 @@ class OrderStatus extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Order Status
 	 *
-	 * @param int   $order_status_id
-	 * @param array $data
+	 * @param int                  $order_status_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -65,7 +67,7 @@ class OrderStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $order_status_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getOrderStatus(int $order_status_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_status` WHERE `order_status_id` = '" . (int)$order_status_id . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
@@ -76,9 +78,9 @@ class OrderStatus extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Order Statuses
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getOrderStatuses(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "order_status` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `name`";
@@ -121,7 +123,7 @@ class OrderStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $order_status_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, string>>
 	 */
 	public function getDescriptions(int $order_status_id): array {
 		$order_status_data = [];

@@ -119,7 +119,9 @@ class Loader {
 				$proxy = new \Opencart\System\Engine\Proxy();
 
 				foreach (get_class_methods($class) as $method) {
-					if ((substr($method, 0, 2) != '__') && is_callable($class, $method)) {
+					$reflection = new \ReflectionMethod($class, $method);
+
+					if ((substr($method, 0, 2) != '__') && $reflection->isPublic()) {
 						// https://wiki.php.net/rfc/variadics
 						$proxy->{$method} = function(&...$args) use ($route, $method) {
 							$route = $route . '/' . $method;
@@ -176,9 +178,9 @@ class Loader {
 	 *
 	 * Loads the template file and generates the html code.
 	 *
-	 * @param string $route
-	 * @param array  $data
-	 * @param string $code
+	 * @param string               $route
+	 * @param array<string, mixed> $data
+	 * @param string               $code
 	 *
 	 * @return string
 	 */
@@ -211,7 +213,7 @@ class Loader {
 	 * @param string $prefix
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, string>
 	 */
 	public function language(string $route, string $prefix = '', string $code = ''): array {
 		// Sanitize the call
@@ -233,10 +235,10 @@ class Loader {
 	/**
 	 * Library
 	 *
-	 * @param string $route
-	 * @param array  $args
+	 * @param string       $route
+	 * @param array<mixed> $args
 	 *
-	 * @return void
+	 * @return object
 	 */
 	public function library(string $route, &...$args): object {
 		// Sanitize the call
@@ -263,7 +265,7 @@ class Loader {
 	 *
 	 * @param string $route
 	 *
-	 * @return array
+	 * @return array<string, string>
 	 */
 	public function config(string $route): array {
 		// Sanitize the call

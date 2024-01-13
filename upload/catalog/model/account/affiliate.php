@@ -9,8 +9,8 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Affiliate
 	 *
-	 * @param int   $customer_id
-	 * @param array $data
+	 * @param int                  $customer_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -25,8 +25,8 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Affiliate
 	 *
-	 * @param int   $customer_id
-	 * @param array $data
+	 * @param int                  $customer_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -39,7 +39,7 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $customer_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getAffiliate(int $customer_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_affiliate` WHERE `customer_id` = '" . (int)$customer_id . "'");
@@ -56,7 +56,7 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getAffiliateByTracking(string $code): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_affiliate` WHERE `tracking` = '" . $this->db->escape($code) . "'");

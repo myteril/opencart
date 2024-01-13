@@ -9,7 +9,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Subscription
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -76,8 +76,8 @@ class Subscription extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Subscription
 	 *
-	 * @param int   $subscription_id
-	 * @param array $data
+	 * @param int                  $subscription_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -156,7 +156,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	 * @param int $order_id
 	 * @param int $order_product_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSubscriptionByOrderProductId(int $order_id, int $order_product_id): array {
 		$subscription_data = [];
@@ -229,9 +229,9 @@ class Subscription extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Subscriptions
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getSubscriptions(array $data): array {
 		$sql = "SELECT `s`.`subscription_id`, `s`.*, CONCAT(`o`.`firstname`, ' ', `o`.`lastname`) AS `customer`, (SELECT `ss`.`name` FROM `" . DB_PREFIX . "subscription_status` `ss` WHERE `ss`.`subscription_status_id` = `s`.`subscription_status_id` AND `ss`.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS `subscription_status` FROM `" . DB_PREFIX . "subscription` `s` LEFT JOIN `" . DB_PREFIX . "order` `o` ON (`s`.`order_id` = `o`.`order_id`)";

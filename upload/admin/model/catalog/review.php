@@ -9,7 +9,7 @@ class Review extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Review
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -31,8 +31,8 @@ class Review extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Review
 	 *
-	 * @param int   $review_id
-	 * @param array $data
+	 * @param int                  $review_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -74,7 +74,7 @@ class Review extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $review_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getReview(int $review_id): array {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT pd.`name` FROM `" . DB_PREFIX . "product_description` pd WHERE pd.`product_id` = r.`product_id` AND pd.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS product FROM `" . DB_PREFIX . "review` r WHERE r.`review_id` = '" . (int)$review_id . "'");
@@ -102,9 +102,9 @@ class Review extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Reviews
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getReviews(array $data = []): array {
 		$sql = "SELECT `r`.`review_id`, `pd`.`name`, `r`.`author`, `r`.`rating`, `r`.`status`, `r`.`date_added` FROM `" . DB_PREFIX . "review` `r` LEFT JOIN `" . DB_PREFIX . "product_description` `pd` ON (`r`.`product_id` = `pd`.`product_id`) WHERE `pd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
@@ -169,7 +169,7 @@ class Review extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Reviews
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */

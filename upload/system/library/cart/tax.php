@@ -7,15 +7,15 @@ namespace Opencart\System\Library\Cart;
  */
 class Tax {
 	/**
-	 * @var \Opencart\System\Library\DB
+	 * @var object
 	 */
-	private \Opencart\System\Library\DB $db;
+	private object $db;
 	/**
-	 * @var \Opencart\System\Engine\Config
+	 * @var object
 	 */
-	private \Opencart\System\Engine\Config $config;
+	private object $config;
 	/**
-	 * @var array
+	 * @var array<int, array<int, array<string, mixed>>>
 	 */
 	private array $tax_rates = [];
 
@@ -203,9 +203,9 @@ class Tax {
 	 *
 	 * @param int $tax_rate_id
 	 *
-	 * @return string
+	 * @return false|string
 	 */
-	public function getRateName(int $tax_rate_id): string {
+	public function getRateName(int $tax_rate_id) {
 		$tax_query = $this->db->query("SELECT `name` FROM `" . DB_PREFIX . "tax_rate` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
 
 		if ($tax_query->num_rows) {
@@ -221,7 +221,7 @@ class Tax {
 	 * @param float $value
 	 * @param int   $tax_class_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getRates(float $value, int $tax_class_id): array {
 		$tax_rate_data = [];

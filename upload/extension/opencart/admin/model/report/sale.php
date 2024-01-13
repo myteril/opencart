@@ -7,7 +7,7 @@ namespace Opencart\Admin\Model\Extension\Opencart\Report;
  */
 class Sale extends \Opencart\System\Engine\Model {
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return float
 	 */
@@ -24,7 +24,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getTotalOrdersByCountry(): array {
 		$query = $this->db->query("SELECT COUNT(*) AS `total`, SUM(`o`.`total`) AS amount, c.`iso_code_2` FROM `" . DB_PREFIX . "order` `o` LEFT JOIN `" . DB_PREFIX . "country` c ON (`o`.`payment_country_id` = c.`country_id`) WHERE `o`.`order_status_id` > '0' GROUP BY `o`.`payment_country_id`");
@@ -33,7 +33,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @return array
+	 * @return array<int, array<string, int>>
 	 */
 	public function getTotalOrdersByDay(): array {
 		$implode = [];
@@ -64,7 +64,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @return array
+	 * @return array<int, array<string, int>>
 	 */
 	public function getTotalOrdersByWeek(): array {
 		$implode = [];
@@ -99,7 +99,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @return array
+	 * @return array<int, array<string, int>>
 	 */
 	public function getTotalOrdersByMonth(): array {
 		$implode = [];
@@ -132,7 +132,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @return array
+	 * @return array<int, array<string, int>>
 	 */
 	public function getTotalOrdersByYear(): array {
 		$implode = [];
@@ -163,9 +163,9 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getOrders(array $data = []): array {
 		$sql = "SELECT MIN(`o`.`date_added`) AS date_start, MAX(`o`.`date_added`) AS date_end, COUNT(*) AS `orders`, SUM((SELECT SUM(op.`quantity`) FROM `" . DB_PREFIX . "order_product` `op` WHERE `op`.`order_id` = `o`.`order_id` GROUP BY `op`.`order_id`)) AS `products`, SUM((SELECT SUM(`ot`.`value`) FROM `" . DB_PREFIX . "order_total` ot WHERE ot.`order_id` = `o`.`order_id` AND ot.`code` = 'tax' GROUP BY ot.`order_id`)) AS tax, SUM(`o`.`total`) AS `total` FROM `" . DB_PREFIX . "order` `o`";
@@ -226,7 +226,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -273,9 +273,9 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getTaxes(array $data = []): array {
 		$sql = "SELECT MIN(`o`.`date_added`) AS date_start, MAX(`o`.`date_added`) AS date_end, ot.`title`, SUM(ot.`value`) AS `total`, COUNT(`o`.`order_id`) AS `orders` FROM `" . DB_PREFIX . "order` `o` LEFT JOIN `" . DB_PREFIX . "order_total` ot ON (ot.`order_id` = `o`.`order_id`) WHERE ot.`code` = 'tax'";
@@ -334,7 +334,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -383,9 +383,9 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getShipping(array $data = []): array {
 		$sql = "SELECT MIN(`o`.`date_added`) AS date_start, MAX(`o`.`date_added`) AS date_end, ot.`title`, SUM(ot.`value`) AS `total`, COUNT(`o`.`order_id`) AS `orders` FROM `" . DB_PREFIX . "order` `o` LEFT JOIN `" . DB_PREFIX . "order_total` ot ON (`o`.`order_id` = ot.`order_id`) WHERE ot.`code` = 'shipping'";
@@ -444,7 +444,7 @@ class Sale extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */

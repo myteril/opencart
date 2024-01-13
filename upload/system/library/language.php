@@ -22,15 +22,15 @@ class Language {
 	 */
 	protected string $directory;
 	/**
-	 * @var array
+	 * @var array<string, string>
 	 */
 	protected array $path = [];
 	/**
-	 * @var array
+	 * @var array<string, string>
 	 */
 	protected array $data = [];
 	/**
-	 * @var array
+	 * @var array<string, array<string, array<string, mixed>>>
 	 */
 	protected array $cache = [];
 
@@ -66,7 +66,7 @@ class Language {
 	 *
 	 * @param string $key
 	 */
-	public function get(string $key) {
+	public function get(string $key): string {
 		return $this->data[$key] ?? $key;
 	}
 
@@ -89,7 +89,7 @@ class Language {
 	 *
 	 * @param string $prefix
 	 *
-	 * @return array
+	 * @return array<string, string>
 	 */
 	public function all(string $prefix = ''): array {
 		if (!$prefix) {
@@ -125,7 +125,7 @@ class Language {
 	 * @param string $prefix
 	 * @param string $code     Language code
 	 *
-	 * @return array
+	 * @return array<string, string>
 	 */
 	public function load(string $filename, string $prefix = '', string $code = ''): array {
 		if (!$code) {

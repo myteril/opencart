@@ -9,7 +9,7 @@ class Zone extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Zone
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -24,8 +24,8 @@ class Zone extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Zone
 	 *
-	 * @param int   $zone_id
-	 * @param array $data
+	 * @param int                  $zone_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -53,7 +53,7 @@ class Zone extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $zone_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getZone(int $zone_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "zone` WHERE `zone_id` = '" . (int)$zone_id . "'");
@@ -64,9 +64,9 @@ class Zone extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Zones
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getZones(array $data = []): array {
 		$sql = "SELECT *, `z`.`name`, `z`.`status`, `c`.`name` AS `country` FROM `" . DB_PREFIX . "zone` `z` LEFT JOIN `" . DB_PREFIX . "country` `c` ON (`z`.`country_id` = `c`.`country_id`)";
@@ -129,7 +129,7 @@ class Zone extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $country_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getZonesByCountryId(int $country_id): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "zone` WHERE `country_id` = '" . (int)$country_id . "' AND `status` = '1' ORDER BY `name`";
@@ -152,7 +152,7 @@ class Zone extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Zones
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */

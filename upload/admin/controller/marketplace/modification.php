@@ -184,7 +184,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 	/**
 	 * Refresh
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 *
 	 * @return void
 	 */
@@ -236,7 +236,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 					if (is_file($file)) {
 						unlink($file);
 
-					// If directory use the remove directory function
+						// If directory use the remove directory function
 					} elseif (is_dir($file)) {
 						rmdir($file);
 					}
@@ -268,6 +268,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 			// Log
 			$log = [];
 
+			$original = [];
 			$modification = [];
 
 			foreach ($xml as $xml) {
@@ -386,11 +387,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 											$add = $operation->getElementsByTagName('add')->item(0)->textContent;
 											$trim = $operation->getElementsByTagName('add')->item(0)->getAttribute('trim');
 											$position = $operation->getElementsByTagName('add')->item(0)->getAttribute('position');
-											$offset = $operation->getElementsByTagName('add')->item(0)->getAttribute('offset');
-
-											if ($offset == '') {
-												$offset = 0;
-											}
+											$offset = (int)$operation->getElementsByTagName('add')->item(0)->getAttribute('offset');
 
 											// Trim line if is set to true.
 											if ($trim == 'true') {
@@ -643,7 +640,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 					if (is_file($file)) {
 						unlink($file);
 
-					// If directory use the remove directory function
+						// If directory use the remove directory function
 					} elseif (is_dir($file)) {
 						rmdir($file);
 					}
@@ -745,7 +742,7 @@ class Modification extends \Opencart\System\Engine\Controller {
 			$this->load->model('setting/modification');
 
 			foreach ($selected as $modification_id) {
-				$this->model_setting_modification->deleteMdification($modification_id);
+				$this->model_setting_modification->deleteModification($modification_id);
 			}
 
 			$json['success'] = $this->language->get('text_success');

@@ -11,7 +11,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $subscription_id
 	 *
-	 * @return array<sting, mixed>
+	 * @return array<string, mixed>
 	 */
 	public function getSubscription(int $subscription_id): array {
 		$subscription_data = [];
@@ -35,7 +35,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	 * @param int $order_id
 	 * @param int $order_product_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSubscriptionByOrderProductId(int $order_id, int $order_product_id): array {
 		$subscription_data = [];
@@ -59,7 +59,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getSubscriptions(int $start = 0, int $limit = 20): array {
 		if ($start < 0) {
@@ -123,7 +123,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getHistories(int $subscription_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {
@@ -150,5 +150,29 @@ class Subscription extends \Opencart\System\Engine\Model {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "subscription_history` WHERE `subscription_id` = '" . (int)$subscription_id . "'");
 
 		return (int)$query->row['total'];
+	}
+
+	/**
+	 * Edit Remaining
+	 *
+	 * @param int $subscription_id
+	 * @param int $remaining
+	 *
+	 * @return void
+	 */
+	public function editRemaining(int $subscription_id, int $remaining): void {
+		$this->db->query("UPDATE `" . DB_PREFIX . "subscription` SET `remaining` = '" . (int)$remaining . "' WHERE `subscription_id` = '" . (int)$subscription_id . "'");
+	}
+
+	/**
+	 * Edit Trial Remaining
+	 *
+	 * @param int $subscription_id
+	 * @param int $trial_remaining
+	 *
+	 * @return void
+	 */
+	public function editTrialRemaining(int $subscription_id, int $trial_remaining): void {
+		$this->db->query("UPDATE `" . DB_PREFIX . "subscription` SET `trial_remaining` = '" . (int)$trial_remaining . "' WHERE `subscription_id` = '" . (int)$subscription_id . "'");
 	}
 }

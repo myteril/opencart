@@ -7,15 +7,15 @@ namespace Opencart\System\Library\Cart;
  */
 class Currency {
 	/**
-	 * @var \Opencart\System\Library\DB
+	 * @var object
 	 */
-	private \Opencart\System\Library\DB $db;
+	private object $db;
 	/**
-	 * @var \Opencart\System\Library\Language
+	 * @var object
 	 */
-	private \Opencart\System\Library\Language $language;
+	private object $language;
 	/**
-	 * @var array
+	 * @var array<string, array<string, mixed>>
 	 */
 	private array $currencies = [];
 
@@ -43,9 +43,9 @@ class Currency {
 	 * @param float  $value
 	 * @param bool   $format
 	 *
-	 * @return string
+	 * @return float|string
 	 */
-	public function format(float $number, string $currency, float $value = 0, bool $format = true): string {
+	public function format(float $number, string $currency, float $value = 0, bool $format = true) {
 		if (!isset($this->currencies[$currency])) {
 			return '';
 		}
@@ -156,11 +156,11 @@ class Currency {
 	 *
 	 * @param string $currency
 	 *
-	 * @return string
+	 * @return int
 	 */
-	public function getDecimalPlace(string $currency): string {
+	public function getDecimalPlace(string $currency): int {
 		if (isset($this->currencies[$currency])) {
-			return $this->currencies[$currency]['decimal_place'];
+			return (int)$this->currencies[$currency]['decimal_place'];
 		} else {
 			return 0;
 		}

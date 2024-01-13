@@ -6,7 +6,7 @@ namespace Opencart\System\Library\Session;
  * @package Opencart\System\Library\Session
  */
 class Redis {
-	private \Opencart\System\Engine\Config $config;
+	private object $config;
 	private \Redis $redis;
 	public string $prefix;
 
@@ -31,7 +31,7 @@ class Redis {
 	 *
 	 * @param string $session_id
 	 *
-	 * @return array
+	 * @return array<mixed>
 	 */
 	public function read(string $session_id): array {
 		$data = $this->redis->get($this->prefix . $session_id);
@@ -46,8 +46,8 @@ class Redis {
 	/**
 	 * Write
 	 *
-	 * @param string $session_id
-	 * @param array  $data
+	 * @param string       $session_id
+	 * @param array<mixed> $data
 	 *
 	 * @return bool
 	 */

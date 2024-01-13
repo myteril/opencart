@@ -9,11 +9,13 @@ class ReturnStatus extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Return Status
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return int
+	 * @return ?int
 	 */
-	public function addReturnStatus(array $data): int {
+	public function addReturnStatus(array $data): ?int {
+		$return_status_id = null;
+
 		foreach ($data['return_status'] as $language_id => $value) {
 			if (isset($return_status_id)) {
 				$this->db->query("INSERT INTO `" . DB_PREFIX . "return_status` SET `return_status_id` = '" . (int)$return_status_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($value['name']) . "'");
@@ -32,8 +34,8 @@ class ReturnStatus extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Return Status
 	 *
-	 * @param int   $return_status_id
-	 * @param array $data
+	 * @param int                  $return_status_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -65,7 +67,7 @@ class ReturnStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $return_status_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getReturnStatus(int $return_status_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "return_status` WHERE `return_status_id` = '" . (int)$return_status_id . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
@@ -76,9 +78,9 @@ class ReturnStatus extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Return Statuses
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getReturnStatuses(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "return_status` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `name`";
@@ -121,7 +123,7 @@ class ReturnStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $return_status_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, string>>
 	 */
 	public function getDescriptions(int $return_status_id): array {
 		$return_status_data = [];

@@ -7,9 +7,9 @@ namespace Opencart\Catalog\Model\Extension\Opencart\Shipping;
  */
 class Item extends \Opencart\System\Engine\Model {
 	/**
-	 * @param array $address
+	 * @param array<string, mixed> $address
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getQuote(array $address): array {
 		$this->load->language('extension/opencart/shipping/item');

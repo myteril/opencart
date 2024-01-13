@@ -15,7 +15,7 @@ class Address extends \Opencart\System\Engine\Controller {
 		if (!$this->customer->isLogged() || (!isset($this->request->get['customer_token']) || !isset($this->session->data['customer_token']) || ($this->request->get['customer_token'] != $this->session->data['customer_token']))) {
 			$this->session->data['redirect'] = $this->url->link('account/address', 'language=' . $this->config->get('config_language'));
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language'), true));
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -74,7 +74,7 @@ class Address extends \Opencart\System\Engine\Controller {
 		if (!$this->customer->isLogged() || (!isset($this->request->get['customer_token']) || !isset($this->session->data['customer_token']) || ($this->request->get['customer_token'] != $this->session->data['customer_token']))) {
 			$this->session->data['redirect'] = $this->url->link('account/address', 'language=' . $this->config->get('config_language'));
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language'), true));
 		}
 
 		$this->response->setOutput($this->getList());
@@ -141,7 +141,7 @@ class Address extends \Opencart\System\Engine\Controller {
 		if (!$this->customer->isLogged() || (!isset($this->request->get['customer_token']) || !isset($this->session->data['customer_token']) || ($this->request->get['customer_token'] != $this->session->data['customer_token']))) {
 			$this->session->data['redirect'] = $this->url->link('account/address', 'language=' . $this->config->get('config_language'));
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language'), true));
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -187,7 +187,9 @@ class Address extends \Opencart\System\Engine\Controller {
 			$data['save'] = $this->url->link('account/address.save', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token'] . '&address_id=' . $this->request->get['address_id']);
 		}
 
-		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token'] = oc_token(32));
+		$this->session->data['upload_token'] = oc_token(32);
+
+		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token']);
 
 		if (isset($this->request->get['address_id'])) {
 			$this->load->model('account/address');

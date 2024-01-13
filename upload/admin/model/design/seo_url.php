@@ -9,7 +9,7 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Seo Url
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -22,8 +22,8 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Seo Url
 	 *
-	 * @param int   $seo_url_id
-	 * @param array $data
+	 * @param int                  $seo_url_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -47,7 +47,7 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $seo_url_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSeoUrl(int $seo_url_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `seo_url_id` = '" . (int)$seo_url_id . "'");
@@ -58,9 +58,9 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Seo Urls
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getSeoUrls(array $data = []): array {
 		$sql = "SELECT *, (SELECT `name` FROM `" . DB_PREFIX . "store` `s` WHERE `s`.`store_id` = `su`.`store_id`) AS `store`, (SELECT `name` FROM `" . DB_PREFIX . "language` `l` WHERE `l`.`language_id` = `su`.`language_id`) AS `language` FROM `" . DB_PREFIX . "seo_url` `su`";
@@ -132,7 +132,7 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Seo Urls
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -178,7 +178,7 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 	 * @param int    $store_id
 	 * @param int    $language_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSeoUrlByKeyValue(string $key, string $value, int $store_id, int $language_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `key` = '" . $this->db->escape($key) . "' AND `value` = '" . $this->db->escape($value) . "' AND `store_id` = '" . (int)$store_id . "' AND `language_id` = '" . (int)$language_id . "'");
@@ -193,7 +193,7 @@ class SeoUrl extends \Opencart\System\Engine\Model {
 	 * @param int    $store_id
 	 * @param int    $language_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSeoUrlByKeyword(string $keyword, int $store_id, int $language_id = 0): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE (`keyword` = '" . $this->db->escape($keyword) . "' OR LCASE(`keyword`) LIKE '" . $this->db->escape('%/' . oc_strtolower($keyword)) . "') AND `store_id` = '" . (int)$store_id . "'";

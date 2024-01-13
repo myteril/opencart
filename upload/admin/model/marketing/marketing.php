@@ -9,7 +9,7 @@ class Marketing extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Marketing
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -22,8 +22,8 @@ class Marketing extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Marketing
 	 *
-	 * @param int   $marketing_id
-	 * @param array $data
+	 * @param int                  $marketing_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -47,7 +47,7 @@ class Marketing extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $marketing_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getMarketing(int $marketing_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "marketing` WHERE `marketing_id` = '" . (int)$marketing_id . "'");
@@ -60,7 +60,7 @@ class Marketing extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getMarketingByCode(string $code): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "marketing` WHERE `code` = '" . $this->db->escape($code) . "'");
@@ -71,9 +71,9 @@ class Marketing extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Marketing(s)
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getMarketings(array $data = []): array {
 		$implode = [];
@@ -146,7 +146,7 @@ class Marketing extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Marketing(s)
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -187,7 +187,7 @@ class Marketing extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getReports(int $marketing_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {

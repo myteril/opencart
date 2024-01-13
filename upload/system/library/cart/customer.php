@@ -7,21 +7,21 @@ namespace Opencart\System\Library\Cart;
  */
 class Customer {
 	/**
-	 * @var \Opencart\System\Library\DB
+	 * @var object
 	 */
-	private \Opencart\System\Library\DB $db;
+	private object $db;
 	/**
-	 * @var \Opencart\System\Engine\Config
+	 * @var object
 	 */
-	private \Opencart\System\Engine\Config $config;
+	private object $config;
 	/**
-	 * @var \Opencart\System\Library\Request
+	 * @var object
 	 */
-	private \Opencart\System\Library\Request $request;
+	private object $request; // Do not add namespace as it stops devs being able to extend classes
 	/**
-	 * @var \Opencart\System\Library\Session
+	 * @var object
 	 */
-	private \Opencart\System\Library\Session $session;
+	private object $session;
 	/**
 	 * @var int
 	 */
@@ -62,7 +62,7 @@ class Customer {
 	/**
 	 * Constructor
 	 *
-	 * @param object $registry
+	 * @param \Opencart\System\Engine\Registry $registry
 	 */
 	public function __construct(\Opencart\System\Engine\Registry $registry) {
 		$this->db = $registry->get('db');
@@ -155,8 +155,8 @@ class Customer {
 		$this->email = '';
 		$this->telephone = '';
 		$this->newsletter = false;
-		$this->safe = 0;
-		$this->commenter = 0;
+		$this->safe = false;
+		$this->commenter = false;
 	}
 
 	/**

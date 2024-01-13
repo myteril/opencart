@@ -38,7 +38,7 @@ class Upload extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $upload_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getUpload(int $upload_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "upload` WHERE `upload_id` = '" . (int)$upload_id . "'");
@@ -51,7 +51,7 @@ class Upload extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getUploadByCode(string $code): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "upload` WHERE `code` = '" . $this->db->escape($code) . "'");
@@ -62,9 +62,9 @@ class Upload extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Uploads
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getUploads(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "upload`";
@@ -129,7 +129,7 @@ class Upload extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Uploads
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */

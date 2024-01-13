@@ -9,7 +9,7 @@ class User extends \Opencart\System\Engine\Model {
 	/**
 	 * Add User
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -22,8 +22,8 @@ class User extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit User
 	 *
-	 * @param int   $user_id
-	 * @param array $data
+	 * @param int                  $user_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -38,8 +38,8 @@ class User extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Password
 	 *
-	 * @param int $user_id
-	 * @param     $password
+	 * @param int    $user_id
+	 * @param string $password
 	 *
 	 * @return void
 	 */
@@ -77,7 +77,7 @@ class User extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $user_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getUser(int $user_id): array {
 		$query = $this->db->query("SELECT *, (SELECT ug.`name` FROM `" . DB_PREFIX . "user_group` ug WHERE ug.`user_group_id` = u.`user_group_id`) AS user_group FROM `" . DB_PREFIX . "user` u WHERE u.`user_id` = '" . (int)$user_id . "'");
@@ -90,7 +90,7 @@ class User extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $username
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getUserByUsername(string $username): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "user` WHERE `username` = '" . $this->db->escape($username) . "'");
@@ -103,7 +103,7 @@ class User extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $email
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getUserByEmail(string $email): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "user` WHERE LCASE(`email`) = '" . $this->db->escape(oc_strtolower($email)) . "'");
@@ -116,7 +116,7 @@ class User extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getUserByCode(string $code): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "user` WHERE `code` = '" . $this->db->escape($code) . "' AND `code` != ''");
@@ -127,9 +127,9 @@ class User extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Users
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getUsers(array $data = []): array {
 		$sql = "SELECT *, CONCAT(`u`.`firstname`, ' ', `u`.`lastname`) AS `name`, (SELECT `ug`.`name` FROM `" . DB_PREFIX . "user_group` `ug` WHERE `ug`.`user_group_id` = `u`.`user_group_id`) AS user_group FROM `" . DB_PREFIX . "user` `u`";
@@ -206,7 +206,7 @@ class User extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Users
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -277,8 +277,8 @@ class User extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Login
 	 *
-	 * @param int   $user_id
-	 * @param array $data
+	 * @param int                  $user_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -293,7 +293,7 @@ class User extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getLogins(int $user_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {
@@ -333,8 +333,8 @@ class User extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Authorize
 	 *
-	 * @param int   $user_id
-	 * @param array $data
+	 * @param int                  $user_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -378,12 +378,25 @@ class User extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Authorize
+	 *
+	 * @param int $user_authorize_id
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function getAuthorize(int $user_authorize_id): array {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "user_authorize` WHERE `user_authorize_id` = '" . (int)$user_authorize_id . "'");
+
+		return $query->row;
+	}
+
+	/**
 	 * Get Authorize By Token
 	 *
 	 * @param int    $user_id
 	 * @param string $token
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getAuthorizeByToken(int $user_id, string $token): array {
 		$query = $this->db->query("SELECT *, (SELECT SUM(`total`) FROM `" . DB_PREFIX . "user_authorize` WHERE `user_id` = '" . (int)$user_id . "') AS `attempts` FROM `" . DB_PREFIX . "user_authorize` WHERE `user_id` = '" . (int)$user_id . "' AND `token` = '" . $this->db->escape($token) . "'");
@@ -409,7 +422,7 @@ class User extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getAuthorizes(int $user_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {

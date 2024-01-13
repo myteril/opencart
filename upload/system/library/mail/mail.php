@@ -6,12 +6,15 @@ namespace Opencart\System\Library\Mail;
  * Basic PHP mail class
  */
 class Mail {
+	/**
+	 * @var array<string, mixed>
+	 */
 	protected array $option = [];
 
 	/**
 	 * Constructor
 	 *
-	 * @param array $option
+	 * @param array<string, mixed> $option
 	 */
 	public function __construct(array &$option = []) {
 		$this->option = &$option;
@@ -29,7 +32,7 @@ class Mail {
 			$to = $this->option['to'];
 		}
 
-		if (version_compare(PHP_VERSION, '7.4', '>=') || substr(PHP_OS, 0, 3) == 'WIN') {
+		if (version_compare(PHP_VERSION, '8.0', '>=')) {
 			$eol = "\r\n";
 		} else {
 			$eol = PHP_EOL;

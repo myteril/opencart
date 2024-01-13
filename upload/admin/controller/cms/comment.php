@@ -378,15 +378,15 @@ class Comment extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function refresh(): void {
+	public function rating(): void {
 		$this->load->language('cms/comment');
 
 		$json = [];
 
-		if (isset($this->request->post['selected'])) {
-			$selected = $this->request->post['selected'];
+		if (isset($this->request->get['page'])) {
+			$page = (int)$this->request->get['page'];
 		} else {
-			$selected = [];
+			$page = 1;
 		}
 
 		if (!$this->user->hasPermission('modify', 'cms/comment')) {
@@ -394,13 +394,52 @@ class Comment extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
+			$limit = 1;
+
+			$filter_data = [
+				'sort'  => 'date_added',
+				'order' => 'ASC',
+				'start' => ($page - 1) * $limit,
+				'limit' => $limit
+			];
+
 			$this->load->model('cms/article');
 
-			foreach ($selected as $article_comment_id) {
-				$this->model_cms_article->deleteComment($article_comment_id);
+			$results = $this->model_cms_article->getComments($filter_data);
+
+			foreach ($results as $result) {
+				$like = 0;
+				$dislike = 0;
+
+				$ratings = $this->model_cms_article->getRatings($result['article_id'], $result['article_comment_id']);
+
+				foreach ($ratings as $rating) {
+					if ($rating['rating'] == 1) {
+						$like = $rating['total'];
+					}
+
+					if ($rating['rating'] == 0) {
+						$dislike = $rating['total'];
+					}
+				}
+
+				$this->model_cms_article->editCommentRating($result['article_id'], $result['article_comment_id'], $like - $dislike);
 			}
 
-			$json['success'] = $this->language->get('text_success');
+			$comment_total = $this->model_cms_article->getTotalComments();
+
+			$start = ($page - 1) * $limit;
+			$end = ($start > ($comment_total - $limit)) ? $comment_total : ($start + $limit);
+
+			if ($end < $comment_total) {
+				$json['text'] = sprintf($this->language->get('text_next'), $start ?: 1, $end, $comment_total);
+
+				$json['next'] = $this->url->link('cms/comment.rating', 'user_token=' . $this->session->data['user_token'] . '&page=' . ($page + 1), true);
+			} else {
+				$json['success'] = $this->language->get('text_success');
+
+				$json['next'] = '';
+			}
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

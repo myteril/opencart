@@ -9,8 +9,8 @@ class Voucher extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Voucher
 	 *
-	 * @param int   $order_id
-	 * @param array $data
+	 * @param int                  $order_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -36,7 +36,7 @@ class Voucher extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getVoucher(string $code): array {
 		$status = true;

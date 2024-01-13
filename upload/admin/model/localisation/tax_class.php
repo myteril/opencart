@@ -9,7 +9,7 @@ class TaxClass extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Tax Class
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -32,8 +32,8 @@ class TaxClass extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Tax Class
 	 *
-	 * @param int   $tax_class_id
-	 * @param array $data
+	 * @param int                  $tax_class_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -70,7 +70,7 @@ class TaxClass extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $tax_class_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getTaxClass(int $tax_class_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "tax_class` WHERE `tax_class_id` = '" . (int)$tax_class_id . "'");
@@ -81,9 +81,9 @@ class TaxClass extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Tax Classes
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getTaxClasses(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "tax_class` ORDER BY `title`";
@@ -137,7 +137,7 @@ class TaxClass extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $tax_class_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getTaxRules(int $tax_class_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "tax_rule` WHERE `tax_class_id` = '" . (int)$tax_class_id . "' ORDER BY `priority` ASC");

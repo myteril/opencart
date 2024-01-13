@@ -14,8 +14,8 @@ namespace Opencart\System\Library\Session;
  * @package Opencart\System\Library\Session
  */
 class DB {
-	private \Opencart\System\Library\DB $db;
-	private \Opencart\System\Engine\Config $config;
+	private object $db;
+	private object $config;
 
 	/**
 	 * Constructor
@@ -32,7 +32,7 @@ class DB {
 	 *
 	 * @param string $session_id
 	 *
-	 * @return array
+	 * @return array<mixed>
 	 */
 	public function read(string $session_id): array {
 		$query = $this->db->query("SELECT `data` FROM `" . DB_PREFIX . "session` WHERE `session_id` = '" . $this->db->escape($session_id) . "' AND `expire` > '" . $this->db->escape(gmdate('Y-m-d H:i:s')) . "'");
@@ -47,8 +47,8 @@ class DB {
 	/**
 	 * Write
 	 *
-	 * @param string $session_id
-	 * @param array  $data
+	 * @param string       $session_id
+	 * @param array<mixed> $data
 	 *
 	 * @return bool
 	 */

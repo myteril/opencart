@@ -9,7 +9,7 @@ class VoucherTheme extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Voucher Theme
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -30,8 +30,8 @@ class VoucherTheme extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Voucher Theme
 	 *
-	 * @param int   $voucher_theme_id
-	 * @param array $data
+	 * @param int                  $voucher_theme_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -66,7 +66,7 @@ class VoucherTheme extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $voucher_theme_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getVoucherTheme(int $voucher_theme_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "voucher_theme` `vt` LEFT JOIN `" . DB_PREFIX . "voucher_theme_description` `vtd` ON (`vt`.`voucher_theme_id` = `vtd`.`voucher_theme_id`) WHERE `vt`.`voucher_theme_id` = '" . (int)$voucher_theme_id . "' AND `vtd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
@@ -77,9 +77,9 @@ class VoucherTheme extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Voucher Themes
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getVoucherThemes(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "voucher_theme` `vt` LEFT JOIN `" . DB_PREFIX . "voucher_theme_description` `vtd` ON (`vt`.`voucher_theme_id` = `vtd`.`voucher_theme_id`) WHERE `vtd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `vtd`.`name`";
@@ -122,7 +122,7 @@ class VoucherTheme extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $voucher_theme_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, string>>
 	 */
 	public function getDescriptions(int $voucher_theme_id): array {
 		$voucher_theme_data = [];

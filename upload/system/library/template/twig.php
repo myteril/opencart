@@ -19,14 +19,12 @@ class Twig {
 	 */
 	protected string $directory;
 	/**
-	 * @var array
+	 * @var array<string, string>
 	 */
 	protected array $path = [];
 
 	/**
 	 * Constructor
-	 *
-	 * @param string $adaptor
 	 */
 	public function __construct() {
 		// Unfortunately, we have to set the web root directory as the base since Twig confuses which template cache to use.
@@ -35,7 +33,7 @@ class Twig {
 		// We have to add the C directory as the base directory because twig can only accept the first namespace/,
 		// rather than a multiple namespace system, which took me less than a minute to write. If symphony is like
 		// this, then I have no idea why people use the framework.
-		$this->loader = new \Twig\Loader\FilesystemLoader('/', $this->root);
+		$this->loader = new \Twig\Loader\FilesystemLoader('./', $this->root);
 	}
 
 	/**
@@ -57,9 +55,9 @@ class Twig {
 	/**
 	 * Render
 	 *
-	 * @param string $filename
-	 * @param array  $data
-	 * @param string $code
+	 * @param string               $filename
+	 * @param array<string, mixed> $data
+	 * @param string               $code
 	 *
 	 * @return string
 	 */

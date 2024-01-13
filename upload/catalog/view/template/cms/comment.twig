@@ -1,10 +1,12 @@
 <div class="text-center">
-  <button type="button" value="{{ like }}" id="input-rating-like" data-oc-toggle="rate" class="btn btn-secondary"><i class="fa fa-thumbs-up"></i></button>
-  <button type="button" value="{{ dislike }}" id="input-rating-dislike" data-oc-toggle="rate" class="btn btn-secondary"><i class="fa fa-thumbs-down"></i></button>
-  {% if comment_guest %}
+  {% if logged %}
+    <button type="button" value="{{ like }}" data-bs-toggle="tooltip" title="{{ button_like }}" data-oc-toggle="rate" class="btn btn-secondary"><i class="fa fa-thumbs-up"></i></button>
+    <button type="button" value="{{ dislike }}"  data-bs-toggle="tooltip" title="{{ button_dislike }}"data-oc-toggle="rate" class="btn btn-secondary"><i class="fa fa-thumbs-down"></i></button>
     <button type="button" value="{{ comment_add }}" data-oc-toggle="comment" data-oc-target="#comment-0" data-oc-trigger="#button-refresh" class="btn btn-secondary">{{ button_comment }}</button>
   {% else %}
-    <button type="button" class="btn btn-secondary" disabled>{{ button_comment }}</button>
+    <a href="{{ login }}" class="btn btn-secondary"><i class="fa fa-thumbs-up"></i></a>
+    <a href="{{ login }}" class="btn btn-secondary"><i class="fa fa-thumbs-down"></i></a>
+    <a href="{{ login }}" class="btn btn-secondary">{{ button_login }}</a>
   {% endif %}
 </div>
 <hr/>
@@ -96,6 +98,8 @@ $('#form-comment').on('submit', function(e) {
             $('#button-comment').button('reset');
         },
         success: function(json) {
+            console.log(json);
+
             $('.alert-dismissible').remove();
 
             $('#form-comment').find('.is-invalid').removeClass('is-invalid');
@@ -179,7 +183,7 @@ $('#comment').on('click', '[data-oc-toggle=\'refresh\']', function(e) {
 });
 
 // Rating
-let rating = function(e) {
+$('#comment-container').on('click', '[data-oc-toggle=\'rate\']', function(e) {
     e.preventDefault();
 
     var element = this;
@@ -208,9 +212,5 @@ let rating = function(e) {
             console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
     });
-}
-
-$('#input-rating-like, #input-rating-dislike').on('click', rating);
-
-$('#comment').on('click', '[data-oc-toggle=\'rate\']', rating);
+});
 //--></script>

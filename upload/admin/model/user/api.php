@@ -9,7 +9,7 @@ class Api extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Api
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -32,8 +32,8 @@ class Api extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Api
 	 *
-	 * @param int   $api_id
-	 * @param array $data
+	 * @param int                  $api_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -67,7 +67,7 @@ class Api extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $api_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getApi(int $api_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api` WHERE `api_id` = '" . (int)$api_id . "'");
@@ -78,9 +78,9 @@ class Api extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Apis
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getApis(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "api`";
@@ -149,7 +149,7 @@ class Api extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $api_id
 	 *
-	 * @return array
+	 * @return array<int, string>
 	 */
 	public function getIps(int $api_id): array {
 		$ip_data = [];
@@ -189,7 +189,7 @@ class Api extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $api_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getSessions(int $api_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api_session` WHERE `api_id` = '" . (int)$api_id . "'");

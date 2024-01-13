@@ -7,31 +7,31 @@ namespace Opencart\System\Library\Cart;
  */
 class Cart {
 	/**
-	 * @var \Opencart\System\Library\DB
+	 * @var object
 	 */
-	private \Opencart\System\Library\DB $db;
+	private object $db;
 	/**
-	 * @var \Opencart\System\Engine\Config
+	 * @var object
 	 */
-	private \Opencart\System\Engine\Config $config;
+	private object $config;
 	/**
-	 * @var \Opencart\System\Library\Cart\Customer
+	 * @var object
 	 */
-	private \Opencart\System\Library\Cart\Customer $customer;
+	private object $customer;
 	/**
-	 * @var \Opencart\System\Library\Session
+	 * @var object
 	 */
-	private \Opencart\System\Library\Session $session;
+	private object $session;
 	/**
-	 * @var \Opencart\System\Library\Cart\Tax
+	 * @var object
 	 */
-	private \Opencart\System\Library\Cart\Tax $tax;
+	private object $tax;
 	/**
-	 * @var \Opencart\System\Library\Cart\Weight
+	 * @var object
 	 */
-	private \Opencart\System\Library\Cart\Weight $weight;
+	private object $weight;
 	/**
-	 * @var array
+	 * @var array<int, array<string, mixed>>
 	 */
 	private array $data = [];
 
@@ -73,7 +73,7 @@ class Cart {
 	/**
 	 * getProducts
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getProducts(): array {
 		if (!$this->data) {
@@ -361,12 +361,12 @@ class Cart {
 	/**
 	 * Add
 	 *
-	 * @param int   $product_id
-	 * @param int   $quantity
-	 * @param array $option
-	 * @param int   $subscription_plan_id
-	 * @param bool  $override
-	 * @param float $price
+	 * @param int          $product_id
+	 * @param int          $quantity
+	 * @param array<mixed> $option
+	 * @param int          $subscription_plan_id
+	 * @param bool         $override
+	 * @param float        $price
 	 *
 	 * @return void
 	 */
@@ -442,7 +442,7 @@ class Cart {
 	/**
 	 * getSubscriptions
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getSubscriptions(): array {
 		$product_data = [];
@@ -491,7 +491,7 @@ class Cart {
 	/**
 	 * getTaxes
 	 *
-	 * @return array
+	 * @return array<int, float>
 	 */
 	public function getTaxes(): array {
 		$tax_data = [];

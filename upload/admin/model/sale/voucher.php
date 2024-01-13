@@ -9,7 +9,7 @@ class Voucher extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Voucher
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -22,8 +22,8 @@ class Voucher extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Voucher
 	 *
-	 * @param int   $voucher_id
-	 * @param array $data
+	 * @param int                  $voucher_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -48,7 +48,7 @@ class Voucher extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $voucher_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getVoucher(int $voucher_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "voucher` WHERE `voucher_id` = '" . (int)$voucher_id . "'");
@@ -61,7 +61,7 @@ class Voucher extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getVoucherByCode(string $code): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "voucher` WHERE `code` = '" . $this->db->escape($code) . "'");
@@ -72,9 +72,9 @@ class Voucher extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Vouchers
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getVouchers(array $data = []): array {
 		$sql = "SELECT `v`.`voucher_id`, `v`.`order_id`, `v`.`code`, `v`.`from_name`, `v`.`from_email`, `v`.`to_name`, `v`.`to_email`, (SELECT `vtd`.`name` FROM `" . DB_PREFIX . "voucher_theme_description` `vtd` WHERE `vtd`.`voucher_theme_id` = `v`.`voucher_theme_id` AND `vtd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS `theme`, `v`.`amount`, `v`.`status`, `v`.`date_added` FROM `" . DB_PREFIX . "voucher` `v`";
@@ -149,7 +149,7 @@ class Voucher extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getHistories(int $voucher_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {

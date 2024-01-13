@@ -6,7 +6,7 @@ namespace Opencart\System\Library\Session;
  * @package Opencart\System\Library\Session
  */
 class File {
-	private \Opencart\System\Engine\Config $config;
+	private object $config;
 
 	/**
 	 * Constructor
@@ -22,7 +22,7 @@ class File {
 	 *
 	 * @param string $session_id
 	 *
-	 * @return array
+	 * @return array<mixed>
 	 */
 	public function read(string $session_id): array {
 		$file = DIR_SESSION . 'sess_' . basename($session_id);
@@ -37,8 +37,8 @@ class File {
 	/**
 	 * Write
 	 *
-	 * @param string $session_id
-	 * @param array  $data
+	 * @param string       $session_id
+	 * @param array<mixed> $data
 	 *
 	 * @return bool
 	 */

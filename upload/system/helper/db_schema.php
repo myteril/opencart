@@ -1,5 +1,5 @@
 <?php
-function oc_db_create($db_driver, $db_hostname, $db_username, $db_password, $db_database, $db_port, $db_prefix, $db_ssl_key, $db_ssl_cert, $db_ssl_ca) {
+function oc_db_create(string $db_driver, string $db_hostname, string $db_username, string $db_password, string $db_database, string $db_port, string $db_prefix, string $db_ssl_key, string $db_ssl_cert, string $db_ssl_ca): bool {
 	try {
 		// Database
 		$db = new \Opencart\System\Library\DB($db_driver, $db_hostname, $db_username, $db_password, $db_database, $db_port, $db_ssl_key, $db_ssl_cert, $db_ssl_ca);
@@ -54,6 +54,9 @@ function oc_db_create($db_driver, $db_hostname, $db_username, $db_password, $db_
 	return true;
 }
 
+/**
+ * @return array<int, array<string, mixed>>
+ */
 function oc_db_schema() {
 	$tables = [];
 
@@ -529,6 +532,10 @@ function oc_db_schema() {
 				'type' => 'varchar(64)'
 			],
 			[
+				'name' => 'rating',
+				'type' => 'int(11)'
+			],
+			[
 				'name' => 'status',
 				'type' => 'tinyint(1)'
 			],
@@ -617,6 +624,12 @@ function oc_db_schema() {
 				]
 			],
 			[
+				'name' => 'customer_id',
+				'key'  => [
+					'customer_id'
+				]
+			],
+			[
 				'name' => 'parent_id',
 				'key'  => [
 					'parent_id'
@@ -701,11 +714,11 @@ function oc_db_schema() {
 				'auto_increment' => true
 			],
 			[
-				'name' => 'article_id',
+				'name' => 'article_comment_id',
 				'type' => 'int(11)'
 			],
 			[
-				'name' => 'article_comment_id',
+				'name' => 'article_id',
 				'type' => 'int(11)'
 			],
 			[
@@ -714,13 +727,12 @@ function oc_db_schema() {
 				'default' => 0
 			],
 			[
-				'name'    => 'customer_id',
-				'type'    => 'int(11)',
-				'default' => 0
+				'name' => 'customer_id',
+				'type' => 'int(11)'
 			],
 			[
 				'name' => 'rating',
-				'type' => 'tinyint(11)'
+				'type' => 'tinyint(1)'
 			],
 			[
 				'name' => 'ip',
@@ -736,33 +748,27 @@ function oc_db_schema() {
 		],
 		'foreign' => [
 			[
-				'key'   => 'article_id',
-				'table' => 'article',
-				'field' => 'article_id'
-			],
-			[
 				'key'   => 'article_comment_id',
 				'table' => 'article_comment',
 				'field' => 'article_comment_id'
 			],
 			[
-				'key'   => 'customer_id',
-				'table' => 'customer',
-				'field' => 'customer_id'
+				'key'   => 'article_id',
+				'table' => 'article',
+				'field' => 'article_id'
 			],
 			[
 				'key'   => 'store_id',
 				'table' => 'store',
 				'field' => 'store_id'
+			],
+			[
+				'key'   => 'customer_id',
+				'table' => 'customer',
+				'field' => 'customer_id'
 			]
 		],
 		'index' => [
-			[
-				'name' => 'article_id',
-				'key'  => [
-					'article_id'
-				]
-			],
 			[
 				'name' => 'article_comment_id',
 				'key'  => [
@@ -770,15 +776,21 @@ function oc_db_schema() {
 				]
 			],
 			[
-				'name' => 'customer_id',
+				'name' => 'article_id',
 				'key'  => [
-					'customer_id'
+					'article_id'
 				]
 			],
 			[
 				'name' => 'store_id',
 				'key'  => [
 					'store_id'
+				]
+			],
+			[
+				'name' => 'customer_id',
+				'key'  => [
+					'customer_id'
 				]
 			]
 		],

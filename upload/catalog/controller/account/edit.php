@@ -15,7 +15,7 @@ class Edit extends \Opencart\System\Engine\Controller {
 		if (!$this->customer->isLogged() || (!isset($this->request->get['customer_token']) || !isset($this->session->data['customer_token']) || ($this->request->get['customer_token'] != $this->session->data['customer_token']))) {
 			$this->session->data['redirect'] = $this->url->link('account/edit', 'language=' . $this->config->get('config_language'));
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language'), true));
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,10 @@ class Edit extends \Opencart\System\Engine\Controller {
 		$data['config_telephone_required'] = $this->config->get('config_telephone_required');
 
 		$data['save'] = $this->url->link('account/edit.save', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']);
-		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token'] = oc_token(32));
+
+		$this->session->data['upload_token'] = oc_token(32);
+
+		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token']);
 
 		$this->load->model('account/customer');
 
@@ -68,11 +71,7 @@ class Edit extends \Opencart\System\Engine\Controller {
 			}
 		}
 
-		if (isset($customer_info)) {
-			$data['account_custom_field'] = $customer_info['custom_field'];
-		} else {
-			$data['account_custom_field'] = [];
-		}
+		$data['account_custom_field'] = $customer_info['custom_field'];
 
 		$data['back'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']);
 

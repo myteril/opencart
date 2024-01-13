@@ -9,7 +9,7 @@ class Location extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Location
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -22,8 +22,8 @@ class Location extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Location
 	 *
-	 * @param int   $location_id
-	 * @param array $data
+	 * @param int                  $location_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -47,7 +47,7 @@ class Location extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $location_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getLocation(int $location_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "location` WHERE `location_id` = '" . (int)$location_id . "'");
@@ -58,9 +58,9 @@ class Location extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Locations
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getLocations(array $data = []): array {
 		$sql = "SELECT `location_id`, `name`, `address` FROM `" . DB_PREFIX . "location`";

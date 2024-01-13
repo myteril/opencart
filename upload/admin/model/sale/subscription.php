@@ -9,8 +9,8 @@ class Subscription extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Subscription
 	 *
-	 * @param int   $subscription_id
-	 * @param array $data
+	 * @param int                  $subscription_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -79,11 +79,22 @@ class Subscription extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Delete Subscription By Customer Payment ID
+	 *
+	 * @param int $customer_payment_id
+	 *
+	 * @return void
+	 */
+	public function deleteSubscriptionByCustomerPaymentId(int $customer_payment_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "subscription` WHERE `customer_payment_id ` = '" . $customer_payment_id);
+	}
+
+	/**
 	 * Get Subscription
 	 *
 	 * @param int $subscription_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSubscription(int $subscription_id): array {
 		$subscription_data = [];
@@ -107,7 +118,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	 * @param int $order_id
 	 * @param int $order_product_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSubscriptionByOrderProductId(int $order_id, int $order_product_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "subscription` WHERE `order_id` = '" . (int)$order_id . "' AND `order_product_id` = '" . (int)$order_product_id . "'");
@@ -118,9 +129,9 @@ class Subscription extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Subscriptions
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getSubscriptions(array $data): array {
 		$sql = "SELECT `s`.`subscription_id`, `s`.*, CONCAT(`o`.`firstname`, ' ', `o`.`lastname`) AS customer, (SELECT `ss`.`name` FROM `" . DB_PREFIX . "subscription_status` `ss` WHERE `ss`.`subscription_status_id` = `s`.`subscription_status_id` AND `ss`.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS `subscription_status` FROM `" . DB_PREFIX . "subscription` `s` LEFT JOIN `" . DB_PREFIX . "order` `o` ON (`s`.`order_id` = `o`.`order_id`)";
@@ -137,6 +148,14 @@ class Subscription extends \Opencart\System\Engine\Model {
 
 		if (!empty($data['filter_order_product_id'])) {
 			$implode[] = "`s`.`order_product_id` = '" . (int)$data['filter_order_product_id'] . "'";
+		}
+
+		if (!empty($data['filter_customer_payment_id'])) {
+			$implode[] = "`s`.`customer_payment_id` = " . (int)$data['filter_customer_payment_id'];
+		}
+
+		if (!empty($data['filter_customer_id'])) {
+			$implode[] = "`s`.`customer_id` = " . (int)$data['filter_customer_id'];
 		}
 
 		if (!empty($data['filter_customer'])) {
@@ -204,7 +223,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Subscriptions
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -219,6 +238,10 @@ class Subscription extends \Opencart\System\Engine\Model {
 
 		if (!empty($data['filter_order_id'])) {
 			$implode[] = "`s`.`order_id` = '" . (int)$data['filter_order_id'] . "'";
+		}
+
+		if (!empty($data['filter_customer_id'])) {
+			$implode[] = "`s`.`customer_id` = " . (int)$data['filter_customer_id'];
 		}
 
 		if (!empty($data['filter_customer'])) {
@@ -295,7 +318,7 @@ class Subscription extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getHistories(int $subscription_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {

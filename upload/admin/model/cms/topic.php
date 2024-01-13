@@ -9,7 +9,7 @@ class Topic extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Topic
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int $topic
 	 */
@@ -42,8 +42,8 @@ class Topic extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Topic
 	 *
-	 * @param int   $topic_id
-	 * @param array $data
+	 * @param int                  $topic_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -96,7 +96,7 @@ class Topic extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $topic_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getTopic(int $topic_id): array {
 		$sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "topic` `t` LEFT JOIN `" . DB_PREFIX . "topic_description` `td` ON (`t`.`topic_id` = `td`.`topic_id`) WHERE `t`.`topic_id` = '" . (int)$topic_id . "' AND `td`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
@@ -117,9 +117,9 @@ class Topic extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Topics
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getTopics(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "topic` `t` LEFT JOIN `" . DB_PREFIX . "topic_description` `td` ON (`t`.`topic_id` = `td`.`topic_id`) WHERE `td`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
@@ -173,7 +173,7 @@ class Topic extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $topic_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getDescriptions(int $topic_id): array {
 		$topic_description_data = [];
@@ -199,7 +199,7 @@ class Topic extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $topic_id
 	 *
-	 * @return array
+	 * @return array<int, array<int, string>>
 	 */
 	public function getSeoUrls(int $topic_id): array {
 		$topic_seo_url_data = [];
@@ -218,7 +218,7 @@ class Topic extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $topic_id
 	 *
-	 * @return array
+	 * @return array<int, int>
 	 */
 	public function getStores(int $topic_id): array {
 		$topic_store_data = [];

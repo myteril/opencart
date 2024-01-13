@@ -9,7 +9,7 @@ class Returns extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Return
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -22,8 +22,8 @@ class Returns extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Return
 	 *
-	 * @param int   $return_id
-	 * @param array $data
+	 * @param int                  $return_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -48,7 +48,7 @@ class Returns extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $return_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getReturn(int $return_id): array {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT CONCAT(`c`.`firstname`, ' ', `c`.`lastname`) FROM `" . DB_PREFIX . "customer` `c` WHERE `c`.`customer_id` = `r`.`customer_id`) AS `customer`, (SELECT `c`.`language_id` FROM `" . DB_PREFIX . "customer` `c` WHERE `c`.`customer_id` = `r`.`customer_id`) AS `language_id`, (SELECT `rs`.`name` FROM `" . DB_PREFIX . "return_status` `rs` WHERE `rs`.`return_status_id` = `r`.`return_status_id` AND `rs`.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS `return_status` FROM `" . DB_PREFIX . "return` `r` WHERE `r`.`return_id` = '" . (int)$return_id . "'");
@@ -59,9 +59,9 @@ class Returns extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Returns
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getReturns(array $data = []): array {
 		$sql = "SELECT *, CONCAT(`r`.`firstname`, ' ', `r`.`lastname`) AS `customer`, (SELECT `rs`.`name` FROM `" . DB_PREFIX . "return_status` `rs` WHERE `rs`.`return_status_id` = `r`.`return_status_id` AND `rs`.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS `return_status` FROM `" . DB_PREFIX . "return` `r`";
@@ -147,7 +147,7 @@ class Returns extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Returns
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -258,7 +258,7 @@ class Returns extends \Opencart\System\Engine\Model {
 	 * @param int $start
 	 * @param int $limit
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getHistories(int $return_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {

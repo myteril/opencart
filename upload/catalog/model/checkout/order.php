@@ -9,7 +9,7 @@ class Order extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Order
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -64,8 +64,8 @@ class Order extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Order
 	 *
-	 * @param int   $order_id
-	 * @param array $data
+	 * @param int                  $order_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -192,7 +192,7 @@ class Order extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $order_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getOrder(int $order_id): array {
 		$order_query = $this->db->query("SELECT *, (SELECT `os`.`name` FROM `" . DB_PREFIX . "order_status` `os` WHERE `os`.`order_status_id` = `o`.`order_status_id` AND `os`.`language_id` = `o`.`language_id`) AS order_status FROM `" . DB_PREFIX . "order` `o` WHERE `o`.`order_id` = '" . (int)$order_id . "'");
@@ -244,7 +244,7 @@ class Order extends \Opencart\System\Engine\Model {
 	 * @param int $order_id
 	 * @param int $order_product_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getProduct(int $order_id, int $order_product_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_product` WHERE `order_id` = '" . (int)$order_id . "' AND `order_product_id` = '" . (int)$order_product_id . "'");
@@ -257,7 +257,7 @@ class Order extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $order_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getProducts(int $order_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_product` WHERE `order_id` = '" . (int)$order_id . "'");
@@ -271,7 +271,7 @@ class Order extends \Opencart\System\Engine\Model {
 	 * @param int $order_id
 	 * @param int $order_product_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getOptions(int $order_id, int $order_product_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_option` WHERE `order_id` = '" . (int)$order_id . "' AND `order_product_id` = '" . (int)$order_product_id . "'");
@@ -285,7 +285,7 @@ class Order extends \Opencart\System\Engine\Model {
 	 * @param int $order_id
 	 * @param int $order_product_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getSubscription(int $order_id, int $order_product_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_subscription` WHERE `order_id` = '" . (int)$order_id . "' AND `order_product_id` = '" . (int)$order_product_id . "'");
@@ -296,9 +296,9 @@ class Order extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Subscriptions
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getSubscriptions(array $data): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "subscription`";
@@ -373,7 +373,7 @@ class Order extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $order_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getVouchers(int $order_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_voucher` WHERE `order_id` = '" . (int)$order_id . "'");
@@ -386,7 +386,7 @@ class Order extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $order_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getTotals(int $order_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_total` WHERE `order_id` = '" . (int)$order_id . "' ORDER BY `sort_order` ASC");
@@ -432,8 +432,10 @@ class Order extends \Opencart\System\Engine\Model {
 					if ($this->config->get('fraud_' . $extension['code'] . '_status')) {
 						$this->load->model('extension/' . $extension['extension'] . '/fraud/' . $extension['code']);
 
-						if (isset($this->{'model_extension_' . $extension['extension'] . '_fraud_' . $extension['code']}->check)) {
-							$fraud_status_id = $this->{'model_extension_' . $extension['extension'] . '_fraud_' . $extension['code']}->check($order_info);
+						$model_extension_fraud = ($this->{'model_extension_' . $extension['extension'] . '_fraud_' . $extension['code']}) ?? null;
+
+						if ($model_extension_fraud && isset($model_extension_fraud->check)) {
+							$fraud_status_id = $model_extension_fraud->check($order_info);
 
 							if ($fraud_status_id) {
 								$order_status_id = $fraud_status_id;
@@ -455,9 +457,11 @@ class Order extends \Opencart\System\Engine\Model {
 				foreach ($order_totals as $order_total) {
 					$this->load->model('extension/' . $order_total['extension'] . '/total/' . $order_total['code']);
 
-					if (isset($this->{'model_extension_' . $order_total['extension'] . '_total_' . $order_total['code']}->confirm)) {
+					$model_extension_total = $this->{'model_extension_' . $order_total['extension'] . '_total_' . $order_total['code']} ?? null;
+
+					if ($model_extension_total && isset($model_extension_total->confirm)) {
 						// Confirm coupon, vouchers and reward points
-						$fraud_status_id = $this->{'model_extension_' . $order_total['extension'] . '_total_' . $order_total['code']}->confirm($order_info, $order_total);
+						$fraud_status_id = $model_extension_total->confirm($order_info, $order_total);
 
 						// If the balance on the coupon, vouchers and reward points is not enough to cover the transaction or has already been used then the fraud order status is returned.
 						if ($fraud_status_id) {
@@ -555,8 +559,10 @@ class Order extends \Opencart\System\Engine\Model {
 				foreach ($order_totals as $order_total) {
 					$this->load->model('extension/' . $order_total['extension'] . '/total/' . $order_total['code']);
 
-					if (isset($this->{'model_extension_' . $order_total['extension'] . '_total_' . $order_total['code']}->unconfirm)) {
-						$this->{'model_extension_' . $order_total['extension'] . '_total_' . $order_total['code']}->unconfirm($order_id);
+					$model_extension_total = $this->{'model_extension_' . $order_total['extension'] . '_total_' . $order_total['code']} ?? null;
+
+					if ($model_extension_total && isset($model_extension_total->unconfirm)) {
+						$model_extension_total->unconfirm($order_id);
 					}
 				}
 			}

@@ -9,7 +9,7 @@ class Cart extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Products
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getProducts(): array {
 		$this->load->model('tool/image');
@@ -95,7 +95,7 @@ class Cart extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Vouchers
 	 *
-	 * @return array
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function getVouchers(): array {
 		$voucher_data = [];
@@ -122,9 +122,9 @@ class Cart extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Totals
 	 *
-	 * @param array $totals
-	 * @param array $taxes
-	 * @param int   $total
+	 * @param array<int, array<string, mixed>> $totals
+	 * @param array<int, float>                $taxes
+	 * @param int                              $total
 	 *
 	 * @return void
 	 */

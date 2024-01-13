@@ -9,7 +9,7 @@ class Modification extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Modification
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -56,7 +56,7 @@ class Modification extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $modification_id
 	 *
-	 * @return mixed
+	 * @return array<string, mixed>
 	 */
 	public function getModification(int $modification_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "modification` WHERE `modification_id` = '" . (int)$modification_id . "'");
@@ -67,9 +67,9 @@ class Modification extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Modifications
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getModifications(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "modification`";
@@ -128,7 +128,7 @@ class Modification extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getModificationByCode(string $code): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "modification` WHERE `code` = '" . $this->db->escape($code) . "'");

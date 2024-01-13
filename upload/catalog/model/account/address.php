@@ -9,8 +9,8 @@ class Address extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Address
 	 *
-	 * @param int   $customer_id
-	 * @param array $data
+	 * @param int                  $customer_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -29,8 +29,8 @@ class Address extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Address
 	 *
-	 * @param int   $address_id
-	 * @param array $data
+	 * @param int                  $address_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -57,7 +57,7 @@ class Address extends \Opencart\System\Engine\Model {
 	 * @param int $customer_id
 	 * @param int $address_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getAddress(int $customer_id, int $address_id): array {
 		$address_query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "address` WHERE `address_id` = '" . (int)$address_id . "' AND `customer_id` = '" . (int)$customer_id . "'");
@@ -121,7 +121,7 @@ class Address extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $customer_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getAddresses(int $customer_id): array {
 		$address_data = [];

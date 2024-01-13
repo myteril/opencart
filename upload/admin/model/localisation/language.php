@@ -9,7 +9,7 @@ class Language extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Language
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -219,8 +219,8 @@ class Language extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Language
 	 *
-	 * @param int   $language_id
-	 * @param array $data
+	 * @param int                  $language_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -304,7 +304,7 @@ class Language extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $language_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getLanguage(int $language_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "language` WHERE `language_id` = '" . (int)$language_id . "'");
@@ -331,7 +331,7 @@ class Language extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $code
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getLanguageByCode(string $code): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE `code` = '" . $this->db->escape($code) . "'");
@@ -356,9 +356,9 @@ class Language extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Languages
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function getLanguages(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "language`";
@@ -434,9 +434,9 @@ class Language extends \Opencart\System\Engine\Model {
 	 *
 	 * @param string $extension
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
-	public function getLanguagesByExtensions(string $extension): array {
+	public function getLanguagesByExtension(string $extension): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE `extension` = '" . $this->db->escape($extension) . "'");
 
 		return $query->rows;

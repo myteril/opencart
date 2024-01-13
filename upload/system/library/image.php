@@ -18,7 +18,7 @@ class Image {
 	 */
 	private string $file;
 	/**
-	 * @var false|\GdImage
+	 * @var mixed
 	 */
 	private $image;
 	/**
@@ -86,9 +86,9 @@ class Image {
 	/**
 	 * getImage
 	 *
-	 * @return ?\GdImage
+	 * @return mixed
 	 */
-	public function getImage(): ?\GdImage {
+	public function getImage() {
 		return $this->image ?: null;
 	}
 
@@ -364,7 +364,7 @@ class Image {
 	 *
 	 * @param string $color
 	 *
-	 * @return array
+	 * @return array<int, int>
 	 */
 	private function html2rgb(string $color): array {
 		if ($color[0] == '#') {

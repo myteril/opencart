@@ -9,7 +9,7 @@ class Antispam extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Antispam
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */
@@ -22,10 +22,10 @@ class Antispam extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Antispam
 	 *
-	 * @param int   $antispam_id
-	 * @param array $data
+	 * @param int                  $antispam_id
+	 * @param array<string, mixed> $data
 	 *
-	 * @return int
+	 * @return void
 	 */
 	public function editAntispam(int $antispam_id, array $data = []): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "antispam` SET `keyword` = '" . $this->db->escape((string)$data['keyword']) . "' WHERE `antispam_id` = '" . (int)$antispam_id . "'");
@@ -47,7 +47,7 @@ class Antispam extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $antispam_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getAntispam(int $antispam_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "antispam` WHERE `antispam_id` = '" . (int)$antispam_id . "'");
@@ -58,9 +58,9 @@ class Antispam extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Antispam(s)
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getAntispams(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "antispam`";
@@ -109,7 +109,7 @@ class Antispam extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Total Antispam(s)
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
 	 * @return int
 	 */

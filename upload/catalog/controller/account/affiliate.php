@@ -17,7 +17,7 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 
 			$this->session->data['redirect'] = $this->url->link('account/affiliate', 'language=' . $this->config->get('config_language'));
 
-			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language'), true));
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,10 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 		];
 
 		$data['save'] = $this->url->link('account/affiliate.save', 'language=' . $this->config->get('config_language') . '&customer_token=' . $this->session->data['customer_token']);
-		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token'] = oc_token(32));
+
+		$this->session->data['upload_token'] = oc_token(32);
+
+		$data['upload'] = $this->url->link('tool/upload', 'language=' . $this->config->get('config_language') . '&upload_token=' . $this->session->data['upload_token']);
 
 		$this->load->model('account/affiliate');
 

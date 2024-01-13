@@ -9,11 +9,13 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Return Reason
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return int
+	 * @return ?int
 	 */
-	public function addReturnReason(array $data): int {
+	public function addReturnReason(array $data): ?int {
+		$return_reason_id = null;
+
 		foreach ($data['return_reason'] as $language_id => $value) {
 			if (isset($return_reason_id)) {
 				$this->db->query("INSERT INTO `" . DB_PREFIX . "return_reason` SET `return_reason_id` = '" . (int)$return_reason_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($value['name']) . "'");
@@ -32,8 +34,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Return Reason
 	 *
-	 * @param int   $return_reason_id
-	 * @param array $data
+	 * @param int                  $return_reason_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
@@ -65,7 +67,7 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $return_reason_id
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function getReturnReason(int $return_reason_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "return_reason` WHERE `return_reason_id` = '" . (int)$return_reason_id . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
@@ -76,9 +78,9 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Return Reasons
 	 *
-	 * @param array $data
+	 * @param array<string, mixed> $data
 	 *
-	 * @return array
+	 * @return array<int, array<string, mixed>>
 	 */
 	public function getReturnReasons(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "return_reason` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `name`";
@@ -121,7 +123,7 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @param int $return_reason_id
 	 *
-	 * @return array
+	 * @return array<int, array<string, string>>
 	 */
 	public function getDescriptions(int $return_reason_id): array {
 		$return_reason_data = [];
