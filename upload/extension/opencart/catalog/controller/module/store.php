@@ -47,6 +47,5 @@ class Store extends \Opencart\System\Engine\Controller {
 		} else {
 			return '';
 		}
-		return '';
 	}
 }

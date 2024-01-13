@@ -13,9 +13,10 @@ class Install extends \Opencart\System\Engine\Model
 	 * @param DB $db
 	 * @param array $tables
 	 * @param string $db_prefix
+	 * @param string $triggers
 	 * @return void
 	 */
-	public function createDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, string $db_prefix): void{
+	public function createDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, array $triggers, string $db_prefix): void{
 		foreach ($tables as $table) {
 			$db->query("DROP TABLE IF EXISTS `" . $db_prefix . $table['name'] . "`");
 
@@ -53,6 +54,8 @@ class Install extends \Opencart\System\Engine\Model
 			// Add table into another array so that it can be sorted to avoid foreign keys from being incorrectly formed.
 			$db->query($sql);
 		}
+
+		$this->installTriggers($db, $triggers, $db_prefix);
 	}
 
 	/**
