@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Tool;
+
 /**
  * Class Notification
  *
  * @package Opencart\Admin\Model\Tool
  */
-class Notification extends \Opencart\System\Engine\Model {
+class Notification extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Notification
 	 *
@@ -13,7 +15,8 @@ class Notification extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addNotification(array $data): int {
+	public function addNotification(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "notification` SET `title` = '" . $this->db->escape((string)$data['title']) . "', `text` = '" . $this->db->escape((string)$data['text']) . "', `status` = '" . (bool)$data['status'] . "', `date_added` = NOW()");
 
 		return $this->db->getLastId();
@@ -27,7 +30,8 @@ class Notification extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editStatus(int $notification_id, bool $status): void {
+	public function editStatus(int $notification_id, bool $status): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "notification` SET `status` = '" . (bool)$status . "' WHERE `notification_id` = '" . (int)$notification_id . "'");
 	}
 
@@ -38,7 +42,8 @@ class Notification extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteNotification(int $notification_id): void {
+	public function deleteNotification(int $notification_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "notification` WHERE `notification_id` = '" . (int)$notification_id . "'");
 	}
 
@@ -49,7 +54,8 @@ class Notification extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getNotification(int $notification_id): array {
+	public function getNotification(int $notification_id): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "notification` WHERE `notification_id` = '" . (int)$notification_id . "'");
 
 		return $query->row;
@@ -62,7 +68,8 @@ class Notification extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getNotifications(array $data = []): array {
+	public function getNotifications(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "notification`";
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
@@ -95,7 +102,8 @@ class Notification extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalNotifications(array $data = []): int {
+	public function getTotalNotifications(array $data = []): int
+	{
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "notification`";
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {

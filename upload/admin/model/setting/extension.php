@@ -1,17 +1,20 @@
 <?php
 namespace Opencart\Admin\Model\Setting;
+
 /**
  * Class Extension
  *
  * @package Opencart\Admin\Model\Setting
  */
-class Extension extends \Opencart\System\Engine\Model {
+class Extension extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Get Extensions
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getExtensions(): array {
+	public function getExtensions(): array
+	{
 		$query = $this->db->query("SELECT DISTINCT `extension` FROM `" . DB_PREFIX . "extension`");
 
 		return $query->rows;
@@ -24,7 +27,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getExtensionsByType(string $type): array {
+	public function getExtensionsByType(string $type): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension` WHERE `type` = '" . $this->db->escape($type) . "' ORDER BY `code` ASC");
 
 		return $query->rows;
@@ -38,7 +42,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getExtensionByCode(string $type, string $code): array {
+	public function getExtensionByCode(string $type, string $code): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension` WHERE `type` = '" . $this->db->escape($type) . "' AND `code` = '" . $this->db->escape($code) . "'");
 
 		return $query->row;
@@ -51,7 +56,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalExtensionsByExtension(string $extension): int {
+	public function getTotalExtensionsByExtension(string $extension): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "extension` WHERE `extension` = '" . $this->db->escape($extension) . "'");
 
 		return (int)$query->row['total'];
@@ -66,7 +72,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function install(string $type, string $extension, string $code): void {
+	public function install(string $type, string $extension, string $code): void
+	{
 		$extensions = $this->getExtensionsByType($type);
 
 		$codes = array_column($extensions, 'code');
@@ -84,7 +91,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function uninstall(string $type, string $code): void {
+	public function uninstall(string $type, string $code): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "extension` WHERE `type` = '" . $this->db->escape($type) . "' AND `code` = '" . $this->db->escape($code) . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE `code` = '" . $this->db->escape($type . '_' . $code) . "'");
 	}
@@ -96,7 +104,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addInstall(array $data): int {
+	public function addInstall(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "extension_install` SET `extension_id` = '" . (int)$data['extension_id'] . "', `extension_download_id` = '" . (int)$data['extension_download_id'] . "', `name` = '" . $this->db->escape($data['name']) . "', `description` = '" . $this->db->escape($data['description']) . "', `code` = '" . $this->db->escape($data['code']) . "', `version` = '" . $this->db->escape($data['version']) . "', `author` = '" . $this->db->escape($data['author']) . "', `link` = '" . $this->db->escape($data['link']) . "', `status` = '0', `date_added` = NOW()");
 
 		return $this->db->getLastId();
@@ -109,7 +118,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteInstall(int $extension_install_id): void {
+	public function deleteInstall(int $extension_install_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "extension_install` WHERE `extension_install_id` = '" . (int)$extension_install_id . "'");
 	}
 
@@ -121,7 +131,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editStatus(int $extension_install_id, bool $status): void {
+	public function editStatus(int $extension_install_id, bool $status): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "extension_install` SET `status` = '" . (bool)$status . "' WHERE `extension_install_id` = '" . (int)$extension_install_id . "'");
 	}
 
@@ -132,7 +143,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getInstall(int $extension_install_id): array {
+	public function getInstall(int $extension_install_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_install` WHERE `extension_install_id` = '" . (int)$extension_install_id . "'");
 
 		return $query->row;
@@ -145,7 +157,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getInstallByExtensionDownloadId(int $extension_download_id): array {
+	public function getInstallByExtensionDownloadId(int $extension_download_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_install` WHERE `extension_download_id` = '" . (int)$extension_download_id . "'");
 
 		return $query->row;
@@ -158,7 +171,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getInstallByCode(string $code): array {
+	public function getInstallByCode(string $code): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_install` WHERE `code` = '" . $this->db->escape($code) . "'");
 
 		return $query->row;
@@ -171,7 +185,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getInstalls(array $data = []): array {
+	public function getInstalls(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "extension_install`";
 
 		if (!empty($data['filter_extension_download_id'])) {
@@ -220,7 +235,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalInstalls(array $data = []): int {
+	public function getTotalInstalls(array $data = []): int
+	{
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "extension_install`";
 
 		if (!empty($data['filter_extension_download_id'])) {
@@ -240,7 +256,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function addPath(int $extension_install_id, string $path): void {
+	public function addPath(int $extension_install_id, string $path): void
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "extension_path` SET `extension_install_id` = '" . (int)$extension_install_id . "', `path` = '" . $this->db->escape($path) . "'");
 	}
 
@@ -251,7 +268,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deletePath(int $extension_path_id): void {
+	public function deletePath(int $extension_path_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "extension_path` WHERE `extension_path_id` = '" . (int)$extension_path_id . "'");
 	}
 
@@ -262,7 +280,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getPathsByExtensionInstallId(int $extension_install_id): array {
+	public function getPathsByExtensionInstallId(int $extension_install_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_path` WHERE `extension_install_id` = '" . (int)$extension_install_id . "' ORDER BY `extension_path_id` ASC");
 
 		return $query->rows;
@@ -275,7 +294,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getPaths(string $path): array {
+	public function getPaths(string $path): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_path` WHERE `path` LIKE '" . $this->db->escape($path) . "' ORDER BY `path` ASC");
 
 		return $query->rows;
@@ -288,7 +308,8 @@ class Extension extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalPaths(string $path): int {
+	public function getTotalPaths(string $path): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "extension_path` WHERE `path` LIKE '" . $this->db->escape($path) . "'");
 
 		return (int)$query->row['total'];

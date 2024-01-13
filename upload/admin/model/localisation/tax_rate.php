@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Localisation;
+
 /**
  * Class TaxRate
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class TaxRate extends \Opencart\System\Engine\Model {
+class TaxRate extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Tax Rate
 	 *
@@ -13,7 +15,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addTaxRate(array $data): int {
+	public function addTaxRate(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "tax_rate` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `rate` = '" . (float)$data['rate'] . "', `type` = '" . $this->db->escape((string)$data['type']) . "', `geo_zone_id` = '" . (int)$data['geo_zone_id'] . "'");
 
 		$tax_rate_id = $this->db->getLastId();
@@ -35,7 +38,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editTaxRate(int $tax_rate_id, array $data): void {
+	public function editTaxRate(int $tax_rate_id, array $data): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "tax_rate` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `rate` = '" . (float)$data['rate'] . "', `type` = '" . $this->db->escape((string)$data['type']) . "', `geo_zone_id` = '" . (int)$data['geo_zone_id'] . "' WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "tax_rate_to_customer_group` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
@@ -54,7 +58,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteTaxRate(int $tax_rate_id): void {
+	public function deleteTaxRate(int $tax_rate_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "tax_rate` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "tax_rate_to_customer_group` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
 	}
@@ -66,7 +71,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getTaxRate(int $tax_rate_id): array {
+	public function getTaxRate(int $tax_rate_id): array
+	{
 		$query = $this->db->query("SELECT `tr`.`tax_rate_id`, `tr`.`name` AS name, `tr`.`rate`, `tr`.`type`, `tr`.`geo_zone_id`, `gz`.`name` AS `geo_zone` FROM `" . DB_PREFIX . "tax_rate` `tr` LEFT JOIN `" . DB_PREFIX . "geo_zone` `gz` ON (`tr`.`geo_zone_id` = `gz`.`geo_zone_id`) WHERE `tr`.`tax_rate_id` = '" . (int)$tax_rate_id . "'");
 
 		return $query->row;
@@ -79,7 +85,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getTaxRates(array $data = []): array {
+	public function getTaxRates(array $data = []): array
+	{
 		$sql = "SELECT `tr`.`tax_rate_id`, `tr`.`name` AS `name`, `tr`.`rate`, `tr`.`type`, `gz`.`name` AS `geo_zone` FROM `" . DB_PREFIX . "tax_rate` `tr` LEFT JOIN `" . DB_PREFIX . "geo_zone` `gz` ON (`tr`.`geo_zone_id` = `gz`.`geo_zone_id`)";
 
 		$sort_data = [
@@ -125,7 +132,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, int>
 	 */
-	public function getCustomerGroups(int $tax_rate_id): array {
+	public function getCustomerGroups(int $tax_rate_id): array
+	{
 		$tax_customer_group_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "tax_rate_to_customer_group` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
@@ -142,7 +150,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalTaxRates(): int {
+	public function getTotalTaxRates(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "tax_rate`");
 
 		return (int)$query->row['total'];
@@ -155,7 +164,8 @@ class TaxRate extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalTaxRatesByGeoZoneId(int $geo_zone_id): int {
+	public function getTotalTaxRatesByGeoZoneId(int $geo_zone_id): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "tax_rate` WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
 
 		return (int)$query->row['total'];

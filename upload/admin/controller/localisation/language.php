@@ -1,17 +1,20 @@
 <?php
 namespace Opencart\Admin\Controller\Localisation;
+
 /**
  * Class Language
  *
  * @package Opencart\Admin\Controller\Localisation
  */
-class Language extends \Opencart\System\Engine\Controller {
+class Language extends \Opencart\System\Engine\Controller
+{
 	/**
 	 * Index
 	 *
 	 * @return void
 	 */
-	public function index(): void {
+	public function index(): void
+	{
 		$this->load->language('localisation/language');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -62,7 +65,8 @@ class Language extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function list(): void {
+	public function list(): void
+	{
 		$this->load->language('localisation/language');
 
 		$this->response->setOutput($this->getList());
@@ -73,7 +77,8 @@ class Language extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return string
 	 */
-	protected function getList(): string {
+	protected function getList(): string
+	{
 		if (isset($this->request->get['sort'])) {
 			$sort = (string)$this->request->get['sort'];
 		} else {
@@ -176,7 +181,8 @@ class Language extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function form(): void {
+	public function form(): void
+	{
 		$this->load->language('localisation/language');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -273,7 +279,8 @@ class Language extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function save(): void {
+	public function save(): void
+	{
 		$this->load->language('localisation/language');
 
 		$json = [];
@@ -327,7 +334,8 @@ class Language extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function delete(): void {
+	public function delete(): void
+	{
 		$this->load->language('localisation/language');
 
 		$json = [];

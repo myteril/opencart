@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Setting;
+
 /**
  * Class Setting
  *
  * @package Opencart\Admin\Model\Setting
  */
-class Setting extends \Opencart\System\Engine\Model {
+class Setting extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Get Settings
 	 *
@@ -13,7 +15,8 @@ class Setting extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getSettings(int $store_id = 0): array {
+	public function getSettings(int $store_id = 0): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `store_id` = '" . (int)$store_id . "' OR `store_id` = '0' ORDER BY `store_id` ASC");
 
 		return $query->rows;
@@ -27,7 +30,8 @@ class Setting extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getSetting(string $code, int $store_id = 0): array {
+	public function getSetting(string $code, int $store_id = 0): array
+	{
 		$setting_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `store_id` = '" . (int)$store_id . "' AND `code` = '" . $this->db->escape($code) . "'");
@@ -43,24 +47,25 @@ class Setting extends \Opencart\System\Engine\Model {
 		return $setting_data;
 	}
 
-	public function getSettingsByKeys(array $keys, int $store_id = 0): array {
-        $settings = [];
+	public function getSettingsByKeys(array $keys, int $store_id = 0): array
+	{
+		$settings = [];
 
-        if(empty($keys)){
-            return $settings;
-        }
+		if(empty($keys)) {
+			return $settings;
+		}
 
-        $escaped_keys = array_map(function($item){
-            return "'" . $this->db->escape($item) . "'";
-        }, array_unique($keys));
+		$escaped_keys = array_map(function ($item) {
+			return "'" . $this->db->escape($item) . "'";
+		}, array_unique($keys));
 
-        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `store_id` = '" . (int)$store_id . "' AND `key` IN (" . implode(', ', $escaped_keys) . ')');
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `store_id` = '" . (int)$store_id . "' AND `key` IN (" . implode(', ', $escaped_keys) . ')');
 
 		foreach ($query->rows as $result) {
 			if (!$result['serialized']) {
-                $settings[$result['key']] = $result['value'];
+				$settings[$result['key']] = $result['value'];
 			} else {
-                $settings[$result['key']] = json_decode($result['value'], true);
+				$settings[$result['key']] = json_decode($result['value'], true);
 			}
 		}
 
@@ -77,7 +82,8 @@ class Setting extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editSetting(string $code, array $data, int $store_id = 0): void {
+	public function editSetting(string $code, array $data, int $store_id = 0): void
+	{
 		$setting_keys = array_keys($data);
 		if(!empty($setting_keys)) {
 			$escaped_setting_keys = [];
@@ -108,7 +114,8 @@ class Setting extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteSetting(string $code, int $store_id = 0): void {
+	public function deleteSetting(string $code, int $store_id = 0): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE `store_id` = '" . (int)$store_id . "' AND `code` = '" . $this->db->escape($code) . "'");
 	}
 
@@ -120,7 +127,8 @@ class Setting extends \Opencart\System\Engine\Model {
 	 *
 	 * @return string
 	 */
-	public function getValue(string $key, int $store_id = 0): string {
+	public function getValue(string $key, int $store_id = 0): string
+	{
 		$query = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `store_id` = '" . (int)$store_id . "' AND `key` = '" . $this->db->escape($key) . "'");
 
 		if ($query->num_rows) {
@@ -140,7 +148,8 @@ class Setting extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editValue(string $code = '', string $key = '', $value = '', int $store_id = 0): void {
+	public function editValue(string $code = '', string $key = '', $value = '', int $store_id = 0): void
+	{
 		if (!is_array($value)) {
 			$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = '" . $this->db->escape($value) . "', `serialized` = '0'  WHERE `code` = '" . $this->db->escape($code) . "' AND `key` = '" . $this->db->escape($key) . "' AND `store_id` = '" . (int)$store_id . "'");
 		} else {

@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Tool;
+
 /**
  * Class Image
  *
  * @package Opencart\Admin\Model\Tool
  */
-class Image extends \Opencart\System\Engine\Model {
+class Image extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Resize
 	 *
@@ -17,7 +19,8 @@ class Image extends \Opencart\System\Engine\Model {
 	 *
 	 * @return string
 	 */
-	public function resize(string $filename, int $width, int $height): string {
+	public function resize(string $filename, int $width, int $height): string
+	{
 		if (!is_file(DIR_IMAGE . $filename) || substr(str_replace('\\', '/', realpath(DIR_IMAGE . $filename)), 0, strlen(DIR_IMAGE)) != DIR_IMAGE) {
 			return '';
 		}

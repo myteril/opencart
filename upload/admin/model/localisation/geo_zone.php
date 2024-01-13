@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Localisation;
+
 /**
  * Class GeoZone
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class GeoZone extends \Opencart\System\Engine\Model {
+class GeoZone extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Geo Zone
 	 *
@@ -13,7 +15,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addGeoZone(array $data): int {
+	public function addGeoZone(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "geo_zone` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `description` = '" . $this->db->escape((string)$data['description']) . "'");
 
 		$geo_zone_id = $this->db->getLastId();
@@ -39,7 +42,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editGeoZone(int $geo_zone_id, array $data): void {
+	public function editGeoZone(int $geo_zone_id, array $data): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "geo_zone` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `description` = '" . $this->db->escape((string)$data['description']) . "' WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
@@ -62,7 +66,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteGeoZone(int $geo_zone_id): void {
+	public function deleteGeoZone(int $geo_zone_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "geo_zone` WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
 
@@ -76,7 +81,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getGeoZone(int $geo_zone_id): array {
+	public function getGeoZone(int $geo_zone_id): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "geo_zone` WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
 
 		return $query->row;
@@ -89,7 +95,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getGeoZones(array $data = []): array {
+	public function getGeoZones(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "geo_zone`";
 
 		$sort_data = [
@@ -141,7 +148,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalGeoZones(): int {
+	public function getTotalGeoZones(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "geo_zone`");
 
 		return (int)$query->row['total'];
@@ -154,7 +162,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getZoneToGeoZones(int $geo_zone_id): array {
+	public function getZoneToGeoZones(int $geo_zone_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
 
 		return $query->rows;
@@ -167,7 +176,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalZoneToGeoZoneByGeoZoneId(int $geo_zone_id): int {
+	public function getTotalZoneToGeoZoneByGeoZoneId(int $geo_zone_id): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE `geo_zone_id` = '" . (int)$geo_zone_id . "'");
 
 		return (int)$query->row['total'];
@@ -180,7 +190,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalZoneToGeoZoneByCountryId(int $country_id): int {
+	public function getTotalZoneToGeoZoneByCountryId(int $country_id): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE `country_id` = '" . (int)$country_id . "'");
 
 		return (int)$query->row['total'];
@@ -193,7 +204,8 @@ class GeoZone extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalZoneToGeoZoneByZoneId(int $zone_id): int {
+	public function getTotalZoneToGeoZoneByZoneId(int $zone_id): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE `zone_id` = '" . (int)$zone_id . "'");
 
 		return (int)$query->row['total'];

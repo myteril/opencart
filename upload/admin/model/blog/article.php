@@ -6,15 +6,17 @@ namespace Opencart\Admin\Model\Blog;
  *
  * @package Opencart\Admin\Model\Design
  */
-class Article extends \Opencart\System\Engine\Model {
+class Article extends \Opencart\System\Engine\Model
+{
 	/**
 	 * @param array $data
 	 *
 	 * @return int
 	 */
-	public function add(array $data): int {
+	public function add(array $data): int
+	{
 		$blog_author_id = intval($data['blog_author_id'] ?? 0);
-		if($blog_author_id === 0){
+		if($blog_author_id === 0) {
 			$blog_author_id = null;
 		}
 
@@ -35,8 +37,8 @@ class Article extends \Opencart\System\Engine\Model {
 		$blog_article_id = $this->db->getLastId();
 
 		// Add the contents.
-		if(!empty($data['blog_article_content'])){
-			foreach($data['blog_article_content'] as $language_id => $blog_content){
+		if(!empty($data['blog_article_content'])) {
+			foreach($data['blog_article_content'] as $language_id => $blog_content) {
 				$this->db->query(
 					"INSERT INTO `" . DB_PREFIX . "blog_article_content` SET " .
 					"`title` = '" . $this->db->escape((string)$blog_content['title']) . "', " .
@@ -50,17 +52,17 @@ class Article extends \Opencart\System\Engine\Model {
 
 		// Add the store relations.
 		$article_stores = $data['article_store_id'];
-		if(!is_array($article_stores)){
+		if(!is_array($article_stores)) {
 			$article_stores = [$article_stores];
 		}
 
-		$article_stores = array_map(function($item){
+		$article_stores = array_map(function ($item) {
 			return intval($item);
 		}, $article_stores);
 
 		$article_stores = array_unique($article_stores, SORT_NUMERIC);
 
-		foreach ($article_stores as $article_store_id){
+		foreach ($article_stores as $article_store_id) {
 			$this->db->query(
 				"INSERT INTO `" . DB_PREFIX . "blog_store_to_article` SET " .
 				"`store_id` = '" . $article_store_id. "', " .
@@ -72,7 +74,7 @@ class Article extends \Opencart\System\Engine\Model {
 		// Add the tags.
 		if(!empty($data['tags'])) {
 			foreach ($data['tags'] as $language_id => $tags) {
-				foreach($tags as $tag){
+				foreach($tags as $tag) {
 					foreach ($article_stores as $article_store_id) {
 						$this->db->query(
 							"INSERT IGNORE INTO `" . DB_PREFIX . "blog_tag` SET " .
@@ -93,13 +95,13 @@ class Article extends \Opencart\System\Engine\Model {
 			}
 		}
 
-		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])){
+		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])) {
 			$seo_keywords = $data['seo_keywords'];
-			foreach ($seo_keywords as $store_id => $seo_keywords_map){
-				foreach($seo_keywords_map as $language_id => $seo_keyword){
+			foreach ($seo_keywords as $store_id => $seo_keywords_map) {
+				foreach($seo_keywords_map as $language_id => $seo_keyword) {
 					$language_id = intval($language_id);
 
-					if($language_id === 0){
+					if($language_id === 0) {
 						continue;
 					}
 
@@ -120,9 +122,10 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function edit(int $blog_article_id, array $data): void {
+	public function edit(int $blog_article_id, array $data): void
+	{
 		$blog_author_id = intval($data['blog_author_id'] ?? 0);
-		if($blog_author_id === 0){
+		if($blog_author_id === 0) {
 			$blog_author_id = null;
 		}
 
@@ -140,10 +143,10 @@ class Article extends \Opencart\System\Engine\Model {
 		);
 
 		// Update the contents.
-		if(!empty($data['blog_article_content'])){
-			foreach($data['blog_article_content'] as $language_id => $blog_content){
-				$query = $this->db->query("SELECT blog_article_id FROM `" . DB_PREFIX . "blog_article_content` WHERE `language_id` = '" . intval($language_id) . "' AND `blog_article_id` = '" . intval($blog_article_id) . "' LIMIT 1" );
-				if($query->num_rows > 0){
+		if(!empty($data['blog_article_content'])) {
+			foreach($data['blog_article_content'] as $language_id => $blog_content) {
+				$query = $this->db->query("SELECT blog_article_id FROM `" . DB_PREFIX . "blog_article_content` WHERE `language_id` = '" . intval($language_id) . "' AND `blog_article_id` = '" . intval($blog_article_id) . "' LIMIT 1");
+				if($query->num_rows > 0) {
 					$this->db->query(
 						"UPDATE `" . DB_PREFIX . "blog_article_content` SET " .
 						"`title` = '" . $this->db->escape((string)$blog_content['title']) . "', " .
@@ -152,7 +155,7 @@ class Article extends \Opencart\System\Engine\Model {
 						" WHERE `language_id` = '" . intval($language_id) . "' AND " .
 						"`blog_article_id` = '" . intval($blog_article_id) . "' "
 					);
-				}else{
+				} else {
 					$this->db->query(
 						"INSERT INTO `" . DB_PREFIX . "blog_article_content` SET " .
 						"`title` = '" . $this->db->escape((string)$blog_content['title']) . "', " .
@@ -167,17 +170,17 @@ class Article extends \Opencart\System\Engine\Model {
 
 		// Add the store relations if not exists.
 		$article_stores = $data['article_store_id'];
-		if(!is_array($article_stores)){
+		if(!is_array($article_stores)) {
 			$article_stores = [$article_stores];
 		}
 
-		$article_stores = array_map(function($item){
+		$article_stores = array_map(function ($item) {
 			return intval($item);
 		}, $article_stores);
 
 		$article_stores = array_unique($article_stores, SORT_NUMERIC);
 
-		foreach ($article_stores as $article_store_id){
+		foreach ($article_stores as $article_store_id) {
 			$this->db->query(
 				"INSERT IGNORE INTO `" . DB_PREFIX . "blog_store_to_article` SET " .
 				"`store_id` = '" . $article_store_id. "', " .
@@ -226,7 +229,7 @@ class Article extends \Opencart\System\Engine\Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "seo_url` WHERE `store_id` = '" . intval($article_store_id) . "' AND `key` = 'blog_article_id' AND `value` = '" . intval($blog_article_id) . "'");
 
 		// Add SEO keywords
-		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])){
+		if(!empty($data['seo_keywords']) && is_array($data['seo_keywords'])) {
 			$seo_keywords = $data['seo_keywords'];
 			foreach ($seo_keywords as $store_id => $seo_keywords_map) {
 				foreach ($seo_keywords_map as $language_id => $seo_keyword) {
@@ -250,7 +253,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function delete(int $blog_article_id): void {
+	public function delete(int $blog_article_id): void
+	{
 		// Delete its tags.
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "blog_tag_to_article` WHERE `blog_article_id` = '" . (int)$blog_article_id . "'");
 		// Delete its store relations.
@@ -266,7 +270,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array
 	 */
-	public function getArticle(int $blog_article_id): array {
+	public function getArticle(int $blog_article_id): array
+	{
 		$query = $this->db->query("SELECT ba.*, bat.fullname as author_name  FROM `" . DB_PREFIX . "blog_article` ba LEFT JOIN `" . DB_PREFIX . "blog_author` bat ON (ba.blog_author_id =  bat.blog_author_id) WHERE `blog_article_id` = '" . (int)$blog_article_id . "' LIMIT 1");
 
 		return $query->row;
@@ -277,7 +282,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array
 	 */
-	public function getArticles(array $data = []): array {
+	public function getArticles(array $data = []): array
+	{
 		$sql = "SELECT ba.*, bat.fullname as author_name  FROM `" . DB_PREFIX . "blog_article` ba";
 
 		if (!empty($data['tag'])) {
@@ -324,7 +330,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 * @param array $data
 	 * @return int
 	 */
-	public function getTotalArticles(array $data = []): int {
+	public function getTotalArticles(array $data = []): int
+	{
 		$query = $this->db->query("SELECT COUNT(ba.blog_article_id) AS `total` FROM `" . DB_PREFIX . "blog_article` ba");
 
 		if (!empty($data['tag'])) {
@@ -338,12 +345,13 @@ class Article extends \Opencart\System\Engine\Model {
 	 * @param int $blog_article_id
 	 * @return array
 	 */
-	public function getAllTags(int $blog_article_id): array{
+	public function getAllTags(int $blog_article_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "blog_tag_to_article` WHERE blog_article_id = " . $blog_article_id);
 		$result = [];
-		foreach ($query->rows as $row){
+		foreach ($query->rows as $row) {
 			$language_id = intval($row['language_id']);
-			if(!isset($result[$language_id])){
+			if(!isset($result[$language_id])) {
 				$result[$language_id] = [];
 			}
 			$result[$language_id][] = $row['tag'];
@@ -355,10 +363,11 @@ class Article extends \Opencart\System\Engine\Model {
 	 * @param int $blog_article_id
 	 * @return array
 	 */
-	public function getStores(int $blog_article_id): array{
+	public function getStores(int $blog_article_id): array
+	{
 		$query = $this->db->query("SELECT bsta.*, s.name as store_name FROM `" . DB_PREFIX . "blog_store_to_article` bsta LEFT JOIN `" . DB_PREFIX . "store` s ON (bsta.store_id = s.store_id) WHERE bsta.blog_article_id = " . $blog_article_id);
 		$result = [];
-		foreach ($query->rows as $row){
+		foreach ($query->rows as $row) {
 			$result[] = [
 				'store_id' => $row['store_id'],
 				'store_name' => $row['store_name'] === null ? $this->language->get('text_default') : $row['store_name'],
@@ -372,10 +381,11 @@ class Article extends \Opencart\System\Engine\Model {
 	 * @param int $blog_article_id
 	 * @return array
 	 */
-	public function getContents(int $blog_article_id): array{
+	public function getContents(int $blog_article_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "blog_article_content` WHERE blog_article_id = " . $blog_article_id);
 		$result = [];
-		foreach ($query->rows as $row){
+		foreach ($query->rows as $row) {
 			$result[$row['language_id']] = [
 				'blog_article_id' 	=> $row['blog_article_id'],
 				'language_id' 		=> $row['language_id'],

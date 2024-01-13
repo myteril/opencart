@@ -43,7 +43,7 @@ $log = new \Opencart\System\Library\Log($config->get('error_filename'));
 $registry->set('log', $log);
 
 // Error Handler
-set_error_handler(function(int $code, string $message, string $file, int $line) use ($log, $config) {
+set_error_handler(function (int $code, string $message, string $file, int $line) use ($log, $config) {
 	// error suppressed with @
 	if (@error_reporting() === 0) {
 		return false;
@@ -82,7 +82,7 @@ set_error_handler(function(int $code, string $message, string $file, int $line) 
 });
 
 // Exception Handler
-set_exception_handler(function(\Throwable $e) use ($log, $config): void {
+set_exception_handler(function (\Throwable $e) use ($log, $config): void {
 	if ($config->get('error_log')) {
 		$log->write(get_class($e) . ':  ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
 	}

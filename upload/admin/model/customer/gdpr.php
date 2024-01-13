@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Customer;
+
 /**
  * Class GDPR
  *
  * @package Opencart\Admin\Model\Customer
  */
-class Gdpr extends \Opencart\System\Engine\Model {
+class Gdpr extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Edit Status
 	 *
@@ -14,7 +16,8 @@ class Gdpr extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editStatus(int $gdpr_id, int $status): void {
+	public function editStatus(int $gdpr_id, int $status): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "gdpr` SET `status` = '" . (int)$status . "' WHERE `gdpr_id` = '" . (int)$gdpr_id . "'");
 	}
 
@@ -25,7 +28,8 @@ class Gdpr extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteGdpr(int $gdpr_id): void {
+	public function deleteGdpr(int $gdpr_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "gdpr` WHERE `gdpr_id` = '" . (int)$gdpr_id . "'");
 	}
 
@@ -36,7 +40,8 @@ class Gdpr extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getGdprs(array $data = []): array {
+	public function getGdprs(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "gdpr`";
 
 		$implode = [];
@@ -91,7 +96,8 @@ class Gdpr extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getGdpr(int $gdpr_id): array {
+	public function getGdpr(int $gdpr_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "gdpr` WHERE `gdpr_id` = '" . (int)$gdpr_id . "'");
 
 		return $query->row;
@@ -104,7 +110,8 @@ class Gdpr extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalGdprs(array $data = []): int {
+	public function getTotalGdprs(array $data = []): int
+	{
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "gdpr`";
 
 		$implode = [];
@@ -143,7 +150,8 @@ class Gdpr extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getExpires(): array {
+	public function getExpires(): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "gdpr` WHERE `status` = '2' AND DATE(`date_added`) <= DATE('" . $this->db->escape(date('Y-m-d', strtotime('+' . (int)$this->config->get('config_gdpr_limit') . ' days'))) . "') ORDER BY `date_added` DESC");
 
 		return $query->rows;

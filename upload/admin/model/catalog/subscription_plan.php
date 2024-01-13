@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Catalog;
+
 /**
  * Class Subscription Plan
  *
  * @package Opencart\Admin\Model\Catalog
  */
-class SubscriptionPlan extends \Opencart\System\Engine\Model {
+class SubscriptionPlan extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Subscription Plan
 	 *
@@ -13,7 +15,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addSubscriptionPlan(array $data): int {
+	public function addSubscriptionPlan(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "subscription_plan` SET `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `sort_order` = '" . (int)$data['sort_order'] . "'");
 
 		$subscription_plan_id = $this->db->getLastId();
@@ -33,7 +36,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editSubscriptionPlan(int $subscription_plan_id, array $data): void {
+	public function editSubscriptionPlan(int $subscription_plan_id, array $data): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "subscription_plan` SET  `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `sort_order` = '" . (int)$data['sort_order'] . "' WHERE `subscription_plan_id` = '" . (int)$subscription_plan_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "subscription_plan_description` WHERE `subscription_plan_id` = '" . (int)$subscription_plan_id . "'");
@@ -50,7 +54,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function copySubscriptionPlan(int $subscription_plan_id): void {
+	public function copySubscriptionPlan(int $subscription_plan_id): void
+	{
 		$data = $this->getSubscriptionPlan($subscription_plan_id);
 
 		$data['subscription_plan_description'] = $this->getDescription($subscription_plan_id);
@@ -65,7 +70,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteSubscriptionPlan(int $subscription_plan_id): void {
+	public function deleteSubscriptionPlan(int $subscription_plan_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "subscription_plan` WHERE `subscription_plan_id` = '" . (int)$subscription_plan_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "subscription_plan_description` WHERE `subscription_plan_id` = '" . (int)$subscription_plan_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "product_subscription` WHERE `subscription_plan_id` = '" . (int)$subscription_plan_id . "'");
@@ -79,7 +85,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getSubscriptionPlan(int $subscription_plan_id): array {
+	public function getSubscriptionPlan(int $subscription_plan_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "subscription_plan` sp LEFT JOIN `" . DB_PREFIX . "subscription_plan_description` spd ON (sp.`subscription_plan_id` = spd.`subscription_plan_id`) WHERE sp.`subscription_plan_id` = '" . (int)$subscription_plan_id . "' AND spd.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -92,7 +99,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, string>>
 	 */
-	public function getDescription(int $subscription_plan_id): array {
+	public function getDescription(int $subscription_plan_id): array
+	{
 		$subscription_plan_description_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "subscription_plan_description` WHERE `subscription_plan_id` = '" . (int)$subscription_plan_id . "'");
@@ -111,7 +119,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getSubscriptionPlans(array $data = []): array {
+	public function getSubscriptionPlans(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "subscription_plan` `sp` LEFT JOIN `" . DB_PREFIX . "subscription_plan_description` `spd` ON (`sp`.`subscription_plan_id` = `spd`.`subscription_plan_id`) WHERE `spd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
@@ -157,7 +166,8 @@ class SubscriptionPlan extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalSubscriptionPlans(): int {
+	public function getTotalSubscriptionPlans(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "subscription_plan`");
 
 		return (int)$query->row['total'];

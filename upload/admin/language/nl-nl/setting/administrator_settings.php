@@ -20,4 +20,3 @@ $_['help_price_incl_tax']                 = 'Als deze optie is ingeschakeld, wor
 
 $_['error_permission']                    = 'Warning: Je hebt geen toestemming om de instellingen van de beheerder te wijzigen!';
 $_['text_success']                        = 'Succes: Je hebt de beheerdersinstellingen gewijzigd!';
-

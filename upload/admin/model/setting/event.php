@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Setting;
+
 /**
  * Class Event
  *
  * @package Opencart\Admin\Model\Setting
  */
-class Event extends \Opencart\System\Engine\Model {
+class Event extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Event
 	 *
@@ -13,7 +15,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addEvent(array $data): int {
+	public function addEvent(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "event` SET `code` = '" . $this->db->escape($data['code']) . "', `description` = '" . $this->db->escape($data['description']) . "', `trigger` = '" . $this->db->escape($data['trigger']) . "', `action` = '" . $this->db->escape($data['action']) . "', `status` = '" . (bool)$data['status'] . "', `sort_order` = '" . (int)$data['sort_order'] . "'");
 
 		return $this->db->getLastId();
@@ -26,7 +29,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteEvent(int $event_id): void {
+	public function deleteEvent(int $event_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "event` WHERE `event_id` = '" . (int)$event_id . "'");
 	}
 
@@ -37,7 +41,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteEventByCode(string $code): void {
+	public function deleteEventByCode(string $code): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 
@@ -49,7 +54,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editStatus(int $event_id, bool $status): void {
+	public function editStatus(int $event_id, bool $status): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "event` SET `status` = '" . (bool)$status . "' WHERE `event_id` = '" . (int)$event_id . "'");
 	}
 
@@ -61,7 +67,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editStatusByCode(string $code, bool $status): void {
+	public function editStatusByCode(string $code, bool $status): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "event` SET `status` = '" . (bool)$status . "' WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 
@@ -72,7 +79,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getEvent(int $event_id): array {
+	public function getEvent(int $event_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "event` WHERE `event_id` = '" . (int)$event_id . "'");
 
 		return $query->row;
@@ -85,7 +93,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getEventByCode(string $code): array {
+	public function getEventByCode(string $code): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape($code) . "' LIMIT 1");
 
 		return $query->row;
@@ -98,7 +107,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getEvents(array $data = []): array {
+	public function getEvents(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "event`";
 
 		$sort_data = [
@@ -144,7 +154,8 @@ class Event extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalEvents(): int {
+	public function getTotalEvents(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "event`");
 
 		return (int)$query->row['total'];

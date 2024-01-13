@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Catalog;
+
 /**
  * Class Manufacturer
  *
  * @package Opencart\Admin\Model\Catalog
  */
-class Manufacturer extends \Opencart\System\Engine\Model {
+class Manufacturer extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Manufacturer
 	 *
@@ -13,7 +15,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addManufacturer(array $data): int {
+	public function addManufacturer(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "manufacturer` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `image` = '" . $this->db->escape((string)$data['image']) . "', `sort_order` = '" . (int)$data['sort_order'] . "'");
 
 		$manufacturer_id = $this->db->getLastId();
@@ -52,7 +55,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editManufacturer(int $manufacturer_id, array $data): void {
+	public function editManufacturer(int $manufacturer_id, array $data): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "manufacturer` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `image` = '" . $this->db->escape((string)$data['image']) . "', `sort_order` = '" . (int)$data['sort_order'] . "' WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "manufacturer_to_store` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
@@ -91,7 +95,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteManufacturer(int $manufacturer_id): void {
+	public function deleteManufacturer(int $manufacturer_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "manufacturer` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "manufacturer_to_store` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "manufacturer_to_layout` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
@@ -107,7 +112,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getManufacturer(int $manufacturer_id): array {
+	public function getManufacturer(int $manufacturer_id): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "manufacturer` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
 
 		return $query->row;
@@ -120,7 +126,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getManufacturers(array $data = []): array {
+	public function getManufacturers(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "manufacturer`";
 
 		if (!empty($data['filter_name'])) {
@@ -168,7 +175,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, int>
 	 */
-	public function getStores(int $manufacturer_id): array {
+	public function getStores(int $manufacturer_id): array
+	{
 		$manufacturer_store_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "manufacturer_to_store` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
@@ -187,7 +195,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<int, string>>
 	 */
-	public function getSeoUrls(int $manufacturer_id): array {
+	public function getSeoUrls(int $manufacturer_id): array
+	{
 		$manufacturer_seo_url_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `key` = 'manufacturer_id' AND `value` = '" . (int)$manufacturer_id . "'");
@@ -206,7 +215,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, int>
 	 */
-	public function getLayouts(int $manufacturer_id): array {
+	public function getLayouts(int $manufacturer_id): array
+	{
 		$manufacturer_layout_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "manufacturer_to_layout` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
@@ -223,7 +233,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalManufacturers(): int {
+	public function getTotalManufacturers(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "manufacturer`");
 
 		return (int)$query->row['total'];
@@ -236,7 +247,8 @@ class Manufacturer extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalManufacturersByLayoutId(int $layout_id): int {
+	public function getTotalManufacturersByLayoutId(int $layout_id): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "manufacturer_to_layout` WHERE `layout_id` = '" . (int)$layout_id . "'");
 
 		return (int)$query->row['total'];

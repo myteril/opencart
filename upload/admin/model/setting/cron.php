@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Setting;
+
 /**
  * Class Cron
  *
  * @package Opencart\Admin\Model\Setting
  */
-class Cron extends \Opencart\System\Engine\Model {
+class Cron extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Cron
 	 *
@@ -17,7 +19,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addCron(string $code, string $description, string $cycle, string $action, bool $status): int {
+	public function addCron(string $code, string $description, string $cycle, string $action, bool $status): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "cron` SET `code` = '" . $this->db->escape($code) . "', `description` = '" . $this->db->escape($description) . "', `cycle` = '" . $this->db->escape($cycle) . "', `action` = '" . $this->db->escape($action) . "', `status` = '" . (int)$status . "', `date_added` = NOW(), `date_modified` = NOW()");
 
 		return $this->db->getLastId();
@@ -30,7 +33,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteCron(int $cron_id): void {
+	public function deleteCron(int $cron_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "cron` WHERE `cron_id` = '" . (int)$cron_id . "'");
 	}
 
@@ -41,7 +45,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteCronByCode(string $code): void {
+	public function deleteCronByCode(string $code): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "cron` WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 
@@ -52,7 +57,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editCron(int $cron_id): void {
+	public function editCron(int $cron_id): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "cron` SET `date_modified` = NOW() WHERE `cron_id` = '" . (int)$cron_id . "'");
 	}
 
@@ -64,7 +70,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editStatus(int $cron_id, bool $status): void {
+	public function editStatus(int $cron_id, bool $status): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "cron` SET `status` = '" . (bool)$status . "' WHERE `cron_id` = '" . (int)$cron_id . "'");
 	}
 
@@ -75,7 +82,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getCron(int $cron_id): array {
+	public function getCron(int $cron_id): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "cron` WHERE `cron_id` = '" . (int)$cron_id . "'");
 
 		return $query->row;
@@ -88,7 +96,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getCronByCode(string $code): array {
+	public function getCronByCode(string $code): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "cron` WHERE `code` = '" . $this->db->escape($code) . "' LIMIT 1");
 
 		return $query->row;
@@ -101,7 +110,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getCrons(array $data = []): array {
+	public function getCrons(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "cron`";
 
 		$sort_data = [
@@ -147,7 +157,8 @@ class Cron extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalCrons(): int {
+	public function getTotalCrons(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "cron`");
 
 		return (int)$query->row['total'];

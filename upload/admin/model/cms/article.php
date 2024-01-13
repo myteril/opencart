@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Cms;
+
 /**
  * Class Article
  *
  * @package Opencart\Admin\Model\Cms
  */
-class Article extends \Opencart\System\Engine\Model {
+class Article extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Article
 	 *
@@ -13,7 +15,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function addArticle(array $data): int {
+	public function addArticle(array $data): int
+	{
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "article` SET `topic_id` = '" . (int)$data['topic_id'] . "', `author` = '" . $this->db->escape($data['author']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_added` = NOW(), `date_modified` = NOW()");
 
 		$article_id = $this->db->getLastId();
@@ -54,7 +57,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editArticle(int $article_id, array $data): void {
+	public function editArticle(int $article_id, array $data): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "article` SET `topic_id` = '" . (int)$data['topic_id'] . "', `author` = '" . $this->db->escape($data['author']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_modified` = NOW() WHERE `article_id` = '" . (int)$article_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "article_description` WHERE `article_id` = '" . (int)$article_id . "'");
@@ -97,7 +101,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 * @param int $article_id
 	 * @param int $rating
 	 */
-	public function editRating(int $article_id, int $rating): void {
+	public function editRating(int $article_id, int $rating): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "article` SET `rating` = '" . (int)$rating . "' WHERE `article_id` = '" . (int)$article_id . "'");
 	}
 
@@ -108,7 +113,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteArticle(int $article_id): void {
+	public function deleteArticle(int $article_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "article` WHERE `article_id` = '" . (int)$article_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "article_comment` WHERE `article_id` = '" . (int)$article_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "article_description` WHERE `article_id` = '" . (int)$article_id . "'");
@@ -126,7 +132,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getArticle(int $article_id): array {
+	public function getArticle(int $article_id): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "article` `a` LEFT JOIN `" . DB_PREFIX . "article_description` `ad` ON (`a`.`article_id` = `ad`.`article_id`) WHERE `a`.`article_id` = '" . (int)$article_id . "' AND `ad`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -139,7 +146,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getArticles(array $data = []): array {
+	public function getArticles(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "article` `a` LEFT JOIN `" . DB_PREFIX . "article_description` `ad` ON (`a`.`article_id` = `ad`.`article_id`) WHERE `ad`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
@@ -199,7 +207,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getDescriptions(int $article_id): array {
+	public function getDescriptions(int $article_id): array
+	{
 		$article_description_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "article_description` WHERE `article_id` = '" . (int)$article_id . "'");
@@ -226,7 +235,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<int, string>>
 	 */
-	public function getSeoUrls(int $article_id): array {
+	public function getSeoUrls(int $article_id): array
+	{
 		$article_seo_url_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `key` = 'article_id' AND `value` = '" . (int)$article_id . "'");
@@ -245,7 +255,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, int>
 	 */
-	public function getStores(int $article_id): array {
+	public function getStores(int $article_id): array
+	{
 		$article_store_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "article_to_store` WHERE `article_id` = '" . (int)$article_id . "'");
@@ -264,7 +275,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, int>
 	 */
-	public function getLayouts(int $article_id): array {
+	public function getLayouts(int $article_id): array
+	{
 		$article_layout_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "article_to_layout` WHERE `article_id` = '" . (int)$article_id . "'");
@@ -283,7 +295,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalArticles(array $data = []): int {
+	public function getTotalArticles(array $data = []): int
+	{
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "article`";
 
 		if (!empty($data['filter_name'])) {
@@ -302,7 +315,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalArticlesByLayoutId(int $layout_id): int {
+	public function getTotalArticlesByLayoutId(int $layout_id): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "article_to_layout` WHERE `layout_id` = '" . (int)$layout_id . "'");
 
 		return (int)$query->row['total'];
@@ -316,7 +330,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editCommentStatus(int $article_comment_id, bool $status): void {
+	public function editCommentStatus(int $article_comment_id, bool $status): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "article_comment` SET `status` = '" . (bool)$status . "' WHERE `article_comment_id` = '" . (int)$article_comment_id . "'");
 
 		$this->cache->delete('topic');
@@ -329,7 +344,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 * @param int $article_comment_id
 	 * @param int $rating
 	 */
-	public function editCommentRating(int $article_id, int $article_comment_id, int $rating): void {
+	public function editCommentRating(int $article_id, int $article_comment_id, int $rating): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "article_comment` SET `rating` = '" . (int)$rating . "' WHERE `article_comment_id` = '" . (int)$article_comment_id . "' AND `article_id` = '" . (int)$article_id . "'");
 	}
 
@@ -340,7 +356,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteComment(int $article_comment_id): void {
+	public function deleteComment(int $article_comment_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "article_comment` WHERE `article_comment_id` = '" . (int)$article_comment_id . "'");
 
 		$this->cache->delete('topic');
@@ -353,7 +370,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getComment(int $article_comment_id): array {
+	public function getComment(int $article_comment_id): array
+	{
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "article_comment` WHERE `article_comment_id` = '" . (int)$article_comment_id . "'");
 
 		return $query->row;
@@ -366,7 +384,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getComments(array $data = []): array {
+	public function getComments(array $data = []): array
+	{
 		$sql = "SELECT *, `ac`.`rating`, `ac`.`status`, `ac`.`date_added` FROM `" . DB_PREFIX . "article_comment` `ac` LEFT JOIN `" . DB_PREFIX . "article` `a` ON (`ac`.`article_id` = `a`.`article_id`) LEFT JOIN `" . DB_PREFIX . "article_description` `ad` ON (`ac`.`article_id` = `ad`.`article_id`)";
 
 		$implode = [];
@@ -425,7 +444,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalComments(array $data = []): int {
+	public function getTotalComments(array $data = []): int
+	{
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "article_comment` `ac` LEFT JOIN `" . DB_PREFIX . "article` `a` ON (`ac`.`article_id` = `a`.`article_id`)";
 
 		$implode = [];
@@ -471,7 +491,8 @@ class Article extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getRatings(int $article_id, int $article_comment_id = 0): array {
+	public function getRatings(int $article_id, int $article_comment_id = 0): array
+	{
 		$sql = "SELECT rating, COUNT(*) AS total FROM `" . DB_PREFIX . "article_rating` WHERE `article_id` = '" . (int)$article_id . "'";
 
 		if ($article_comment_id) {

@@ -20,4 +20,3 @@ $_['help_price_incl_tax']                 = 'When enabled, any product price is 
 
 $_['error_permission']                    = 'Warning: You do not have permission to modify administrator settings!';
 $_['text_success']                        = 'Success: You have modified administrator settings!';
-

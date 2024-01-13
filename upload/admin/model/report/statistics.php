@@ -1,17 +1,20 @@
 <?php
 namespace Opencart\Admin\Model\Report;
+
 /**
  * Class Statistics
  *
  * @package Opencart\Admin\Model\Report
  */
-class Statistics extends \Opencart\System\Engine\Model {
+class Statistics extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Get Statistics
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getStatistics(): array {
+	public function getStatistics(): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "statistics`");
 
 		return $query->rows;
@@ -22,7 +25,8 @@ class Statistics extends \Opencart\System\Engine\Model {
 	 *
 	 * @return float
 	 */
-	public function getValue(string $code): float {
+	public function getValue(string $code): float
+	{
 		$query = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "statistics` WHERE `code` = '" . $this->db->escape($code) . "'");
 
 		if ($query->num_rows) {
@@ -40,7 +44,8 @@ class Statistics extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function addValue(string $code, float $value): void {
+	public function addValue(string $code, float $value): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "statistics` SET `value` = (`value` + '" . (float)$value . "') WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 
@@ -50,7 +55,8 @@ class Statistics extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function removeValue(string $code, float $value): void {
+	public function removeValue(string $code, float $value): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "statistics` SET `value` = (`value` - '" . (float)$value . "') WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 
@@ -62,7 +68,8 @@ class Statistics extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editValue(string $code, float $value): void {
+	public function editValue(string $code, float $value): void
+	{
 		$this->db->query("UPDATE `" . DB_PREFIX . "statistics` SET `value` = '" . (float)$value . "' WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 }

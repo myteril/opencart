@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Localisation;
+
 /**
  * Class ReturnReason
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class ReturnReason extends \Opencart\System\Engine\Model {
+class ReturnReason extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Return Reason
 	 *
@@ -13,7 +15,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @return ?int
 	 */
-	public function addReturnReason(array $data): ?int {
+	public function addReturnReason(array $data): ?int
+	{
 		$return_reason_id = null;
 
 		foreach ($data['return_reason'] as $language_id => $value) {
@@ -39,7 +42,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editReturnReason(int $return_reason_id, array $data): void {
+	public function editReturnReason(int $return_reason_id, array $data): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "return_reason` WHERE `return_reason_id` = '" . (int)$return_reason_id . "'");
 
 		foreach ($data['return_reason'] as $language_id => $value) {
@@ -56,7 +60,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteReturnReason(int $return_reason_id): void {
+	public function deleteReturnReason(int $return_reason_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "return_reason` WHERE `return_reason_id` = '" . (int)$return_reason_id . "'");
 
 		$this->cache->delete('return_reason');
@@ -69,7 +74,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getReturnReason(int $return_reason_id): array {
+	public function getReturnReason(int $return_reason_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "return_reason` WHERE `return_reason_id` = '" . (int)$return_reason_id . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -82,7 +88,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getReturnReasons(array $data = []): array {
+	public function getReturnReasons(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "return_reason` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `name`";
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -125,7 +132,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, string>>
 	 */
-	public function getDescriptions(int $return_reason_id): array {
+	public function getDescriptions(int $return_reason_id): array
+	{
 		$return_reason_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "return_reason` WHERE `return_reason_id` = '" . (int)$return_reason_id . "'");
@@ -142,7 +150,8 @@ class ReturnReason extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalReturnReasons(): int {
+	public function getTotalReturnReasons(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "return_reason` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return (int)$query->row['total'];

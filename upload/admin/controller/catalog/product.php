@@ -1,17 +1,20 @@
 <?php
 namespace Opencart\Admin\Controller\Catalog;
+
 /**
  * Class Product
  *
  * @package Opencart\Admin\Controller\Catalog
  */
-class Product extends \Opencart\System\Engine\Controller {
+class Product extends \Opencart\System\Engine\Controller
+{
 	/**
 	 * Index
 	 *
 	 * @return void
 	 */
-	public function index(): void {
+	public function index(): void
+	{
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -119,7 +122,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function list(): void {
+	public function list(): void
+	{
 		$this->load->language('catalog/product');
 
 		$this->response->setOutput($this->controller_catalog_product->getList());
@@ -128,7 +132,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	/**
 	 * @return string
 	 */
-	protected function getList(): string {
+	protected function getList(): string
+	{
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -226,13 +231,13 @@ class Product extends \Opencart\System\Engine\Controller {
 
 
 		$is_price_incl_tax = intval($this->config->get("config_price_incl_tax")) === 1;
-        if(!empty($is_price_incl_tax) && intval($is_price_incl_tax) === 1){
-            $is_price_incl_tax = true;
-        }else{
-            $is_price_incl_tax = false;
-        }
+		if(!empty($is_price_incl_tax) && intval($is_price_incl_tax) === 1) {
+			$is_price_incl_tax = true;
+		} else {
+			$is_price_incl_tax = false;
+		}
 
-        $data['is_price_incl_tax'] = $is_price_incl_tax;
+		$data['is_price_incl_tax'] = $is_price_incl_tax;
 
 
 		foreach ($results as $result) {
@@ -254,18 +259,18 @@ class Product extends \Opencart\System\Engine\Controller {
 				}
 			}
 
-            if($is_price_incl_tax){
-                $price = $this->tax->calculate(floatval($result['price']), $result['tax_class_id'], $this->config->get('config_tax'));
-                if($special !== false){
-                    $special = $this->tax->calculate(floatval($special), $result['tax_class_id'], $this->config->get('config_tax'));
-                }
-            }else{
-                $price = $result['price'];
-            }
+			if($is_price_incl_tax) {
+				$price = $this->tax->calculate(floatval($result['price']), $result['tax_class_id'], $this->config->get('config_tax'));
+				if($special !== false) {
+					$special = $this->tax->calculate(floatval($special), $result['tax_class_id'], $this->config->get('config_tax'));
+				}
+			} else {
+				$price = $result['price'];
+			}
 
-            if($special !== false){
-                $special = $this->currency->format(floatval($special), $this->config->get('config_currency'));
-            }
+			if($special !== false) {
+				$special = $this->currency->format(floatval($special), $this->config->get('config_currency'));
+			}
 
 
 			$data['products'][] = [
@@ -368,7 +373,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function form(): void {
+	public function form(): void
+	{
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -562,16 +568,16 @@ class Product extends \Opencart\System\Engine\Controller {
 			$data['mpn'] = '';
 		}
 
-        $this->load->model('setting/admin');
-        // Get the identifier settings of Default Store.
+		$this->load->model('setting/admin');
+		// Get the identifier settings of Default Store.
 
 		$data['upc_enabled'] = $this->config->get("config_product_upc");
 		$data['ean_enabled'] = $this->config->get("config_product_ean");
 		$data['jan_enabled'] = $this->config->get("config_product_jan");
 		$data['isbn_enabled'] = $this->config->get("config_product_isbn");
 		$data['mpn_enabled'] = $this->config->get("config_product_mpn");
-        $is_price_incl_tax = intval($this->config->get("config_price_incl_tax")) === 1;
-        $data['is_price_incl_tax'] = $is_price_incl_tax;
+		$is_price_incl_tax = intval($this->config->get("config_price_incl_tax")) === 1;
+		$data['is_price_incl_tax'] = $is_price_incl_tax;
 
 		if (!empty($product_info)) {
 			$data['location'] = $product_info['location'];
@@ -582,9 +588,9 @@ class Product extends \Opencart\System\Engine\Controller {
 		if (!empty($product_info)) {
 			$data['price'] = $product_info['price'];
 
-            if($is_price_incl_tax){
-                $data['price'] = $this->tax->calculate(floatval($product_info['price']), $product_info['tax_class_id']);
-            }
+			if($is_price_incl_tax) {
+				$data['price'] = $this->tax->calculate(floatval($product_info['price']), $product_info['tax_class_id']);
+			}
 		} else {
 			$data['price'] = '';
 		}
@@ -971,12 +977,12 @@ class Product extends \Opencart\System\Engine\Controller {
 			$data['product_subscriptions'] = [];
 		}
 
-        if($is_price_incl_tax) {
-            foreach ($data['product_subscriptions'] as $i => $product_subscription) {
-                $data['product_subscriptions'][$i]['trial_price'] = $this->tax->calculate(floatval($product_subscription['trial_price']), $data['tax_class_id']);
-                $data['product_subscriptions'][$i]['price'] = $this->tax->calculate(floatval($product_subscription['price']), $data['tax_class_id']);
-            }
-        }
+		if($is_price_incl_tax) {
+			foreach ($data['product_subscriptions'] as $i => $product_subscription) {
+				$data['product_subscriptions'][$i]['trial_price'] = $this->tax->calculate(floatval($product_subscription['trial_price']), $data['tax_class_id']);
+				$data['product_subscriptions'][$i]['price'] = $this->tax->calculate(floatval($product_subscription['price']), $data['tax_class_id']);
+			}
+		}
 
 		// Discount
 		if ($product_id) {
@@ -1107,7 +1113,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function save(): void {
+	public function save(): void
+	{
 		$this->load->language('catalog/product');
 
 		$json = [];
@@ -1171,52 +1178,52 @@ class Product extends \Opencart\System\Engine\Controller {
 		if (!$json) {
 
 			$is_price_incl_tax = intval($this->config->get("config_price_incl_tax")) === 1;
-            if(!empty($is_price_incl_tax) && intval($is_price_incl_tax) === 1){
-                $is_price_incl_tax = true;
-            }else{
-                $is_price_incl_tax = false;
-            }
+			if(!empty($is_price_incl_tax) && intval($is_price_incl_tax) === 1) {
+				$is_price_incl_tax = true;
+			} else {
+				$is_price_incl_tax = false;
+			}
 
-            if($is_price_incl_tax){
-                $this->request->post['price'] = $this->tax->calculatePriceExclTax(floatval($this->request->post['price']), $this->request->post['tax_class_id']);
+			if($is_price_incl_tax) {
+				$this->request->post['price'] = $this->tax->calculatePriceExclTax(floatval($this->request->post['price']), $this->request->post['tax_class_id']);
 
-                if(!empty($this->request->post['product_option'])) {
-                    foreach ($this->request->post['product_option'] as $i => $product_option) {
+				if(!empty($this->request->post['product_option'])) {
+					foreach ($this->request->post['product_option'] as $i => $product_option) {
 						if(!empty($product_option['product_option_value'])) {
 							foreach ($product_option['product_option_value'] as $j => $product_option_value) {
 								$this->request->post['product_option'][$i]['product_option_value'][$j]['price'] = $this->tax->calculatePriceExclTax(floatval($product_option_value['price']), $this->request->post['tax_class_id'], 'P');
 							}
 						}
-                    }
-                }
+					}
+				}
 
-                if(!empty($this->request->post['product_subscription'])){
-                    foreach ($this->request->post['product_subscription'] as $i => $product_subscription){
+				if(!empty($this->request->post['product_subscription'])) {
+					foreach ($this->request->post['product_subscription'] as $i => $product_subscription) {
 
-						if(!empty($this->request->post['product_subscription'][$i]['price'])){
+						if(!empty($this->request->post['product_subscription'][$i]['price'])) {
 							$this->request->post['product_subscription'][$i]['price'] = $this->tax->calculatePriceExclTax(floatval($product_subscription['price']), $this->request->post['tax_class_id']);
-						}else{
+						} else {
 							$this->request->post['product_subscription'][$i]['price'] = 0;
 						}
 
-						if(!empty($this->request->post['product_subscription'][$i]['trial_price'])){
+						if(!empty($this->request->post['product_subscription'][$i]['trial_price'])) {
 							$this->request->post['product_subscription'][$i]['trial_price'] = $this->tax->calculatePriceExclTax(floatval($product_subscription['trial_price']), $this->request->post['tax_class_id']);
 						}
-                    }
-                }
+					}
+				}
 
-                if(!empty($this->request->post['product_discount'])) {
-                    foreach ($this->request->post['product_discount'] as $i => $product_discount) {
-                        $this->request->post['product_discount'][$i]['price'] = $this->tax->calculatePriceExclTax(floatval($product_discount['price']), $this->request->post['tax_class_id']);
-                    }
-                }
+				if(!empty($this->request->post['product_discount'])) {
+					foreach ($this->request->post['product_discount'] as $i => $product_discount) {
+						$this->request->post['product_discount'][$i]['price'] = $this->tax->calculatePriceExclTax(floatval($product_discount['price']), $this->request->post['tax_class_id']);
+					}
+				}
 
-                if(!empty($this->request->post['product_special'])) {
-                    foreach ($this->request->post['product_special'] as $i => $product_special) {
-                        $this->request->post['product_special'][$i]['price'] = $this->tax->calculatePriceExclTax(floatval($product_special['price']), $this->request->post['tax_class_id']);
-                    }
-                }
-            }
+				if(!empty($this->request->post['product_special'])) {
+					foreach ($this->request->post['product_special'] as $i => $product_special) {
+						$this->request->post['product_special'][$i]['price'] = $this->tax->calculatePriceExclTax(floatval($product_special['price']), $this->request->post['tax_class_id']);
+					}
+				}
+			}
 
 			if (!$this->request->post['product_id']) {
 				if (!$this->request->post['master_id']) {
@@ -1251,7 +1258,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function delete(): void {
+	public function delete(): void
+	{
 		$this->load->language('catalog/product');
 
 		$json = [];
@@ -1285,7 +1293,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function copy(): void {
+	public function copy(): void
+	{
 		$this->load->language('catalog/product');
 
 		$json = [];
@@ -1319,7 +1328,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function report(): void {
+	public function report(): void
+	{
 		$this->load->language('catalog/product');
 
 		$this->response->setOutput($this->getReport());
@@ -1330,7 +1340,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return string
 	 */
-	public function getReport(): string {
+	public function getReport(): string
+	{
 		if (isset($this->request->get['product_id'])) {
 			$product_id = (int)$this->request->get['product_id'];
 		} else {
@@ -1390,7 +1401,8 @@ class Product extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function autocomplete(): void {
+	public function autocomplete(): void
+	{
 		$json = [];
 
 		if (isset($this->request->get['filter_name'])) {
@@ -1490,40 +1502,40 @@ class Product extends \Opencart\System\Engine\Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-    /**
-     * subtractTaxes
-     *
-     * @return void
-     */
-    public function subtractTaxes(): void
-    {
-        $this->load->language('catalog/product');
+	/**
+	 * subtractTaxes
+	 *
+	 * @return void
+	 */
+	public function subtractTaxes(): void
+	{
+		$this->load->language('catalog/product');
 
-        $json = [];
+		$json = [];
 
-        if(!isset($this->request->post['price']) ||
-            !is_numeric($this->request->post['price']) ||
-            floatval($this->request->post['price']) < 0 ||
-            !isset($this->request->post['tax_class_id']) ||
-            !is_numeric($this->request->post['tax_class_id']) ||
-            intval($this->request->post['tax_class_id']) < 1
-        ){
-            $json['error'] = $this->language->get('error_warning');
-        }
+		if(!isset($this->request->post['price']) ||
+			!is_numeric($this->request->post['price']) ||
+			floatval($this->request->post['price']) < 0 ||
+			!isset($this->request->post['tax_class_id']) ||
+			!is_numeric($this->request->post['tax_class_id']) ||
+			intval($this->request->post['tax_class_id']) < 1
+		) {
+			$json['error'] = $this->language->get('error_warning');
+		}
 
-        if (!$this->user->hasPermission('access', 'catalog/product')) {
-            $json['error'] = $this->language->get('error_permission');
-        }
+		if (!$this->user->hasPermission('access', 'catalog/product')) {
+			$json['error'] = $this->language->get('error_permission');
+		}
 
-        if(empty($json['error'])){
-            $price_incl_tax = floatval($this->request->post['price']);
-            $tax_class_id = floatval($this->request->post['tax_class_id']);
-            $price_excl_tax = $this->tax->calculatePriceExclTax($price_incl_tax, $tax_class_id);
-            $json['price'] = $price_excl_tax;
-            $json['priceText'] = $this->currency->format($price_excl_tax, $this->config->get('config_currency'));
-        }
+		if(empty($json['error'])) {
+			$price_incl_tax = floatval($this->request->post['price']);
+			$tax_class_id = floatval($this->request->post['tax_class_id']);
+			$price_excl_tax = $this->tax->calculatePriceExclTax($price_incl_tax, $tax_class_id);
+			$json['price'] = $price_excl_tax;
+			$json['priceText'] = $this->currency->format($price_excl_tax, $this->config->get('config_currency'));
+		}
 
-        $this->response->addHeader('Content-Type: application/json');
-        $this->response->setOutput(json_encode($json));
-    }
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
 }

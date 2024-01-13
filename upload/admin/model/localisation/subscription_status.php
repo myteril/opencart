@@ -1,11 +1,13 @@
 <?php
 namespace Opencart\Admin\Model\Localisation;
+
 /**
  * Class SubscriptionStatus
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class SubscriptionStatus extends \Opencart\System\Engine\Model {
+class SubscriptionStatus extends \Opencart\System\Engine\Model
+{
 	/**
 	 * Add Subscription Status
 	 *
@@ -13,7 +15,8 @@ class SubscriptionStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @return ?int
 	 */
-	public function addSubscriptionStatus(array $data): ?int {
+	public function addSubscriptionStatus(array $data): ?int
+	{
 		$subscription_status_id = null;
 
 		foreach ($data['subscription_status'] as $language_id => $value) {
@@ -39,7 +42,8 @@ class SubscriptionStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function editSubscriptionStatus(int $subscription_status_id, array $data): void {
+	public function editSubscriptionStatus(int $subscription_status_id, array $data): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "subscription_status` WHERE `subscription_status_id` = '" . (int)$subscription_status_id . "'");
 
 		foreach ($data['subscription_status'] as $language_id => $value) {
@@ -56,7 +60,8 @@ class SubscriptionStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @return void
 	 */
-	public function deleteSubscriptionStatus(int $subscription_status_id): void {
+	public function deleteSubscriptionStatus(int $subscription_status_id): void
+	{
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "subscription_status` WHERE `subscription_status_id` = '" . (int)$subscription_status_id . "'");
 
 		$this->cache->delete('subscription_status');
@@ -69,7 +74,8 @@ class SubscriptionStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getSubscriptionStatus(int $subscription_status_id): array {
+	public function getSubscriptionStatus(int $subscription_status_id): array
+	{
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "subscription_status` WHERE `subscription_status_id` = '" . (int)$subscription_status_id . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -82,7 +88,8 @@ class SubscriptionStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getSubscriptionStatuses(array $data = []): array {
+	public function getSubscriptionStatuses(array $data = []): array
+	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "subscription_status` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `name`";
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -125,7 +132,8 @@ class SubscriptionStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @return array<int, array<string, string>>
 	 */
-	public function getDescriptions(int $subscription_status_id): array {
+	public function getDescriptions(int $subscription_status_id): array
+	{
 		$subscription_status_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "subscription_status` WHERE `subscription_status_id` = '" . (int)$subscription_status_id . "'");
@@ -142,7 +150,8 @@ class SubscriptionStatus extends \Opencart\System\Engine\Model {
 	 *
 	 * @return int
 	 */
-	public function getTotalSubscriptionStatuses(): int {
+	public function getTotalSubscriptionStatuses(): int
+	{
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "subscription_status` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return (int)$query->row['total'];
