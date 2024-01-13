@@ -16,7 +16,7 @@ class Install extends \Opencart\System\Engine\Model
 	 * @param string $triggers
 	 * @return void
 	 */
-	public function createDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, array $triggers, string $db_prefix): void{
+	public function createDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, string $db_prefix): void{
 		foreach ($tables as $table) {
 			$db->query("DROP TABLE IF EXISTS `" . $db_prefix . $table['name'] . "`");
 
@@ -172,7 +172,7 @@ class Install extends \Opencart\System\Engine\Model
 		}
 
 		// Create tables that do not exist.
-		$this->createDatabaseSchema($db, $tables_to_insert, $triggers, $db_prefix);
+		$this->createDatabaseSchema($db, $tables_to_insert, $db_prefix);
 
 		// Update the existing tables if needed.
 		foreach ($tables_to_update as $table) {
@@ -280,6 +280,8 @@ class Install extends \Opencart\System\Engine\Model
 
 			}
 		}
+
+		$this->installTriggers($db, $triggers, $db_prefix);
 	}
 }
 

@@ -10,7 +10,7 @@ class Tax extends \Opencart\System\Engine\Model
 {
 	/**
 	 * @param array<int, array<string, mixed>> $totals
-	 * @param array<int|string, float>         $taxes
+	 * @param array<int|string, float|array>   $taxes
 	 * @param float                            $total
 	 *
 	 * @return void
