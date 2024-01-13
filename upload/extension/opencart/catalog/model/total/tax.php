@@ -10,7 +10,7 @@ class Tax extends \Opencart\System\Engine\Model
 {
 	/**
 	 * @param array<int, array<string, mixed>> $totals
-	 * @param array<int|string, float|array>   $taxes
+	 * @param array<int|string, float|int|array>   $taxes
 	 * @param float                            $total
 	 *
 	 * @return void
@@ -18,7 +18,7 @@ class Tax extends \Opencart\System\Engine\Model
 	public function getTotal(array &$totals, array &$taxes, float &$total): void
 	{
 		foreach ($taxes as $key => $value) {
-			if ((is_int($value) && $value > 0) || is_array($value)) {
+			if (((is_int($value) || is_float($value)) && $value > 0) || is_array($value)) {
 
 				if(is_string($key) && str_starts_with($key, 'multiple_') && is_array($value)) {
 					$tax_rate_id = intval(str_replace('multiple_', '', $key));
