@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Localisation;
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class StockStatus extends \Opencart\System\Engine\Model
-{
+class StockStatus extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Stock Status
 	 *
@@ -15,8 +14,7 @@ class StockStatus extends \Opencart\System\Engine\Model
 	 *
 	 * @return ?int
 	 */
-	public function addStockStatus(array $data): ?int
-	{
+	public function addStockStatus(array $data): ?int {
 		$stock_status_id = null;
 
 		foreach ($data['stock_status'] as $language_id => $value) {
@@ -42,8 +40,7 @@ class StockStatus extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editStockStatus(int $stock_status_id, array $data): void
-	{
+	public function editStockStatus(int $stock_status_id, array $data): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "stock_status` WHERE `stock_status_id` = '" . (int)$stock_status_id . "'");
 
 		foreach ($data['stock_status'] as $language_id => $value) {
@@ -60,8 +57,7 @@ class StockStatus extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteStockStatus(int $stock_status_id): void
-	{
+	public function deleteStockStatus(int $stock_status_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "stock_status` WHERE `stock_status_id` = '" . (int)$stock_status_id . "'");
 
 		$this->cache->delete('stock_status');
@@ -74,8 +70,7 @@ class StockStatus extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getStockStatus(int $stock_status_id): array
-	{
+	public function getStockStatus(int $stock_status_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "stock_status` WHERE `stock_status_id` = '" . (int)$stock_status_id . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -88,8 +83,7 @@ class StockStatus extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getStockStatuses(array $data = []): array
-	{
+	public function getStockStatuses(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "stock_status` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `name`";
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -132,8 +126,7 @@ class StockStatus extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, string>>
 	 */
-	public function getDescriptions(int $stock_status_id): array
-	{
+	public function getDescriptions(int $stock_status_id): array {
 		$stock_status_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "stock_status` WHERE `stock_status_id` = '" . (int)$stock_status_id . "'");
@@ -150,8 +143,7 @@ class StockStatus extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalStockStatuses(): int
-	{
+	public function getTotalStockStatuses(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "stock_status` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return (int)$query->row['total'];

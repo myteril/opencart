@@ -6,15 +6,13 @@ namespace Opencart\Admin\Controller\Sale;
  *
  * @package Opencart\Admin\Controller\Sale
  */
-class Order extends \Opencart\System\Engine\Controller
-{
+class Order extends \Opencart\System\Engine\Controller {
 	/**
 	 * Index
 	 *
 	 * @return void
 	 */
-	public function index(): void
-	{
+	public function index(): void {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -189,8 +187,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function list(): void
-	{
+	public function list(): void {
 		$this->load->language('sale/order');
 
 		$this->response->setOutput($this->getList());
@@ -201,8 +198,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return string
 	 */
-	protected function getList(): string
-	{
+	protected function getList(): string {
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = (int)$this->request->get['filter_order_id'];
 		} else {
@@ -485,8 +481,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function info(): void
-	{
+	public function info(): void {
 		$this->load->language('sale/order');
 
 		if (isset($this->request->get['order_id'])) {
@@ -1260,8 +1255,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function call(): void
-	{
+	public function call(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1327,8 +1321,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function invoice(): void
-	{
+	public function invoice(): void {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_invoice');
@@ -1557,7 +1550,7 @@ class Order extends \Opencart\System\Engine\Controller
 				}
 
 				$show_store_logo_on_invoice = $this->config->get('config_show_store_logo_on_invoice');
-				if(intval($show_store_logo_on_invoice) === 1) {
+				if ((int)$show_store_logo_on_invoice === 1) {
 					$store_logo = $this->config->get('config_logo');
 
 					if (is_file(DIR_IMAGE . html_entity_decode($store_logo, ENT_QUOTES, 'UTF-8'))) {
@@ -1601,8 +1594,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function shipping(): void
-	{
+	public function shipping(): void {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_shipping');
@@ -1795,8 +1787,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function history(): void
-	{
+	public function history(): void {
 		$this->load->language('sale/order');
 
 		$this->response->setOutput($this->getHistory());
@@ -1807,8 +1798,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return string
 	 */
-	public function getHistory(): string
-	{
+	public function getHistory(): string {
 		if (isset($this->request->get['order_id'])) {
 			$order_id = (int)$this->request->get['order_id'];
 		} else {
@@ -1857,8 +1847,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function createInvoiceNo(): void
-	{
+	public function createInvoiceNo(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1902,8 +1891,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function addReward(): void
-	{
+	public function addReward(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1953,8 +1941,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function removeReward(): void
-	{
+	public function removeReward(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1994,8 +1981,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function addCommission(): void
-	{
+	public function addCommission(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -2047,8 +2033,7 @@ class Order extends \Opencart\System\Engine\Controller
 	 *
 	 * @return void
 	 */
-	public function removeCommission(): void
-	{
+	public function removeCommission(): void {
 		$this->load->language('sale/order');
 
 		$json = [];

@@ -6,31 +6,29 @@ namespace Opencart\admin\model\design;
  *
  * @package Opencart\Admin\Model\Design
  */
-class Popup extends \Opencart\System\Engine\Model
-{
+class Popup extends \Opencart\System\Engine\Model {
 	/**
 	 * @param array $data
 	 *
 	 * @return int
 	 */
-	public function addPopup(array $data): int
-	{
+	public function addPopup(array $data): int {
 		$this->db->query(
-			"INSERT INTO `" . DB_PREFIX . "popup` SET " .
-			"`title` = '" . $this->db->escape((string)$data['title']) . "', " .
-			"`status` = '" . (bool)(isset($data['status']) ? $data['status'] : 0) . "'," .
-			"`initial_delay` = '" . (int)(isset($data['initial_delay']) ? $data['initial_delay'] : 0) . "'," .
-			"`time_to_close` = '" .  (int)(isset($data['time_to_close']) ? $data['time_to_close'] : 0) . "'," .
-			"`width` = '" . (int)(isset($data['width']) ? $data['width'] : 0) . "'," .
-			"`show_everytime` = '" . (bool)(isset($data['show_everytime']) ? $data['show_everytime'] : 0) . "'," .
-			"`store_id` = '" . (int)(isset($data['store_id']) ? $data['store_id'] : 0) . "'"
+			"INSERT INTO `" . DB_PREFIX . "popup` SET "
+			. "`title` = '" . $this->db->escape((string)$data['title']) . "', "
+			. "`status` = '" . (bool)($data['status'] ?? 0) . "',"
+			. "`initial_delay` = '" . (int)($data['initial_delay'] ?? 0) . "',"
+			. "`time_to_close` = '" . (int)($data['time_to_close'] ?? 0) . "',"
+			. "`width` = '" . (int)($data['width'] ?? 0) . "',"
+			. "`show_everytime` = '" . (bool)($data['show_everytime'] ?? 0) . "',"
+			. "`store_id` = '" . (int)($data['store_id'] ?? 0) . "'"
 		);
 
 		$popup_id = $this->db->getLastId();
 
 		if (isset($data['popup_content'])) {
 			foreach ($data['popup_content'] as $language_id => $popup_content) {
-				$this->db->query("INSERT INTO `" . DB_PREFIX . "popup_content` SET `popup_id` = '" . (int)$popup_id . "', `language_id` = '" . (int)$language_id . "', `header` = '" .  $this->db->escape($popup_content['header']) . "', `content` = '" .  $this->db->escape($popup_content['content']) . "'");
+				$this->db->query("INSERT INTO `" . DB_PREFIX . "popup_content` SET `popup_id` = '" . (int)$popup_id . "', `language_id` = '" . (int)$language_id . "', `header` = '" . $this->db->escape($popup_content['header']) . "', `content` = '" . $this->db->escape($popup_content['content']) . "'");
 			}
 		}
 
@@ -43,25 +41,24 @@ class Popup extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editPopup(int $popup_id, array $data): void
-	{
+	public function editPopup(int $popup_id, array $data): void {
 		$this->db->query(
-			"UPDATE `" . DB_PREFIX . "popup` SET " .
-			"`title` = '" . $this->db->escape((string)$data['title']) . "', " .
-			"`status` = '" . (bool)(isset($data['status']) ? $data['status'] : 0) . "'," .
-			"`initial_delay` = '" . (int)(isset($data['initial_delay']) ? $data['initial_delay'] : 0) . "'," .
-			"`time_to_close` = '" . max(1, (int)(isset($data['time_to_close']) ? $data['time_to_close'] : 0)) . "'," .
-			"`width` = '" . (int)(isset($data['width']) ? $data['width'] : 0) . "'," .
-			"`show_everytime` = '" . (bool)(isset($data['show_everytime']) ? $data['show_everytime'] : 0) . "'," .
-			"`store_id` = '" . (int)(isset($data['store_id']) ? $data['store_id'] : 0) . "' ".
-			"where popup_id = '" . (int)$popup_id . "'"
+			"UPDATE `" . DB_PREFIX . "popup` SET "
+			. "`title` = '" . $this->db->escape((string)$data['title']) . "', "
+			. "`status` = '" . (bool)($data['status'] ?? 0) . "',"
+			. "`initial_delay` = '" . (int)($data['initial_delay'] ?? 0) . "',"
+			. "`time_to_close` = '" . max(1, (int)($data['time_to_close'] ?? 0)) . "',"
+			. "`width` = '" . (int)($data['width'] ?? 0) . "',"
+			. "`show_everytime` = '" . (bool)($data['show_everytime'] ?? 0) . "',"
+			. "`store_id` = '" . (int)($data['store_id'] ?? 0) . "' "
+			. "where popup_id = '" . (int)$popup_id . "'"
 		);
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "popup_content` WHERE `popup_id` = '" . (int)$popup_id . "'");
 
 		if (isset($data['popup_content'])) {
 			foreach ($data['popup_content'] as $language_id => $popup_content) {
-				$this->db->query("INSERT INTO `" . DB_PREFIX . "popup_content` SET `popup_id` = '" . (int)$popup_id . "', `language_id` = '" . (int)$language_id . "', `header` = '" .  $this->db->escape($popup_content['header']) . "', `content` = '" .  $this->db->escape($popup_content['content']) . "'");
+				$this->db->query("INSERT INTO `" . DB_PREFIX . "popup_content` SET `popup_id` = '" . (int)$popup_id . "', `language_id` = '" . (int)$language_id . "', `header` = '" . $this->db->escape($popup_content['header']) . "', `content` = '" . $this->db->escape($popup_content['content']) . "'");
 			}
 		}
 	}
@@ -71,8 +68,7 @@ class Popup extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deletePopup(int $popup_id): void
-	{
+	public function deletePopup(int $popup_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "popup` WHERE `popup_id` = '" . (int)$popup_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "popup_content` WHERE `popup_id` = '" . (int)$popup_id . "'");
 	}
@@ -82,8 +78,7 @@ class Popup extends \Opencart\System\Engine\Model
 	 *
 	 * @return array
 	 */
-	public function getPopup(int $popup_id): array
-	{
+	public function getPopup(int $popup_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "popup` WHERE `popup_id` = '" . (int)$popup_id . "'");
 
 		return $query->row;
@@ -91,10 +86,10 @@ class Popup extends \Opencart\System\Engine\Model
 
 	/**
 	 * @param int $popup_id
+	 *
 	 * @return array
 	 */
-	public function getContents(int $popup_id): array
-	{
+	public function getContents(int $popup_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "popup_content` WHERE `popup_id` = '" . (int)$popup_id . "'");
 
 		$result = [];
@@ -110,8 +105,7 @@ class Popup extends \Opencart\System\Engine\Model
 	 *
 	 * @return array
 	 */
-	public function getPopups(array $data = []): array
-	{
+	public function getPopups(array $data = []): array {
 		$sql = "SELECT p.*, s.name as store_name  FROM `" . DB_PREFIX . "popup` p left join `" . DB_PREFIX . "store` s on p.store_id = s.store_id";
 
 		$sort_data = [
@@ -151,8 +145,7 @@ class Popup extends \Opencart\System\Engine\Model
 	/**
 	 * @return int
 	 */
-	public function getTotalPopups(): int
-	{
+	public function getTotalPopups(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "popup`");
 
 		return (int)$query->row['total'];

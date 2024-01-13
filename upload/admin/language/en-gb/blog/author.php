@@ -16,7 +16,7 @@ $_['button_clear']     = 'Clear';
 $_['column_name']      = 'Author Name';
 $_['column_email']     = 'Email Address';
 $_['column_photo']     = 'Photo';
-$_['column_post_count']= 'Article Count';
+$_['column_post_count'] = 'Article Count';
 
 // Entry
 $_['entry_fullname']   = 'Author Name';

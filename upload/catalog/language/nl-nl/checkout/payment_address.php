@@ -31,5 +31,3 @@ $_['error_country']      	= 'Je moet een land selecteren!';
 $_['error_zone']         	= 'Je moet een provincie selecteren!';
 $_['error_custom_field'] 	= '%s is vereist!';
 $_['error_regex'] 		 	= "%s is geen geldige invoer!";
-
-

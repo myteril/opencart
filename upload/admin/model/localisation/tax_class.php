@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Localisation;
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class TaxClass extends \Opencart\System\Engine\Model
-{
+class TaxClass extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Tax Class
 	 *
@@ -15,8 +14,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addTaxClass(array $data): int
-	{
+	public function addTaxClass(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "tax_class` SET `title` = '" . $this->db->escape((string)$data['title']) . "', `description` = '" . $this->db->escape((string)$data['description']) . "'");
 
 		$tax_class_id = $this->db->getLastId();
@@ -40,8 +38,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editTaxClass(int $tax_class_id, array $data): void
-	{
+	public function editTaxClass(int $tax_class_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "tax_class` SET `title` = '" . $this->db->escape((string)$data['title']) . "', `description` = '" . $this->db->escape((string)$data['description']) . "' WHERE `tax_class_id` = '" . (int)$tax_class_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "tax_rule` WHERE `tax_class_id` = '" . (int)$tax_class_id . "'");
@@ -62,8 +59,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteTaxClass(int $tax_class_id): void
-	{
+	public function deleteTaxClass(int $tax_class_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "tax_class` WHERE `tax_class_id` = '" . (int)$tax_class_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "tax_rule` WHERE `tax_class_id` = '" . (int)$tax_class_id . "'");
 
@@ -77,8 +73,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getTaxClass(int $tax_class_id): array
-	{
+	public function getTaxClass(int $tax_class_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "tax_class` WHERE `tax_class_id` = '" . (int)$tax_class_id . "'");
 
 		return $query->row;
@@ -91,8 +86,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getTaxClasses(array $data = []): array
-	{
+	public function getTaxClasses(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "tax_class` ORDER BY `title`";
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -133,8 +127,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalTaxClasses(): int
-	{
+	public function getTotalTaxClasses(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "tax_class`");
 
 		return (int)$query->row['total'];
@@ -147,8 +140,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getTaxRules(int $tax_class_id): array
-	{
+	public function getTaxRules(int $tax_class_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "tax_rule` WHERE `tax_class_id` = '" . (int)$tax_class_id . "' ORDER BY `priority` ASC");
 
 		return $query->rows;
@@ -161,8 +153,7 @@ class TaxClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalTaxRulesByTaxRateId(int $tax_rate_id): int
-	{
+	public function getTotalTaxRulesByTaxRateId(int $tax_rate_id): int {
 		$query = $this->db->query("SELECT COUNT(DISTINCT `tax_class_id`) AS `total` FROM `" . DB_PREFIX . "tax_rule` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
 
 		return (int)$query->row['total'];

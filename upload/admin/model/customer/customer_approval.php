@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Customer;
  *
  * @package Opencart\Admin\Model\Customer
  */
-class CustomerApproval extends \Opencart\System\Engine\Model
-{
+class CustomerApproval extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Customer Approvals
 	 *
@@ -15,8 +14,7 @@ class CustomerApproval extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getCustomerApprovals(array $data = []): array
-	{
+	public function getCustomerApprovals(array $data = []): array {
 		$sql = "SELECT *, CONCAT(`c`.`firstname`, ' ', `c`.`lastname`) AS customer, `cgd`.`name` AS customer_group, `ca`.`type` FROM `" . DB_PREFIX . "customer_approval` `ca` LEFT JOIN `" . DB_PREFIX . "customer` `c` ON (`ca`.`customer_id` = `c`.`customer_id`) LEFT JOIN `" . DB_PREFIX . "customer_group_description` `cgd` ON (`c`.`customer_group_id` = `cgd`.`customer_group_id`) WHERE `cgd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_customer'])) {
@@ -69,8 +67,7 @@ class CustomerApproval extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getCustomerApproval(int $customer_approval_id): array
-	{
+	public function getCustomerApproval(int $customer_approval_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_approval` WHERE `customer_approval_id` = '" . (int)$customer_approval_id . "'");
 
 		return $query->row;
@@ -83,8 +80,7 @@ class CustomerApproval extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalCustomerApprovals(array $data = []): int
-	{
+	public function getTotalCustomerApprovals(array $data = []): int {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "customer_approval` `ca` LEFT JOIN `" . DB_PREFIX . "customer` `c` ON (`ca`.`customer_id` = `c`.`customer_id`)";
 
 		$implode = [];
@@ -129,8 +125,7 @@ class CustomerApproval extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function approveCustomer(int $customer_id): void
-	{
+	public function approveCustomer(int $customer_id): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `status` = '1' WHERE `customer_id` = '" . (int)$customer_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_approval` WHERE `customer_id` = '" . (int)$customer_id . "' AND `type` = 'customer'");
 	}
@@ -142,8 +137,7 @@ class CustomerApproval extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function denyCustomer(int $customer_id): void
-	{
+	public function denyCustomer(int $customer_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_approval` WHERE `customer_id` = '" . (int)$customer_id . "' AND `type` = 'customer'");
 	}
 
@@ -154,8 +148,7 @@ class CustomerApproval extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function approveAffiliate(int $customer_id): void
-	{
+	public function approveAffiliate(int $customer_id): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer_affiliate` SET `status` = '1' WHERE `customer_id` = '" . (int)$customer_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_approval` WHERE `customer_id` = '" . (int)$customer_id . "' AND `type` = 'affiliate'");
 	}
@@ -167,8 +160,7 @@ class CustomerApproval extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function denyAffiliate(int $customer_id): void
-	{
+	public function denyAffiliate(int $customer_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_approval` WHERE `customer_id` = '" . (int)$customer_id . "' AND `type` = 'affiliate'");
 	}
 }

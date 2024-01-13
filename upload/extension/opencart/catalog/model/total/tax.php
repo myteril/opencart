@@ -6,22 +6,20 @@ namespace Opencart\Catalog\Model\Extension\Opencart\Total;
  *
  * @package Opencart\Catalog\Model\Extension\Opencart\Total
  */
-class Tax extends \Opencart\System\Engine\Model
-{
+class Tax extends \Opencart\System\Engine\Model {
 	/**
-	 * @param array<int, array<string, mixed>> $totals
-	 * @param array<int|string, float|int|array>   $taxes
-	 * @param float                            $total
+	 * @param array<int, array<string, mixed>>   $totals
+	 * @param array<int|string, array|float|int> $taxes
+	 * @param float                              $total
 	 *
 	 * @return void
 	 */
-	public function getTotal(array &$totals, array &$taxes, float &$total): void
-	{
+	public function getTotal(array &$totals, array &$taxes, float &$total): void {
 		foreach ($taxes as $key => $value) {
 			if (((is_int($value) || is_float($value)) && $value > 0) || is_array($value)) {
 
-				if(is_string($key) && str_starts_with($key, 'multiple_') && is_array($value)) {
-					$tax_rate_id = intval(str_replace('multiple_', '', $key));
+				if (is_string($key) && str_starts_with($key, 'multiple_') && is_array($value)) {
+					$tax_rate_id = (int)(str_replace('multiple_', '', $key));
 					$total_tax_amount = 0;
 					foreach ($value as $shipping_method_name => $tax_amount) {
 						$totals[] = [

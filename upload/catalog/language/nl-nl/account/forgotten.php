@@ -23,4 +23,3 @@ $_['error_password']  = 'Wachtwoord moet tussen 4 en 20 tekens bevatten!';
 $_['error_confirm']   = 'Het wachtwoord en de bevestiging van het wachtwoord komen niet overeen.';
 $_['error_not_found'] = "Warning: Het e-mailadres is niet gevonden in onze records!";
 $_['error_code'] 	  = "Wachtwoord resetcode is ongeldig of is eerder gebruikt!";
-

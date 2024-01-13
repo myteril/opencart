@@ -6,13 +6,13 @@ namespace Opencart\Catalog\Controller\Blog;
  * @package Opencart\Catalog\Controller\Blog
  */
 class Search extends \Opencart\System\Engine\Controller {
-
 	/**
 	 * @return void
 	 */
 	public function index(): void {
-		if(intval($this->config->get('config_blog_enabled')) !== 1){
+		if ((int)($this->config->get('config_blog_enabled')) !== 1) {
 			$this->response->redirect($this->url->link('common/home', 'language=' . $this->config->get('config_language')));
+
 			return;
 		}
 
@@ -33,10 +33,9 @@ class Search extends \Opencart\System\Engine\Controller {
 			$tag = '';
 		}
 
-
 		if (isset($this->request->get['sort'])) {
-			$sort = match($this->request->get['sort']){
-				'id' 	=> 'ba.blog_article_id',
+			$sort = match ($this->request->get['sort']) {
+				'id'    => 'ba.blog_article_id',
 				'title' => 'bac.title',
 				default => 'ba.blog_article_id'
 			};
@@ -58,7 +57,7 @@ class Search extends \Opencart\System\Engine\Controller {
 
 		if (isset($this->request->get['author'])) {
 			$blog_author_id = (int)$this->request->get['author'];
-			if($blog_author_id < 1){
+			if ($blog_author_id < 1) {
 				$blog_author_id = null;
 			}
 		} else {
@@ -72,9 +71,9 @@ class Search extends \Opencart\System\Engine\Controller {
 		}
 
 		if (isset($this->request->get['search'])) {
-			$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['search']);
+			$this->document->setTitle($this->language->get('heading_title') . ' - ' . $this->request->get['search']);
 		} elseif (oc_strlen($tag) > 0) {
-			$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->language->get('heading_tag') . $tag);
+			$this->document->setTitle($this->language->get('heading_title') . ' - ' . $this->language->get('heading_tag') . $tag);
 		} else {
 			$this->document->setTitle($this->language->get('heading_title'));
 		}
@@ -122,7 +121,7 @@ class Search extends \Opencart\System\Engine\Controller {
 		];
 
 		if (isset($this->request->get['search'])) {
-			$data['heading_title'] = $this->language->get('heading_title') .  ' - ' . $this->request->get['search'];
+			$data['heading_title'] = $this->language->get('heading_title') . ' - ' . $this->request->get['search'];
 		} else {
 			$data['heading_title'] = $this->language->get('heading_title');
 		}
@@ -132,14 +131,14 @@ class Search extends \Opencart\System\Engine\Controller {
 		$data['user_searched'] = (isset($this->request->get['search'])) || (oc_strlen($tag) > 0) || ($blog_author_id !== null);
 
 		$filter_data = [
-			'store_id'        	  => (int)$this->config->get('config_store_id'),
-			'filter_title'        => $search,
-			'filter_author'       => $blog_author_id,
-			'filter_tag'          => $tag,
-			'sort'                => $sort,
-			'order'               => $order,
-			'start'               => ($page - 1) * $limit,
-			'limit'               => $limit
+			'store_id'      => (int)$this->config->get('config_store_id'),
+			'filter_title'  => $search,
+			'filter_author' => $blog_author_id,
+			'filter_tag'    => $tag,
+			'sort'          => $sort,
+			'order'         => $order,
+			'start'         => ($page - 1) * $limit,
+			'limit'         => $limit
 		];
 
 		$article_total = $this->model_blog_article->getTotalArticles($filter_data);
@@ -158,11 +157,11 @@ class Search extends \Opencart\System\Engine\Controller {
 			}
 
 			$article_data = [
-				'blog_article_id'  => $result['blog_article_id'],
-				'thumb'       => $image,
-				'title'       => $result['title'],
-				'description' => oc_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('config_product_description_length')) . '..',
-				'href'        => $this->url->link('blog/article', 'language=' . $this->config->get('config_language') . '&blog_article_id=' . $result['blog_article_id'] . $url)
+				'blog_article_id' => $result['blog_article_id'],
+				'thumb'           => $image,
+				'title'           => $result['title'],
+				'description'     => oc_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('config_product_description_length')) . '..',
+				'href'            => $this->url->link('blog/article', 'language=' . $this->config->get('config_language') . '&blog_article_id=' . $result['blog_article_id'] . $url)
 			];
 
 			$data['article_thumbs'][] = $this->load->controller('blog/search.thumb', $article_data);
@@ -305,10 +304,10 @@ class Search extends \Opencart\System\Engine\Controller {
 			}
 
 			$search_data = [
-				'keyword'      => $search,
-				'articles'     => $article_total,
-				'customer_id'  => $customer_id,
-				'ip'           => $ip
+				'keyword'     => $search,
+				'articles'    => $article_total,
+				'customer_id' => $customer_id,
+				'ip'          => $ip
 			];
 
 			$this->model_account_search->addSearch($search_data);
@@ -322,8 +321,8 @@ class Search extends \Opencart\System\Engine\Controller {
 
 		$data['tag'] = $tag;
 		$data['tags'] = [];
-		$tag_rows = $this->model_blog_store->getTags((int)$this->config->get('config_store_id'), intval($language['language_id']), 30);
-		foreach ($tag_rows as $tag_row){
+		$tag_rows = $this->model_blog_store->getTags((int)$this->config->get('config_store_id'), (int)($language['language_id']), 30);
+		foreach ($tag_rows as $tag_row) {
 			$tag_row['link'] = $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&tag=' . urlencode(html_entity_decode($tag_row['tag'], ENT_QUOTES, 'UTF-8')));
 			$data['tags'][] = $tag_row;
 		}
@@ -331,7 +330,7 @@ class Search extends \Opencart\System\Engine\Controller {
 		$data['author'] = $blog_author_id;
 		$data['authors'] = [];
 		$author_rows = $this->model_blog_store->getAuthors((int)$this->config->get('config_store_id'), 30);
-		foreach ($author_rows as $author_row){
+		foreach ($author_rows as $author_row) {
 			$author_row['link'] = $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $author_row['blog_author_id']);
 			$data['authors'][] = $author_row;
 		}
@@ -357,6 +356,7 @@ class Search extends \Opencart\System\Engine\Controller {
 
 	/**
 	 * @param array $data
+	 *
 	 * @return string
 	 */
 	public function thumb(array $data): string {

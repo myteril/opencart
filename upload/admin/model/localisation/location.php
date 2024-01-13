@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Localisation;
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class Location extends \Opencart\System\Engine\Model
-{
+class Location extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Location
 	 *
@@ -15,8 +14,7 @@ class Location extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addLocation(array $data): int
-	{
+	public function addLocation(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "location` SET `name` = '" . $this->db->escape((string)$data['name']) . "', address = '" . $this->db->escape((string)$data['address']) . "', `geocode` = '" . $this->db->escape((string)$data['geocode']) . "', `telephone` = '" . $this->db->escape((string)$data['telephone']) . "', `image` = '" . $this->db->escape((string)$data['image']) . "', `open` = '" . $this->db->escape((string)$data['open']) . "', `comment` = '" . $this->db->escape((string)$data['comment']) . "'");
 
 		return $this->db->getLastId();
@@ -30,8 +28,7 @@ class Location extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editLocation(int $location_id, array $data): void
-	{
+	public function editLocation(int $location_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "location` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `address` = '" . $this->db->escape((string)$data['address']) . "', `geocode` = '" . $this->db->escape((string)$data['geocode']) . "', `telephone` = '" . $this->db->escape((string)$data['telephone']) . "', `image` = '" . $this->db->escape((string)$data['image']) . "', `open` = '" . $this->db->escape((string)$data['open']) . "', `comment` = '" . $this->db->escape((string)$data['comment']) . "' WHERE `location_id` = '" . (int)$location_id . "'");
 	}
 
@@ -42,8 +39,7 @@ class Location extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteLocation(int $location_id): void
-	{
+	public function deleteLocation(int $location_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "location` WHERE `location_id` = '" . (int)$location_id . "'");
 	}
 
@@ -54,8 +50,7 @@ class Location extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getLocation(int $location_id): array
-	{
+	public function getLocation(int $location_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "location` WHERE `location_id` = '" . (int)$location_id . "'");
 
 		return $query->row;
@@ -68,8 +63,7 @@ class Location extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getLocations(array $data = []): array
-	{
+	public function getLocations(array $data = []): array {
 		$sql = "SELECT `location_id`, `name`, `address` FROM `" . DB_PREFIX . "location`";
 
 		$sort_data = [
@@ -111,8 +105,7 @@ class Location extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalLocations(): int
-	{
+	public function getTotalLocations(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "location`");
 
 		return (int)$query->row['total'];

@@ -5,14 +5,8 @@ namespace Opencart\Admin\Controller\Design;
  *
  * @package Opencart\Admin\Controller\Design
  */
-class Popup extends \Opencart\System\Engine\Controller
-{
-
-	/**
-	 *
-	 */
-	public function index(): void
-	{
+class Popup extends \Opencart\System\Engine\Controller {
+	public function index(): void {
 		$this->load->language('design/popup');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -57,7 +51,6 @@ class Popup extends \Opencart\System\Engine\Controller
 
 		$this->response->setOutput($this->load->view('design/popup', $data));
 	}
-
 
 	/**
 	 * @return void
@@ -171,7 +164,6 @@ class Popup extends \Opencart\System\Engine\Controller
 		return $this->load->view('design/popup_list', $data);
 	}
 
-
 	/**
 	 * @return void
 	 */
@@ -227,13 +219,13 @@ class Popup extends \Opencart\System\Engine\Controller
 			$data['popup_id'] = 0;
 		}
 
-		if(!empty($popup_info)){
+		if (!empty($popup_info)) {
 			$data['title'] = $popup_info['title'];
 			$data['initial_delay'] = $popup_info['initial_delay'];
 			$data['time_to_close'] = $popup_info['time_to_close'];
 			$data['show_everytime'] = $popup_info['show_everytime'];
 			$data['width'] = $popup_info['width'];
-		}else{
+		} else {
 			$data['title'] = '';
 			$data['initial_delay'] = 0;
 			$data['time_to_close'] = 3;
@@ -263,11 +255,10 @@ class Popup extends \Opencart\System\Engine\Controller
 
 		foreach ($popup_contents as $language_id => $popup_content) {
 			$data['popup_contents'][$language_id] = [
-				'header'      => $popup_content['header'],
-				'content'     => $popup_content['content']
+				'header'  => $popup_content['header'],
+				'content' => $popup_content['content']
 			];
 		}
-
 
 		$this->load->model('setting/store');
 		$stores = $this->model_setting_store->getStores();
@@ -288,7 +279,6 @@ class Popup extends \Opencart\System\Engine\Controller
 		$this->response->setOutput($this->load->view('design/popup_form', $data));
 	}
 
-
 	/**
 	 * @return void
 	 */
@@ -305,10 +295,10 @@ class Popup extends \Opencart\System\Engine\Controller
 			$json['error']['title'] = $this->language->get('error_title');
 		}
 
-		$this->request->post['initial_delay'] = max(0, intval($this->request->post['initial_delay']));
-		$this->request->post['time_to_close'] = max(1, intval($this->request->post['time_to_close']));
-		$this->request->post['width'] = max(0, intval($this->request->post['width']));
-		$this->request->post['show_everytime'] = intval($this->request->post['show_everytime']) === 1 ? '1' : '0';
+		$this->request->post['initial_delay'] = max(0, (int)($this->request->post['initial_delay']));
+		$this->request->post['time_to_close'] = max(1, (int)($this->request->post['time_to_close']));
+		$this->request->post['width'] = max(0, (int)($this->request->post['width']));
+		$this->request->post['show_everytime'] = (int)($this->request->post['show_everytime']) === 1 ? '1' : '0';
 
 		if (!$json) {
 			$this->load->model('design/popup');

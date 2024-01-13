@@ -407,14 +407,15 @@ class Image {
 	}
 
 	/**
-	 * @return string
 	 * @throws \Exception
+	 *
+	 * @return string
 	 */
-	public function getUrl(): string{
+	public function getUrl(): string {
 		$root_dir = realpath(DIR_OPENCART);
 		$image_abspath = realpath($this->file);
 
-		if(!str_starts_with($image_abspath, $root_dir)){
+		if (!str_starts_with($image_abspath, $root_dir)) {
 			throw new \Exception('The image file does not exist in the root directory or its subdirectories.');
 		}
 		$image_path_relative_to_root = oc_substr($image_abspath, oc_strlen($root_dir) + 1);

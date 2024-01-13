@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Cms;
  *
  * @package Opencart\Admin\Model\Cms
  */
-class Topic extends \Opencart\System\Engine\Model
-{
+class Topic extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Topic
 	 *
@@ -15,8 +14,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return int $topic
 	 */
-	public function addTopic(array $data): int
-	{
+	public function addTopic(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "topic` SET `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "'");
 
 		$topic_id = $this->db->getLastId();
@@ -50,8 +48,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editTopic(int $topic_id, array $data): void
-	{
+	public function editTopic(int $topic_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "topic` SET `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "' WHERE `topic_id` = '" . (int)$topic_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "topic_description` WHERE `topic_id` = '" . (int)$topic_id . "'");
@@ -86,8 +83,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteTopic(int $topic_id): void
-	{
+	public function deleteTopic(int $topic_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "topic` WHERE `topic_id` = '" . (int)$topic_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "topic_description` WHERE `topic_id` = '" . (int)$topic_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "topic_to_store` WHERE `topic_id` = '" . (int)$topic_id . "'");
@@ -103,8 +99,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getTopic(int $topic_id): array
-	{
+	public function getTopic(int $topic_id): array {
 		$sql = "SELECT DISTINCT * FROM `" . DB_PREFIX . "topic` `t` LEFT JOIN `" . DB_PREFIX . "topic_description` `td` ON (`t`.`topic_id` = `td`.`topic_id`) WHERE `t`.`topic_id` = '" . (int)$topic_id . "' AND `td`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		$topic_data = $this->cache->get('topic.' . md5($sql));
@@ -127,8 +122,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getTopics(array $data = []): array
-	{
+	public function getTopics(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "topic` `t` LEFT JOIN `" . DB_PREFIX . "topic_description` `td` ON (`t`.`topic_id` = `td`.`topic_id`) WHERE `td`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		$sort_data = [
@@ -182,8 +176,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getDescriptions(int $topic_id): array
-	{
+	public function getDescriptions(int $topic_id): array {
 		$topic_description_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "topic_description` WHERE `topic_id` = '" . (int)$topic_id . "'");
@@ -209,8 +202,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<int, string>>
 	 */
-	public function getSeoUrls(int $topic_id): array
-	{
+	public function getSeoUrls(int $topic_id): array {
 		$topic_seo_url_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `key` = 'topic_id' AND `value` = '" . (int)$topic_id . "'");
@@ -229,8 +221,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, int>
 	 */
-	public function getStores(int $topic_id): array
-	{
+	public function getStores(int $topic_id): array {
 		$topic_store_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "topic_to_store` WHERE `topic_id` = '" . (int)$topic_id . "'");
@@ -247,8 +238,7 @@ class Topic extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalTopics(): int
-	{
+	public function getTotalTopics(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "topic`");
 
 		return (int)$query->row['total'];

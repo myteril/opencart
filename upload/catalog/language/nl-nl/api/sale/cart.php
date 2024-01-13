@@ -1,7 +1,7 @@
 <?php
 // Text
 $_['text_success']     = 'Je hebt je winkelwagentje gewijzigd.';
-$_['text_subscription']= "Abonnement";
+$_['text_subscription'] = "Abonnement";
 $_['text_day'] 		   = "dag";
 $_['text_week'] 	   = "week";
 $_['text_semi_month']  = "halve maand";

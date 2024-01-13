@@ -104,7 +104,6 @@ $_['help_cookie'] 				   = "Cookiebeleid weergeven als onderdeel van de EU-wetge
 $_['help_gdpr'] 				   = "AVG-functies inschakelen, zoals de mogelijkheid voor klanten om accountverwijdering aan te vragen.";
 $_['help_product_count'] 		   = "Toon het aantal producten in de subcategorieën in het categoriemenu in de kop van de winkel. Warning: Dit veroorzaakt een extreme prestatiehit voor winkels met veel subcategorieën!";
 
-
 // Error
 $_['error_warning']                = 'Controleer het formulier!';
 $_['error_permission']             = 'Je hebt geen toestemming om winkels te bewerken!';

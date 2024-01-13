@@ -6,14 +6,8 @@ namespace Opencart\admin\controller\blog;
  *
  * @package Opencart\Admin\Controller\Design
  */
-class Article extends \Opencart\System\Engine\Controller
-{
-
-	/**
-	 *
-	 */
-	public function index(): void
-	{
+class Article extends \Opencart\System\Engine\Controller {
+	public function index(): void {
 		$this->load->language('blog/article');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -50,7 +44,6 @@ class Article extends \Opencart\System\Engine\Controller
 
 		$data['list'] = $this->getList();
 
-
 		$data['user_token'] = $this->session->data['user_token'];
 
 		$data['header'] = $this->load->controller('common/header');
@@ -60,12 +53,10 @@ class Article extends \Opencart\System\Engine\Controller
 		$this->response->setOutput($this->load->view('blog/article', $data));
 	}
 
-
 	/**
 	 * @return void
 	 */
-	public function list(): void
-	{
+	public function list(): void {
 		$this->load->language('blog/article');
 
 		$this->response->setOutput($this->getList());
@@ -74,8 +65,7 @@ class Article extends \Opencart\System\Engine\Controller
 	/**
 	 * @return string
 	 */
-	protected function getList(): string
-	{
+	protected function getList(): string {
 		if (isset($this->request->get['sort'])) {
 			$sort = (string)$this->request->get['sort'];
 		} else {
@@ -128,20 +118,20 @@ class Article extends \Opencart\System\Engine\Controller
 		$data['image_placeholder'] = $this->model_tool_image->resize('no_image.png', 136, 136);
 
 		foreach ($results as $result) {
-			if(!empty($result['image'])) {
+			if (!empty($result['image'])) {
 				$result['image'] = $this->model_tool_image->resize($result['image'], 136, 136);
 			} else {
 				$result['image'] = $data['image_placeholder'];
 			}
 
 			$data['blog_articles'][] = [
-				'blog_article_id'   => $result['blog_article_id'],
-				'image' 			=> $result['image'],
-				'name'      		=> $result['name'],
-				'author_name' 		=> $result['author_name'],
-				'view_count' 		=> $result['view_count'],
-				'date_added' 		=> date($this->language->get('date_format_long'), strtotime($result['date_added'])),
-				'edit'       		=> $this->url->link('blog/article.form', 'user_token=' . $this->session->data['user_token'] . '&blog_article_id=' . $result['blog_article_id'] . $url)
+				'blog_article_id' => $result['blog_article_id'],
+				'image'           => $result['image'],
+				'name'            => $result['name'],
+				'author_name'     => $result['author_name'],
+				'view_count'      => $result['view_count'],
+				'date_added'      => date($this->language->get('date_format_long'), strtotime($result['date_added'])),
+				'edit'            => $this->url->link('blog/article.form', 'user_token=' . $this->session->data['user_token'] . '&blog_article_id=' . $result['blog_article_id'] . $url)
 			];
 		}
 
@@ -185,12 +175,10 @@ class Article extends \Opencart\System\Engine\Controller
 		return $this->load->view('blog/article_list', $data);
 	}
 
-
 	/**
 	 * @return void
 	 */
-	public function form(): void
-	{
+	public function form(): void {
 		$this->load->language('blog/article');
 
 		$this->document->addScript('view/javascript/ckeditor/ckeditor.js');
@@ -245,11 +233,11 @@ class Article extends \Opencart\System\Engine\Controller
 
 		$this->load->model('tool/image');
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 136, 136);
-		if(!empty($blog_article_info)) {
+		if (!empty($blog_article_info)) {
 			$data['name'] = $blog_article_info['name'];
 			$data['author_name'] = $blog_article_info['author_name'];
 			$data['blog_author_id'] = $blog_article_info['blog_author_id'];
-			if(!empty($blog_article_info['image'])) {
+			if (!empty($blog_article_info['image'])) {
 				$data['image'] = $this->model_tool_image->resize($blog_article_info['image'], 136, 136);
 				$data['original_image'] = $blog_article_info['image'];
 			} else {
@@ -270,7 +258,7 @@ class Article extends \Opencart\System\Engine\Controller
 
 		// Article Tags
 		if (!empty($blog_article_info)) {
-			$data['tags']  = $this->model_blog_article->getAllTags(intval($this->request->get['blog_article_id']));
+			$data['tags']  = $this->model_blog_article->getAllTags((int)($this->request->get['blog_article_id']));
 		} else {
 			$data['tags'] = [];
 		}
@@ -281,9 +269,9 @@ class Article extends \Opencart\System\Engine\Controller
 		} else {
 			$article_stores = [
 				[
-					'store_id' 		=> 0,
-					'store_name' 	=> $this->language->get('text_default'),
-					'view_count' 	=> 0
+					'store_id'   => 0,
+					'store_name' => $this->language->get('text_default'),
+					'view_count' => 0
 				]
 			];
 		}
@@ -293,9 +281,9 @@ class Article extends \Opencart\System\Engine\Controller
 
 		foreach ($article_stores as $article_store) {
 			$data['article_stores'][] = [
-				'store_id'    	=> 0,
-				'store_name'    => $article_store['store_name'],
-				'view_count'   	=> $article_store['view_count'],
+				'store_id'   => 0,
+				'store_name' => $article_store['store_name'],
+				'view_count' => $article_store['view_count'],
 			];
 			$data['article_store_id'][] = $article_store['store_id'];
 		}
@@ -311,9 +299,9 @@ class Article extends \Opencart\System\Engine\Controller
 
 		foreach ($article_contents as $language_id => $article_content) {
 			$data['blog_article_content'][$language_id] = [
-				'title'      	=> $article_content['title'],
-				'description'   => $article_content['description'],
-				'content'     	=> $article_content['content']
+				'title'       => $article_content['title'],
+				'description' => $article_content['description'],
+				'content'     => $article_content['content']
 			];
 		}
 
@@ -345,9 +333,9 @@ class Article extends \Opencart\System\Engine\Controller
 		$data['seo_keywords'] = [];
 		if (!empty($blog_article_info)) {
 			$this->load->model('design/seo_url');
-			$seo_keywords = $this->model_design_seo_url->getSeoUrlsByKeyValue('blog_article_id', strval($this->request->get['blog_article_id']));
-			foreach($seo_keywords as $seo_keyword) {
-				if(!isset($data['seo_keywords'][$seo_keyword['store_id']])) {
+			$seo_keywords = $this->model_design_seo_url->getSeoUrlsByKeyValue('blog_article_id', (string)($this->request->get['blog_article_id']));
+			foreach ($seo_keywords as $seo_keyword) {
+				if (!isset($data['seo_keywords'][$seo_keyword['store_id']])) {
 					$data['seo_keywords'][$seo_keyword['store_id']] = [];
 				}
 
@@ -364,12 +352,10 @@ class Article extends \Opencart\System\Engine\Controller
 		$this->response->setOutput($this->load->view('blog/article_form', $data));
 	}
 
-
 	/**
 	 * @return void
 	 */
-	public function save(): void
-	{
+	public function save(): void {
 		$this->load->language('blog/article');
 
 		$json = [];
@@ -382,11 +368,11 @@ class Article extends \Opencart\System\Engine\Controller
 			$json['error']['name'] = $this->language->get('error_name');
 		}
 
-		if(is_array($this->request->post['seo_keywords'])) {
+		if (is_array($this->request->post['seo_keywords'])) {
 			foreach ($this->request->post['seo_keywords'] as $store_id => $seo_keywords_map) {
 				foreach ($seo_keywords_map as $language_id => $seo_keyword) {
-					if(preg_match('/[a-zA-Z0-9-_]*/', strval($seo_keyword)) !== 1) {
-						$json['error']['seo-keyword-' . intval($store_id) . '-' . intval($language_id)] = $this->language->get('error_seo_keyword');
+					if (preg_match('/[a-zA-Z0-9-_]*/', (string)$seo_keyword) !== 1) {
+						$json['error']['seo-keyword-' . (int)$store_id . '-' . (int)$language_id] = $this->language->get('error_seo_keyword');
 					}
 				}
 			}
@@ -413,8 +399,7 @@ class Article extends \Opencart\System\Engine\Controller
 	/**
 	 * @return void
 	 */
-	public function delete(): void
-	{
+	public function delete(): void {
 		$this->load->language('blog/article');
 
 		$json = [];

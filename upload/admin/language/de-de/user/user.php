@@ -51,4 +51,3 @@ $_['error_confirm']         = 'Das Passwort und die Passwortbestätigung stimmen
 
 // old versions
 $_['tab_login']             = 'Anmeldungen';
-

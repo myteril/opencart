@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Catalog;
  *
  * @package Opencart\Admin\Model\Catalog
  */
-class Category extends \Opencart\System\Engine\Model
-{
+class Category extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Category
 	 *
@@ -15,8 +14,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addCategory(array $data): int
-	{
+	public function addCategory(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "category` SET `image` = '" . $this->db->escape((string)$data['image']) . "', `parent_id` = '" . (int)$data['parent_id'] . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_modified` = NOW(), `date_added` = NOW()");
 
 		$category_id = $this->db->getLastId();
@@ -91,8 +89,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editCategory(int $category_id, array $data): void
-	{
+	public function editCategory(int $category_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "category` SET `image` = '" . $this->db->escape((string)$data['image']) . "', `parent_id` = '" . (int)$data['parent_id'] . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_modified` = NOW() WHERE `category_id` = '" . (int)$category_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "category_description` WHERE `category_id` = '" . (int)$category_id . "'");
@@ -222,8 +219,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteCategory(int $category_id): void
-	{
+	public function deleteCategory(int $category_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "category` WHERE `category_id` = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "category_description` WHERE `category_id` = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "category_filter` WHERE `category_id` = '" . (int)$category_id . "'");
@@ -248,8 +244,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function repairCategories(int $parent_id = 0): void
-	{
+	public function repairCategories(int $parent_id = 0): void {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "category` WHERE `parent_id` = '" . (int)$parent_id . "'");
 
 		foreach ($query->rows as $category) {
@@ -280,8 +275,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getCategory(int $category_id): array
-	{
+	public function getCategory(int $category_id): array {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT GROUP_CONCAT(`cd1`.`name` ORDER BY `level` SEPARATOR ' > ') FROM `" . DB_PREFIX . "category_path` `cp` LEFT JOIN `" . DB_PREFIX . "category_description` `cd1` ON (`cp`.`path_id` = cd1.`category_id` AND `cp`.`category_id` != `cp`.`path_id`) WHERE `cp`.`category_id` = `c`.`category_id` AND `cd1`.`language_id` = '" . (int)$this->config->get('config_language_id') . "' GROUP BY `cp`.`category_id`) AS `path` FROM `" . DB_PREFIX . "category` `c` LEFT JOIN `" . DB_PREFIX . "category_description` `cd2` ON (`c`.`category_id` = `cd2`.`category_id`) WHERE `c`.`category_id` = '" . (int)$category_id . "' AND `cd2`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -294,8 +288,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return string
 	 */
-	public function getPath(int $category_id): string
-	{
+	public function getPath(int $category_id): string {
 		return implode('_', array_column($this->getPaths($category_id), 'path_id'));
 	}
 
@@ -306,8 +299,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getPaths(int $category_id): array
-	{
+	public function getPaths(int $category_id): array {
 		$query = $this->db->query("SELECT `category_id`, `path_id`, `level` FROM `" . DB_PREFIX . "category_path` WHERE `category_id` = '" . (int)$category_id . "' ORDER BY `level` ASC");
 
 		return $query->rows;
@@ -320,8 +312,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getCategories(array $data = []): array
-	{
+	public function getCategories(array $data = []): array {
 		$sql = "SELECT `cp`.`category_id` AS `category_id`, GROUP_CONCAT(`cd1`.`name` ORDER BY `cp`.`level` SEPARATOR ' > ') AS `name`, `c1`.`parent_id`, `c1`.`sort_order`, `c1`.`status` FROM `" . DB_PREFIX . "category_path` `cp` LEFT JOIN `" . DB_PREFIX . "category` `c1` ON (`cp`.`category_id` = `c1`.`category_id`) LEFT JOIN `" . DB_PREFIX . "category` `c2` ON (`cp`.`path_id` = `c2`.`category_id`) LEFT JOIN `" . DB_PREFIX . "category_description` `cd1` ON (`cp`.`path_id` = `cd1`.`category_id`) LEFT JOIN `" . DB_PREFIX . "category_description` `cd2` ON (`cp`.`category_id` = `cd2`.`category_id`) WHERE `cd1`.`language_id` = '" . (int)$this->config->get('config_language_id') . "' AND `cd2`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
@@ -371,8 +362,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, string>>
 	 */
-	public function getDescriptions(int $category_id): array
-	{
+	public function getDescriptions(int $category_id): array {
 		$category_description_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "category_description` WHERE `category_id` = '" . (int)$category_id . "'");
@@ -397,8 +387,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, int>
 	 */
-	public function getFilters(int $category_id): array
-	{
+	public function getFilters(int $category_id): array {
 		$category_filter_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "category_filter` WHERE `category_id` = '" . (int)$category_id . "'");
@@ -417,8 +406,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<int, string>>
 	 */
-	public function getSeoUrls(int $category_id): array
-	{
+	public function getSeoUrls(int $category_id): array {
 		$category_seo_url_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `key` = 'path' AND `value` = '" . $this->db->escape($this->getPath($category_id)) . "'");
@@ -437,8 +425,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, int>
 	 */
-	public function getStores(int $category_id): array
-	{
+	public function getStores(int $category_id): array {
 		$category_store_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "category_to_store` WHERE `category_id` = '" . (int)$category_id . "'");
@@ -457,8 +444,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, int>
 	 */
-	public function getLayouts(int $category_id): array
-	{
+	public function getLayouts(int $category_id): array {
 		$category_layout_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "category_to_layout` WHERE `category_id` = '" . (int)$category_id . "'");
@@ -475,8 +461,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalCategories(): int
-	{
+	public function getTotalCategories(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "category`");
 
 		return (int)$query->row['total'];
@@ -489,8 +474,7 @@ class Category extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalCategoriesByLayoutId(int $layout_id): int
-	{
+	public function getTotalCategoriesByLayoutId(int $layout_id): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "category_to_layout` WHERE `layout_id` = '" . (int)$layout_id . "'");
 
 		return (int)$query->row['total'];

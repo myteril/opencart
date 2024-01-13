@@ -38,6 +38,5 @@ $_['error_product']     = 'Deze download kan niet worden verwijderd omdat deze i
 $_['error_warning'] 	= "Warning: Controleer het formulier zorgvuldig op fouten!";
 $_['error_file_type'] 	= "Ongeldig bestandstype!";
 $_['error_filename_character'] = "De bestandsnaam kan alleen tekens a-z, 0-9, - en _ gebruiken!";
-$_['error_directory'] 	= "Downloads moeten in de map storage\/download staan!";
+$_['error_directory'] 	= "Downloads moeten in de map storage\\/download staan!";
 $_['error_mask_character'] = "Maskers kunnen alleen tekens a-z, 0-9, - en _ gebruiken!";
-

@@ -19,4 +19,4 @@ $_['text_reward']      = 'Spaarpunten';
 $_['text_return']      = 'Retourneringen';
 $_['text_transaction'] = 'Transacties';
 $_['text_newsletter']  = 'Updates';
-$_['text_subscription']= 'Abonnementen';
+$_['text_subscription'] = 'Abonnementen';

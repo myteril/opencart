@@ -22,7 +22,7 @@ $_['column_returns']    = 'Aantal retourneringen';
 $_['entry_date_start']  = 'Startdatum';
 $_['entry_date_end']    = 'Einddatum';
 $_['entry_group']       = 'Groeperen op';
-$_['entry_return_status']= "Retourneerstatus";
+$_['entry_return_status'] = "Retourneerstatus";
 $_['entry_status']      = 'Status';
 $_['entry_sort_order']  = 'Sorteervolgorde';
 

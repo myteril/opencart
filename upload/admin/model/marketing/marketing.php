@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Marketing;
  *
  * @package Opencart\Admin\Model\Marketing
  */
-class Marketing extends \Opencart\System\Engine\Model
-{
+class Marketing extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Marketing
 	 *
@@ -15,8 +14,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addMarketing(array $data): int
-	{
+	public function addMarketing(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "marketing` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `description` = '" . $this->db->escape((string)$data['description']) . "', `code` = '" . $this->db->escape((string)$data['code']) . "', `date_added` = NOW()");
 
 		return $this->db->getLastId();
@@ -30,8 +28,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editMarketing(int $marketing_id, array $data): void
-	{
+	public function editMarketing(int $marketing_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "marketing` SET `name` = '" . $this->db->escape((string)$data['name']) . "', `description` = '" . $this->db->escape((string)$data['description']) . "', `code` = '" . $this->db->escape((string)$data['code']) . "' WHERE `marketing_id` = '" . (int)$marketing_id . "'");
 	}
 
@@ -42,8 +39,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteMarketing(int $marketing_id): void
-	{
+	public function deleteMarketing(int $marketing_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "marketing` WHERE `marketing_id` = '" . (int)$marketing_id . "'");
 	}
 
@@ -54,8 +50,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getMarketing(int $marketing_id): array
-	{
+	public function getMarketing(int $marketing_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "marketing` WHERE `marketing_id` = '" . (int)$marketing_id . "'");
 
 		return $query->row;
@@ -68,8 +63,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getMarketingByCode(string $code): array
-	{
+	public function getMarketingByCode(string $code): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "marketing` WHERE `code` = '" . $this->db->escape($code) . "'");
 
 		return $query->row;
@@ -82,8 +76,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getMarketings(array $data = []): array
-	{
+	public function getMarketings(array $data = []): array {
 		$implode = [];
 
 		$order_statuses = $this->config->get('config_complete_status');
@@ -158,8 +151,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalMarketings(array $data = []): int
-	{
+	public function getTotalMarketings(array $data = []): int {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "marketing`";
 
 		$implode = [];
@@ -198,8 +190,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getReports(int $marketing_id, int $start = 0, int $limit = 10): array
-	{
+	public function getReports(int $marketing_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -220,8 +211,7 @@ class Marketing extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalReports(int $marketing_id): int
-	{
+	public function getTotalReports(int $marketing_id): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "marketing_report` WHERE `marketing_id` = '" . (int)$marketing_id . "'");
 
 		return (int)$query->row['total'];

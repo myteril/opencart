@@ -28,7 +28,6 @@ $_['text_semi_month']            = '14 Tage';
 $_['text_month']                 = 'Monat(e)';
 $_['text_year']                  = 'Jahr(e)';
 
-
 // Entry
 $_['entry_qty']                  = 'Menge';
 $_['entry_rating']               = 'Bewertung';

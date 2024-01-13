@@ -12,7 +12,6 @@ $_['text_history']      = 'Thema geschiedenis';
 $_['text_twig']         = 'De thema editor gebruikt de programmeertaal Twig. Je kunt <a href="http://twig.sensiolabs.org/documentation" target="_blank" class="alert-link">hier</a> meer lezen over Twig.';
 $_['text_extension'] 	= "Extensie";
 
-
 // Column
 $_['column_store']      = 'Winkel';
 $_['column_route']      = 'Route';

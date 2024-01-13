@@ -5,14 +5,8 @@ namespace Opencart\admin\controller\blog;
  *
  * @package Opencart\Admin\Controller\Design
  */
-class Author extends \Opencart\System\Engine\Controller
-{
-
-	/**
-	 *
-	 */
-	public function index(): void
-	{
+class Author extends \Opencart\System\Engine\Controller {
+	public function index(): void {
 		$this->load->language('blog/author');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -49,7 +43,6 @@ class Author extends \Opencart\System\Engine\Controller
 
 		$data['list'] = $this->getList();
 
-
 		$data['user_token'] = $this->session->data['user_token'];
 
 		$data['header'] = $this->load->controller('common/header');
@@ -58,7 +51,6 @@ class Author extends \Opencart\System\Engine\Controller
 
 		$this->response->setOutput($this->load->view('blog/author', $data));
 	}
-
 
 	/**
 	 * @return void
@@ -124,19 +116,19 @@ class Author extends \Opencart\System\Engine\Controller
 		$results = $this->model_blog_author->getAuthors($filter_data);
 
 		foreach ($results as $result) {
-			if(!empty($result['photo'])){
+			if (!empty($result['photo'])) {
 				$result['photo'] = $this->model_tool_image->resize($result['photo'], 136, 136);
-			}else{
+			} else {
 				$result['photo'] = $this->model_tool_image->resize('no_image.png', 136, 136);
 			}
 
 			$data['blog_authors'][] = [
-				'blog_author_id'   => $result['blog_author_id'],
-				'fullname'      => $result['fullname'],
-				'email' => $result['email'],
-				'photo' => $result['photo'],
-				'post_count' => $result['post_count'],
-				'edit'       => $this->url->link('blog/author.form', 'user_token=' . $this->session->data['user_token'] . '&blog_author_id=' . $result['blog_author_id'] . $url)
+				'blog_author_id' => $result['blog_author_id'],
+				'fullname'       => $result['fullname'],
+				'email'          => $result['email'],
+				'photo'          => $result['photo'],
+				'post_count'     => $result['post_count'],
+				'edit'           => $this->url->link('blog/author.form', 'user_token=' . $this->session->data['user_token'] . '&blog_author_id=' . $result['blog_author_id'] . $url)
 			];
 		}
 
@@ -179,7 +171,6 @@ class Author extends \Opencart\System\Engine\Controller
 
 		return $this->load->view('blog/author_list', $data);
 	}
-
 
 	/**
 	 * @return void
@@ -238,15 +229,15 @@ class Author extends \Opencart\System\Engine\Controller
 
 		$this->load->model('tool/image');
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 64, 64);
-		if(!empty($blog_author_info)){
+		if (!empty($blog_author_info)) {
 			$data['fullname'] = $blog_author_info['fullname'];
 			$data['email'] = $blog_author_info['email'];
-			if(!empty($blog_author_info['photo'])){
+			if (!empty($blog_author_info['photo'])) {
 				$data['photo'] = $this->model_tool_image->resize($blog_author_info['photo'], 64, 64);
 				$data['original_photo'] = $blog_author_info['photo'];
 			}
 			$data['post_count'] = $blog_author_info['post_count'];
-		}else{
+		} else {
 			$data['fullname'] = '';
 			$data['email'] = '';
 			$data['photo'] = $data['placeholder'];
@@ -267,7 +258,6 @@ class Author extends \Opencart\System\Engine\Controller
 		$this->response->setOutput($this->load->view('blog/author_form', $data));
 	}
 
-
 	/**
 	 * @return void
 	 */
@@ -286,7 +276,7 @@ class Author extends \Opencart\System\Engine\Controller
 
 		$email = $this->request->post['email'] ?? '';
 		$email = trim($email);
-		if(oc_strlen($email) > 0){
+		if (oc_strlen($email) > 0) {
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 				$json['error']['email'] = $this->language->get('error_email');
 			}
@@ -360,7 +350,7 @@ class Author extends \Opencart\System\Engine\Controller
 			foreach ($results as $result) {
 				$json[] = [
 					'blog_author_id' => $result['blog_author_id'],
-					'name'            => strip_tags(html_entity_decode($result['fullname'], ENT_QUOTES, 'UTF-8'))
+					'name'           => strip_tags(html_entity_decode($result['fullname'], ENT_QUOTES, 'UTF-8'))
 				];
 			}
 		}

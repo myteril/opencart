@@ -6,7 +6,6 @@ namespace Opencart\Admin\Controller\Localisation;
  * @package Opencart\Admin\Controller\Localisation
  */
 class StockStatus extends \Opencart\System\Engine\Controller {
-
 	public static array $ItemAvailabilityValues = [
 		'BackOrder',
 		'Discontinued',
@@ -239,15 +238,15 @@ class StockStatus extends \Opencart\System\Engine\Controller {
 		} else {
 			$data['stock_status'] = [];
 		}
-		if(!empty($data['stock_status'])){
+		if (!empty($data['stock_status'])) {
 			$data['item_availability'] = reset($data['stock_status'])['item_availability'];
-		}else{
+		} else {
 			$data['item_availability'] = 'InStock';
 		}
 
 		$data['item_availability_values'] = self::$ItemAvailabilityValues;
 		$data['item_availability_language'] = [];
-		foreach(self::$ItemAvailabilityValues as $value){
+		foreach (self::$ItemAvailabilityValues as $value) {
 			$data['item_availability_language'][$value] = $this->language->get('value_' . oc_strtolower($value));
 		}
 
@@ -278,7 +277,7 @@ class StockStatus extends \Opencart\System\Engine\Controller {
 			}
 		}
 
-		if(!isset($this->request->post['item_availability']) || !in_array($this->request->post['item_availability'], self::$ItemAvailabilityValues)){
+		if (!isset($this->request->post['item_availability']) || !in_array($this->request->post['item_availability'], self::$ItemAvailabilityValues)) {
 			$json['error']['item-availability'] = $this->language->get('error_item_availability');
 		}
 

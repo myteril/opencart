@@ -46,4 +46,4 @@ $_['error_meta_title']       = 'Meta titel moet tussen 1 en 255 tekens bevatten!
 $_['error_keyword']          = 'SEO URL is al in gebruik!';
 $_['error_parent']           = 'De bovenliggende categorie die je hebt gekozen is een onderliggende van de huidige!';
 $_['error_keyword_exists'] 	 = "SEO URL moet uniek zijn!";
-$_['error_keyword_character']= "Zoekwoord kan alleen tekens a-z, 0-9, - en _ gebruiken!";
+$_['error_keyword_character'] = "Zoekwoord kan alleen tekens a-z, 0-9, - en _ gebruiken!";

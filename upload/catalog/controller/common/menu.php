@@ -51,7 +51,7 @@ class Menu extends \Opencart\System\Engine\Controller {
 		}
 
 		$data['blog_link'] = $this->url->link('blog/search', 'language=' . $this->config->get('config_language'));
-		$data['blog_enabled'] = intval($this->config->get('config_blog_enabled')) === 1;
+		$data['blog_enabled'] = (int)($this->config->get('config_blog_enabled')) === 1;
 
 		return $this->load->view('common/menu', $data);
 	}

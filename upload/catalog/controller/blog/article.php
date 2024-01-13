@@ -6,13 +6,13 @@ namespace Opencart\Catalog\Controller\Blog;
  * @package Opencart\Catalog\Controller\Blog
  */
 class Article extends \Opencart\System\Engine\Controller {
-
 	/**
 	 * @return void
 	 */
 	public function index(): void {
-		if(intval($this->config->get('config_blog_enabled')) !== 1){
+		if ((int)($this->config->get('config_blog_enabled')) !== 1) {
 			$this->response->redirect($this->url->link('common/home', 'language=' . $this->config->get('config_language')));
+
 			return;
 		}
 
@@ -21,23 +21,25 @@ class Article extends \Opencart\System\Engine\Controller {
 		$this->load->model('tool/image');
 		$this->load->model('blog/article');
 
-		$blog_article_id = isset($this->request->get['blog_article_id']) ? intval($this->request->get['blog_article_id']) : 0;
+		$blog_article_id = isset($this->request->get['blog_article_id']) ? (int)($this->request->get['blog_article_id']) : 0;
 
-		if($blog_article_id < 1){
+		if ($blog_article_id < 1) {
 			$this->response->redirect($this->url->link('blog/search', 'language=' . $this->config->get('config_language')));
+
 			return;
 		}
 
 		$this->load->model("localisation/language");
 
 		$language =  $this->model_localisation_language->getLanguageByCode($this->config->get('config_language'));
-		$language_id = intval($language['language_id']);
+		$language_id = (int)($language['language_id']);
 		$store_id = (int)$this->config->get('config_store_id');
 
 		$blog_article = $this->model_blog_article->getArticle($store_id, $language_id, $blog_article_id);
 
-		if($blog_article === null){
+		if ($blog_article === null) {
 			$this->response->redirect($this->url->link('blog/search', 'language=' . $this->config->get('config_language')));
+
 			return;
 		}
 
@@ -60,8 +62,7 @@ class Article extends \Opencart\System\Engine\Controller {
 		];
 
 		// Page Title
-		$this->document->setTitle($this->language->get('text_blog') .  ' - ' . $blog_article['title']);
-
+		$this->document->setTitle($this->language->get('text_blog') . ' - ' . $blog_article['title']);
 
 		// Image
 
@@ -78,7 +79,7 @@ class Article extends \Opencart\System\Engine\Controller {
 		$data['date_added'] = date($this->language->get('date_format_long'), strtotime($blog_article['date_added']));
 		$data['date_modified'] = date($this->language->get('date_format_long'), strtotime($blog_article['date_modified']));
 
-		if(!empty($blog_article['author_name'])){
+		if (!empty($blog_article['author_name'])) {
 
 			$author_photo = null;
 
@@ -87,10 +88,10 @@ class Article extends \Opencart\System\Engine\Controller {
 			}
 
 			$data['author'] = [
-				'name' => $blog_article['author_name'],
+				'name'  => $blog_article['author_name'],
 				'photo' => $author_photo,
 				'email' => html_entity_decode($blog_article['author_email'], ENT_QUOTES, 'UTF-8'),
-				'link' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $blog_article['blog_author_id'] ),
+				'link'  => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $blog_article['blog_author_id']),
 			];
 		}
 
@@ -102,9 +103,9 @@ class Article extends \Opencart\System\Engine\Controller {
 
 		$data['tags'] = [];
 		$tags = $this->model_blog_article->getArticleTags($blog_article_id, $language_id);
-		foreach ($tags as $tag){
+		foreach ($tags as $tag) {
 			$data['tags'][] = [
-				'tag' => $tag['tag'],
+				'tag'  => $tag['tag'],
 				'link' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&tag=' . urlencode(html_entity_decode($tag['tag'], ENT_QUOTES, 'UTF-8'))),
 			];
 		}
@@ -125,7 +126,7 @@ class Article extends \Opencart\System\Engine\Controller {
 			$image
 		];
 		$structured_data['author'] = [];
-		if(!empty($blog_article['author_name'])){
+		if (!empty($blog_article['author_name'])) {
 			$author_photo = null;
 
 			if (is_file(DIR_IMAGE . html_entity_decode($blog_article['author_photo'], ENT_QUOTES, 'UTF-8'))) {
@@ -133,9 +134,9 @@ class Article extends \Opencart\System\Engine\Controller {
 			}
 
 			$structured_data['author'][] = [
-				'name' => $blog_article['author_name'],
+				'name'  => $blog_article['author_name'],
 				'photo' => $author_photo,
-				'link' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $blog_article['blog_author_id'], true),
+				'link'  => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $blog_article['blog_author_id'], true),
 			];
 		}
 		$data['structured_data'] = $this->load->controller('structured_data/article', $structured_data['title'], $structured_data['author'], $structured_data['image'], $blog_article['date_added'], $blog_article['date_modified']);

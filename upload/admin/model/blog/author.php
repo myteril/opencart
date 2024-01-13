@@ -6,27 +6,23 @@ namespace Opencart\Admin\Model\Blog;
  *
  * @package Opencart\Admin\Model\Design
  */
-class Author extends \Opencart\System\Engine\Model
-{
+class Author extends \Opencart\System\Engine\Model {
 	/**
 	 * @param array $data
 	 *
 	 * @return int
 	 */
-	public function add(array $data): int
-	{
+	public function add(array $data): int {
 		$this->db->query(
-			"INSERT INTO `" . DB_PREFIX . "blog_author` SET " .
-			"`fullname` = '" . $this->db->escape((string)$data['fullname']) . "', " .
-			"`email` = '" . $this->db->escape((string)$data['email']) . "'," .
-			"`photo` = '" . $this->db->escape((string)$data['photo']) . "'," .
-			"`date_added` = NOW()," .
-			"`date_modified` = NOW()"
+			"INSERT INTO `" . DB_PREFIX . "blog_author` SET "
+			. "`fullname` = '" . $this->db->escape((string)$data['fullname']) . "', "
+			. "`email` = '" . $this->db->escape((string)$data['email']) . "',"
+			. "`photo` = '" . $this->db->escape((string)$data['photo']) . "',"
+			. "`date_added` = NOW(),"
+			. "`date_modified` = NOW()"
 		);
 
-		$blog_author_id = $this->db->getLastId();
-
-		return $blog_author_id;
+		return $this->db->getLastId();
 	}
 
 	/**
@@ -35,15 +31,14 @@ class Author extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function edit(int $blog_author_id, array $data): void
-	{
+	public function edit(int $blog_author_id, array $data): void {
 		$this->db->query(
-			"UPDATE `" . DB_PREFIX . "blog_author` SET " .
-			"`fullname` = '" . $this->db->escape((string)$data['fullname']) . "', " .
-			"`email` = '" . $this->db->escape((string)$data['email']) . "'," .
-			"`photo` = '" . $this->db->escape((string)$data['photo']) . "'," .
-			"`date_modified` = NOW() ".
-			"where blog_author_id = '" . (int)$blog_author_id . "'"
+			"UPDATE `" . DB_PREFIX . "blog_author` SET "
+			. "`fullname` = '" . $this->db->escape((string)$data['fullname']) . "', "
+			. "`email` = '" . $this->db->escape((string)$data['email']) . "',"
+			. "`photo` = '" . $this->db->escape((string)$data['photo']) . "',"
+			. "`date_modified` = NOW() "
+			. "where blog_author_id = '" . (int)$blog_author_id . "'"
 		);
 	}
 
@@ -52,8 +47,7 @@ class Author extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function delete(int $blog_author_id): void
-	{
+	public function delete(int $blog_author_id): void {
 		// Delete the author.
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "blog_author` WHERE `blog_author_id` = '" . (int)$blog_author_id . "'");
 		// Remove the all relation between the author and his/her posts.
@@ -65,8 +59,7 @@ class Author extends \Opencart\System\Engine\Model
 	 *
 	 * @return array
 	 */
-	public function getAuthor(int $blog_author_id): array
-	{
+	public function getAuthor(int $blog_author_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "blog_author` WHERE `blog_author_id` = '" . (int)$blog_author_id . "'");
 
 		return $query->row;
@@ -77,8 +70,7 @@ class Author extends \Opencart\System\Engine\Model
 	 *
 	 * @return array
 	 */
-	public function getAuthors(array $data = []): array
-	{
+	public function getAuthors(array $data = []): array {
 		$sql = "SELECT *  FROM `" . DB_PREFIX . "blog_author`";
 
 		if (!empty($data['filter_name'])) {
@@ -122,8 +114,7 @@ class Author extends \Opencart\System\Engine\Model
 	/**
 	 * @return int
 	 */
-	public function getTotalAuthors(): int
-	{
+	public function getTotalAuthors(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "blog_author`");
 
 		return (int)$query->row['total'];

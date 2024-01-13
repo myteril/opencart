@@ -79,5 +79,4 @@ class Url {
 			return $url;
 		}
 	}
-
 }

@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Catalog;
  *
  * @package Opencart\Admin\Model\Catalog
  */
-class Review extends \Opencart\System\Engine\Model
-{
+class Review extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Review
 	 *
@@ -15,8 +14,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addReview(array $data): int
-	{
+	public function addReview(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "review` SET `author` = '" . $this->db->escape((string)$data['author']) . "', `product_id` = '" . (int)$data['product_id'] . "', `text` = '" . $this->db->escape(strip_tags((string)$data['text'])) . "', `rating` = '" . (int)$data['rating'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_added` = '" . $this->db->escape((string)$data['date_added']) . "'");
 
 		$review_id = $this->db->getLastId();
@@ -39,8 +37,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editReview(int $review_id, array $data): void
-	{
+	public function editReview(int $review_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "review` SET `author` = '" . $this->db->escape((string)$data['author']) . "', `product_id` = '" . (int)$data['product_id'] . "', `text` = '" . $this->db->escape(strip_tags((string)$data['text'])) . "', `rating` = '" . (int)$data['rating'] . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_added` = '" . $this->db->escape((string)$data['date_added']) . "', `date_modified` = NOW() WHERE `review_id` = '" . (int)$review_id . "'");
 
 		// Update product rating
@@ -58,8 +55,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteReview(int $review_id): void
-	{
+	public function deleteReview(int $review_id): void {
 		$review_info = $this->getReview($review_id);
 
 		if ($review_info) {
@@ -81,8 +77,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getReview(int $review_id): array
-	{
+	public function getReview(int $review_id): array {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT pd.`name` FROM `" . DB_PREFIX . "product_description` pd WHERE pd.`product_id` = r.`product_id` AND pd.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS product FROM `" . DB_PREFIX . "review` r WHERE r.`review_id` = '" . (int)$review_id . "'");
 
 		return $query->row;
@@ -95,8 +90,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getRating(int $product_id): int
-	{
+	public function getRating(int $product_id): int {
 		$query = $this->db->query("SELECT AVG(`rating`) AS `total` FROM `" . DB_PREFIX . "review` WHERE `product_id` = '" . (int)$product_id . "' AND `status` = '1'");
 
 		if ($query->num_rows) {
@@ -113,8 +107,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getReviews(array $data = []): array
-	{
+	public function getReviews(array $data = []): array {
 		$sql = "SELECT `r`.`review_id`, `pd`.`name`, `r`.`author`, `r`.`rating`, `r`.`status`, `r`.`date_added` FROM `" . DB_PREFIX . "review` `r` LEFT JOIN `" . DB_PREFIX . "product_description` `pd` ON (`r`.`product_id` = `pd`.`product_id`) WHERE `pd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_product'])) {
@@ -181,8 +174,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalReviews(array $data = []): int
-	{
+	public function getTotalReviews(array $data = []): int {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "review` `r` LEFT JOIN `" . DB_PREFIX . "product_description` `pd` ON (`r`.`product_id` = `pd`.`product_id`) WHERE `pd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_product'])) {
@@ -215,8 +207,7 @@ class Review extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalReviewsAwaitingApproval(): int
-	{
+	public function getTotalReviewsAwaitingApproval(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "review` WHERE `status` = '0'");
 
 		return (int)$query->row['total'];

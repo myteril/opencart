@@ -34,12 +34,10 @@ $_['text_year']                  = 'Jahr(e)';
 $_['text_date_next']             = 'Nächster Tag';
 $_['text_remaining']             = 'Verbleibend';
 
-
 $_['text_payment_address']       = 'Rechnungs-Adresse';
 $_['text_payment_method']        = 'Zahlungs-Methode';
 $_['text_shipping_address']      = 'Versand-Address';
 $_['text_shipping_method']       = 'Versand-Methode';
-
 
 $_['text_history']               = 'Historie';
 $_['text_history_add']           = 'Neuer Eintrag';

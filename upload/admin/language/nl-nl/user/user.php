@@ -48,4 +48,3 @@ $_['error_email']           = 'Dit e-mail adres is niet correct!';
 $_['error_login'] 			= "Warning: Inloggen gebruiker bestaat niet!";
 $_['error_username_exists'] = "Warning: Gebruikersnaam is al in gebruik!";
 $_['error_email_exists']	= "Warning: E-mailadres is al geregistreerd!";
-

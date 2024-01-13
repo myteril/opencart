@@ -6,15 +6,13 @@ namespace Opencart\Admin\Model\Tool;
  *
  * @package Opencart\Admin\Model\Tool
  */
-class Backup extends \Opencart\System\Engine\Model
-{
+class Backup extends \Opencart\System\Engine\Model {
 	/**
 	 * Get Tables
 	 *
 	 * @return array<int, string>
 	 */
-	public function getTables(): array
-	{
+	public function getTables(): array {
 		$table_data = [];
 
 		$query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
@@ -37,8 +35,7 @@ class Backup extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getRecords(string $table, int $start = 0, int $limit = 100): array
-	{
+	public function getRecords(string $table, int $start = 0, int $limit = 100): array {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -63,8 +60,7 @@ class Backup extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalRecords(string $table): int
-	{
+	public function getTotalRecords(string $table): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . $table . "`");
 
 		if ($query->num_rows) {

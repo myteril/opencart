@@ -74,4 +74,4 @@ $_['button_forgot_pin']  = "PIN-code vergeten?";
 $_['error_permission']   = 'Warning: Je hebt geen toestemming om extensies te wijzigen!';
 $_['error_purchase']     = 'De extensie kon niet worden gekocht!';
 $_['error_download']     = 'De extensie kon niet worden gedownload!';
-$_['error_api'] 		 = "Warning: Je moet je OpenCart API informatie invoeren door op de <i class=\"fa-solid fa-triangle-exclamation\"><\/i> te klikken voordat je extensies kunt downloaden of aankopen kunt doen!";
+$_['error_api'] 		 = "Warning: Je moet je OpenCart API informatie invoeren door op de <i class=\"fa-solid fa-triangle-exclamation\"><\\/i> te klikken voordat je extensies kunt downloaden of aankopen kunt doen!";

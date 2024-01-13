@@ -41,4 +41,3 @@ $_['column_date_added']                    = 'Datum hinzugefügt';
 // Error
 $_['error_not_cancelled']                  = 'Error: %s';
 $_['error_not_found']                      = 'Wiederkehrende Zahlung konnte nicht storniert werden';
-

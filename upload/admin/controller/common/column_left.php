@@ -289,7 +289,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($this->user->hasPermission('access', 'design/popup')) {
 				$design[] = [
-					'name'	   => $this->language->get('text_popup'),
+					'name'     => $this->language->get('text_popup'),
 					'href'     => $this->url->link('design/popup', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
@@ -469,7 +469,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($this->user->hasPermission('access', 'marketing/feed')) {
 				$marketing[] = [
-					'name'	   => $this->language->get('text_feeds'),
+					'name'     => $this->language->get('text_feeds'),
 					'href'     => $this->url->link('marketing/feed', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
@@ -490,7 +490,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($this->user->hasPermission('access', 'blog/author')) {
 				$blog[] = [
-					'name'	   => $this->language->get('text_blog_authors'),
+					'name'     => $this->language->get('text_blog_authors'),
 					'href'     => $this->url->link('blog/author', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
@@ -498,7 +498,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 
 			if ($this->user->hasPermission('access', 'blog/article')) {
 				$blog[] = [
-					'name'	   => $this->language->get('text_blog_articles'),
+					'name'     => $this->language->get('text_blog_articles'),
 					'href'     => $this->url->link('blog/article', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];
@@ -507,8 +507,8 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 			if (!empty($blog)) {
 				$data['menus'][] = [
 					'id'       => 'menu-blog',
-					'icon'	   => 'fas fa-newspaper',
-					'name'	   => $this->language->get('text_blog'),
+					'icon'     => 'fas fa-newspaper',
+					'name'     => $this->language->get('text_blog'),
 					'href'     => '',
 					'children' => $blog
 				];
@@ -565,7 +565,7 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 			}
 			if ($this->user->hasPermission('access', 'setting/administrator_settings')) {
 				$system[] = [
-					'name'	   => $this->language->get('text_admin_settings'),
+					'name'     => $this->language->get('text_admin_settings'),
 					'href'     => $this->url->link('setting/administrator_settings', 'user_token=' . $this->session->data['user_token']),
 					'children' => []
 				];

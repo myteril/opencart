@@ -7,15 +7,15 @@ use Opencart\System\Library\DB;
  *
  * @package Opencart\Install\Model\Install
  */
-class Install extends \Opencart\System\Engine\Model
-{
+class Install extends \Opencart\System\Engine\Model {
 	/**
-	 * @param DB $db
-	 * @param array $tables
+	 * @param DB     $db
+	 * @param array  $tables
 	 * @param string $db_prefix
+	 *
 	 * @return void
 	 */
-	public function createDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, string $db_prefix): void{
+	public function createDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, string $db_prefix): void {
 		foreach ($tables as $table) {
 			$db->query("DROP TABLE IF EXISTS `" . $db_prefix . $table['name'] . "`");
 
@@ -56,14 +56,13 @@ class Install extends \Opencart\System\Engine\Model
 	}
 
 	/**
-	 * @param DB $db
-	 * @param array $triggers
+	 * @param DB     $db
+	 * @param array  $triggers
 	 * @param string $db_prefix
+	 *
 	 * @return void
 	 */
-	public
-	function installTriggers(\Opencart\System\Library\DB $db, array $triggers, string $db_prefix): void
-	{
+	public function installTriggers(\Opencart\System\Library\DB $db, array $triggers, string $db_prefix): void {
 		foreach ($triggers as $trigger) {
 			$table = $trigger['table'];
 			foreach (['after', 'before'] as $trigger_time) {
@@ -91,16 +90,16 @@ class Install extends \Opencart\System\Engine\Model
 	}
 
 	/**
-	 * @param DB $db
+	 * @param DB     $db
 	 * @param string $data_sql_file
 	 * @param string $db_prefix
 	 * @param string $admin_username
 	 * @param string $admin_password
 	 * @param string $admin_email
+	 *
 	 * @return void
 	 */
-	public function setupDatabaseData(\Opencart\System\Library\DB $db, string $data_sql_file, string $db_prefix, string $admin_username, string $admin_password, string $admin_email): void
-	{
+	public function setupDatabaseData(\Opencart\System\Library\DB $db, string $data_sql_file, string $db_prefix, string $admin_username, string $admin_password, string $admin_email): void {
 		$lines = file($data_sql_file, FILE_IGNORE_NEW_LINES);
 
 		if ($lines) {
@@ -148,15 +147,15 @@ class Install extends \Opencart\System\Engine\Model
 	}
 
 	/**
-	 * @param DB $db
-	 * @param array $tables
-	 * @param array $triggers
+	 * @param DB     $db
+	 * @param array  $tables
+	 * @param array  $triggers
 	 * @param string $database_name
 	 * @param string $db_prefix
+	 *
 	 * @return void
 	 */
-	public function upgradeDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, array $triggers, string $database_name, string $db_prefix): void
-	{
+	public function upgradeDatabaseSchema(\Opencart\System\Library\DB $db, array $tables, array $triggers, string $database_name, string $db_prefix): void {
 		$tables_to_insert = [];
 		$tables_to_update = [];
 		foreach ($tables as $table) {
@@ -281,4 +280,3 @@ class Install extends \Opencart\System\Engine\Model
 		$this->installTriggers($db, $triggers, $db_prefix);
 	}
 }
-

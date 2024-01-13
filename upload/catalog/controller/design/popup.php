@@ -15,7 +15,7 @@ class Popup extends \Opencart\System\Engine\Controller {
 		$data = [];
 
 		$data['active_popup'] = $this->model_design_popup->getActivePopup();
-		if(!empty($data['active_popup'])){
+		if (!empty($data['active_popup'])) {
 			$data['active_popup']['content'] = html_entity_decode($data['active_popup']['content'], ENT_QUOTES, 'UTF-8');
 		}
 

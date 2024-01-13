@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Marketing;
  *
  * @package Opencart\Admin\Model\Marketing
  */
-class Affiliate extends \Opencart\System\Engine\Model
-{
+class Affiliate extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Affiliate
 	 *
@@ -15,8 +14,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function addAffiliate(array $data): void
-	{
+	public function addAffiliate(array $data): void {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "customer_affiliate` SET `customer_id` = '" . (int)$data['customer_id'] . "', `company` = '" . $this->db->escape((string)$data['company']) . "', `website` = '" . $this->db->escape((string)$data['website']) . "', `tracking` = '" . $this->db->escape((string)$data['tracking']) . "', `commission` = '" . (float)$data['commission'] . "', `tax` = '" . $this->db->escape((string)$data['tax']) . "', `payment_method` = '" . $this->db->escape((string)$data['payment_method']) . "', `cheque` = '" . $this->db->escape((string)$data['cheque']) . "', `paypal` = '" . $this->db->escape((string)$data['paypal']) . "', `bank_name` = '" . $this->db->escape((string)$data['bank_name']) . "', `bank_branch_number` = '" . $this->db->escape((string)$data['bank_branch_number']) . "', `bank_swift_code` = '" . $this->db->escape((string)$data['bank_swift_code']) . "', `bank_account_name` = '" . $this->db->escape((string)$data['bank_account_name']) . "', `bank_account_number` = '" . $this->db->escape((string)$data['bank_account_number']) . "', `custom_field` = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : json_encode([])) . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `date_added` = NOW()");
 	}
 
@@ -28,8 +26,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editAffiliate(int $customer_id, array $data): void
-	{
+	public function editAffiliate(int $customer_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer_affiliate` SET `company` = '" . $this->db->escape((string)$data['company']) . "', `website` = '" . $this->db->escape((string)$data['website']) . "', `tracking` = '" . $this->db->escape((string)$data['tracking']) . "', `commission` = '" . (float)$data['commission'] . "', `tax` = '" . $this->db->escape((string)$data['tax']) . "', `payment_method` = '" . $this->db->escape((string)$data['payment_method']) . "', `cheque` = '" . $this->db->escape((string)$data['cheque']) . "', `paypal` = '" . $this->db->escape((string)$data['paypal']) . "', `bank_name` = '" . $this->db->escape((string)$data['bank_name']) . "', `bank_branch_number` = '" . $this->db->escape((string)$data['bank_branch_number']) . "', `bank_swift_code` = '" . $this->db->escape((string)$data['bank_swift_code']) . "', `bank_account_name` = '" . $this->db->escape((string)$data['bank_account_name']) . "', `bank_account_number` = '" . $this->db->escape((string)$data['bank_account_number']) . "', `custom_field` = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : json_encode([])) . "', `status` = '" . (bool)($data['status'] ?? 0) . "' WHERE `customer_id` = '" . (int)$customer_id . "'");
 	}
 
@@ -41,8 +38,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editBalance(int $customer_id, float $amount): void
-	{
+	public function editBalance(int $customer_id, float $amount): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer_affiliate` SET `balance` = '" . (float)$amount . "' WHERE `customer_id` = '" . (int)$customer_id . "'");
 	}
 
@@ -53,8 +49,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteAffiliate(int $customer_id): void
-	{
+	public function deleteAffiliate(int $customer_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_affiliate` WHERE `customer_id` = '" . (int)$customer_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_affiliate_report` WHERE `customer_id` = '" . (int)$customer_id . "'");
 	}
@@ -66,8 +61,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getAffiliate(int $customer_id): array
-	{
+	public function getAffiliate(int $customer_id): array {
 		$query = $this->db->query("SELECT DISTINCT *, CONCAT(`c`.`firstname`, ' ', `c`.`lastname`) AS `customer`, `ca`.`custom_field` FROM `" . DB_PREFIX . "customer_affiliate` `ca` LEFT JOIN `" . DB_PREFIX . "customer` `c` ON (`ca`.`customer_id` = `c`.`customer_id`) WHERE `ca`.`customer_id` = '" . (int)$customer_id . "'");
 
 		if ($query->num_rows) {
@@ -84,8 +78,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getAffiliateByTracking(string $tracking): array
-	{
+	public function getAffiliateByTracking(string $tracking): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_affiliate` WHERE `tracking` = '" . $this->db->escape($tracking) . "'");
 
 		if ($query->num_rows) {
@@ -102,8 +95,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getAffiliates(array $data = []): array
-	{
+	public function getAffiliates(array $data = []): array {
 		$sql = "SELECT *, CONCAT(`c`.`firstname`, ' ', `c`.`lastname`) AS `name`, `ca`.`status` FROM `" . DB_PREFIX . "customer_affiliate` `ca` LEFT JOIN `" . DB_PREFIX . "customer` `c` ON (`ca`.`customer_id` = `c`.`customer_id`)";
 
 		$implode = [];
@@ -190,8 +182,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalAffiliates(array $data = []): int
-	{
+	public function getTotalAffiliates(array $data = []): int {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "customer_affiliate` `ca` LEFT JOIN `" . DB_PREFIX . "customer` `c` ON (`ca`.`customer_id` = `c`.`customer_id`)";
 
 		$implode = [];
@@ -242,8 +233,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getReports(int $customer_id, int $start = 0, int $limit = 10): array
-	{
+	public function getReports(int $customer_id, int $start = 0, int $limit = 10): array {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -264,8 +254,7 @@ class Affiliate extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalReports(int $customer_id): int
-	{
+	public function getTotalReports(int $customer_id): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "customer_affiliate_report` WHERE `customer_id` = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];

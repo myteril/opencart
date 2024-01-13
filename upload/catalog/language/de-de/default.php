@@ -89,7 +89,7 @@ $_['error_upload_size']             = 'Warnung: Die hochgeladene Datei überschr
 $_['error_curl']                    = 'cURL: Fehlernr.(%s): %s';
 $_['error_session']                 = 'Warnung: Die Anmeldung ist abgelaufen. Bitte senden Sie das Formular erneut ab!';
 
-/* When doing translations only include the matching language code */
+// When doing translations only include the matching language code
 // Datepicker (Datumsauswahl)
 //$_['datepicker']                  = 'en-gb';
 //$_['datepicker']                  = 'af';

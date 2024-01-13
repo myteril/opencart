@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Setting;
  *
  * @package Opencart\Admin\Model\Setting
  */
-class Startup extends \Opencart\System\Engine\Model
-{
+class Startup extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Startup
 	 *
@@ -15,8 +14,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addStartup(array $data): int
-	{
+	public function addStartup(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "startup` SET `code` = '" . $this->db->escape($data['code']) . "', `description` = '" . $this->db->escape($data['description']) . "', `action` = '" . $this->db->escape($data['action']) . "', `status` = '" . (bool)$data['status'] . "', `sort_order` = '" . (int)$data['sort_order'] . "'");
 
 		return $this->db->getLastId();
@@ -29,8 +27,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteStartup(int $startup_id): void
-	{
+	public function deleteStartup(int $startup_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "startup` WHERE `startup_id` = '" . (int)$startup_id . "'");
 	}
 
@@ -41,8 +38,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteStartupByCode(string $code): void
-	{
+	public function deleteStartupByCode(string $code): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "startup` WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 
@@ -54,8 +50,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editStatus(int $startup_id, bool $status): void
-	{
+	public function editStatus(int $startup_id, bool $status): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "startup` SET `status` = '" . (bool)$status . "' WHERE `startup_id` = '" . (int)$startup_id . "'");
 	}
 
@@ -66,8 +61,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getStartup(int $startup_id): array
-	{
+	public function getStartup(int $startup_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "startup` WHERE `startup_id` = '" . (int)$startup_id . "'");
 
 		return $query->row;
@@ -80,8 +74,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getStartupByCode(string $code): array
-	{
+	public function getStartupByCode(string $code): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "startup` WHERE `code` = '" . $this->db->escape($code) . "' LIMIT 1");
 
 		return $query->row;
@@ -94,8 +87,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getStartups(array $data = []): array
-	{
+	public function getStartups(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "startup`";
 
 		$sort_data = [
@@ -140,8 +132,7 @@ class Startup extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalStartups(): int
-	{
+	public function getTotalStartups(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "startup`");
 
 		return (int)$query->row['total'];

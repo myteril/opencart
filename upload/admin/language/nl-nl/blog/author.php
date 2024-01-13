@@ -16,7 +16,7 @@ $_['button_clear']     = 'Wissen';
 $_['column_name']      = 'Naam auteur';
 $_['column_email']     = 'E-mailadres';
 $_['column_photo']     = 'Afbeelding';
-$_['column_post_count']= 'Aantal artikelen';
+$_['column_post_count'] = 'Aantal artikelen';
 
 // Entry
 $_['entry_fullname']   = 'Naam auteur';

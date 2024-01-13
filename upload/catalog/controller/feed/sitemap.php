@@ -7,8 +7,9 @@ namespace Opencart\Catalog\Controller\Feed;
  */
 class Sitemap extends \Opencart\System\Engine\Controller {
 	/**
-	 * @return void
 	 * @throws \Exception
+	 *
+	 * @return void
 	 */
 	public function index(): void {
 		$this->cache->get($this->getCacheHash());
@@ -19,12 +20,12 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 
 		// Fetch XML from the cache.
 		$sitemap_xml = $this->cache->get($sitemap_hash_key);
-		$current_time = intval(microtime(true));
+		$current_time = (int)(microtime(true));
 		// If the cache is expired, then generate the XML again.
-		if(empty($sitemap_xml)) {
+		if (empty($sitemap_xml)) {
 			// Check if the sitemap is preparing.
 			$preparation_start_time = $this->cache->get($preparing_hash_key);
-			if (empty($preparation_start_time) || $current_time - intval($preparation_start_time) > 120) {
+			if (empty($preparation_start_time) || $current_time - (int)$preparation_start_time > 120) {
 				// Mark the cache as the sitemap is preparing.
 				$this->cache->set($preparing_hash_key, $current_time);
 				$sitemap_xml = $this->generateXML();
@@ -37,6 +38,7 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 				// Refresh the page after five seconds if the sitemap is preparing on other instance of the script.
 				sleep(5);
 				header('Location: ./index.php?route=feed/sitemap&_=' . $current_time);
+
 				return;
 			}
 		}
@@ -47,14 +49,15 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 
 	/**
 	 * @param ...$args
+	 *
 	 * @return string
 	 */
-	private function getCacheHash(...$args): string
-	{
+	private function getCacheHash(...$args): string {
 		$hash_components = [];
-		foreach ($args as $arg){
-			$hash_components[] = strval($arg);
+		foreach ($args as $arg) {
+			$hash_components[] = (string)$arg;
 		}
+
 		return hash('sha256', implode('|', $hash_components));
 	}
 
@@ -63,30 +66,31 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 	 */
 	private function generateXML(): string {
 		$links = $this->collectLinks();
-		$xml = '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
-		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'. "\n";
+		$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
-		foreach ($links as $link){
-			$xml .= '<url>'. "\n";
-			$xml .= '<loc>' . $link['loc'] . '</loc>'. "\n";
-			if(!empty($link['lastmod'])){
-				$xml .= '<lastmod>' . $link['lastmod'] . '</lastmod>'. "\n";
+		foreach ($links as $link) {
+			$xml .= '<url>' . "\n";
+			$xml .= '<loc>' . $link['loc'] . '</loc>' . "\n";
+			if (!empty($link['lastmod'])) {
+				$xml .= '<lastmod>' . $link['lastmod'] . '</lastmod>' . "\n";
 			}
-			$xml .= '</url>'. "\n";
+			$xml .= '</url>' . "\n";
 		}
-		$xml .= '</urlset>'. "\n";
+		$xml .= '</urlset>' . "\n";
+
 		return $xml;
 	}
 
 	/**
-	 * @return array
 	 * @throws \Exception
+	 *
+	 * @return array
 	 */
-	private function collectLinks(): array{
+	private function collectLinks(): array {
 		$this->load->model("localisation/language");
 
 		$language =  $this->model_localisation_language->getLanguageByCode($this->config->get('config_language'));
-
 
 		$links = [];
 
@@ -127,11 +131,11 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 		$blog_articles = $this->model_blog_article->getArticlesForSitemap([
 			'store_id' => (int)$this->config->get('config_store_id'),
 		]);
-		if(intval($this->config->get('config_blog_enabled')) === 1){
-			foreach ($blog_articles as $blog_article){
+		if ((int)($this->config->get('config_blog_enabled')) === 1) {
+			foreach ($blog_articles as $blog_article) {
 				$links[] = [
-					'loc' 		=> $this->url->link('blog/article', 'language=' . $this->config->get('config_language') . '&blog_article_id=' . $blog_article['blog_article_id']),
-					'lastmod'	=> (new \DateTime($blog_article['date_modified']))->format(DATE_W3C)
+					'loc'     => $this->url->link('blog/article', 'language=' . $this->config->get('config_language') . '&blog_article_id=' . $blog_article['blog_article_id']),
+					'lastmod' => (new \DateTime($blog_article['date_modified']))->format(DATE_W3C)
 				];
 			}
 		}
@@ -139,7 +143,7 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 		// Blog Tags
 		$this->load->model('blog/store');
 		$tags = $this->model_blog_store->getTags((int)$this->config->get('config_store_id'), (int)$language['language_id']);
-		foreach ($tags as $tag){
+		foreach ($tags as $tag) {
 			$links[] = [
 				'loc' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&tag=' . urlencode(html_entity_decode($tag['tag'], ENT_QUOTES, 'UTF-8')))
 			];
@@ -147,7 +151,7 @@ class Sitemap extends \Opencart\System\Engine\Controller {
 
 		// Blog Authors
 		$authors = $this->model_blog_store->getAuthors((int)$this->config->get('config_store_id'));
-		foreach ($authors as $author){
+		foreach ($authors as $author) {
 			$links[] = [
 				'loc' => $this->url->link('blog/search', 'language=' . $this->config->get('config_language') . '&author=' . $author['blog_author_id'])
 			];

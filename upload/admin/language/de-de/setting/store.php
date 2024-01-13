@@ -131,4 +131,3 @@ $_['error_image_cart']                 = 'Warenkorb-Bild Größen-Abmessungen be
 $_['error_image_location']             = 'Online-Shop (Store) Bild Größen-Abmessungen benötigt!';
 $_['error_image_article']              = 'Artikel Bild Größe Abmessungen benötigt!';
 $_['error_image_topic']                = 'Thema-Bildgrößen-Abmessungen benötigt!';
-

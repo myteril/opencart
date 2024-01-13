@@ -17,10 +17,10 @@ class LowOrderFee extends \Opencart\System\Engine\Model {
 		if ($this->cart->getSubTotal() && ($this->cart->getSubTotal() < (float)$this->config->get('total_low_order_fee_total'))) {
 			$this->load->language('extension/opencart/total/low_order_fee');
 
-            $list_taxes_separately = $this->config->get('config_list_taxes_separately');
-            $list_taxes_separately = !empty($list_taxes_separately) && intval($list_taxes_separately) === 1;
+			$list_taxes_separately = $this->config->get('config_list_taxes_separately');
+			$list_taxes_separately = !empty($list_taxes_separately) && (int)$list_taxes_separately === 1;
 
-            $title = $this->language->get('text_low_order_fee');
+			$title = $this->language->get('text_low_order_fee');
 
 			$totals[] = [
 				'extension'  => 'opencart',
@@ -34,24 +34,24 @@ class LowOrderFee extends \Opencart\System\Engine\Model {
 				$tax_rates = $this->tax->getRates($this->config->get('total_low_order_fee_fee'), $this->config->get('total_low_order_fee_tax_class_id'));
 
 				foreach ($tax_rates as $tax_rate) {
-                    if($list_taxes_separately){
-                        $tax_rate_id = $tax_rate['tax_rate_id'];
-                        $new_tax_rate_id = 'multiple_'.$tax_rate_id;
-                        if (!isset($taxes[$new_tax_rate_id])) {
-                            $taxes[$new_tax_rate_id] = [];
-                        }
-                        if(!isset($taxes[$new_tax_rate_id][$title])){
-                            $taxes[$new_tax_rate_id][$title] = $tax_rate['amount'];
-                        }else{
-                            $taxes[$new_tax_rate_id][$title] += $tax_rate['amount'];
-                        }
-                    }else{
-                        if (!isset($taxes[$tax_rate['tax_rate_id']])) {
-                            $taxes[$tax_rate['tax_rate_id']] = $tax_rate['amount'];
-                        } else {
-                            $taxes[$tax_rate['tax_rate_id']] += $tax_rate['amount'];
-                        }
-                    }
+					if ($list_taxes_separately) {
+						$tax_rate_id = $tax_rate['tax_rate_id'];
+						$new_tax_rate_id = 'multiple_' . $tax_rate_id;
+						if (!isset($taxes[$new_tax_rate_id])) {
+							$taxes[$new_tax_rate_id] = [];
+						}
+						if (!isset($taxes[$new_tax_rate_id][$title])) {
+							$taxes[$new_tax_rate_id][$title] = $tax_rate['amount'];
+						} else {
+							$taxes[$new_tax_rate_id][$title] += $tax_rate['amount'];
+						}
+					} else {
+						if (!isset($taxes[$tax_rate['tax_rate_id']])) {
+							$taxes[$tax_rate['tax_rate_id']] = $tax_rate['amount'];
+						} else {
+							$taxes[$tax_rate['tax_rate_id']] += $tax_rate['amount'];
+						}
+					}
 
 				}
 			}

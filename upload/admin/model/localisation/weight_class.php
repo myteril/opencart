@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Localisation;
  *
  * @package Opencart\Admin\Model\Localisation
  */
-class WeightClass extends \Opencart\System\Engine\Model
-{
+class WeightClass extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Weight Class
 	 *
@@ -15,8 +14,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addWeightClass(array $data): int
-	{
+	public function addWeightClass(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "weight_class` SET `value` = '" . (float)$data['value'] . "'");
 
 		$weight_class_id = $this->db->getLastId();
@@ -38,8 +36,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editWeightClass(int $weight_class_id, array $data): void
-	{
+	public function editWeightClass(int $weight_class_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "weight_class` SET `value` = '" . (float)$data['value'] . "' WHERE `weight_class_id` = '" . (int)$weight_class_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "weight_class_description` WHERE `weight_class_id` = '" . (int)$weight_class_id . "'");
@@ -58,8 +55,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteWeightClass(int $weight_class_id): void
-	{
+	public function deleteWeightClass(int $weight_class_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "weight_class` WHERE `weight_class_id` = '" . (int)$weight_class_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "weight_class_description` WHERE `weight_class_id` = '" . (int)$weight_class_id . "'");
 
@@ -73,8 +69,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getWeightClasses(array $data = []): array
-	{
+	public function getWeightClasses(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "weight_class` `wc` LEFT JOIN `" . DB_PREFIX . "weight_class_description` `wcd` ON (`wc`.`weight_class_id` = `wcd`.`weight_class_id`) WHERE `wcd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		$sort_data = [
@@ -129,8 +124,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getWeightClass(int $weight_class_id): array
-	{
+	public function getWeightClass(int $weight_class_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "weight_class` `wc` LEFT JOIN `" . DB_PREFIX . "weight_class_description` `wcd` ON (`wc`.`weight_class_id` = `wcd`.`weight_class_id`) WHERE `wc`.`weight_class_id` = '" . (int)$weight_class_id . "' AND `wcd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -143,8 +137,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getDescriptionByUnit(string $unit): array
-	{
+	public function getDescriptionByUnit(string $unit): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "weight_class_description` WHERE `unit` = '" . $this->db->escape($unit) . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -157,8 +150,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getDescriptions(int $weight_class_id): array
-	{
+	public function getDescriptions(int $weight_class_id): array {
 		$weight_class_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "weight_class_description` WHERE `weight_class_id` = '" . (int)$weight_class_id . "'");
@@ -178,8 +170,7 @@ class WeightClass extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalWeightClasses(): int
-	{
+	public function getTotalWeightClasses(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "weight_class`");
 
 		return (int)$query->row['total'];

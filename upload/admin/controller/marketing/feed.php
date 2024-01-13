@@ -56,14 +56,15 @@ class feed extends \Opencart\System\Engine\Controller {
 
 	/**
 	 * @param ...$args
+	 *
 	 * @return string
 	 */
-	private function getCacheHash(...$args): string
-	{
+	private function getCacheHash(...$args): string {
 		$hash_components = [];
-		foreach ($args as $arg){
-			$hash_components[] = strval($arg);
+		foreach ($args as $arg) {
+			$hash_components[] = (string)$arg;
 		}
+
 		return hash('sha256', implode('|', $hash_components));
 	}
 
@@ -89,31 +90,31 @@ class feed extends \Opencart\System\Engine\Controller {
 
 		$feeds = $this->getFeedList();
 		$stores = $this->getStoreList();
-		foreach ($feeds as $feed){
-			foreach($stores as $store){
-				if(!empty($feed['multilanguage'])) {
+		foreach ($feeds as $feed) {
+			foreach ($stores as $store) {
+				if (!empty($feed['multilanguage'])) {
 					foreach ($languages as $language_code => $language) {
 						$cache_hash = $this->getCacheHash($store['store_id'], $feed['action'], $language['language_id'], 'last-update');
 						$feed_last_update_cache = $this->cache->get($cache_hash);
-						$feed_last_update_cache = intval($feed_last_update_cache);
+						$feed_last_update_cache = (int)$feed_last_update_cache;
 						$feed_list[] = [
-							'store_name' => $store['name'],
-							'feed_name' => $feed['name'],
+							'store_name'    => $store['name'],
+							'feed_name'     => $feed['name'],
 							'language_name' => $language['name'],
-							'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'] . '&language=' . $language['code'],
-							'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('datetime_format'), $feed_last_update_cache) : '-'
+							'feed_url'      => $store['url'] . 'index.php?route=' . $feed['action'] . '&language=' . $language['code'],
+							'last_update'   => !empty($feed_last_update_cache) ? date($this->language->get('datetime_format'), $feed_last_update_cache) : '-'
 						];
 					}
-				}else{
+				} else {
 					$cache_hash = $this->getCacheHash($store['store_id'], $feed['action'], 'last-update');
 					$feed_last_update_cache = $this->cache->get($cache_hash);
-					$feed_last_update_cache = intval($feed_last_update_cache);
+					$feed_last_update_cache = (int)$feed_last_update_cache;
 					$feed_list[] = [
-						'store_name' => $store['name'],
-						'feed_name' => $feed['name'],
+						'store_name'    => $store['name'],
+						'feed_name'     => $feed['name'],
 						'language_name' => false,
-						'feed_url' => $store['url'] . 'index.php?route=' . $feed['action'],
-						'last_update' => !empty($feed_last_update_cache) ? date($this->language->get('datetime_format'), $feed_last_update_cache) : '-'
+						'feed_url'      => $store['url'] . 'index.php?route=' . $feed['action'],
+						'last_update'   => !empty($feed_last_update_cache) ? date($this->language->get('datetime_format'), $feed_last_update_cache) : '-'
 					];
 				}
 			}
@@ -127,7 +128,7 @@ class feed extends \Opencart\System\Engine\Controller {
 	/**
 	 * @return array
 	 */
-	private function getStoreList(): array{
+	private function getStoreList(): array {
 		$stores = [];
 
 		$stores[] = [
@@ -148,22 +149,22 @@ class feed extends \Opencart\System\Engine\Controller {
 			];
 		}
 
-		return  $stores;
+		return $stores;
 	}
 
 	/**
 	 * @return array[]
 	 */
-	private function getFeedList(): array{
+	private function getFeedList(): array {
 		return [
 			[
-				"name" => "Google Merchant Feed XML",
-				"action" => "feed/google/merchant",
+				"name"          => "Google Merchant Feed XML",
+				"action"        => "feed/google/merchant",
 				"multilanguage" => true
 			],
 			[
-				"name" => "Sitemap XML",
-				"action" => "feed/sitemap",
+				"name"          => "Sitemap XML",
+				"action"        => "feed/sitemap",
 				"multilanguage" => false
 			]
 		];

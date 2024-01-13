@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Customer;
  *
  * @package Opencart\Admin\Model\Customer
  */
-class CustomField extends \Opencart\System\Engine\Model
-{
+class CustomField extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Custom Field
 	 *
@@ -15,8 +14,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addCustomField(array $data): int
-	{
+	public function addCustomField(array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "custom_field` SET `type` = '" . $this->db->escape((string)$data['type']) . "', `value` = '" . $this->db->escape((string)$data['value']) . "', `validation` = '" . $this->db->escape((string)$data['validation']) . "', `location` = '" . $this->db->escape((string)$data['location']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `sort_order` = '" . (int)$data['sort_order'] . "'");
 
 		$custom_field_id = $this->db->getLastId();
@@ -56,8 +54,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editCustomField(int $custom_field_id, array $data): void
-	{
+	public function editCustomField(int $custom_field_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "custom_field` SET `type` = '" . $this->db->escape((string)$data['type']) . "', `value` = '" . $this->db->escape((string)$data['value']) . "', `validation` = '" . $this->db->escape((string)$data['validation']) . "', `location` = '" . $this->db->escape((string)$data['location']) . "', `status` = '" . (bool)($data['status'] ?? 0) . "', `sort_order` = '" . (int)$data['sort_order'] . "' WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "custom_field_description` WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
@@ -103,8 +100,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteCustomField(int $custom_field_id): void
-	{
+	public function deleteCustomField(int $custom_field_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "custom_field` WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "custom_field_description` WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "custom_field_customer_group` WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
@@ -119,8 +115,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getCustomField(int $custom_field_id): array
-	{
+	public function getCustomField(int $custom_field_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "custom_field` `cf` LEFT JOIN `" . DB_PREFIX . "custom_field_description` `cfd` ON (`cf`.`custom_field_id` = `cfd`.`custom_field_id`) WHERE `cf`.`custom_field_id` = '" . (int)$custom_field_id . "' AND `cfd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -133,8 +128,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getCustomFields(array $data = []): array
-	{
+	public function getCustomFields(array $data = []): array {
 		if (empty($data['filter_customer_group_id'])) {
 			$sql = "SELECT * FROM `" . DB_PREFIX . "custom_field` `cf` LEFT JOIN `" . DB_PREFIX . "custom_field_description` `cfd` ON (`cf`.`custom_field_id` = `cfd`.`custom_field_id`) WHERE `cfd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 		} else {
@@ -201,8 +195,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, string>>
 	 */
-	public function getDescriptions(int $custom_field_id): array
-	{
+	public function getDescriptions(int $custom_field_id): array {
 		$custom_field_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "custom_field_description` WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
@@ -221,8 +214,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getValue(int $custom_field_value_id): array
-	{
+	public function getValue(int $custom_field_value_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "custom_field_value` `cfv` LEFT JOIN `" . DB_PREFIX . "custom_field_value_description` `cfvd` ON (`cfv`.`custom_field_value_id` = `cfvd`.`custom_field_value_id`) WHERE `cfv`.`custom_field_value_id` = '" . (int)$custom_field_value_id . "' AND `cfvd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
@@ -235,8 +227,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getValues(int $custom_field_id): array
-	{
+	public function getValues(int $custom_field_id): array {
 		$custom_field_value_data = [];
 
 		$custom_field_value_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "custom_field_value` `cfv` LEFT JOIN `" . DB_PREFIX . "custom_field_value_description` `cfvd` ON (`cfv`.`custom_field_value_id` = `cfvd`.`custom_field_value_id`) WHERE `cfv`.`custom_field_id` = '" . (int)$custom_field_id . "' AND `cfvd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY `cfv`.`sort_order` ASC");
@@ -258,8 +249,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getCustomerGroups(int $custom_field_id): array
-	{
+	public function getCustomerGroups(int $custom_field_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "custom_field_customer_group` WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
 
 		return $query->rows;
@@ -272,8 +262,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getValueDescriptions(int $custom_field_id): array
-	{
+	public function getValueDescriptions(int $custom_field_id): array {
 		$custom_field_value_data = [];
 
 		$custom_field_value_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "custom_field_value` WHERE `custom_field_id` = '" . (int)$custom_field_id . "'");
@@ -302,8 +291,7 @@ class CustomField extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalCustomFields(): int
-	{
+	public function getTotalCustomFields(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "custom_field`");
 
 		return (int)$query->row['total'];

@@ -19,7 +19,7 @@ $_['text_all_zones']        = 'Alle zones';
 $_['text_pagination']       = '%d - %d van %d (%d pagina\'s)';
 $_['text_loading']          = 'Laden...';
 $_['text_no_results']       = 'Geen resultaten!';
-$_['text_home_icon'] 		= "<i class=\"fas fa-home\"><\/i>";
+$_['text_home_icon'] 		= "<i class=\"fas fa-home\"><\\/i>";
 $_['text_just_now'] 		= "zojuist";
 $_['text_seconds_ago'] 		= "%s seconden geleden";
 $_['text_minute_ago'] 		= "%s minuut geleden";
@@ -88,7 +88,7 @@ $_['error_curl']            = 'CURL: Foutcode(%s): %s';
 $_['error_upload_size'] 	= "Warning: Het geüploade bestand overschrijdt de %smb max bestandsgrootte!";
 $_['error_session'] 		= "Warning:De sessie is verlopen, verzend het formulier opnieuw!";
 
-/* When doing translations only include the matching language code */
+// When doing translations only include the matching language code
 
 // Datepicker
 //$_['datepicker']            = 'af';

@@ -24,4 +24,3 @@ $_['text_transactions']   = 'Finanz-Transaktionens-Daten';
 $_['text_affiliate_add']  = 'Partner-Konto registrieren';
 $_['text_affiliate_edit'] = 'Partner-Konto bearbeiten';
 $_['text_tracking']       = 'Partner Tracking-Code';
-

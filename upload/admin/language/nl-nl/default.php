@@ -177,7 +177,7 @@ $_['error_format_gb'] 		= "Warning: Het geüploade bestand overschrijdt de maxim
 
 $_['ckeditor'] = "nl";
 
-/* When doing translations only include the matching language code */
+// When doing translations only include the matching language code
 
 // Datepicker
 //$_['datepicker']            = 'af';

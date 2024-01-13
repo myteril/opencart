@@ -175,7 +175,7 @@ $_['error_format_kb']               = 'Warnung: Die hochgeladene Datei überschr
 $_['error_format_mb']               = 'Warnung: Die hochgeladene Datei überschreitet die maximale Dateigröße: %s Megabytes!';
 $_['error_format_gb']               = 'Warnung: Die hochgeladene Datei überschreitet die maximale Dateigröße: %s Gigabytes!';
 
-/* When doing translations only include the matching language code */
+// When doing translations only include the matching language code
 
 // CKEditor
 //$_['ckeditor']                    = 'af';

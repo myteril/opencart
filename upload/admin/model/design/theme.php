@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Design;
  *
  * @package Opencart\Admin\Model\Design
  */
-class Theme extends \Opencart\System\Engine\Model
-{
+class Theme extends \Opencart\System\Engine\Model {
 	/**
 	 * Edit Theme
 	 *
@@ -17,8 +16,7 @@ class Theme extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editTheme(int $store_id, string $route, string $code): void
-	{
+	public function editTheme(int $store_id, string $route, string $code): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "theme` WHERE `store_id` = '" . (int)$store_id . "' AND `route` = '" . $this->db->escape($route) . "'");
 
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "theme` SET `store_id` = '" . (int)$store_id . "', `route` = '" . $this->db->escape($route) . "', `code` = '" . $this->db->escape($code) . "', `date_added` = NOW()");
@@ -31,8 +29,7 @@ class Theme extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteTheme(int $theme_id): void
-	{
+	public function deleteTheme(int $theme_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "theme` WHERE `theme_id` = '" . (int)$theme_id . "'");
 	}
 
@@ -44,8 +41,7 @@ class Theme extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getTheme(int $store_id, string $route): array
-	{
+	public function getTheme(int $store_id, string $route): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "theme` WHERE `store_id` = '" . (int)$store_id . "' AND `route` = '" . $this->db->escape($route) . "'");
 
 		return $query->row;
@@ -59,8 +55,7 @@ class Theme extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getThemes(int $start = 0, int $limit = 10): array
-	{
+	public function getThemes(int $start = 0, int $limit = 10): array {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -79,8 +74,7 @@ class Theme extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalThemes(): int
-	{
+	public function getTotalThemes(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "theme`");
 
 		return (int)$query->row['total'];

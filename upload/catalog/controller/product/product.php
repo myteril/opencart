@@ -518,30 +518,30 @@ class Product extends \Opencart\System\Engine\Controller {
 			// region Structured Data
 
 			$data['structured_data'] = [
-				'name' 			=> $product_info['meta_title'],
-				'description' 	=> $product_info['meta_description'],
-				'product_code' 	=> $product_info['model'],
-				'image' 		=> [],
-				'sku' 			=> $product_info['sku'],
-				'mpn' 			=> $product_info['mpn'],
-				'gtin' 			=> $product_info['ean'],
-				'manifacturer' 	=> $data['manufacturer'],
-				'price'			=> $data['price'] === false ? 0 : $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')),
+				'name'          => $product_info['meta_title'],
+				'description'   => $product_info['meta_description'],
+				'product_code'  => $product_info['model'],
+				'image'         => [],
+				'sku'           => $product_info['sku'],
+				'mpn'           => $product_info['mpn'],
+				'gtin'          => $product_info['ean'],
+				'manifacturer'  => $data['manufacturer'],
+				'price'         => $data['price'] === false ? 0 : $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')),
 				'currency_code' => $this->session->data['currency'],
-				'width' 		=> $product_info['width'],
-				'height' 		=> $product_info['height'],
-				'depth' 		=> $product_info['length'],
-				'weight' 		=> $product_info['weight'],
-				'length_unit' 	=> $this->length->getUnit($product_info['length_class_id']),
-				'weight_unit' 	=> $this->weight->getUnit($product_info['weight_class_id'])
+				'width'         => $product_info['width'],
+				'height'        => $product_info['height'],
+				'depth'         => $product_info['length'],
+				'weight'        => $product_info['weight'],
+				'length_unit'   => $this->length->getUnit($product_info['length_class_id']),
+				'weight_unit'   => $this->weight->getUnit($product_info['weight_class_id'])
 			];
 
-			if(empty($data['structured_data']['gtin'])){
-				if(!empty($product_info['upc'])){
+			if (empty($data['structured_data']['gtin'])) {
+				if (!empty($product_info['upc'])) {
 					$data['structured_data']['gtin'] = '0' . $product_info['upc'];
-				}else if(!empty($product_info['isbn'])){
+				} elseif (!empty($product_info['isbn'])) {
 					$data['structured_data']['gtin'] = $product_info['isbn'];
-				}else if(!empty($product_info['jan'])){
+				} elseif (!empty($product_info['jan'])) {
 					$data['structured_data']['gtin'] = $product_info['jan'];
 				}
 			}
@@ -559,14 +559,14 @@ class Product extends \Opencart\System\Engine\Controller {
 			}
 
 			$data['structured_data']['image'][] = $data['popup'];
-			foreach($data['images'] as $image){
+			foreach ($data['images'] as $image) {
 				$data['structured_data']['image'][] = $image['popup'];
 			}
 
-			if($product_info['reviews'] > 0){
+			if ($product_info['reviews'] > 0) {
 				$data['structured_data']['rating'] = [
-					'average' 		=> $product_info['rating'],
-					'review_count' 	=> $product_info['reviews']
+					'average'      => $product_info['rating'],
+					'review_count' => $product_info['reviews']
 				];
 			}
 

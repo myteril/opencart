@@ -48,7 +48,6 @@ $_['text_language'] 				      = 'Sprache';
 $_['text_currency'] 					  = 'Währung';
 $_['text_measurement'] 					  = 'Messung';
 
-
 // Entry
 $_['entry_meta_title']                    = 'Meta Titel';
 $_['entry_meta_description']              = 'Meta-Tag Beschreibung';
@@ -181,9 +180,6 @@ $_['entry_image_default'] 				  = 'Standard-Bildgröße (B x H)';
 $_['entry_image_article'] 				  = 'Artikel Bildgröße (B x H)';
 $_['entry_image_topic'] 				  = 'Thema Bildgröße (B x H)';
 
-
-
-
 // Help
 $_['help_geocode']                        = 'Bitte geben Sie den Geo-Code Ihres Standorts manuell ein.';
 $_['help_open']                           = 'Geben Sie die Öffnungszeiten Ihres Geschäfts an.';
@@ -261,7 +257,6 @@ $_['help_blog_enabled']                   = 'Bestimmt, ob der Blog für Benutzer
 $_['help_article_description_length'] 	  = 'In der Listenansicht ist dies die Zeichengrenze für die Kurzbeschreibung des Artikels.';
 $_['help_comment_guest'] 				  = 'Erlauben Sie Gästen, Kommentare zu veröffentlichen.';
 $_['help_comment_approve'] 			      = 'Automatische Genehmigung von Kommentaren, da sonst der erste Kommentar genehmigt werden muss, bevor er in eine sichere Liste aufgenommen wird.';
-
 
 // Error
 $_['error_warning']                       = 'Warnung: Bitte prüfen Sie das Formular sorgfältig auf Fehler!';

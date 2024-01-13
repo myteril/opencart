@@ -9,11 +9,10 @@ $_['text_restore'] 	   = "%s van %s terugzetten";
 $_['text_option'] 	   = "Back-up opties";
 $_['text_history'] 	   = "Back-up geschiedenis";
 $_['text_progress']    = "Voortgang";
-$_['text_import'] 	   = "Voor grote back-upbestanden is het beter om het SQL-bestand via FTP te uploaden naar de <strong>~\/storage\/backup\/<\/strong> map.";
-
+$_['text_import'] 	   = "Voor grote back-upbestanden is het beter om het SQL-bestand via FTP te uploaden naar de <strong>~\\/storage\\/backup\\/<\\/strong> map.";
 
 // Column
-$_['column_date_added']= "Datum toegevoegd";
+$_['column_date_added'] = "Datum toegevoegd";
 $_['column_filename']  = "Bestandsnaam";
 $_['column_size'] 	   = "Grootte";
 $_['column_action']    = "Actie";

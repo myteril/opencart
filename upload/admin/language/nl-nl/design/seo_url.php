@@ -17,7 +17,7 @@ $_['column_language']  = 'Taal';
 $_['column_action']    = 'Actie';
 $_['column_key'] 	   = "Sleutel";
 $_['column_value'] 	   = "Waarde";
-$_['column_sort_order']= "Sorteervolgorde";
+$_['column_sort_order'] = "Sorteervolgorde";
 
 // Entry
 $_['entry_keyword']    = 'Sleutelwoord';
@@ -28,7 +28,7 @@ $_['entry_value'] 	   = "Waarde";
 $_['entry_sort_order'] = "Sorteervolgorde";
 
 // Help
-$_['help_keyword'] 	   = "Zorg ervoor dat je alleen tekens in de a-z of 0-9 gebruikt en - of _ voor spaties. Gebruik \/ voor categorieën.";
+$_['help_keyword'] 	   = "Zorg ervoor dat je alleen tekens in de a-z of 0-9 gebruikt en - of _ voor spaties. Gebruik \\/ voor categorieën.";
 $_['help_sort_order']  = "De sorteervolgorde van de sleutelwoorden in de URL.";
 
 // Error

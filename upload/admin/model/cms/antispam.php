@@ -6,8 +6,7 @@ namespace Opencart\Admin\Model\Cms;
  *
  * @package Opencart\Admin\Model\Cms
  */
-class Antispam extends \Opencart\System\Engine\Model
-{
+class Antispam extends \Opencart\System\Engine\Model {
 	/**
 	 * Add Antispam
 	 *
@@ -15,8 +14,7 @@ class Antispam extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function addAntispam(array $data = []): int
-	{
+	public function addAntispam(array $data = []): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "antispam` SET `keyword` = '" . $this->db->escape((string)$data['keyword']) . "'");
 
 		return $this->db->getLastId();
@@ -30,8 +28,7 @@ class Antispam extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function editAntispam(int $antispam_id, array $data = []): void
-	{
+	public function editAntispam(int $antispam_id, array $data = []): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "antispam` SET `keyword` = '" . $this->db->escape((string)$data['keyword']) . "' WHERE `antispam_id` = '" . (int)$antispam_id . "'");
 	}
 
@@ -42,8 +39,7 @@ class Antispam extends \Opencart\System\Engine\Model
 	 *
 	 * @return void
 	 */
-	public function deleteAntispam(int $antispam_id): void
-	{
+	public function deleteAntispam(int $antispam_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "antispam` WHERE `antispam_id` = '" . (int)$antispam_id . "'");
 	}
 
@@ -54,8 +50,7 @@ class Antispam extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getAntispam(int $antispam_id): array
-	{
+	public function getAntispam(int $antispam_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "antispam` WHERE `antispam_id` = '" . (int)$antispam_id . "'");
 
 		return $query->row;
@@ -68,8 +63,7 @@ class Antispam extends \Opencart\System\Engine\Model
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
-	public function getAntispams(array $data = []): array
-	{
+	public function getAntispams(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "antispam`";
 
 		$implode = [];
@@ -120,8 +114,7 @@ class Antispam extends \Opencart\System\Engine\Model
 	 *
 	 * @return int
 	 */
-	public function getTotalAntispams(array $data = []): int
-	{
+	public function getTotalAntispams(array $data = []): int {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "antispam`";
 
 		$implode = [];

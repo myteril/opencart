@@ -1,6 +1,5 @@
 <?php
-function oc_db_create(string $db_driver, string $db_hostname, string $db_username, string $db_password, string $db_database, string $db_port, string $db_prefix, string $db_ssl_key, string $db_ssl_cert, string $db_ssl_ca): bool
-{
+function oc_db_create(string $db_driver, string $db_hostname, string $db_username, string $db_password, string $db_database, string $db_port, string $db_prefix, string $db_ssl_key, string $db_ssl_cert, string $db_ssl_ca): bool {
 	try {
 		// Database
 		$db = new \Opencart\System\Library\DB($db_driver, $db_hostname, $db_username, $db_password, $db_database, $db_port, $db_ssl_key, $db_ssl_cert, $db_ssl_ca);
@@ -58,8 +57,7 @@ function oc_db_create(string $db_driver, string $db_hostname, string $db_usernam
 /**
  * @return array<int, array<string, mixed>>
  */
-function oc_db_schema()
-{
+function oc_db_schema() {
 	$tables = [];
 
 	$tables[] = [
@@ -6393,8 +6391,8 @@ function oc_db_schema()
 				'not_null' => true
 			],
 			[
-				'name' => 'item_availability',
-				'type' => 'enum(\'BackOrder\',\'Discontinued\',\'InStock\',\'InStoreOnly\',\'LimitedAvailability\',\'OnlineOnly\',\'OutOfStock\',\'PreOrder\',\'PreSale\',\'SoldOut\')',
+				'name'     => 'item_availability',
+				'type'     => 'enum(\'BackOrder\',\'Discontinued\',\'InStock\',\'InStoreOnly\',\'LimitedAvailability\',\'OnlineOnly\',\'OutOfStock\',\'PreOrder\',\'PreSale\',\'SoldOut\')',
 				'not_null' => true
 			]
 		],
@@ -7143,7 +7141,7 @@ function oc_db_schema()
 			],
 			[
 				'name' => 'store_query',
-				'key' => [
+				'key'  => [
 					'store_id',
 					'key',
 					'value'
@@ -7656,52 +7654,52 @@ function oc_db_schema()
 	];
 
 	$tables[] = [
-		'name' => 'popup',
+		'name'  => 'popup',
 		'field' => [
 			[
-				'name' => 'popup_id',
-				'type' => 'int(11)',
-				'not_null' => true,
+				'name'           => 'popup_id',
+				'type'           => 'int(11)',
+				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name' => 'title',
-				'type' => 'varchar(255)',
+				'name'     => 'title',
+				'type'     => 'varchar(255)',
 				'not_null' => true,
 			],
 			[
-				'name' => 'status',
-				'type' => 'tinyint(1)',
+				'name'     => 'status',
+				'type'     => 'tinyint(1)',
 				'not_null' => true,
-				'default' => '0'
+				'default'  => '0'
 			],
 			[
-				'name' => 'initial_delay',
-				'type' => 'int(11)',
+				'name'     => 'initial_delay',
+				'type'     => 'int(11)',
 				'not_null' => true,
-				'default' => '0'
+				'default'  => '0'
 			],
 			[
-				'name' => 'time_to_close',
-				'type' => 'int(11)',
+				'name'     => 'time_to_close',
+				'type'     => 'int(11)',
 				'not_null' => true,
-				'default' => '3000'
+				'default'  => '3000'
 			],
 			[
-				'name' => 'width',
-				'type' => 'int(11)',
+				'name'     => 'width',
+				'type'     => 'int(11)',
 				'not_null' => true,
-				'default' => '1000'
+				'default'  => '1000'
 			],
 			[
-				'name' => 'show_everytime',
-				'type' => 'tinyint(1)',
+				'name'     => 'show_everytime',
+				'type'     => 'tinyint(1)',
 				'not_null' => true,
-				'default' => '0'
+				'default'  => '0'
 			],
 			[
-				'name' => 'store_id',
-				'type' => 'int(11)',
+				'name'     => 'store_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			]
 		],
@@ -7715,32 +7713,32 @@ function oc_db_schema()
 				'field' => 'store_id'
 			]
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name' => 'popup_content',
+		'name'  => 'popup_content',
 		'field' => [
 			[
-				'name' => 'popup_id',
-				'type' => 'int(11)',
+				'name'     => 'popup_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			],
 			[
-				'name' => 'language_id',
-				'type' => 'int(11)',
+				'name'     => 'language_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			],
 			[
-				'name' => 'header',
-				'type' => 'varchar(255)',
+				'name'     => 'header',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'content',
-				'type' => 'text',
+				'name'     => 'content',
+				'type'     => 'text',
 				'not_null' => true
 			],
 		],
@@ -7760,54 +7758,54 @@ function oc_db_schema()
 				'field' => 'language_id'
 			]
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name' => 'blog_article',
+		'name'  => 'blog_article',
 		'field' => [
 			[
-				'name' => 'blog_article_id',
-				'type' => 'bigint(16)',
-				'not_null' => true,
+				'name'           => 'blog_article_id',
+				'type'           => 'bigint(16)',
+				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name' => 'name',
-				'type' => 'varchar(255)',
+				'name'     => 'name',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'image',
-				'type' => 'varchar(255)',
+				'name'     => 'image',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'date_added',
-				'type' => 'datetime',
+				'name'     => 'date_added',
+				'type'     => 'datetime',
 				'not_null' => true
 			],
 			[
-				'name' => 'date_modified',
-				'type' => 'datetime',
+				'name'     => 'date_modified',
+				'type'     => 'datetime',
 				'not_null' => true
 			],
 			[
-				'name' => 'status',
-				'type' => 'tinyint(1)',
+				'name'     => 'status',
+				'type'     => 'tinyint(1)',
 				'not_null' => true
 			],
 			[
-				'name' => 'view_count',
-				'type' => 'bigint(16)',
+				'name'     => 'view_count',
+				'type'     => 'bigint(16)',
 				'not_null' => true,
-				'default' => 0
+				'default'  => 0
 			],
 			[
-				'name' => 'blog_author_id',
-				'type' => 'varchar(255)',
+				'name'     => 'blog_author_id',
+				'type'     => 'varchar(255)',
 				'not_null' => false
 			],
 		],
@@ -7824,50 +7822,50 @@ function oc_db_schema()
 		'index' => [
 			[
 				'name' => 'date_added',
-				'key' => [
+				'key'  => [
 					'status',
 					'date_added'
 				]
 			],
 			[
 				'name' => 'name',
-				'key' => [
+				'key'  => [
 					'status',
 					'name'
 				]
 			],
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name' => 'blog_article_content',
+		'name'  => 'blog_article_content',
 		'field' => [
 			[
-				'name' => 'blog_article_id',
-				'type' => 'bigint(16)',
+				'name'     => 'blog_article_id',
+				'type'     => 'bigint(16)',
 				'not_null' => true
 			],
 			[
-				'name' => 'language_id',
-				'type' => 'int(11)',
+				'name'     => 'language_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			],
 			[
-				'name' => 'title',
-				'type' => 'varchar(255)',
+				'name'     => 'title',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'description',
-				'type' => 'varchar(255)',
+				'name'     => 'description',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'content',
-				'type' => 'text',
+				'name'     => 'content',
+				'type'     => 'text',
 				'not_null' => true
 			]
 		],
@@ -7890,55 +7888,55 @@ function oc_db_schema()
 		'index' => [
 			[
 				'name' => 'title',
-				'key' => [
+				'key'  => [
 					'title',
 					'description'
 				]
 			]
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name' => 'blog_author',
+		'name'  => 'blog_author',
 		'field' => [
 			[
-				'name' => 'blog_author_id',
-				'type' => 'bigint(16)',
-				'not_null' => true,
+				'name'           => 'blog_author_id',
+				'type'           => 'bigint(16)',
+				'not_null'       => true,
 				'auto_increment' => true
 			],
 			[
-				'name' => 'fullname',
-				'type' => 'varchar(255)',
+				'name'     => 'fullname',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'email',
-				'type' => 'varchar(255)',
+				'name'     => 'email',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'post_count',
-				'type' => 'bigint(16)',
+				'name'     => 'post_count',
+				'type'     => 'bigint(16)',
 				'not_null' => true,
-				'default' => 0
+				'default'  => 0
 			],
 			[
-				'name' => 'photo',
-				'type' => 'varchar(255)',
+				'name'     => 'photo',
+				'type'     => 'varchar(255)',
 				'not_null' => false
 			],
 			[
-				'name' => 'date_added',
-				'type' => 'datetime',
+				'name'     => 'date_added',
+				'type'     => 'datetime',
 				'not_null' => true
 			],
 			[
-				'name' => 'date_modified',
-				'type' => 'datetime',
+				'name'     => 'date_modified',
+				'type'     => 'datetime',
 				'not_null' => true
 			]
 		],
@@ -7948,33 +7946,33 @@ function oc_db_schema()
 		'index' => [
 			[
 				'name' => 'fullname',
-				'key' => [
+				'key'  => [
 					'fullname',
 					'blog_author_id'
 				]
 			],
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name' => 'blog_tag_to_article',
+		'name'  => 'blog_tag_to_article',
 		'field' => [
 			[
-				'name' => 'tag',
-				'type' => 'varchar(255)',
+				'name'     => 'tag',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'language_id',
-				'type' => 'int(11)',
+				'name'     => 'language_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			],
 			[
-				'name' => 'blog_article_id',
-				'type' => 'bigint(16)',
+				'name'     => 'blog_article_id',
+				'type'     => 'bigint(16)',
 				'not_null' => true
 			],
 		],
@@ -7995,40 +7993,40 @@ function oc_db_schema()
 				'field' => 'language_id'
 			]
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name' => 'blog_tag',
+		'name'  => 'blog_tag',
 		'field' => [
 			[
-				'name' => 'tag',
-				'type' => 'varchar(255)',
+				'name'     => 'tag',
+				'type'     => 'varchar(255)',
 				'not_null' => true
 			],
 			[
-				'name' => 'language_id',
-				'type' => 'int(11)',
+				'name'     => 'language_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			],
 			[
-				'name' => 'store_id',
-				'type' => 'bigint(16)',
+				'name'     => 'store_id',
+				'type'     => 'bigint(16)',
 				'not_null' => true
 			],
 			[
-				'name' => 'article_count',
-				'type' => 'bigint(16)',
+				'name'     => 'article_count',
+				'type'     => 'bigint(16)',
 				'not_null' => true,
-				'default' => '0'
+				'default'  => '0'
 			],
 		],
 		'index' => [
 			[
 				'name' => 'article_count',
-				'key' => [
+				'key'  => [
 					'tag',
 					'language_id',
 					'store_id',
@@ -8058,27 +8056,27 @@ function oc_db_schema()
 				'field' => 'store_id'
 			]
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
 
 	$tables[] = [
-		'name' => 'blog_store_to_article',
+		'name'  => 'blog_store_to_article',
 		'field' => [
 			[
-				'name' => 'store_id',
-				'type' => 'int(11)',
+				'name'     => 'store_id',
+				'type'     => 'int(11)',
 				'not_null' => true
 			],
 			[
-				'name' => 'blog_article_id',
-				'type' => 'bigint(16)',
+				'name'     => 'blog_article_id',
+				'type'     => 'bigint(16)',
 				'not_null' => true
 			],
 			[
-				'name' => 'view_count',
-				'type' => 'bigint(16)',
+				'name'     => 'view_count',
+				'type'     => 'bigint(16)',
 				'not_null' => true
 			]
 		],
@@ -8098,7 +8096,7 @@ function oc_db_schema()
 				'field' => 'blog_article_id'
 			]
 		],
-		'engine' => 'InnoDB',
+		'engine'  => 'InnoDB',
 		'charset' => 'utf8mb4',
 		'collate' => 'utf8mb4_general_ci'
 	];
@@ -8106,31 +8104,30 @@ function oc_db_schema()
 	return $tables;
 }
 
-
 /**
  * @param string $db_prefix
+ *
  * @return array
  */
-function oc_db_triggers(string $db_prefix): array
-{
+function oc_db_triggers(string $db_prefix): array {
 	$triggers = [];
 
 	$triggers[] = [
 		'table' => 'blog_article',
 		'after' => [
 			'insert' => 'IF NEW.blog_author_id IS NOT NULL AND NEW.blog_author_id > 0 THEN
-							UPDATE `'. $db_prefix . 'blog_author` SET post_count = post_count + 1 WHERE blog_author_id = NEW.blog_author_id LIMIT 1;
+							UPDATE `' . $db_prefix . 'blog_author` SET post_count = post_count + 1 WHERE blog_author_id = NEW.blog_author_id LIMIT 1;
 						 END IF;',
 			'update' => 'IF NOT (OLD.blog_author_id <=> NEW.blog_author_id) THEN
 							IF OLD.blog_author_id IS NOT NULL THEN
-								UPDATE `'. $db_prefix . 'blog_author` SET post_count = post_count - 1 WHERE blog_author_id = OLD.blog_author_id LIMIT 1;
+								UPDATE `' . $db_prefix . 'blog_author` SET post_count = post_count - 1 WHERE blog_author_id = OLD.blog_author_id LIMIT 1;
 							END IF;
 							IF NEW.blog_author_id IS NOT NULL THEN
-								UPDATE `'. $db_prefix . 'blog_author` SET post_count = post_count + 1 WHERE blog_author_id = NEW.blog_author_id LIMIT 1;
+								UPDATE `' . $db_prefix . 'blog_author` SET post_count = post_count + 1 WHERE blog_author_id = NEW.blog_author_id LIMIT 1;
 							END IF;
 						 END IF;',
 			'delete' => 'IF OLD.blog_author_id IS NOT NULL AND OLD.blog_author_id > 0 THEN
-							UPDATE `'. $db_prefix . 'blog_author` SET post_count = post_count + 1 WHERE blog_author_id = OLD.blog_author_id LIMIT 1;
+							UPDATE `' . $db_prefix . 'blog_author` SET post_count = post_count + 1 WHERE blog_author_id = OLD.blog_author_id LIMIT 1;
 						 END IF;'
 		],
 	];
@@ -8139,23 +8136,23 @@ function oc_db_triggers(string $db_prefix): array
 		'table' => 'blog_store_to_article',
 		'after' => [
 			'update' => 'SET @difference = (NEW.view_count - OLD.view_count);
-						 UPDATE `'. $db_prefix . 'blog_article` SET view_count = view_count + @difference WHERE blog_article_id = NEW.blog_article_id LIMIT 1;',
+						 UPDATE `' . $db_prefix . 'blog_article` SET view_count = view_count + @difference WHERE blog_article_id = NEW.blog_article_id LIMIT 1;',
 			'delete' => 'SET @difference = OLD.view_count;
-						 UPDATE `'. $db_prefix . 'blog_article` SET view_count = view_count - @difference WHERE blog_article_id = OLD.blog_article_id LIMIT 1;'
+						 UPDATE `' . $db_prefix . 'blog_article` SET view_count = view_count - @difference WHERE blog_article_id = OLD.blog_article_id LIMIT 1;'
 		],
 	];
 
 	$triggers[] = [
 		'table' => 'blog_tag_to_article',
 		'after' => [
-			'insert' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = NEW.blog_article_id LIMIT 1);
-						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count + 1 WHERE tag = NEW.tag AND language_id = NEW.language_id AND store_id = @store_id LIMIT 1;',
-			'update' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = NEW.blog_article_id LIMIT 1);
-						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count + 1 WHERE tag = NEW.tag AND language_id = NEW.language_id AND store_id = @store_id LIMIT 1;
-						 SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = OLD.blog_article_id LIMIT 1);
-						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count - 1 WHERE tag = OLD.tag AND language_id = OLD.language_id AND store_id = @store_id LIMIT 1;',
-			'delete' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix. 'blog_store_to_article` WHERE blog_article_id = OLD.blog_article_id LIMIT 1);
-						 UPDATE `'. $db_prefix . 'blog_tag` SET article_count = article_count - 1 WHERE tag = OLD.tag AND language_id = OLD.language_id AND store_id = @store_id LIMIT 1;'
+			'insert' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix . 'blog_store_to_article` WHERE blog_article_id = NEW.blog_article_id LIMIT 1);
+						 UPDATE `' . $db_prefix . 'blog_tag` SET article_count = article_count + 1 WHERE tag = NEW.tag AND language_id = NEW.language_id AND store_id = @store_id LIMIT 1;',
+			'update' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix . 'blog_store_to_article` WHERE blog_article_id = NEW.blog_article_id LIMIT 1);
+						 UPDATE `' . $db_prefix . 'blog_tag` SET article_count = article_count + 1 WHERE tag = NEW.tag AND language_id = NEW.language_id AND store_id = @store_id LIMIT 1;
+						 SET @store_id = (SELECT store_id FROM `' . $db_prefix . 'blog_store_to_article` WHERE blog_article_id = OLD.blog_article_id LIMIT 1);
+						 UPDATE `' . $db_prefix . 'blog_tag` SET article_count = article_count - 1 WHERE tag = OLD.tag AND language_id = OLD.language_id AND store_id = @store_id LIMIT 1;',
+			'delete' => 'SET @store_id = (SELECT store_id FROM `' . $db_prefix . 'blog_store_to_article` WHERE blog_article_id = OLD.blog_article_id LIMIT 1);
+						 UPDATE `' . $db_prefix . 'blog_tag` SET article_count = article_count - 1 WHERE tag = OLD.tag AND language_id = OLD.language_id AND store_id = @store_id LIMIT 1;'
 		],
 	];
 

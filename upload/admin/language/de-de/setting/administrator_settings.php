@@ -18,7 +18,5 @@ $_['entry_language_admin']                = 'Administrationssprache';
 $_['help_identifier_fields']              = 'Legt die Sichtbarkeit der zusätzlichen Identifikationsfelder für Produkte fest.';
 $_['help_price_incl_tax']                 = 'Wenn aktiviert, wird jeder Produktpreis als Preis inklusive Steuern angezeigt.';
 
-
 $_['error_permission']                    = 'Warnung: Sie haben keine Berechtigung, die Administrator-Einstellungen zu ändern!';
 $_['text_success']                        = 'Erfolg: Sie haben die Administrator-Einstellungen geändert!';
-

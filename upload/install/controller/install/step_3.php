@@ -32,7 +32,7 @@ class Step3 extends \Opencart\System\Engine\Controller {
 				$this->request->post['db_port']
 			);
 
-			$db_prefix = strval($this->request->post['db_prefix']);
+			$db_prefix = (string)($this->request->post['db_prefix']);
 			$tables = oc_db_schema();
 			$triggers = oc_db_triggers($db_prefix);
 
@@ -44,7 +44,6 @@ class Step3 extends \Opencart\System\Engine\Controller {
 			$data_sql_file = DIR_APPLICATION . 'opencart.sql';
 			$this->model_install_install->setupDatabaseData($db, $data_sql_file, $this->request->post['db_prefix'], $this->request->post['username'], $this->request->post['password'], $this->request->post['email']);
 			$this->model_install_install->installTriggers($db, $triggers, $db_prefix);
-
 
 			// Catalog config.php
 			$output  = '<?php' . "\n";

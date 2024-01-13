@@ -9,8 +9,9 @@ use Opencart\System\Library\Image;
  */
 class Header extends \Opencart\System\Engine\Controller {
 	/**
-	 * @return string
 	 * @throws \Exception
+	 *
+	 * @return string
 	 */
 	public function index(): string {
 		// Analytics

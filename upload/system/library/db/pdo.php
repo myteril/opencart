@@ -75,12 +75,14 @@ class PDO {
 					$this->affected = 0;
 
 					$statement->closeCursor();
+
 					return $result;
 				} else {
 					$this->affected = $statement->rowCount();
 					$statement->closeCursor();
 
 					$statement->closeCursor();
+
 					return true;
 				}
 			} else {

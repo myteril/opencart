@@ -10,7 +10,7 @@ $_['text_address']   = 'Adres';
 $_['text_telephone'] = 'Telefoonnummer';
 $_['text_open']      = 'Openingstijden';
 $_['text_comment']   = 'Opmerkingen';
-$_['text_message'] = "<p>Je vraag is succesvol verzonden naar de winkeleigenaar!<\/p>";
+$_['text_message'] = "<p>Je vraag is succesvol verzonden naar de winkeleigenaar!<\\/p>";
 
 // Entry
 $_['entry_name']     = 'Naam';
