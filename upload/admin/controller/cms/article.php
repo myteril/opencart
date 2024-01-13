@@ -450,7 +450,7 @@ class Article extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$limit = 1;
+			$limit = 100;
 
 			$filter_data = [
 				'sort'  => 'date_added',
