@@ -1109,10 +1109,6 @@ function oc_db_schema() {
 				'default' => '0'
 			],
 			[
-				'name' => 'top',
-				'type' => 'tinyint(1)'
-			],
-			[
 				'name' => 'column',
 				'type' => 'int(3)'
 			],
@@ -2483,6 +2479,10 @@ function oc_db_schema() {
 				'type' => 'int(11)'
 			],
 			[
+				'name' => 'store_id',
+				'type' => 'int(11)'
+			],
+			[
 				'name' => 'product_id',
 				'type' => 'int(11)'
 			],
@@ -2493,6 +2493,7 @@ function oc_db_schema() {
 		],
 		'primary' => [
 			'customer_id',
+			'store_id',
 			'product_id'
 		],
 		'foreign' => [
@@ -2500,6 +2501,11 @@ function oc_db_schema() {
 				'key'   => 'customer_id',
 				'table' => 'customer',
 				'field' => 'customer_id'
+			],
+			[
+				'key'   => 'store_id',
+				'table' => 'store',
+				'field' => 'store_id'
 			],
 			[
 				'key'   => 'product_id',
@@ -3030,10 +3036,6 @@ function oc_db_schema() {
 				'type' => 'int(11)'
 			],
 			[
-				'name' => 'filter_group_id',
-				'type' => 'int(11)'
-			],
-			[
 				'name' => 'name',
 				'type' => 'varchar(64)'
 			]
@@ -3047,11 +3049,6 @@ function oc_db_schema() {
 				'key'   => 'language_id',
 				'table' => 'language',
 				'field' => 'language_id'
-			],
-			[
-				'key'   => 'filter_group_id',
-				'table' => 'filter_group',
-				'field' => 'filter_group_id'
 			]
 		],
 		'engine'  => 'InnoDB',
@@ -3206,11 +3203,6 @@ function oc_db_schema() {
 				'name'           => 'information_id',
 				'type'           => 'int(11)',
 				'auto_increment' => true
-			],
-			[
-				'name'    => 'bottom',
-				'type'    => 'int(1)',
-				'default' => '0'
 			],
 			[
 				'name'    => 'sort_order',
@@ -3851,7 +3843,7 @@ function oc_db_schema() {
 			],
 			[
 				'name' => 'xml',
-				'type' => 'text'
+				'type' => 'mediumtext'
 			],
 			[
 				'name' => 'status',
@@ -6972,6 +6964,10 @@ function oc_db_schema() {
 				'type' => 'mediumtext'
 			],
 			[
+				'name' => 'status',
+				'type' => 'tinyint(1)'
+			],
+			[
 				'name' => 'date_added',
 				'type' => 'datetime'
 			]
@@ -7615,6 +7611,10 @@ function oc_db_schema() {
 				'auto_increment' => true
 			],
 			[
+				'name' => 'geo_zone_id',
+				'type' => 'int(11)'
+			],
+			[
 				'name' => 'country_id',
 				'type' => 'int(11)'
 			],
@@ -7622,16 +7622,17 @@ function oc_db_schema() {
 				'name'    => 'zone_id',
 				'type'    => 'int(11)',
 				'default' => '0'
-			],
-			[
-				'name' => 'geo_zone_id',
-				'type' => 'int(11)'
 			]
 		],
 		'primary' => [
 			'zone_to_geo_zone_id'
 		],
 		'foreign' => [
+			[
+				'key'   => 'geo_zone_id',
+				'table' => 'geo_zone',
+				'field' => 'geo_zone_id'
+			],
 			[
 				'key'   => 'country_id',
 				'table' => 'country',
@@ -7641,11 +7642,6 @@ function oc_db_schema() {
 				'key'   => 'zone_id',
 				'table' => 'zone',
 				'field' => 'zone_id'
-			],
-			[
-				'key'   => 'geo_zone_id',
-				'table' => 'geo_zone',
-				'field' => 'geo_zone_id'
 			]
 		],
 		'engine'  => 'InnoDB',

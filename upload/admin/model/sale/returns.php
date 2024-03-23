@@ -33,6 +33,18 @@ class Returns extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Edit Return Status ID
+	 *
+	 * @param int $return_id
+	 * @param int $return_status_id
+	 *
+	 * @return void
+	 */
+	public function editReturnStatusId(int $return_id, int $return_status_id): void {
+		$this->db->query("UPDATE `" . DB_PREFIX . "return` SET `return_status_id` = '" . (int)$return_status_id . "', `date_modified` = NOW() WHERE `return_id` = '" . (int)$return_id . "'");
+	}
+
+	/**
 	 * Delete Return
 	 *
 	 * @param int $return_id
@@ -41,7 +53,8 @@ class Returns extends \Opencart\System\Engine\Model {
 	 */
 	public function deleteReturn(int $return_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "return` WHERE `return_id` = '" . (int)$return_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "return_history` WHERE `return_id` = '" . (int)$return_id . "'");
+
+		$this->deleteHistories($return_id);
 	}
 
 	/**
@@ -248,8 +261,20 @@ class Returns extends \Opencart\System\Engine\Model {
 	 * @return void
 	 */
 	public function addHistory(int $return_id, int $return_status_id, string $comment, bool $notify): void {
-		$this->db->query("UPDATE `" . DB_PREFIX . "return` SET `return_status_id` = '" . (int)$return_status_id . "', `date_modified` = NOW() WHERE `return_id` = '" . (int)$return_id . "'");
+		$this->editReturnStatusId($return_id, $return_status_id);
+
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "return_history` SET `return_id` = '" . (int)$return_id . "', `return_status_id` = '" . (int)$return_status_id . "', `notify` = '" . (int)$notify . "', `comment` = '" . $this->db->escape(strip_tags($comment)) . "', `date_added` = NOW()");
+	}
+
+	/**
+	 * Delete Return Histories
+	 *
+	 * @param int $return_id
+	 *
+	 * @return void
+	 */
+	public function deleteHistories(int $return_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "return_history` WHERE `return_id` = '" . (int)$return_id . "'");
 	}
 
 	/**

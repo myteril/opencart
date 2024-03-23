@@ -69,8 +69,9 @@ class User extends \Opencart\System\Engine\Model {
 	 */
 	public function deleteUser(int $user_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "user` WHERE `user_id` = '" . (int)$user_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "user_authorize` WHERE `user_id` = '" . (int)$user_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "user_login` WHERE `user_id` = '" . (int)$user_id . "'");
+
+		$this->deleteAuthorizes($user_id);
+		$this->deleteLogins($user_id);
 	}
 
 	/**
@@ -288,6 +289,17 @@ class User extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Delete User Logins
+	 *
+	 * @param int $user_id
+	 *
+	 * @return void
+	 */
+	public function deleteLogins(int $user_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "user_login` WHERE `user_id` = '" . (int)$user_id . "'");
+	}
+
+	/**
 	 * Get Logins
 	 *
 	 * @param int $user_id
@@ -368,14 +380,33 @@ class User extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * Delete Authorize
+	 * Reset User Authorizes
 	 *
+	 * @param int $user_id
+	 * @param int $total
+	 *
+	 * @return void
+	 */
+	public function editAuthorizeTotalByUserId(int $user_id, int $total): void {
+		$this->db->query("UPDATE `" . DB_PREFIX . "user_authorize` SET `total` = '" . (int)$total . "' WHERE `user_id` = '" . (int)$user_id . "'");
+	}
+
+	/**
+	 * Delete User Authorizes
+	 *
+	 * @param int $user_id
 	 * @param int $user_authorize_id
 	 *
 	 * @return void
 	 */
-	public function deleteAuthorize(int $user_authorize_id): void {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "user_authorize` WHERE `user_authorize_id` = '" . (int)$user_authorize_id . "'");
+	public function deleteAuthorizes(int $user_id, int $user_authorize_id = 0): void {
+		$sql = "DELETE FROM `" . DB_PREFIX . "user_authorize` WHERE `user_id` = '" . (int)$user_id . "'";
+
+		if ($user_authorize_id) {
+			$sql .= " AND `user_authorize_id` = '" . (int)$user_authorize_id . "'";
+		}
+
+		$this->db->query($sql);
 	}
 
 	/**
@@ -403,17 +434,6 @@ class User extends \Opencart\System\Engine\Model {
 		$query = $this->db->query("SELECT *, (SELECT SUM(`total`) FROM `" . DB_PREFIX . "user_authorize` WHERE `user_id` = '" . (int)$user_id . "') AS `attempts` FROM `" . DB_PREFIX . "user_authorize` WHERE `user_id` = '" . (int)$user_id . "' AND `token` = '" . $this->db->escape($token) . "'");
 
 		return $query->row;
-	}
-
-	/**
-	 * Reset Authorizes
-	 *
-	 * @param int $user_id
-	 *
-	 * @return void
-	 */
-	public function resetAuthorizes(int $user_id): void {
-		$this->db->query("UPDATE `" . DB_PREFIX . "user_authorize` SET `total` = '0' WHERE `user_id` = '" . (int)$user_id . "'");
 	}
 
 	/**

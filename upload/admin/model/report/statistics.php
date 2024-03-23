@@ -19,6 +19,8 @@ class Statistics extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Value
+	 *
 	 * @param string $code
 	 *
 	 * @return float
@@ -46,6 +48,8 @@ class Statistics extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Remove Value
+	 *
 	 * @param string $code
 	 * @param float  $value
 	 *

@@ -482,8 +482,8 @@ class User extends \Opencart\System\Engine\Controller {
 
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 
-		if (is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
-			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
+		if ($data['image'] && is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
+			$data['thumb'] = $this->model_tool_image->resize($data['image'], $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 		} else {
 			$data['thumb'] = $data['placeholder'];
 		}
@@ -520,7 +520,7 @@ class User extends \Opencart\System\Engine\Controller {
 			$json['error']['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((oc_strlen($this->request->post['username']) < 3) || (oc_strlen($this->request->post['username']) > 20)) {
+		if (!oc_validate_length($this->request->post['username'], 3, 20)) {
 			$json['error']['username'] = $this->language->get('error_username');
 		}
 
@@ -538,15 +538,15 @@ class User extends \Opencart\System\Engine\Controller {
 			}
 		}
 
-		if ((oc_strlen($this->request->post['firstname']) < 1) || (oc_strlen($this->request->post['firstname']) > 32)) {
+		if (!oc_validate_length($this->request->post['firstname'], 1, 32)) {
 			$json['error']['firstname'] = $this->language->get('error_firstname');
 		}
 
-		if ((oc_strlen($this->request->post['lastname']) < 1) || (oc_strlen($this->request->post['lastname']) > 32)) {
+		if (!oc_validate_length($this->request->post['lastname'], 1, 32)) {
 			$json['error']['lastname'] = $this->language->get('error_lastname');
 		}
 
-		if ((oc_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
+		if (!oc_validate_email($this->request->post['email'])) {
 			$json['error']['email'] = $this->language->get('error_email');
 		}
 
@@ -563,7 +563,7 @@ class User extends \Opencart\System\Engine\Controller {
 		}
 
 		if ($this->request->post['password'] || (!isset($this->request->post['user_id']))) {
-			if ((oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 6) || (oc_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
+			if (!oc_validate_length(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8'), 6, 40)) {
 				$json['error']['password'] = $this->language->get('error_password');
 			}
 
@@ -724,7 +724,7 @@ class User extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$this->model_user_user->deleteAuthorize($user_authorize_id);
+			$this->model_user_user->deleteAuthorize($authorize_info['user_id'], $user_authorize_id);
 
 			// If the token is still present, then we enforce the user to log out automatically.
 			if ($authorize_info['token'] == $token) {

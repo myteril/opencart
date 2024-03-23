@@ -9,7 +9,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 	/**
 	 * @return void
 	 */
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('api/sale/customer');
 
 		$json = [];
@@ -21,7 +21,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 			'lastname',
 			'email',
 			'telephone',
-			'account_custom_field'
+			'custom_field'
 		];
 
 		foreach ($keys as $key) {
@@ -55,19 +55,19 @@ class Customer extends \Opencart\System\Engine\Controller {
 			$json['error']['warning'] = $this->language->get('error_customer_group');
 		}
 
-		if ((oc_strlen($this->request->post['firstname']) < 1) || (oc_strlen($this->request->post['firstname']) > 32)) {
+		if (!oc_validate_length($this->request->post['firstname'], 1, 32)) {
 			$json['error']['firstname'] = $this->language->get('error_firstname');
 		}
 
-		if ((oc_strlen($this->request->post['lastname']) < 1) || (oc_strlen($this->request->post['lastname']) > 32)) {
+		if (!oc_validate_length($this->request->post['lastname'], 1, 32)) {
 			$json['error']['lastname'] = $this->language->get('error_lastname');
 		}
 
-		if ((oc_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
+		if (!oc_validate_email($this->request->post['email'])) {
 			$json['error']['email'] = $this->language->get('error_email');
 		}
 
-		if ($this->config->get('config_telephone_required') && (oc_strlen($this->request->post['telephone']) < 3) || (oc_strlen($this->request->post['telephone']) > 32)) {
+		if ($this->config->get('config_telephone_required') && !oc_validate_length($this->request->post['telephone'], 3, 32)) {
 			$json['error']['telephone'] = $this->language->get('error_telephone');
 		}
 
@@ -98,9 +98,18 @@ class Customer extends \Opencart\System\Engine\Controller {
 			];
 
 			$json['success'] = $this->language->get('text_success');
-
-			unset($this->session->data['reward']);
 		}
+
+		return $json;
+	}
+
+	/**
+	 * Save
+	 * 
+	 * @return void
+	 */
+	public function save(): void {
+
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

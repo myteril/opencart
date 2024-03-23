@@ -53,7 +53,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			$data['from_email'] = '';
 		}
 
-		$data['amount'] = $this->currency->format($this->config->get('config_voucher_min'), $this->config->get('config_currency'), false, false);
+		$data['amount'] = $this->currency->format($this->config->get('config_voucher_min'), $this->config->get('config_currency'), 0.0, false);
 
 		$this->load->model('checkout/voucher_theme');
 
@@ -100,7 +100,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			$json['redirect'] = $this->url->link('checkout/voucher', 'language=' . $this->config->get('config_language'), true);
 		}
 
-		if ((oc_strlen($this->request->post['to_name']) < 1) || (oc_strlen($this->request->post['to_name']) > 64)) {
+		if (!oc_validate_length($this->request->post['to_name'], 1, 64)) {
 			$json['error']['to_name'] = $this->language->get('error_to_name');
 		}
 
@@ -108,7 +108,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			$json['error']['to_email'] = $this->language->get('error_email');
 		}
 
-		if ((oc_strlen($this->request->post['from_name']) < 1) || (oc_strlen($this->request->post['from_name']) > 64)) {
+		if (!oc_validate_length($this->request->post['from_name'], 1, 64)) {
 			$json['error']['from_name'] = $this->language->get('error_from_name');
 		}
 
@@ -124,7 +124,7 @@ class Voucher extends \Opencart\System\Engine\Controller {
 			$json['error']['amount'] = sprintf($this->language->get('error_amount'), $this->currency->format($this->config->get('config_voucher_min'), $this->session->data['currency']), $this->currency->format($this->config->get('config_voucher_max'), $this->session->data['currency']));
 		}
 
-		if (!isset($this->request->post['agree'])) {
+		if (empty($this->request->post['agree'])) {
 			$json['error']['warning'] = $this->language->get('error_agree');
 		}
 
@@ -166,8 +166,8 @@ class Voucher extends \Opencart\System\Engine\Controller {
 
 		$json = [];
 
-		if (isset($this->request->post['key'])) {
-			$key = $this->request->post['key'];
+		if (isset($this->request->get['key'])) {
+			$key = $this->request->get['key'];
 		} else {
 			$key = '';
 		}

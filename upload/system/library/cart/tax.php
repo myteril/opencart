@@ -30,7 +30,7 @@ class Tax {
 	}
 
 	/**
-	 * setShippingAddress
+	 * Set Shipping Address
 	 *
 	 * @param int $country_id
 	 * @param int $zone_id
@@ -52,7 +52,7 @@ class Tax {
 	}
 
 	/**
-	 * setPaymentAddress
+	 * Set Payment Address
 	 *
 	 * @param int $country_id
 	 * @param int $zone_id
@@ -74,7 +74,7 @@ class Tax {
 	}
 
 	/**
-	 * setStoreAddress
+	 * Set Store Address
 	 *
 	 * @param int $country_id
 	 * @param int $zone_id
@@ -174,7 +174,7 @@ class Tax {
 	}
 
 	/**
-	 * getTax
+	 * Get Tax
 	 *
 	 * @param float $value
 	 * @param int   $tax_class_id
@@ -194,7 +194,7 @@ class Tax {
 	}
 
 	/**
-	 * getRateName
+	 * Get Rate Name
 	 *
 	 * @param int $tax_rate_id
 	 *
@@ -211,7 +211,7 @@ class Tax {
 	}
 
 	/**
-	 * getRates
+	 * Get Rates
 	 *
 	 * @param float $value
 	 * @param int   $tax_class_id

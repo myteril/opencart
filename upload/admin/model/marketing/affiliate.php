@@ -51,7 +51,8 @@ class Affiliate extends \Opencart\System\Engine\Model {
 	 */
 	public function deleteAffiliate(int $customer_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_affiliate` WHERE `customer_id` = '" . (int)$customer_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_affiliate_report` WHERE `customer_id` = '" . (int)$customer_id . "'");
+
+		$this->deleteReport($customer_id);
 	}
 
 	/**
@@ -245,6 +246,17 @@ class Affiliate extends \Opencart\System\Engine\Model {
 		$query = $this->db->query("SELECT `ip`, `store_id`, `country`, `date_added` FROM `" . DB_PREFIX . "customer_affiliate_report` WHERE `customer_id` = '" . (int)$customer_id . "' ORDER BY `date_added` ASC LIMIT " . (int)$start . "," . (int)$limit);
 
 		return $query->rows;
+	}
+
+	/**
+	 * Delete Reports
+	 *
+	 * @param int $customer_id
+	 *
+	 * @return void
+	 */
+	public function deleteReports(int $customer_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_affiliate_report` WHERE `customer_id` = '" . (int)$customer_id . "'");
 	}
 
 	/**

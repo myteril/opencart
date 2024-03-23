@@ -19,8 +19,8 @@ class AttributeGroup extends \Opencart\System\Engine\Model {
 
 		$attribute_group_id = $this->db->getLastId();
 
-		foreach ($data['attribute_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "attribute_group_description` SET `attribute_group_id` = '" . (int)$attribute_group_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($value['name']) . "'");
+		foreach ($data['attribute_group_description'] as $language_id => $attribute_group_description) {
+			$this->model_catalog_attribute_group->addDescription($attribute_group_id, $language_id, $attribute_group_description);
 		}
 
 		return $attribute_group_id;
@@ -37,10 +37,10 @@ class AttributeGroup extends \Opencart\System\Engine\Model {
 	public function editAttributeGroup(int $attribute_group_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "attribute_group` SET `sort_order` = '" . (int)$data['sort_order'] . "' WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
 
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "attribute_group_description` WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
+		$this->deleteDescriptions($attribute_group_id);
 
-		foreach ($data['attribute_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "attribute_group_description` SET `attribute_group_id` = '" . (int)$attribute_group_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($value['name']) . "'");
+		foreach ($data['attribute_group_description'] as $language_id => $attribute_group_description) {
+			$this->addDescription($attribute_group_id, $language_id, $attribute_group_description);
 		}
 	}
 
@@ -53,7 +53,8 @@ class AttributeGroup extends \Opencart\System\Engine\Model {
 	 */
 	public function deleteAttributeGroup(int $attribute_group_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "attribute_group` WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "attribute_group_description` WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
+
+		$this->model_catalog_attribute_group->deleteDescriptions($attribute_group_id);
 	}
 
 	/**
@@ -114,6 +115,52 @@ class AttributeGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Get Total Attribute Groups
+	 *
+	 * @return int
+	 */
+	public function getTotalAttributeGroups(): int {
+		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "attribute_group`");
+
+		return (int)$query->row['total'];
+	}
+
+	/**
+	 *	Add Description
+	 *
+	 * @param int                  $attribute_group_id
+	 * @param int                  $language_id
+	 * @param array<string, mixed> $data
+	 *
+	 * @return void
+	 */
+	public function addDescription(int $attribute_group_id, int $language_id, array $data): void {
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "attribute_group_description` SET `attribute_group_id` = '" . (int)$attribute_group_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($data['name']) . "'");
+	}
+
+	/**
+	 *	Delete Descriptions
+	 *
+	 * @param int $attribute_group_id primary key of the attribute record to be fetched
+	 *
+	 * @return void
+	 */
+	public function deleteDescriptions(int $attribute_group_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "attribute_group_description` WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
+	}
+
+	/**
+	 *	Delete Descriptions By Language ID
+	 *
+	 * @param int $language_id
+	 *
+	 * @return void
+	 */
+	public function deleteDescriptionsByLanguageId(int $language_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "attribute_group_description` WHERE `language_id` = '" . (int)$language_id . "'");
+	}
+
+	/**
 	 * Get Descriptions
 	 *
 	 * @param int $attribute_group_id
@@ -133,13 +180,15 @@ class AttributeGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * Get Total Attribute Groups
+	 * Get Descriptions By Language ID
 	 *
-	 * @return int
+	 * @param int $language_id
+	 *
+	 * @return array<int, array<string, string>>
 	 */
-	public function getTotalAttributeGroups(): int {
-		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "attribute_group`");
+	public function getDescriptionsByLanguageId(int $language_id): array {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "attribute_group_description` WHERE `language_id` = '" . (int)$language_id . "'");
 
-		return (int)$query->row['total'];
+		return $query->rows;
 	}
 }

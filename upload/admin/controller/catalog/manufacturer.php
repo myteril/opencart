@@ -262,8 +262,8 @@ class Manufacturer extends \Opencart\System\Engine\Controller {
 
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 
-		if (is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
-			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
+		if ($data['image'] && is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
+			$data['thumb'] = $this->model_tool_image->resize($data['image'], $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 		} else {
 			$data['thumb'] = $data['placeholder'];
 		}
@@ -279,7 +279,9 @@ class Manufacturer extends \Opencart\System\Engine\Controller {
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
 		if (isset($this->request->get['manufacturer_id'])) {
-			$data['manufacturer_seo_url'] = $this->model_catalog_manufacturer->getSeoUrls($this->request->get['manufacturer_id']);
+			$this->load->model('design/seo_url');
+
+			$data['manufacturer_seo_url'] = $this->model_design_seo_url->getSeoUrlsByKeyValue('manufacturer_id', $this->request->get['manufacturer_id']);
 		} else {
 			$data['manufacturer_seo_url'] = [];
 		}
@@ -315,7 +317,7 @@ class Manufacturer extends \Opencart\System\Engine\Controller {
 			$json['error']['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((oc_strlen($this->request->post['name']) < 1) || (oc_strlen($this->request->post['name']) > 64)) {
+		if (!oc_validate_length($this->request->post['name'], 1, 64)) {
 			$json['error']['name'] = $this->language->get('error_name');
 		}
 
@@ -324,11 +326,11 @@ class Manufacturer extends \Opencart\System\Engine\Controller {
 
 			foreach ($this->request->post['manufacturer_seo_url'] as $store_id => $language) {
 				foreach ($language as $language_id => $keyword) {
-					if ((oc_strlen(trim($keyword)) < 1) || (oc_strlen($keyword) > 64)) {
+					if (!oc_validate_length($keyword, 1, 64)) {
 						$json['error']['keyword_' . $store_id . '_' . $language_id] = $this->language->get('error_keyword');
 					}
 
-					if (preg_match('/[^a-zA-Z0-9\/_-]|[\p{Cyrillic}]+/u', $keyword)) {
+					if (!oc_validate_path($keyword)) {
 						$json['error']['keyword_' . $store_id . '_' . $language_id] = $this->language->get('error_keyword_character');
 					}
 

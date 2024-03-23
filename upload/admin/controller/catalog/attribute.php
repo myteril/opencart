@@ -278,7 +278,7 @@ class Attribute extends \Opencart\System\Engine\Controller {
 		}
 
 		foreach ($this->request->post['attribute_description'] as $language_id => $value) {
-			if ((oc_strlen(trim($value['name'])) < 1) || (oc_strlen($value['name']) > 64)) {
+			if (!oc_validate_length($value['name'], 1, 64)) {
 				$json['error']['name_' . $language_id] = $this->language->get('error_name');
 			}
 		}
@@ -326,7 +326,7 @@ class Attribute extends \Opencart\System\Engine\Controller {
 		$this->load->model('catalog/product');
 
 		foreach ($selected as $attribute_id) {
-			$product_total = $this->model_catalog_product->getTotalProductsByAttributeId($attribute_id);
+			$product_total = $this->model_catalog_product->getTotalAttributesByAttributeId($attribute_id);
 
 			if ($product_total) {
 				$json['error'] = sprintf($this->language->get('error_product'), $product_total);

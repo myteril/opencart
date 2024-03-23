@@ -29,6 +29,10 @@ class Cart extends \Opencart\System\Engine\Controller {
 		if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
 			if (!$this->cart->hasStock() && (!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning'))) {
 				$data['error_warning'] = $this->language->get('error_stock');
+			} elseif (!$this->cart->hasMinimum()) {
+
+				$data['error_warning'] = $this->language->get('error_minimum');
+
 			} elseif (isset($this->session->data['error'])) {
 				$data['error_warning'] = $this->session->data['error'];
 
@@ -50,6 +54,7 @@ class Cart extends \Opencart\System\Engine\Controller {
 			} else {
 				$data['success'] = '';
 			}
+
 
 			if ($this->config->get('config_cart_weight')) {
 				$data['weight'] = $this->weight->format($this->cart->getWeight(), $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'));
@@ -121,7 +126,12 @@ class Cart extends \Opencart\System\Engine\Controller {
 	 * @return string
 	 */
 	public function getList(): string {
-		$data['list'] = $this->url->link(' ', 'language=' . $this->config->get('config_language'));
+
+
+
+
+
+
 		$data['product_edit'] = $this->url->link('checkout/cart.edit', 'language=' . $this->config->get('config_language'));
 		$data['product_remove'] = $this->url->link('checkout/cart.remove', 'language=' . $this->config->get('config_language'));
 		$data['voucher_remove'] = $this->url->link('checkout/voucher.remove', 'language=' . $this->config->get('config_language'));
@@ -191,7 +201,8 @@ class Cart extends \Opencart\System\Engine\Controller {
 				'reward'       => $product['reward'],
 				'price'        => $price_status ? $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']) : '',
 				'total'        => $price_status ? $this->currency->format($this->tax->calculate($product['total'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']) : '',
-				'href'         => $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . $product['product_id'])
+				'href'         => $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . $product['product_id']),
+				'remove'       => $this->url->link('checkout/cart.remove', 'language=' . $this->config->get('config_language') . '&key=' . $product['cart_id'])
 			];
 		}
 
@@ -204,7 +215,8 @@ class Cart extends \Opencart\System\Engine\Controller {
 			$data['vouchers'][] = [
 				'key'         => $key,
 				'description' => $voucher['description'],
-				'amount'      => $this->currency->format($voucher['amount'], $this->session->data['currency'])
+				'amount'      => $this->currency->format($voucher['amount'], $this->session->data['currency']),
+				'remove'      => $this->url->link('checkout/voucher.remove', 'language=' . $this->config->get('config_language') . '&key=' . $key)
 			];
 		}
 
@@ -354,26 +366,20 @@ class Cart extends \Opencart\System\Engine\Controller {
 			$quantity = 1;
 		}
 
-		if (!$this->cart->has($key)) {
-			$json['error'] = $this->language->get('error_product');
+		// Handles single item update
+		$this->cart->update($key, $quantity);
+
+		if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
+			$json['success'] = $this->language->get('text_edit');
+		} else {
+			$json['redirect'] = $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language'), true);
 		}
 
-		if (!$json) {
-			// Handles single item update
-			$this->cart->update($key, $quantity);
-
-			if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
-				$json['success'] = $this->language->get('text_edit');
-			} else {
-				$json['redirect'] = $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language'), true);
-			}
-
-			unset($this->session->data['shipping_method']);
-			unset($this->session->data['shipping_methods']);
-			unset($this->session->data['payment_method']);
-			unset($this->session->data['payment_methods']);
-			unset($this->session->data['reward']);
-		}
+		unset($this->session->data['shipping_method']);
+		unset($this->session->data['shipping_methods']);
+		unset($this->session->data['payment_method']);
+		unset($this->session->data['payment_methods']);
+		unset($this->session->data['reward']);
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
@@ -389,32 +395,26 @@ class Cart extends \Opencart\System\Engine\Controller {
 
 		$json = [];
 
-		if (isset($this->request->post['key'])) {
-			$key = (int)$this->request->post['key'];
+		if (isset($this->request->get['key'])) {
+			$key = (int)$this->request->get['key'];
 		} else {
 			$key = 0;
 		}
 
-		if (!$this->cart->has($key)) {
-			$json['error'] = $this->language->get('error_product');
-		}
-
 		// Remove
-		if (!$json) {
-			$this->cart->remove($key);
+		$this->cart->remove($key);
 
-			if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
-				$json['success'] = $this->language->get('text_remove');
-			} else {
-				$json['redirect'] = $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language'), true);
-			}
-
-			unset($this->session->data['shipping_method']);
-			unset($this->session->data['shipping_methods']);
-			unset($this->session->data['payment_method']);
-			unset($this->session->data['payment_methods']);
-			unset($this->session->data['reward']);
+		if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
+			$json['success'] = $this->language->get('text_remove');
+		} else {
+			$json['redirect'] = $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language'), true);
 		}
+
+		unset($this->session->data['shipping_method']);
+		unset($this->session->data['shipping_methods']);
+		unset($this->session->data['payment_method']);
+		unset($this->session->data['payment_methods']);
+		unset($this->session->data['reward']);
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

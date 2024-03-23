@@ -246,8 +246,8 @@ class Article extends \Opencart\System\Engine\Controller {
 			foreach ($results as $key => $result) {
 				$data['article_description'][$key] = $result;
 
-				if (is_file(DIR_IMAGE . html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'))) {
-					$data['article_description'][$key]['thumb'] = $this->model_tool_image->resize(html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
+				if ($result['image'] && is_file(DIR_IMAGE . html_entity_decode($result['image'], ENT_QUOTES, 'UTF-8'))) {
+					$data['article_description'][$key]['thumb'] = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 				} else {
 					$data['article_description'][$key]['thumb'] = $data['placeholder'];
 				}
@@ -301,7 +301,9 @@ class Article extends \Opencart\System\Engine\Controller {
 		}
 
 		if (isset($this->request->get['article_id'])) {
-			$data['article_seo_url'] = $this->model_cms_article->getSeoUrls($this->request->get['article_id']);
+			$this->load->model('design/seo_url');
+
+			$data['article_seo_url'] = $this->model_design_seo_url->getSeoUrlsByKeyValue('article_id', $this->request->get['article_id']);
 		} else {
 			$data['article_seo_url'] = [];
 		}
@@ -340,16 +342,16 @@ class Article extends \Opencart\System\Engine\Controller {
 		}
 
 		foreach ($this->request->post['article_description'] as $language_id => $value) {
-			if ((oc_strlen(trim($value['name'])) < 1) || (oc_strlen($value['name']) > 255)) {
+			if (!oc_validate_length($value['name'], 1, 255)) {
 				$json['error']['name_' . $language_id] = $this->language->get('error_name');
 			}
 
-			if ((oc_strlen(trim($value['meta_title'])) < 1) || (oc_strlen($value['meta_title']) > 255)) {
+			if (!oc_validate_length($value['meta_title'], 1, 255)) {
 				$json['error']['meta_title_' . $language_id] = $this->language->get('error_meta_title');
 			}
 		}
 
-		if ((oc_strlen($this->request->post['author']) < 3) || (oc_strlen($this->request->post['author']) > 64)) {
+		if (!oc_validate_length($this->request->post['author'], 3, 64)) {
 			$json['error']['author'] = $this->language->get('error_author');
 		}
 
@@ -358,11 +360,11 @@ class Article extends \Opencart\System\Engine\Controller {
 
 			foreach ($this->request->post['article_seo_url'] as $store_id => $language) {
 				foreach ($language as $language_id => $keyword) {
-					if ((oc_strlen(trim($keyword)) < 1) || (oc_strlen($keyword) > 64)) {
+					if (!oc_validate_length($keyword, 1, 64)) {
 						$json['error']['keyword_' . $store_id . '_' . $language_id] = $this->language->get('error_keyword');
 					}
 
-					if (preg_match('/[^a-zA-Z0-9\/_-]|[\p{Cyrillic}]+/u', $keyword)) {
+					if (!oc_validate_path($keyword)) {
 						$json['error']['keyword_' . $store_id . '_' . $language_id] = $this->language->get('error_keyword_character');
 					}
 

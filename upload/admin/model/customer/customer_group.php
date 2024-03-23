@@ -20,7 +20,7 @@ class CustomerGroup extends \Opencart\System\Engine\Model {
 		$customer_group_id = $this->db->getLastId();
 
 		foreach ($data['customer_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "customer_group_description` SET `customer_group_id` = '" . (int)$customer_group_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($value['name']) . "', `description` = '" . $this->db->escape($value['description']) . "'");
+			$this->addDescription($customer_group_id, $language_id, $value);
 		}
 
 		return $customer_group_id;
@@ -37,10 +37,10 @@ class CustomerGroup extends \Opencart\System\Engine\Model {
 	public function editCustomerGroup(int $customer_group_id, array $data): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer_group` SET `approval` = '" . (isset($data['approval']) ? (bool)$data['approval'] : 0) . "', `sort_order` = '" . (int)$data['sort_order'] . "' WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
 
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_group_description` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
+		$this->deleteDescriptions($customer_group_id);
 
 		foreach ($data['customer_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "customer_group_description` SET `customer_group_id` = '" . (int)$customer_group_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($value['name']) . "', `description` = '" . $this->db->escape($value['description']) . "'");
+			$this->addDescription($customer_group_id, $language_id, $value);
 		}
 	}
 
@@ -53,11 +53,18 @@ class CustomerGroup extends \Opencart\System\Engine\Model {
 	 */
 	public function deleteCustomerGroup(int $customer_group_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_group` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_group_description` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "product_discount` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "product_special` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "product_reward` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "tax_rate_to_customer_group` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
+
+		$this->deleteDescriptions($customer_group_id);
+
+		$this->load->model('catalog/product');
+
+		$this->model_catalog_product->deleteDiscountsByCustomerGroupId($customer_group_id);
+		$this->model_catalog_product->deleteSpecialsByCustomerGroupId($customer_group_id);
+		$this->model_catalog_product->deleteRewardsByCustomerGroupId($customer_group_id);
+
+		$this->load->model('localisation/tax_rate');
+
+		$this->model_localisation_tax_rate->deleteCustomerGroupsByCustomerGroupId($customer_group_id);
 	}
 
 	/**
@@ -118,6 +125,41 @@ class CustomerGroup extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Add Description
+	 *
+	 * @param int                  $customer_group_id
+	 * @param int                  $language_id
+	 * @param array<string, mixed> $data
+	 *
+	 * @return void
+	 */
+	public function addDescription(int $customer_group_id, int $language_id, array $data): void {
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "customer_group_description` SET `customer_group_id` = '" . (int)$customer_group_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($data['name']) . "', `description` = '" . $this->db->escape($data['description']) . "'");
+	}
+
+	/**
+	 * Delete Descriptions
+	 *
+	 * @param int $customer_group_id
+	 *
+	 * @return void
+	 */
+	public function deleteDescriptions(int $customer_group_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_group_description` WHERE `customer_group_id` = '" . (int)$customer_group_id . "'");
+	}
+
+	/**
+	 * Delete Descriptions By Language ID
+	 *
+	 * @param int $language_id
+	 *
+	 * @return void
+	 */
+	public function deleteDescriptionsByLanguageId(int $language_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_group_description` WHERE `language_id` = '" . (int)$language_id . "'");
+	}
+
+	/**
 	 * Get Descriptions
 	 *
 	 * @param int $customer_group_id
@@ -137,6 +179,19 @@ class CustomerGroup extends \Opencart\System\Engine\Model {
 		}
 
 		return $customer_group_data;
+	}
+
+	/**
+	 * Get Descriptions By Language ID
+	 *
+	 * @param int $language_id
+	 *
+	 * @return array<int, array<string, string>>
+	 */
+	public function getDescriptionsByLanguageId(int $language_id): array {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_group_description` WHERE `language_id` = '" . (int)$language_id . "'");
+
+		return $query->rows;
 	}
 
 	/**

@@ -355,7 +355,7 @@ class Backup extends \Opencart\System\Engine\Controller {
 			// Sanitize the filename
 			$filename = basename(html_entity_decode($this->request->files['upload']['name'], ENT_QUOTES, 'UTF-8'));
 
-			if ((oc_strlen($filename) < 3) || (oc_strlen($filename) > 128)) {
+			if (!oc_validate_length($filename, 3, 128)) {
 				$json['error'] = $this->language->get('error_filename');
 			}
 
@@ -414,7 +414,7 @@ class Backup extends \Opencart\System\Engine\Controller {
 				ob_end_clean();
 			}
 
-			readfile($file, 'rb');
+			readfile($file);
 
 			exit();
 		} else {

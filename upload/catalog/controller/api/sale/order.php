@@ -6,7 +6,45 @@ namespace Opencart\Catalog\Controller\Api\Sale;
  * @package Opencart\Catalog\Controller\Api\Sale
  */
 class Order extends \Opencart\System\Engine\Controller {
-	// Loads order info
+	public function save(): void {
+		$json = [];
+
+		$routes = [
+			'api/account/login',
+			'api/sale/customer',
+			'api/localisation/language',
+			'api/localisation/currency',
+			'api/sale/cart',
+			'api/sale/coupon',
+			'api/sale/voucher',
+			'api/sale/reward',
+			'api/sale/affiliate',
+			'api/sale/payment_address',
+			'api/sale/shipping_address',
+			'api/sale/shipping_method',
+			'api/sale/payment_method',
+			//'api/sale/order.confirm',
+		];
+
+		foreach ($routes as $route) {
+			$this->load->controller($route);
+
+			$output = $this->response->getOutput();
+
+			if ($output) {
+				$json = $output;
+
+				break;
+			}
+		}
+	}
+
+
+
+
+
+
+
 	/**
 	 * Load
 	 *

@@ -93,10 +93,13 @@ class Notification extends \Opencart\System\Engine\Controller {
 				'year'   => floor($second / 31556926)
 			];
 
+			$date_added = 0;
+			$code = 'seconds';
+
 			foreach ($ranges as $range => $value) {
 				if ($value) {
 					$date_added = $value;
-					$code = $range . ($value > 1) ? $range . 's' : '';
+					$code = ($value > 1) ? $range . 's' : $range;
 				}
 			}
 
@@ -147,7 +150,7 @@ class Notification extends \Opencart\System\Engine\Controller {
 
 			$data['text'] = html_entity_decode($notification_info['text'], ENT_QUOTES, 'UTF-8');
 
-			$this->model_tool_notification->editStatus($notification_id, 1);
+			$this->model_tool_notification->editStatus($notification_id, true);
 
 			$this->response->setOutput($this->load->view('tool/notification_info', $data));
 		}

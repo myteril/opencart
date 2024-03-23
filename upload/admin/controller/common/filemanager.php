@@ -103,26 +103,26 @@ class FileManager extends \Opencart\System\Engine\Controller {
 		$added_files = [];
 
 		if ($paths) {
+			$url = '';
+
+			if (isset($this->request->get['target'])) {
+				$url .= '&target=' . $this->request->get['target'];
+			}
+
+			if (isset($this->request->get['thumb'])) {
+				$url .= '&thumb=' . $this->request->get['thumb'];
+			}
+
+			if (isset($this->request->get['ckeditor'])) {
+				$url .= '&ckeditor=' . $this->request->get['ckeditor'];
+			}
+
 			// Split the array based on current page number and max number of items per page of 10
 			foreach (array_slice($paths, $start, $limit) as $path) {
 				$path = str_replace('\\', '/', realpath($path));
 
-				if (substr($path, 0, strlen($path)) == $path) {
+				if (substr($path, 0, strlen($base)) == $base) {
 					$name = basename($path);
-
-					$url = '';
-
-					if (isset($this->request->get['target'])) {
-						$url .= '&target=' . $this->request->get['target'];
-					}
-
-					if (isset($this->request->get['thumb'])) {
-						$url .= '&thumb=' . $this->request->get['thumb'];
-					}
-
-					if (isset($this->request->get['ckeditor'])) {
-						$url .= '&ckeditor=' . $this->request->get['ckeditor'];
-					}
 
 					if (is_dir($path) && !in_array($name, $added_files)) {
 						$data['directories'][] = [
@@ -293,10 +293,10 @@ class FileManager extends \Opencart\System\Engine\Controller {
 			foreach ($files as $file) {
 				if (is_file($file['tmp_name'])) {
 					// Sanitize the filename
-					$filename = preg_replace('/[\/\\\\?%*:|"<>]/', '', basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8')));
+					$filename = preg_replace('/[\/\\\?%*:|"<>]/', '', basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8')));
 
 					// Validate the filename length
-					if ((oc_strlen($filename) < 4) || (oc_strlen($filename) > 255)) {
+					if (!oc_validate_length($filename, 4, 255)) {
 						$json['error'] = $this->language->get('error_filename');
 					}
 
@@ -386,10 +386,10 @@ class FileManager extends \Opencart\System\Engine\Controller {
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			// Sanitize the folder name
-			$folder = preg_replace('/[\/\\\\?%*&:|"<>]/', '', basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8')));
+			$folder = preg_replace('/[\/\\\?%*&:|"<>]/', '', basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8')));
 
 			// Validate the filename length
-			if ((oc_strlen($folder) < 3) || (oc_strlen($folder) > 128)) {
+			if (oc_validate_length($folder, 3, 128)) {
 				$json['error'] = $this->language->get('error_folder');
 			}
 
@@ -400,11 +400,11 @@ class FileManager extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			mkdir($directory . '/' . $folder, 0777);
+			mkdir($directory . $folder, 0777);
 
-			chmod($directory . '/' . $folder, 0777);
+			chmod($directory . $folder, 0777);
 
-			@touch($directory . '/' . $folder . '/' . 'index.html');
+			@touch($directory . $folder . '/' . 'index.html');
 
 			$json['success'] = $this->language->get('text_directory');
 		}

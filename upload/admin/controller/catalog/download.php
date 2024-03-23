@@ -276,12 +276,12 @@ class Download extends \Opencart\System\Engine\Controller {
 		}
 
 		foreach ($this->request->post['download_description'] as $language_id => $value) {
-			if ((oc_strlen(trim($value['name'])) < 3) || (oc_strlen($value['name']) > 64)) {
+			if (!oc_validate_length($value['name'], 3, 64)) {
 				$json['error']['name_' . $language_id] = $this->language->get('error_name');
 			}
 		}
 
-		if ((oc_strlen($this->request->post['filename']) < 3) || (oc_strlen($this->request->post['filename']) > 128)) {
+		if (!oc_validate_length($this->request->post['filename'], 3, 128)) {
 			$json['error']['filename'] = $this->language->get('error_filename');
 		}
 
@@ -293,15 +293,15 @@ class Download extends \Opencart\System\Engine\Controller {
 			$json['error']['filename'] = $this->language->get('error_exists');
 		}
 
-		if (preg_match('/[^a-zA-Z0-9\/._-]|[\p{Cyrillic}]+/u', $this->request->post['filename'])) {
+		if (!oc_validate_filename($this->request->post['filename'])) {
 			$json['error']['filename'] = $this->language->get('error_filename_character');
 		}
 
-		if ((oc_strlen($this->request->post['mask']) < 3) || (oc_strlen($this->request->post['mask']) > 128)) {
+		if (!oc_validate_length($this->request->post['mask'], 3, 128)) {
 			$json['error']['mask'] = $this->language->get('error_mask');
 		}
 
-		if (preg_match('/[^a-zA-Z0-9\/._-]|[\p{Cyrillic}]+/u', $this->request->post['mask'])) {
+		if (!oc_validate_filename($this->request->post['mask'])) {
 			$json['error']['mask'] = $this->language->get('error_mask_character');
 		}
 
@@ -348,7 +348,7 @@ class Download extends \Opencart\System\Engine\Controller {
 		$this->load->model('catalog/product');
 
 		foreach ($selected as $download_id) {
-			$product_total = $this->model_catalog_product->getTotalProductsByDownloadId($download_id);
+			$product_total = $this->model_catalog_product->getTotalDownloadsByDownloadId($download_id);
 
 			if ($product_total) {
 				$json['error'] = sprintf($this->language->get('error_product'), $product_total);
@@ -467,7 +467,7 @@ class Download extends \Opencart\System\Engine\Controller {
 			$filename = basename(html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8'));
 
 			// Validate the filename length
-			if ((oc_strlen($filename) < 3) || (oc_strlen($filename) > 128)) {
+			if (!oc_validate_length($filename, 3, 128)) {
 				$json['error'] = $this->language->get('error_filename');
 			}
 
@@ -549,7 +549,7 @@ class Download extends \Opencart\System\Engine\Controller {
 				header('Pragma: public');
 				header('Content-Length: ' . filesize($file));
 
-				readfile($file, 'rb');
+				readfile($file);
 				exit;
 			} else {
 				exit($this->language->get('error_headers_sent'));

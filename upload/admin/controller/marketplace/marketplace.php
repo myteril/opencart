@@ -120,7 +120,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 		$string .= VERSION . "\n";
 		$string .= $time . "\n";
 
-		$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), 1));
+		$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), true));
 
 		$url  = '&username=' . urlencode($this->config->get('opencart_username'));
 		$url .= '&domain=' . $this->request->server['HTTP_HOST'];
@@ -554,7 +554,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 		$string .= $extension_id . "\n";
 		$string .= $time . "\n";
 
-		$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), 1));
+		$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), true));
 
 		$url  = '&username=' . urlencode($this->config->get('opencart_username'));
 		$url .= '&domain=' . $this->request->server['HTTP_HOST'];
@@ -813,7 +813,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 			$string .= $this->request->post['pin'] . "\n";
 			$string .= $time . "\n";
 
-			$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), 1));
+			$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), true));
 
 			$url  = '&username=' . urlencode($this->config->get('opencart_username'));
 			$url .= '&domain=' . $this->request->server['HTTP_HOST'];
@@ -895,7 +895,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 			$string .= $extension_download_id . "\n";
 			$string .= $time . "\n";
 
-			$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), 1));
+			$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), true));
 
 			$url  = '&username=' . urlencode($this->config->get('opencart_username'));
 			$url .= '&domain=' . $this->request->server['HTTP_HOST'];
@@ -1001,7 +1001,7 @@ class Marketplace extends \Opencart\System\Engine\Controller {
 			$string .= urlencode(base64_encode($this->request->post['comment'])) . "\n";
 			$string .= $time . "\n";
 
-			$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), 1));
+			$signature = base64_encode(hash_hmac('sha1', $string, $this->config->get('opencart_secret'), true));
 
 			$url  = '&username=' . $this->config->get('opencart_username');
 			$url .= '&domain=' . $this->request->server['HTTP_HOST'];

@@ -610,14 +610,6 @@ class Order extends \Opencart\System\Engine\Controller {
 			$data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		}
 
-		$customer_group_info = $this->model_customer_customer_group->getCustomerGroup($data['customer_group_id']);
-
-		if ($customer_group_info) {
-			$data['customer_group'] = $customer_group_info['name'];
-		} else {
-			$data['customer_group'] = '';
-		}
-
 		if (!empty($order_info)) {
 			$data['firstname'] = $order_info['firstname'];
 		} else {
@@ -681,6 +673,14 @@ class Order extends \Opencart\System\Engine\Controller {
 		$this->load->model('tool/upload');
 
 		$products = $this->model_sale_order->getProducts($order_id);
+
+		if (!empty($order_info)) {
+			$data['currency_code'] = $order_info['currency_code'];
+			$currency_value = $order_info['currency_value'];
+		} else {
+			$data['currency_code'] = $this->config->get('config_currency');
+			$currency_value = 1;
+		}
 
 		foreach ($products as $product) {
 			$option_data = [];
@@ -751,8 +751,8 @@ class Order extends \Opencart\System\Engine\Controller {
 				'subscription'             => $subscription,
 				'subscription_description' => $description,
 				'quantity'                 => $product['quantity'],
-				'price'                    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
-				'total'                    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
+				'price'                    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $data['currency_code'], $currency_value),
+				'total'                    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $data['currency_code'], $currency_value),
 				'reward'                   => $product['reward']
 			];
 		}
@@ -765,7 +765,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		foreach ($vouchers as $voucher) {
 			$data['order_vouchers'][] = [
 				'description' => $voucher['description'],
-				'amount'      => $this->currency->format($voucher['amount'], $order_info['currency_code'], $order_info['currency_value']),
+				'amount'      => $this->currency->format($voucher['amount'], $data['currency_code'], $currency_value),
 				'href'        => $this->url->link('sale/voucher.form', 'user_token=' . $this->session->data['user_token'] . '&voucher_id=' . $voucher['voucher_id'])
 			];
 		}
@@ -778,7 +778,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		foreach ($totals as $total) {
 			$data['order_totals'][] = [
 				'title' => $total['title'],
-				'text'  => $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value'])
+				'text'  => $this->currency->format($total['value'], $data['currency_code'], $currency_value)
 			];
 		}
 
@@ -872,12 +872,6 @@ class Order extends \Opencart\System\Engine\Controller {
 		$this->load->model('localisation/currency');
 
 		$data['currencies'] = $this->model_localisation_currency->getCurrencies();
-
-		if (!empty($order_info)) {
-			$data['currency_code'] = $order_info['currency_code'];
-		} else {
-			$data['currency_code'] = $this->config->get('config_currency');
-		}
 
 		// Coupon, Voucher, Reward
 		$data['total_coupon'] = '';
@@ -1248,10 +1242,10 @@ class Order extends \Opencart\System\Engine\Controller {
 		$this->response->setOutput($this->load->view('sale/order_info', $data));
 	}
 
-	// Method to call the store front API and return a response.
-
 	/**
 	 * Call
+	 *
+	 * Method to call the storefront API and return a response.
 	 *
 	 * @return void
 	 */
@@ -1340,10 +1334,9 @@ class Order extends \Opencart\System\Engine\Controller {
 		$data['bootstrap_js'] = 'view/javascript/bootstrap/js/bootstrap.bundle.min.js';
 
 		$this->load->model('sale/order');
+		$this->load->model('sale/subscription');
 		$this->load->model('setting/setting');
 		$this->load->model('tool/upload');
-		$this->load->model('sale/subscription');
-		$this->load->model('tool/image');
 
 		$data['orders'] = [];
 
@@ -1603,12 +1596,12 @@ class Order extends \Opencart\System\Engine\Controller {
 		$data['direction'] = $this->language->get('direction');
 		$data['lang'] = $this->language->get('code');
 
-		// Hard coding CSS so they can be replaced via the events system.
+		// Hard coding CSS so they can be replaced via the event's system.
 		$data['bootstrap_css'] = 'view/stylesheet/bootstrap.css';
 		$data['icons'] = 'view/stylesheet/fonts/fontawesome/css/all.min.css';
 		$data['stylesheet'] = 'view/stylesheet/stylesheet.css';
 
-		// Hard coding scripts so they can be replaced via the events system.
+		// Hard coding scripts so they can be replaced via the event's system.
 		$data['jquery'] = 'view/javascript/jquery/jquery-3.7.1.min.js';
 		$data['bootstrap_js'] = 'view/javascript/bootstrap/js/bootstrap.bundle.min.js';
 
@@ -1967,7 +1960,7 @@ class Order extends \Opencart\System\Engine\Controller {
 		if (!$json) {
 			$this->load->model('customer/customer');
 
-			$this->model_customer_customer->deleteReward($order_id);
+			$this->model_customer_customer->deleteRewardByOrderId($order_id);
 
 			$json['success'] = $this->language->get('text_reward_remove');
 		}

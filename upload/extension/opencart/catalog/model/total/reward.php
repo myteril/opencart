@@ -7,6 +7,8 @@ namespace Opencart\Catalog\Model\Extension\Opencart\Total;
  */
 class Reward extends \Opencart\System\Engine\Model {
 	/**
+	 * Get Total
+	 *
 	 * @param array<int, array<string, mixed>> $totals
 	 * @param array<int, float>                $taxes
 	 * @param float                            $total
@@ -55,7 +57,7 @@ class Reward extends \Opencart\System\Engine\Model {
 				$totals[] = [
 					'extension'  => 'opencart',
 					'code'       => 'reward',
-					'title'      => sprintf($this->language->get('reward_text_reward'), $this->session->data['reward']),
+					'title'      => sprintf($this->language->get('reward_text_reward'), -$this->session->data['reward']),
 					'value'      => -$discount_total,
 					'sort_order' => (int)$this->config->get('total_reward_sort_order')
 				];
@@ -66,6 +68,8 @@ class Reward extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Confirm
+	 *
 	 * @param array<string, mixed> $order_info
 	 * @param array<string, mixed> $order_total
 	 *
@@ -83,10 +87,10 @@ class Reward extends \Opencart\System\Engine\Model {
 			$points = (float)substr($order_total['title'], $start + 1, $end - ($start + 1));
 		}
 
-		$this->load->model('account/customer');
+		$this->load->model('account/reward');
 
-		if ($order_info['customer_id'] && $this->model_account_customer->getRewardTotal($order_info['customer_id']) >= $points) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "customer_reward` SET `customer_id` = '" . (int)$order_info['customer_id'] . "', `order_id` = '" . (int)$order_info['order_id'] . "', `description` = '" . $this->db->escape(sprintf($this->language->get('text_order_id'), (int)$order_info['order_id'])) . "', `points` = '" . (float)-$points . "', `date_added` = NOW()");
+		if ($order_info['customer_id'] && $this->model_account_reward->getRewardTotal($order_info['customer_id']) >= $points) {
+			$this->model_account_reward->addReward($order_info['customer_id'], $order_info['order_id'], sprintf($this->language->get('text_order_id'), (int)$order_info['order_id']), (int)$points);
 		} else {
 			return $this->config->get('config_fraud_status_id');
 		}
@@ -95,11 +99,15 @@ class Reward extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * @param int $order_id
+	 * Unconfirm
+	 *
+	 * @param array<string, mixed> $order_info
 	 *
 	 * @return void
 	 */
-	public function unconfirm(int $order_id): void {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_reward` WHERE `order_id` = '" . (int)$order_id . "' AND `points` < '0'");
+	public function unconfirm(array $order_info): void {
+		$this->load->model('account/reward');
+
+		$this->model_account_reward->deleteRewardByOrderId($order_info['order_id']);
 	}
 }

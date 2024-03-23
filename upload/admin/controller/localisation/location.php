@@ -222,8 +222,6 @@ class Location extends \Opencart\System\Engine\Controller {
 			$data['location_id'] = 0;
 		}
 
-		$this->load->model('setting/store');
-
 		if (!empty($location_info)) {
 			$data['name'] = $location_info['name'];
 		} else {
@@ -258,8 +256,8 @@ class Location extends \Opencart\System\Engine\Controller {
 
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 
-		if (is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
-			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
+		if ($data['image'] && is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
+			$data['thumb'] = $this->model_tool_image->resize($data['image'], $this->config->get('config_image_default_width'), $this->config->get('config_image_default_height'));
 		} else {
 			$data['thumb'] = $data['placeholder'];
 		}
@@ -299,15 +297,15 @@ class Location extends \Opencart\System\Engine\Controller {
 			$json['error']['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((oc_strlen($this->request->post['name']) < 3) || (oc_strlen($this->request->post['name']) > 32)) {
+		if (!oc_validate_length($this->request->post['name'], 3, 32)) {
 			$json['error']['name'] = $this->language->get('error_name');
 		}
 
-		if ((oc_strlen($this->request->post['address']) < 3) || (oc_strlen($this->request->post['address']) > 128)) {
+		if (!oc_validate_length($this->request->post['address'], 3, 128)) {
 			$json['error']['address'] = $this->language->get('error_address');
 		}
 
-		if ((oc_strlen($this->request->post['telephone']) < 3) || (oc_strlen($this->request->post['telephone']) > 32)) {
+		if (!oc_validate_length($this->request->post['telephone'], 3, 32)) {
 			$json['error']['telephone'] = $this->language->get('error_telephone');
 		}
 

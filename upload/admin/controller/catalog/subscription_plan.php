@@ -229,7 +229,7 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
 		if (isset($this->request->get['subscription_plan_id'])) {
-			$data['subscription_plan_description'] = $this->model_catalog_subscription_plan->getDescription($this->request->get['subscription_plan_id']);
+			$data['subscription_plan_description'] = $this->model_catalog_subscription_plan->getDescriptions($this->request->get['subscription_plan_id']);
 		} else {
 			$data['subscription_plan_description'] = [];
 		}
@@ -339,7 +339,7 @@ class SubscriptionPlan extends \Opencart\System\Engine\Controller {
 		}
 
 		foreach ($this->request->post['subscription_plan_description'] as $language_id => $value) {
-			if ((oc_strlen(trim($value['name'])) < 3) || (oc_strlen($value['name']) > 255)) {
+			if (!oc_validate_length($value['name'], 3, 255)) {
 				$json['error']['name_' . $language_id] = $this->language->get('error_name');
 			}
 		}

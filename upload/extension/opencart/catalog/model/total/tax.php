@@ -8,9 +8,11 @@ namespace Opencart\Catalog\Model\Extension\Opencart\Total;
  */
 class Tax extends \Opencart\System\Engine\Model {
 	/**
-	 * @param array<int, array<string, mixed>>   $totals
-	 * @param array<int|string, array|float|int> $taxes
-	 * @param float                              $total
+	 * Get Total
+	 *
+	 * @param array<int, array<string, mixed>> 		$totals
+	 * @param array<int|string, array|float|int>    $taxes
+	 * @param float                            		$total
 	 *
 	 * @return void
 	 */

@@ -44,7 +44,6 @@
 /.DS_Store
 /.cache
 /.php-cs-fixer.cache
-/tools
 
 # Development Files
 /dev/*

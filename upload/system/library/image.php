@@ -75,7 +75,7 @@ class Image {
 	}
 
 	/**
-	 * getFile
+	 * Get File
 	 *
 	 * @return string
 	 */
@@ -84,7 +84,7 @@ class Image {
 	}
 
 	/**
-	 * getImage
+	 * Get Image
 	 *
 	 * @return mixed
 	 */
@@ -93,7 +93,7 @@ class Image {
 	}
 
 	/**
-	 * getWidth
+	 * Get Width
 	 *
 	 * @return int
 	 */
@@ -102,7 +102,7 @@ class Image {
 	}
 
 	/**
-	 * getHeight
+	 * Get Height
 	 *
 	 * @return int
 	 */
@@ -111,7 +111,7 @@ class Image {
 	}
 
 	/**
-	 * getBits
+	 * Get Bits
 	 *
 	 * @return string
 	 */
@@ -120,7 +120,7 @@ class Image {
 	}
 
 	/**
-	 * getMime
+	 * Get Mime
 	 *
 	 * @return string
 	 */
@@ -185,7 +185,7 @@ class Image {
 			$scale = min($scale_w, $scale_h);
 		}
 
-		if ($scale == 1 && $scale_h == $scale_w && ($this->mime != 'image/png' || $this->mime != 'image/webp')) {
+		if ($scale == 1 && $scale_h == $scale_w && ($this->mime != 'image/png' && $this->mime != 'image/webp')) {
 			return;
 		}
 

@@ -29,19 +29,8 @@ class Confirm extends \Opencart\System\Engine\Controller {
 		}
 
 		// Validate cart has products and has stock.
-		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
+		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout')) || !$this->cart->hasMinimum()) {
 			$status = false;
-		}
-
-		// Validate minimum quantity requirements.
-		$products = $this->model_checkout_cart->getProducts();
-
-		foreach ($products as $product) {
-			if (!$product['minimum']) {
-				$status = false;
-
-				break;
-			}
 		}
 
 		// Shipping
@@ -245,6 +234,8 @@ class Confirm extends \Opencart\System\Engine\Controller {
 			// Products
 			$order_data['products'] = [];
 
+			$products = $this->cart->getProducts();
+
 			foreach ($products as $product) {
 				$option_data = [];
 
@@ -332,7 +323,19 @@ class Confirm extends \Opencart\System\Engine\Controller {
 		foreach ($products as $product) {
 			if ($product['option']) {
 				foreach ($product['option'] as $key => $option) {
-					$product['option'][$key]['value'] = (oc_strlen($option['value']) > 20 ? oc_substr($option['value'], 0, 20) . '..' : $option['value']);
+					if ($option['type'] != 'file') {
+						$value = $option['value'];
+					} else {
+						$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+
+						if ($upload_info) {
+							$value = $upload_info['name'];
+						} else {
+							$value = '';
+						}
+					}
+
+					$product['option'][$key]['value'] = (oc_strlen($value) > 20 ? oc_substr($value, 0, 20) . '..' : $value);
 				}
 			}
 

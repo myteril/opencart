@@ -239,7 +239,7 @@ class GeoZone extends \Opencart\System\Engine\Controller {
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
 		if (!empty($geo_zone_info)) {
-			$data['zone_to_geo_zones'] = $this->model_localisation_geo_zone->getZoneToGeoZones($this->request->get['geo_zone_id']);
+			$data['zone_to_geo_zones'] = $this->model_localisation_geo_zone->getZones($this->request->get['geo_zone_id']);
 		} else {
 			$data['zone_to_geo_zones'] = [];
 		}
@@ -267,11 +267,11 @@ class GeoZone extends \Opencart\System\Engine\Controller {
 			$json['error']['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((oc_strlen($this->request->post['name']) < 3) || (oc_strlen($this->request->post['name']) > 32)) {
+		if (!oc_validate_length($this->request->post['name'], 3, 32)) {
 			$json['error']['name'] = $this->language->get('error_name');
 		}
 
-		if ((oc_strlen($this->request->post['description']) < 3) || (oc_strlen($this->request->post['description']) > 255)) {
+		if (!oc_validate_length($this->request->post['description'], 3, 255)) {
 			$json['error']['description'] = $this->language->get('error_description');
 		}
 

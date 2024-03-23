@@ -8,18 +8,28 @@ namespace Opencart\Admin\Model\Design;
  */
 class Theme extends \Opencart\System\Engine\Model {
 	/**
+	 * Add Theme
+	 *
+	 * @param array<string, mixed> $data
+	 *
+	 * @return int
+	 */
+	public function addTheme(array $data): int {
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "theme` SET `store_id` = '" . (int)$data['store_id'] . "', `route` = '" . $this->db->escape($data['route']) . "', `code` = '" . $this->db->escape($data['code']) . "', `status` = '" . (bool)$data['status'] . "', `date_added` = NOW()");
+
+		return $this->db->getLastId();
+	}
+
+	/**
 	 * Edit Theme
 	 *
-	 * @param int    $store_id
-	 * @param string $route
-	 * @param string $code
+	 * @param int                  $theme_id
+	 * @param array<string, mixed> $data
 	 *
 	 * @return void
 	 */
-	public function editTheme(int $store_id, string $route, string $code): void {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "theme` WHERE `store_id` = '" . (int)$store_id . "' AND `route` = '" . $this->db->escape($route) . "'");
-
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "theme` SET `store_id` = '" . (int)$store_id . "', `route` = '" . $this->db->escape($route) . "', `code` = '" . $this->db->escape($code) . "', `date_added` = NOW()");
+	public function editTheme(int $theme_id, array $data): void {
+		$this->db->query("UPDATE `" . DB_PREFIX . "theme` SET `store_id` = '" . (int)$data['store_id'] . "', `route` = '" . $this->db->escape($data['route']) . "', `code` = '" . $this->db->escape($data['code']) . "', `status` = '" . (bool)$data['status'] . "', `date_added` = NOW() WHERE `theme_id` = '" . (int)$theme_id . "'");
 	}
 
 	/**
@@ -34,15 +44,25 @@ class Theme extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Delete Themes By Store ID
+	 *
+	 * @param int $store_id
+	 *
+	 * @return void
+	 */
+	public function deleteThemesByStoreId(int $store_id): void {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "theme` WHERE `store_id` = '" . (int)$store_id . "'");
+	}
+
+	/**
 	 * Get Theme
 	 *
-	 * @param int    $store_id
-	 * @param string $route
+	 * @param int $theme_id
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function getTheme(int $store_id, string $route): array {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "theme` WHERE `store_id` = '" . (int)$store_id . "' AND `route` = '" . $this->db->escape($route) . "'");
+	public function getTheme(int $theme_id): array {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "theme` WHERE `theme_id` = '" . (int)$theme_id . "'");
 
 		return $query->row;
 	}
